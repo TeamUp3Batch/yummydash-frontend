@@ -1,0 +1,17 @@
+footer {
+    background-color: black;
+    padding: 30px 0; /* Add margin of 10px to top and bottom */
+  }
+ 
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    padding: 5px 0; 
+  }
+ 
+  li a {
+    text-decoration: none;
+    color: white;
+  }

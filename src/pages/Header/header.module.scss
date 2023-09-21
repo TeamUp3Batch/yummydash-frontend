@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  font-family: 'Arsenal', sans-serif;
+}
+
+.header {
+  width: 100%;
+
+  .wrapper {
+    position: sticky;
+    height: 90px;
+    border-bottom: 1px solid #f5f3f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 45px;
+
+    .logo {
+      width: 150px;
+    }
+
+    .address {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        font-weight: 700;
+      }
+    }
+
+    .search {
+      place-self: center flex-start;
+      display: flex;
+      flex-direction: column;
+
+      input {
+        width: 448px;
+        padding: 10px 8px 10px 6px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px 0px;
+      }
+    }
+
+    .sort {
+      display: flex;
+      flex-direction: row;
+
+      p {
+        font-size: 16px;
+        font-weight: 700;
+        color: #425457;
+        margin-left: 8px;
+      }
+    }
+
+    .roundIcon {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      img {
+        width: 24px;
+        margin-left: 30px;
+      }
+    }
+
+    .profile {
+      cursor: pointer;
+      img {
+        background: rgb(255, 255, 255);
+        border-radius: 50%;
+        box-shadow: rgba(23, 32, 38, 0.07) 0px 1px 1px 0px, rgba(23, 32, 38, 0.06) 0px 2px 1px -1px,
+          rgba(23, 32, 38, 0.1) 0px 1px 3px 0px;
+        padding: 2px;
+        position: relative;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .account {
+      .login {
+        border: none;
+        padding: 0;
+        background: none;
+        color: #425457;
+        font-weight: 700;
+        cursor: pointer;
+        margin-right: 20px;
+        font-size: 16px;
+      }
+
+      .signup {
+        border: none;
+        color: rgba(255, 255, 255, 1);
+        background-color: #425457;
+        font-weight: 700;
+        cursor: pointer;
+        border-radius: 50em;
+        padding: 5px 10px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .drawerContent {
+    background-color: #fff; /* Background color of the drawer */
+    width: 300px; /* Width of the drawer */
+    padding: 20px; /* Padding inside the drawer */
+    
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    li {
+      margin-bottom: 10px;
+      
+      a {
+        text-decoration: none;
+        color: #333; /* Text color for menu items */
+        
+        &:hover {
+          color: #007bff; /* Hover color for menu items */
+        }
+      }
+    }
+  }
+}
