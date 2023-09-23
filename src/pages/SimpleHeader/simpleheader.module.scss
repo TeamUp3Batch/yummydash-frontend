@@ -17,7 +17,7 @@
       padding: 0 45px;
   
       .logo {
-        width: 150px;
+        width: 100px;
       }
   
       .address {
@@ -113,6 +113,9 @@
           border-radius: 50em;
           padding: 5px 10px;
           font-size: 16px;
+        }
+        .whiteColorText {
+          color: white;
         }
       }
     }

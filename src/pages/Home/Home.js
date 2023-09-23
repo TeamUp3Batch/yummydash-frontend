@@ -19,7 +19,7 @@ const Home = () => {
     </div>):(<div><SimpleHeader/></div>)
 }
 <div className='skip-mainpage'>
-    <Typography>Did Somebody say Skip?</Typography>
+   
     </div>
     
     </div>
