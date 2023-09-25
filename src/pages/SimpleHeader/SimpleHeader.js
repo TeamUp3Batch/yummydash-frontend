@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 // import SmsIcon from "@mui/icons-material/Sms";
 import { Typography } from "@mui/material";
 import Divider from '@mui/material/Divider';
-
+import { Link } from "react-router-dom";
 import logo from "../../img/yummyDashLogo.png";
 import flag from "../../img/CanadaFlag.png";
 import profile from "../../img/account-default.png";
@@ -35,12 +35,16 @@ const SimpleHeader = () => {
         <img src={profile} alt="Profile" />
         </div>
         <div className={styles.account}>
-          <button className={styles.login} onClick={() => loginWithRedirect()} style={{color:'white'}}>
+        <Link to="/login">
+          <button className={styles.login} style={{color:'white'}}>
             Log In
           </button>
-          <button className={styles.signup} onClick={() => loginWithRedirect()}>
+          </Link>
+          <Link to="/signup">
+          <button className={styles.signup}>
             SignUp
           </button>
+          </Link>
         </div>
       </div>
     </div>

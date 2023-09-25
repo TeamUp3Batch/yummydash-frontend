@@ -10,6 +10,7 @@ import Footer from '../../components/Footer/Footer';
 
 const Home = () => {
   const { isAuthenticated, user } = useAuth0();
+  //const isAuthenticated;
   return (
     <div>
     <div className='background-pic'>
