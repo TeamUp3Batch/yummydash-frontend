@@ -3,13 +3,15 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import {
   Container,
-  Paper,
   Typography,
   TextField,
   Button,
-  Grid,
   Snackbar,
+  Box,
 } from "@mui/material";
+import SimpleHeader from "../SimpleHeader/SimpleHeader";
+import Footer from "../../components/Footer/Footer";
+import ModalLogin from "../../components/ModalLogin/ModalLogin";
 
 import styles from "./SignUp.css"; // Import the CSS file with the provided styles
 
@@ -18,8 +20,6 @@ import styles from "./SignUp.css"; // Import the CSS file with the provided styl
 // }
 
 const SignUp = () => {
-  
-
   // Declare the following variables and functions
   const [data, setData] = useState({
     firstName: "",
@@ -35,6 +35,11 @@ const SignUp = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -58,97 +63,121 @@ const SignUp = () => {
   };
 
   return (
-    <div className={styles.signupContainer}>
-      <Container component="main">
-        <Paper elevation={3} className={styles.paperContainer}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} className={styles.leftContainer}>
-              <Typography variant="h4" className={styles.leftText}>
-                Welcome Back
+    <div>
+      <SimpleHeader />
+      <div className={styles.signupContainer}>
+        <Container component="main">
+          <form>
+            <Box
+              display="flex"
+              flexDirection={"column"}
+              maxWidth={400}
+              alignItems={"center"}
+              justifyContent={"center"}
+              margin={"auto"}
+              marginTop={3}
+              marginBottom={3}
+              padding={2}
+              borderRadius={5}
+              boxShadow={"5px 5px 10px #cccccc"}
+              sx={{
+                hover: {
+                  boxShadow: "10px 10px 10px #cccccc",
+                },
+              }}
+            >
+              <Typography variant="h3" padding={3} textAlign={"center"}>
+                Sign Up
               </Typography>
-              <Link to="/login">
-                <Button variant="outlined" color="inherit">
-                  Sign In
-                </Button>
-              </Link>
-            </Grid>
-            <Grid item xs={12} sm={6} className={styles.rightContainer}>
-              <form className={styles.formContainer} onSubmit={handleSubmit}>
-                <Typography variant="h4" className={styles.formHeader}>
-                  Create Account
-                </Typography>
-                <TextField
-                  type="text"
-                  variant="outlined"
-                  label="First Name"
-                  name="firstName"
-                  onChange={handleChange}
-                  value={data.firstName}
-                  required
-                  className={styles.input}
+              <Typography variant="h6" padding={2} textAlign={"center"}>
+                Your Information
+              </Typography>
+              <TextField
+                type="text"
+                margin="normal"
+                variant="outlined"
+                label="First Name"
+                name="firstName"
+                onChange={handleChange}
+                value={data.firstName}
+                required
+                className={styles.input}
+              />
+              <TextField
+                type="text"
+                margin="normal"
+                variant="outlined"
+                label="Last Name"
+                name="lastName"
+                onChange={handleChange}
+                value={data.lastName}
+                required
+                className={styles.input}
+              />
+              <TextField
+                type="email"
+                margin="normal"
+                variant="outlined"
+                label="Email"
+                name="email"
+                onChange={handleChange}
+                value={data.email}
+                required
+                className={styles.input}
+              />
+              <TextField
+                type="password"
+                margin="normal"
+                variant="outlined"
+                label="Password"
+                name="password"
+                onChange={handleChange}
+                value={data.password}
+                required
+                className={styles.input}
+              />
+              {error && (
+                <div className={`${styles.error} ${styles.input}`}>{error}</div>
+              )}
+              {msg && (
+                <div className={`${styles.success} ${styles.input}`}>{msg}</div>
+              )}
+              <Button
+                sx={{ marginTop: 3, borderRadius: 3 }}
+                type="submit"
+                variant="contained"
+                color="warning"
+                className={styles.button}
+              >
+                Create Account
+              </Button>
+              <Typography variant="h6" padding={2} textAlign={"center"}>
+                Already have an account?
+                {/* <Button>
+                  <Link to="/login">Login</Link>
+                </Button> */}
+                 <Button onClick={handleOpen}>Login</Button>
+                  <ModalLogin
+                  isOpen={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"  
                 />
-                <TextField
-                  type="text"
-                  variant="outlined"
-                  label="Last Name"
-                  name="lastName"
-                  onChange={handleChange}
-                  value={data.lastName}
-                  required
-                  className={styles.input}
-                />
-                <TextField
-                  type="email"
-                  variant="outlined"
-                  label="Email"
-                  name="email"
-                  onChange={handleChange}
-                  value={data.email}
-                  required
-                  className={styles.input}
-                />
-                <TextField
-                  type="password"
-                  variant="outlined"
-                  label="Password"
-                  name="password"
-                  onChange={handleChange}
-                  value={data.password}
-                  required
-                  className={styles.input}
-                />
-                {error && (
-                  <div className={`${styles.error} ${styles.input}`}>
-                    {error}
-                  </div>
-                )}
-                {msg && (
-                  <div className={`${styles.success} ${styles.input}`}>
-                    {msg}
-                  </div>
-                )}
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  className={styles.button}
-                >
-                  Sign Up
-                </Button>
-              </form>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Container>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={5000}
-        onClose={handleCloseSnackbar}
-      >
-        {/* <Alert onClose={handleCloseSnackbar} severity="success">
+              </Typography>
+            </Box>
+          </form>
+        </Container>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={5000}
+          onClose={handleCloseSnackbar}
+        >
+          {/* <Alert onClose={handleCloseSnackbar} severity="success">
           {msg}
         </Alert> */}
-      </Snackbar>
+        </Snackbar>
+      </div>
+      <Footer />
     </div>
   );
 };
