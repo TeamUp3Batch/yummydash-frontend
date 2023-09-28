@@ -11,14 +11,8 @@ import LoginModel from "../../components/LoginModel/LoginModal";
 const SimpleHeader = () => {
   const { loginWithRedirect, isAuthenticated, user } = useAuth0();
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    console.log("open");
-    setOpen(true);
-  };
-  const handleClose = () => {
-    console.log("close");
-    setOpen(false);
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div className={styles.header}>
