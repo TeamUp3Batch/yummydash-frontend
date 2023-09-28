@@ -3,7 +3,7 @@ import React from 'react';
 import SimpleHeader from '../SimpleHeader/SimpleHeader';
 import { useAuth0 } from "@auth0/auth0-react";
 import style from './home.module.scss';
-import HeaderComponent from '../Header/Header';
+import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 
@@ -15,7 +15,7 @@ const Home = () => {
     <div>
     <div className={style.backgroundPic}>
       {isAuthenticated ?
-    (  <div><HeaderComponent />
+    (  <div><Header />
    
     </div>):(<div><SimpleHeader/></div>)
 }
