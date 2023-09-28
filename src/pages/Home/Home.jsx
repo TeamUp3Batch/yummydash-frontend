@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from '../Header';
+// import Header from '../Header/Header';
 import SimpleHeader from '../SimpleHeader/SimpleHeader';
 import { useAuth0 } from "@auth0/auth0-react";
-import './Home.css';
-import { Typography } from '@mui/material';
+import style from './home.module.scss';
+import HeaderComponent from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 
@@ -13,18 +13,18 @@ const Home = () => {
   //const isAuthenticated;
   return (
     <div>
-    <div className='background-pic'>
+    <div className={style.backgroundPic}>
       {isAuthenticated ?
-    (  <div><Header />
+    (  <div><HeaderComponent />
    
     </div>):(<div><SimpleHeader/></div>)
 }
-<div className='skip-mainpage'>
+<div className= {style.skipMainpage}>
    
     </div>
     
     </div>
-    <Footer/>
+    <Footer />
     </div>
   );
 };

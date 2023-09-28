@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import Footer from "../../components/Footer/Footer";
-import ModalLogin from "../../components/ModalLogin/ModalLogin";
+import LoginModel from "../../components/LoginModel/LoginModal";
 
-import styles from "./SignUp.css"; // Import the CSS file with the provided styles
+import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
 
 // function Alert(props) {
 //   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -67,7 +67,7 @@ const SignUp = () => {
       <SimpleHeader />
       <div className={styles.signupContainer}>
         <Container component="main">
-          <form>
+          <form onSubmit={handleSubmit}>
             <Box
               display="flex"
               flexDirection={"column"}
@@ -153,11 +153,8 @@ const SignUp = () => {
               </Button>
               <Typography variant="h6" padding={2} textAlign={"center"}>
                 Already have an account?
-                {/* <Button>
-                  <Link to="/login">Login</Link>
-                </Button> */}
                  <Button onClick={handleOpen}>Login</Button>
-                  <ModalLogin
+                  <LoginModel
                   isOpen={open}
                   onClose={handleClose}
                   aria-labelledby="modal-modal-title"

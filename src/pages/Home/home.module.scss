@@ -1,0 +1,13 @@
+.backgroundPic {
+  background-image: url('../../img/yummyDashBackgroundImage.jpg' );
+  background-size: cover; /* Adjust background size as needed */
+  background-repeat: no-repeat;
+  
+  .skipMainpage {
+    height: 950px;
+    
+    p {
+      color: white;
+    }
+  }
+}

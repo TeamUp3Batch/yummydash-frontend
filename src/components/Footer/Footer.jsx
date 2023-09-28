@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Typography } from "@mui/material";
-import "./Footer.css";
+import  "./footer.module.scss";
 
 
 
@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer>
       <Container>
-       <Typography  align="center" gutterBottom className="textColor"> 
+       <Typography  align="center" gutterBottom color={"white"}> 
        &copy;{new Date().getFullYear()} Yummy Dash 
         </Typography>
         </Container>

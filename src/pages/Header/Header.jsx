@@ -7,8 +7,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import logo from '../../img/yummyDashLogo.png';
-import flag from '../../img/CanadaFlag.png';
-import profile from '../../img/account-default.png';
+import flag from '../../img/canadaFlag.png';
+import profile from '../../img/accountDefault.png';
 import styles from './header.module.scss';
 
 
@@ -65,7 +65,7 @@ const Header = () => {
               <ListItemText primary="Need Help" />
             </ListItemButton>
             {isAuthenticated && (
-              <ListItem button>
+              <ListItem>
                 <ListItemText primary="Logout" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}/>
               </ListItem>
             )}
