@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import logo from "../../img/yummyDashLogo.png";
@@ -11,8 +11,14 @@ import LoginModel from "../../components/LoginModel/LoginModal";
 const SimpleHeader = () => {
   const { loginWithRedirect, isAuthenticated, user } = useAuth0();
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    console.log("open");
+    setOpen(true);
+  };
+  const handleClose = () => {
+    console.log("close");
+    setOpen(false);
+  };
 
   return (
     <div className={styles.header}>
@@ -30,18 +36,20 @@ const SimpleHeader = () => {
           <img src={profile} alt="Profile" />
         </div>
         <div className={styles.account}>
-          <Link onClick={handleOpen}>
+          <Link>
+            <Button onClick={handleOpen} className={styles.login}>
+              Log In
+            </Button>
             <LoginModel
               isOpen={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             />
-            <button className={styles.login}>Log In</button>
           </Link>
 
           <Link to="/signup">
-            <button className={styles.signup}>SignUp</button>
+            <Button className={styles.signup}>SignUp</Button>
           </Link>
         </div>
       </div>
