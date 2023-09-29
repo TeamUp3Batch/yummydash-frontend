@@ -13,7 +13,7 @@ import styles from './header.module.scss';
 
 
 const Header = () => {
-  const { loginWithRedirect,isAuthenticated, user,logout } = useAuth0();
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
 
   const toggleDrawer = () => {
@@ -54,7 +54,7 @@ const Header = () => {
       >
         <div className={styles.drawerContent}>
           <List>
-            <ListItemText primary={user.name}/>
+            {/* <ListItemText primary={user.name}/> */}
           <ListItemButton>
               <ListItemText primary="View Account" />
             </ListItemButton>
@@ -64,11 +64,11 @@ const Header = () => {
             <ListItemButton>
               <ListItemText primary="Need Help" />
             </ListItemButton>
-            {isAuthenticated && (
+            {/* {isAuthenticated && (
               <ListItem>
                 <ListItemText primary="Logout" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}/>
               </ListItem>
-            )}
+            )} */}
           </List>
         </div>
       </Drawer>

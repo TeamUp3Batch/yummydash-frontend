@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,
+  useNavigate,
+  useLocation,
+  NavLink
+  } from "react-router-dom";
 import {
   Container,
   Typography,
@@ -11,7 +15,8 @@ import {
 } from "@mui/material";
 import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import Footer from "../../components/Footer/Footer";
-import LoginModel from "../../components/LoginModel/LoginModal";
+import LoginModal from "../../components/LoginModal/LoginModal";
+
 
 import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
 
@@ -27,6 +32,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate(); // page 
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -43,9 +49,15 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/users";
-      const { data: res } = await axios.post(url, data);
-      setMsg(res.message);
+      const url = "http://localhost:5000/api/users/signup";
+      const result = await axios.post(url, data);
+      console.log("res", result);
+      setMsg(result.data.status);
+      if(result.data.status === 'success') {
+        sessionStorage.setItem("token", result.data.token); 
+        sessionStorage.setItem("user", true);
+        navigate('/main');
+      }
       setOpenSnackbar(true);
     } catch (error) {
       if (
@@ -154,7 +166,7 @@ const SignUp = () => {
               <Typography variant="h6" padding={2} textAlign={"center"}>
                 Already have an account?
                  <Button onClick={handleOpen}>Login</Button>
-                  <LoginModel
+                  <LoginModal
                   isOpen={open}
                   onClose={handleClose}
                   aria-labelledby="modal-modal-title"
