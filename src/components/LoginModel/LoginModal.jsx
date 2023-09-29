@@ -1,25 +1,35 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 
-function ModalComponent({ isOpen, onClose }) {
-  const [formData, setFormData] = useState({
+const LoginModal = ({ isOpen, onClose }) => {
+  const [data, setData] = useState({
     email: "",
     password: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const [error, setError] = useState("");
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log("Login form submitted:", formData);
-    // Close the modal after login or handle login logic
+    try {
+      const url = "http://localhost:5000/api/auth";
+      const { data: res } = await axios.post(url, data);
+      localStorage.setItem("token", res.data);
+      window.location = "/";
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
     onClose();
   };
 
@@ -51,7 +61,7 @@ function ModalComponent({ isOpen, onClose }) {
             type="email"
             label="Email"
             name="email"
-            value={formData.email}
+            value={data.email}
             onChange={handleChange}
             fullWidth
             required
@@ -61,7 +71,7 @@ function ModalComponent({ isOpen, onClose }) {
             type="password"
             label="Password"
             name="password"
-            value={formData.password}
+            value={data.password}
             onChange={handleChange}
             fullWidth
             required
@@ -82,6 +92,6 @@ function ModalComponent({ isOpen, onClose }) {
       </Box>
     </Modal>
   );
-}
+};
 
-export default ModalComponent;
+export default LoginModal;
