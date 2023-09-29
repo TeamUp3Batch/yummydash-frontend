@@ -1,16 +1,16 @@
-import React from 'react'
-import Header from '../Header/Header';
+import React from "react";
+import Header from "../Header/Header";
+import Footer from "../../components/Footer/Footer";
 
-
-function Main() {
+const Main = ()=> {
   return (
-    <div>
-        {/* <Header */}
-        <h1>Your in Main page</h1>
-
-      
-    </div>
-  )
+    <React.Fragment>
+      <Header />
+      <div style={{ height: '500px' }}> {/* Adjust the height as needed */}
+      </div>
+      <Footer />
+    </React.Fragment>
+  );
 }
 
 export default Main;

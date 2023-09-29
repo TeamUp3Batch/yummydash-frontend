@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
-import { Link,
-  useNavigate,
-  useLocation,
-  NavLink
-  } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 const LoginModal = ({ isOpen, onClose }) => {
   const [data, setData] = useState({
     email: "",
@@ -20,19 +16,16 @@ const LoginModal = ({ isOpen, onClose }) => {
   };
   
   const handleSubmit = async (e) => {
-    console.log("handle Submit 1");
     e.preventDefault(); 
-    console.log("handle Submit 2");
     try {
       console.log("handle Submit 3");
       const url = "http://localhost:5000/api/auth/login";
       const result = await axios.post(url, data);
-      console.log("handle Submit", result);
+
      
       sessionStorage.setItem("token", result.data.token); 
       sessionStorage.setItem("user", true);
-      // cookie? 
-      if(result.data.status === 'success') {
+      if(result.data.status === 'logged in') {
         navigate('/main');
       }
     } catch (error) {
