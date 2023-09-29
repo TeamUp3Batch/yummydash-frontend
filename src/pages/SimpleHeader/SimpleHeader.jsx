@@ -1,15 +1,13 @@
 import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import logo from "../../img/yummyDashLogo.png";
 import profile from "../../img/accountDefault.png";
 import styles from "../SimpleHeader/simpleheader.module.scss";
-import LoginModel from "../../components/LoginModel/LoginModal";
+import LoginModel from "../../components/LoginModal/LoginModal";
 
 const SimpleHeader = () => {
-  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

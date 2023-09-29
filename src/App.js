@@ -1,7 +1,7 @@
-import { Auth0Provider } from "@auth0/auth0-react";
 import Profile from "../src/components/Profile/Profile";
 import SignUp from "../src/pages/SignUp/SignUp";
 import Landing from "../src/pages/LandingPage/LandingPage";
+import Main from "../src/pages/Main/Main";
 
 
 import {
@@ -15,6 +15,7 @@ function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/main" element={<Main />} />
     </Routes>
   );
 }
