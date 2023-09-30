@@ -30,13 +30,13 @@ const SimpleHeader = () => {
         <div className={styles.account}>
           <Button onClick={handleOpen} className={styles.login}>
             Log In
-            <LoginModal
+          </Button>
+          <LoginModal
               isOpen={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             />
-          </Button>
           <Link to="/signup">
             <Button className={styles.signup}>SignUp</Button>
           </Link>
