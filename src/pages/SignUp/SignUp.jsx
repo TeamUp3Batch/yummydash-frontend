@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link,
-  useNavigate,
-  useLocation,
-  NavLink
-  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Typography,
@@ -16,7 +12,6 @@ import {
 import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import Footer from "../../components/Footer/Footer";
 import LoginModal from "../../components/LoginModal/LoginModal";
-
 
 import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
 
@@ -32,7 +27,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
-  const navigate = useNavigate(); // page 
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -41,11 +36,10 @@ const SignUp = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -53,10 +47,14 @@ const SignUp = () => {
       const result = await axios.post(url, data);
       console.log("res", result);
       setMsg(result.data.status);
-      if(result.data.status === 'success') {
-        sessionStorage.setItem("token", result.data.token); 
-        sessionStorage.setItem("user", true);
-        navigate('/main');
+      if (result.data.status === "success") {
+        sessionStorage.setItem("token", result.data.token);
+        sessionStorage.setItem(
+          "userName",
+          JSON.stringify(result.data.firstName)
+        );
+        sessionStorage.setItem("loggedIn", true);
+        navigate("/main");
       }
       setOpenSnackbar(true);
     } catch (error) {
@@ -165,12 +163,12 @@ const SignUp = () => {
               </Button>
               <Typography variant="h6" padding={2} textAlign={"center"}>
                 Already have an account?
-                 <Button onClick={handleOpen}>Login</Button>
-                  <LoginModal
+                <Button onClick={handleOpen}>Login</Button>
+                <LoginModal
                   isOpen={open}
                   onClose={handleClose}
                   aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"  
+                  aria-describedby="modal-modal-description"
                 />
               </Typography>
             </Box>
