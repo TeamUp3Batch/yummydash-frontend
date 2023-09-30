@@ -18,14 +18,12 @@ const LoginModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault(); 
     try {
-      console.log("handle Submit 3");
       const url = "http://localhost:5000/api/auth/login";
       const result = await axios.post(url, data);
-
-     
-      sessionStorage.setItem("token", result.data.token); 
-      sessionStorage.setItem("user", true);
       if(result.data.status === 'logged in') {
+      sessionStorage.setItem("token", result.data.token); 
+      sessionStorage.setItem("loggedIn", true);
+      sessionStorage.setItem("userName", JSON.stringify(result.data.firstName));
         navigate('/main');
       }
     } catch (error) {
