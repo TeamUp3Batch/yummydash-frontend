@@ -10,6 +10,7 @@ import flag from "../../img/canadaFlag.png";
 import profile from "../../img/accountDefault.png";
 import styles from "./header.module.scss";
 import { useNavigate } from "react-router-dom";
+import Divider from '@mui/material/Divider';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -34,6 +35,12 @@ const Header = () => {
     setUserName(" ");
     navigate("/");
   };
+  const style = {
+    width: '100%',
+    maxWidth: 360,
+    bgcolor: 'background.paper',
+  };
+  
 
   return (
     <div className={styles.header}>
@@ -68,19 +75,24 @@ const Header = () => {
         }}
       >
         <div className={styles.drawerContent}>
-          <List>
+  
+        <List sx={style} component="nav" aria-label="nav pages">
             <h1>
               <ListItemText primary={userName} />
             </h1>
             <ListItemButton>
               <ListItemText primary="View Account" />
+              <Divider />
             </ListItemButton>
             <ListItemButton>
               <ListItemText primary="Order History" />
+              <Divider />
             </ListItemButton>
             <ListItemButton>
               <ListItemText primary="Need Help" />
+              <Divider />
             </ListItemButton>
+            
             {isUserLoggedIn && (
               <ListItem>
                 <ListItemText

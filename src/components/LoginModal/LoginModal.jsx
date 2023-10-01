@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AlertTitle from "@mui/material/AlertTitle";
+import Alert from "@mui/material/Alert";
 const LoginModal = ({ isOpen, onClose }) => {
   const [data, setData] = useState({
     email: "",
@@ -14,18 +16,22 @@ const LoginModal = ({ isOpen, onClose }) => {
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
-  
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
       const url = "http://localhost:5000/api/auth/login";
       const result = await axios.post(url, data);
-      if(result.data.status === 'logged in') {
-      sessionStorage.setItem("token", result.data.token); 
-      sessionStorage.setItem("loggedIn", true);
-      sessionStorage.setItem("userName", JSON.stringify(result.data.firstName));
-        navigate('/main');
+      if (result.data.status === "logged in") {
+        sessionStorage.setItem("token", result.data.token);
+        sessionStorage.setItem("loggedIn", true);
+        sessionStorage.setItem(
+          "userName",
+          JSON.stringify(result.data.firstName)
+        );
+        navigate("/main");
       }
+      // Perform your validation here
     } catch (error) {
       if (
         error.response &&
@@ -82,6 +88,11 @@ const LoginModal = ({ isOpen, onClose }) => {
             required
             sx={{ mt: 2 }}
           />
+          {error && (
+            <Alert severity="error">
+              <AlertTitle>{error}</AlertTitle>
+            </Alert>
+          )}
           <Button
             type="submit"
             variant="contained"

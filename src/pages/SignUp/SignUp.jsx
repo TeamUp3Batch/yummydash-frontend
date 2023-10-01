@@ -7,13 +7,14 @@ import {
   TextField,
   Button,
   Snackbar,
-  Box,
+  Box
 } from "@mui/material";
 import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import Footer from "../../components/Footer/Footer";
 import LoginModal from "../../components/LoginModal/LoginModal";
-
+import Alert from '@mui/material/Alert';
 import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
+import AlertTitle from '@mui/material/AlertTitle';
 
 // function Alert(props) {
 //   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -147,7 +148,9 @@ const SignUp = () => {
                 className={styles.input}
               />
               {error && (
-                <div className={`${styles.error} ${styles.input}`}>{error}</div>
+                <Alert severity="error">
+                <AlertTitle>{error}</AlertTitle>
+              </Alert>
               )}
               {msg && (
                 <div className={`${styles.success} ${styles.input}`}>{msg}</div>
