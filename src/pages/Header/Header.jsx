@@ -12,6 +12,9 @@ import styles from "./header.module.scss";
 import { useNavigate } from "react-router-dom";
 import Divider from '@mui/material/Divider';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import HelpIcon from '@mui/icons-material/Help';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -82,14 +85,17 @@ const Header = () => {
               <ListItemText primary={userName} />
             </h1>
             <ListItemButton>
+              <AccountCircleIcon /> 
               <ListItemText primary="View Account" />
               <Divider light />
             </ListItemButton>
             <ListItemButton>
+              <ListAltIcon /> 
               <ListItemText primary="Order History" />
               <Divider light/>
             </ListItemButton>
             <ListItemButton>
+              <HelpIcon />  
               <ListItemText primary="Need Help" />
               <Divider light/>
             </ListItemButton>
