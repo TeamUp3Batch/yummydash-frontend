@@ -11,6 +11,7 @@ import profile from "../../img/accountDefault.png";
 import styles from "./header.module.scss";
 import { useNavigate } from "react-router-dom";
 import Divider from '@mui/material/Divider';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -82,25 +83,26 @@ const Header = () => {
             </h1>
             <ListItemButton>
               <ListItemText primary="View Account" />
-              <Divider />
+              <Divider light />
             </ListItemButton>
             <ListItemButton>
               <ListItemText primary="Order History" />
-              <Divider />
+              <Divider light/>
             </ListItemButton>
             <ListItemButton>
               <ListItemText primary="Need Help" />
-              <Divider />
+              <Divider light/>
             </ListItemButton>
             
             {isUserLoggedIn && (
-              <ListItem>
+              <ListItemButton  style={{marginTop: '500px'}}>
+                <LogoutIcon />  
                 <ListItemText
                   primary="Logout"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer"}}
                   onClick={() => logout()}
                 />
-              </ListItem>
+              </ListItemButton>
             )}
           </List>
         </div>
