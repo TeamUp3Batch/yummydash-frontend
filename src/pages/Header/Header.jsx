@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
 import Drawer from "@mui/material/Drawer"; // Import Drawer component
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import logo from "../../img/yummyDashLogo.png";
@@ -10,12 +9,12 @@ import flag from "../../img/canadaFlag.png";
 import profile from "../../img/accountDefault.png";
 import styles from "./header.module.scss";
 import { useNavigate } from "react-router-dom";
-import Divider from '@mui/material/Divider';
-import LogoutIcon from '@mui/icons-material/Logout';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import HelpIcon from '@mui/icons-material/Help';
-
+import Divider from "@mui/material/Divider";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import HelpIcon from "@mui/icons-material/Help";
+import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
 const Header = () => {
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
@@ -40,11 +39,10 @@ const Header = () => {
     navigate("/");
   };
   const style = {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
-    bgcolor: 'background.paper',
+    bgcolor: "background.paper",
   };
-  
 
   return (
     <div className={styles.header}>
@@ -52,7 +50,9 @@ const Header = () => {
         <img className={styles.logo} src={logo} alt="Logo" />
         <div className={styles.address}>
           <p>Delivery</p>
-          <p>Your Address Here</p>
+          <p>
+            Your Address Here <DeliveryAddressDialog />
+          </p>
         </div>
         <div className={styles.search}>
           <input placeholder="Search Cuisines, Restaurants, or Items" />
@@ -79,33 +79,32 @@ const Header = () => {
         }}
       >
         <div className={styles.drawerContent}>
-  
-        <List sx={style} component="nav" aria-label="nav pages">
+          <List sx={style} component="nav" aria-label="nav pages">
             <h1>
               <ListItemText primary={userName} />
             </h1>
             <ListItemButton>
-              <AccountCircleIcon /> 
+              <AccountCircleIcon />
               <ListItemText primary="View Account" />
-              <Divider light />
+              <Divider dark />
             </ListItemButton>
             <ListItemButton>
-              <ListAltIcon /> 
+              <ListAltIcon />
               <ListItemText primary="Order History" />
-              <Divider light/>
+              <Divider dark />
             </ListItemButton>
             <ListItemButton>
-              <HelpIcon />  
+              <HelpIcon />
               <ListItemText primary="Need Help" />
-              <Divider light/>
+              <Divider dark />
             </ListItemButton>
-            
+
             {isUserLoggedIn && (
-              <ListItemButton  style={{marginTop: '500px'}}>
-                <LogoutIcon />  
+              <ListItemButton style={{ marginTop: "500px" }}>
+                <LogoutIcon />
                 <ListItemText
                   primary="Logout"
-                  style={{ cursor: "pointer"}}
+                  style={{ cursor: "pointer" }}
                   onClick={() => logout()}
                 />
               </ListItemButton>
