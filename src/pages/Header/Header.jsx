@@ -15,6 +15,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
+import Typography from "@mui/material/Typography";
+
+
+
 const Header = () => {
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
@@ -80,9 +84,17 @@ const Header = () => {
       >
         <div className={styles.drawerContent}>
           <List sx={style} component="nav" aria-label="nav pages">
-            <h1>
-              <ListItemText primary={userName} />
-            </h1>
+             <ListItemText 
+             primary={
+              <Typography
+                variant="h6"
+                color="textPrimary"
+                style={{ padding: '16px' }} 
+              >
+                {userName} 
+              </Typography>
+            }
+            />
             <ListItemButton>
               <AccountCircleIcon />
               <ListItemText primary="View Account" />
@@ -98,7 +110,6 @@ const Header = () => {
               <ListItemText primary="Need Help" />
               <Divider dark />
             </ListItemButton>
-
             {isUserLoggedIn && (
               <ListItemButton style={{ marginTop: "500px" }}>
                 <LogoutIcon />
