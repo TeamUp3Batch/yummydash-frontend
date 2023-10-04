@@ -11,17 +11,7 @@ root.render(
 <React.StrictMode>
   <Provider store={store}>
   <BrowserRouter>
-  <Auth0Provider
-  domain="dev-mlxkwbtruscyfbve.us.auth0.com"
-  clientId="QWOluch4GoXhaCXb4u9sLV7RazTQxc4z"
-  scope="openid profile email"
-  authorizationParams={{
-    redirect_uri: window.location.origin,
-    audience:"yummydashapi"
-  }}
->
   <App />
-</Auth0Provider>
 </BrowserRouter>
 </Provider>
 </React.StrictMode>,

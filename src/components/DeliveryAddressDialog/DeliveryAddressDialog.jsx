@@ -8,8 +8,10 @@ import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Radio from "@mui/joy/Radio";
+import RadioGroup from "@mui/joy/RadioGroup";
 import axios from "axios";
-import { TextField } from "@mui/material";
+import { ListItem, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const DeliveryAddressDialog = () => {
@@ -22,6 +24,8 @@ const DeliveryAddressDialog = () => {
   const iconRef = useRef(null);
   const [isAddAddressDialogVisible, setAddAddressDialogVisible] =
     useState(false);
+  const [selectedAddress, setSelectedAddress] = useState("");
+  const [isNewAddressAdded, setIsNewAddressAdded] = useState(false)
 
   const [data, setData] = useState({
     email: sessionStorage.getItem("email"),
@@ -33,7 +37,10 @@ const DeliveryAddressDialog = () => {
     country: "Canada",
   });
 
-  const [addresses, setAddresses] = useState([]);
+  const [addresses, setAddresses] = useState(null);
+  const handleAddressChange = (event) => {
+    setSelectedAddress(event.target.value);
+  };
 
   // ******************************************************
   // *  *   Starting Dialog Styling          *  *
@@ -117,14 +124,16 @@ const DeliveryAddressDialog = () => {
       console.log("data", data);
       const url = "http://localhost:5000/api/users/addNewAddress";
       const result = await axios.post(url, data);
-      if (result.data.status === "success") {
+      console.log("resultvsdvsdvsd", result);
+      if (result.status === 201) {
+        console.log("am i here")
         sessionStorage.removeItem("address");
+        console.log("is session storage", sessionStorage.getItem("address"));
+        sessionStorage.setItem("address", JSON.stringify(result.data.address));
         setAddresses(result.data.address);
-        sessionStorage.setItem(
-          "address",
-          JSON.stringify(result.data.address)
-        );
-        window.location.reload();
+        console.log("addressesdbffjsdbffjksd", addresses);
+        //setIsNewAddressAdded(true);
+        setAddAddressDialogVisible(false);
       }
     } catch (error) {
       console.log("error", error);
@@ -153,13 +162,13 @@ const DeliveryAddressDialog = () => {
     };
   }, [isDialogVisible]);
 
-
-  useEffect(() => { 
-    console.log("before addresses form the use effect");
-   setAddresses(JSON.parse(sessionStorage.getItem("address")));
-   
-   console.log("addresses form the use effect", addresses);
-   
+  useEffect(() => {
+  console.log("before addresses form the use effect");
+  const storedAddresses = JSON.parse(sessionStorage.getItem("address"));
+  if (storedAddresses) {
+    setAddresses(storedAddresses);
+  }
+  console.log("addresses form the use effect", storedAddresses);
 
   },[])
 
@@ -187,7 +196,7 @@ const DeliveryAddressDialog = () => {
             <ListItemButton>
               <ListItemText
                 secondary={
-                  <Typography variant="h8" color="textPrimary">
+                  <Typography component="span" variant="h8" color="textPrimary">
                     Select Your Location
                   </Typography>
                 }
@@ -199,7 +208,7 @@ const DeliveryAddressDialog = () => {
             <ListItemButton onClick={openAddAddressDialog}>
               <ListItemText
                 primary={
-                  <Typography variant="h10" color="textSecondary">
+                  <Typography component="span" variant="h10" color="textSecondary">
                     Add New Address
                   </Typography>
                 }
@@ -207,7 +216,6 @@ const DeliveryAddressDialog = () => {
               <AddIcon />
               <Divider dark />
             </ListItemButton>
-
             <div>
               {addresses.map((address) => (
                 <li>{address.unitNumber} {address.street}  {address.city} {address.state} {address.zipCode} {address.country}</li>
