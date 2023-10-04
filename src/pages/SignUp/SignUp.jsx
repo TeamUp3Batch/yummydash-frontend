@@ -55,6 +55,7 @@ const SignUp = () => {
           JSON.stringify(result.data.firstName)
         );
         sessionStorage.setItem("loggedIn", true);
+        sessionStorage.setItem("email", result.data.email);
         navigate("/main");
       }
       setOpenSnackbar(true);

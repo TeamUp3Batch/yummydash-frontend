@@ -29,7 +29,11 @@ const LoginModal = ({ isOpen, onClose }) => {
           "userName",
           JSON.stringify(result.data.firstName)
         );
+        sessionStorage.setItem("email", result.data.email);
+        sessionStorage.setItem("address", JSON.stringify(result.data.address));
+       
         navigate("/main");
+        
       }
       // Perform your validation here
     } catch (error) {
