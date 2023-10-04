@@ -9,23 +9,19 @@ import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Radio from "@mui/joy/Radio";
-import RadioGroup from "@mui/joy/RadioGroup";
 import axios from "axios";
 import { ListItem, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
-const DeliveryAddressDialog = () => {
+const DeliveryAddressDialog = ({ onSelect }) => {
   // ******************************************************
   //  *  *                 Use State Hooks         *  *
   // ******************************************************
-  const navigate = useNavigate();
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
   const iconRef = useRef(null);
   const [isAddAddressDialogVisible, setAddAddressDialogVisible] =
     useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
-  const [isNewAddressAdded, setIsNewAddressAdded] = useState(false)
 
   const [data, setData] = useState({
     email: sessionStorage.getItem("email"),
@@ -38,8 +34,8 @@ const DeliveryAddressDialog = () => {
   });
 
   const [addresses, setAddresses] = useState(null);
-  const handleAddressChange = (event) => {
-    setSelectedAddress(event.target.value);
+  const handleRadioSelect = (address) => {
+    onSelect(address); // Call the callback function to update the selected address in the parent component
   };
 
   // ******************************************************
@@ -76,7 +72,7 @@ const DeliveryAddressDialog = () => {
     top: dialogPosition.top,
     left: dialogPosition.left,
     zIndex: 1000,
-    height: "200px",
+    height: "400px",
     width: "300px",
   };
 
@@ -126,13 +122,9 @@ const DeliveryAddressDialog = () => {
       const result = await axios.post(url, data);
       console.log("resultvsdvsdvsd", result);
       if (result.status === 201) {
-        console.log("am i here")
         sessionStorage.removeItem("address");
-        console.log("is session storage", sessionStorage.getItem("address"));
         sessionStorage.setItem("address", JSON.stringify(result.data.address));
         setAddresses(result.data.address);
-        console.log("addressesdbffjsdbffjksd", addresses);
-        //setIsNewAddressAdded(true);
         setAddAddressDialogVisible(false);
       }
     } catch (error) {
@@ -163,14 +155,11 @@ const DeliveryAddressDialog = () => {
   }, [isDialogVisible]);
 
   useEffect(() => {
-  console.log("before addresses form the use effect");
-  const storedAddresses = JSON.parse(sessionStorage.getItem("address"));
-  if (storedAddresses) {
-    setAddresses(storedAddresses);
-  }
-  console.log("addresses form the use effect", storedAddresses);
-
-  },[])
+    const storedAddresses = JSON.parse(sessionStorage.getItem("address"));
+    if (storedAddresses) {
+      setAddresses(storedAddresses);
+    }
+  }, []);
 
   // ******************************************************
   //  *  *        Render  UI  Here  (JSX)     *  *
@@ -208,7 +197,11 @@ const DeliveryAddressDialog = () => {
             <ListItemButton onClick={openAddAddressDialog}>
               <ListItemText
                 primary={
-                  <Typography component="span" variant="h10" color="textSecondary">
+                  <Typography
+                    component="span"
+                    variant="h10"
+                    color="textSecondary"
+                  >
                     Add New Address
                   </Typography>
                 }
@@ -216,19 +209,40 @@ const DeliveryAddressDialog = () => {
               <AddIcon />
               <Divider dark />
             </ListItemButton>
-            <div>
-              {addresses.map((address) => (
-                <li>{address.unitNumber} {address.street}  {address.city} {address.state} {address.zipCode} {address.country}</li>
-              ))}
-            </div>
+            <ListItem>
+              <ListItemText
+                primary={
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    {addresses.map((address) => (
+                      <div key={address.id}>
+                        <label>
+                          {address.unitNumber} {address.street} {address.city}{" "}
+                          {address.state} {address.zipCode} {address.country}
+                        </label>
+                        <Radio
+                          checked={selectedAddress === address}
+                          onChange={() => handleRadioSelect(address)}
+                          value={address.id}
+                          name="address-radio"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                }
+              />
+            </ListItem>
           </List>
         </Paper>
       )}
       {/* Nested Add Address Dialog */}
       {isAddAddressDialogVisible && (
         <Paper style={innerDialogStyle}>
-          {/* Add your input fields for unit number, street, city, country here */}
-          {/* Example input fields */}
           <div>
             <TextField
               type="text"
