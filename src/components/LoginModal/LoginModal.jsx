@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
 const LoginModal = ({ isOpen, onClose }) => {
-  const API_URL = process.env.REACT_APP_API_URL;
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -22,11 +21,7 @@ const LoginModal = ({ isOpen, onClose }) => {
     console.log("HELLO ")
     e.preventDefault();
     try {
-      console.log("api url",API_URL)
-      const url = API_URL+"/api/auth/login";
-      console.log("url is",url)
-      
-      // const url = "http://localhost:5000/api/auth/login";
+      const url = "http://localhost:5000/api/auth/login";
       const result = await axios.post(url, data);
       if (result.data.status === "logged in") {
         sessionStorage.setItem("token", result.data.token);
