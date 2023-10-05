@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Paper from "@mui/material/Paper";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import List from "@mui/material/List";
@@ -72,7 +73,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
     top: dialogPosition.top,
     left: dialogPosition.left,
     zIndex: 1000,
-    height: "400px",
+    // height: "400px",
     width: "300px",
   };
 
@@ -209,6 +210,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
               <AddIcon />
               <Divider dark />
             </ListItemButton>
+            <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
             <ListItem>
               <ListItemText
                 primary={
@@ -219,24 +221,35 @@ const DeliveryAddressDialog = ({ onSelect }) => {
                       alignItems: "center",
                     }}
                   >
-                    {addresses.map((address) => (
-                      <div key={address.id}>
-                        <label>
-                          {address.unitNumber} {address.street} {address.city}{" "}
-                          {address.state} {address.zipCode} {address.country}
-                        </label>
-                        <Radio
-                          checked={selectedAddress === address}
-                          onChange={() => handleRadioSelect(address)}
-                          value={address.id}
-                          name="address-radio"
-                        />
-                      </div>
-                    ))}
+                    {addresses && addresses.length > 0 ? (
+                      addresses.map((address) => (
+                        <List key={address.id}>
+                          <ListItem>
+                           <LocationOnIcon/>
+                          <ListItemText primaryTypographyProps={{fontSize: '12px'}} >
+                         
+                            {address.unitNumber} {address.street} {address.city}{" "}
+                            {address.state} {address.zipCode} {address.country}
+                          
+                          
+                          </ListItemText>
+                          <Radio
+                            checked={selectedAddress === address}
+                            onChange={() => handleRadioSelect(address)}
+                            value={address.id}
+                            name="address-radio"
+                          />
+                          </ListItem>
+                        </List>
+                      ))
+                    ) : (
+                      <div></div>
+                    )}
                   </div>
                 }
               />
             </ListItem>
+            </div>
           </List>
         </Paper>
       )}
