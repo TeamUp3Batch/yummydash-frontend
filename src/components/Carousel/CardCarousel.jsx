@@ -1,64 +1,45 @@
 import React from "react";
-import { Carousel, Container, Row, Col } from "react-bootstrap";
+import Slider from "react-slick";
+import { Container } from "@mui/material";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import image1 from "../../img/carouselImage1.jpeg";
+import image2 from "../../img/carouselImage2.jpeg";
+import image3 from "../../img/carouselImage3.jpeg";
+import image4 from "../../img/carouselImage4.jpeg";
 
 const CardCarousel = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear"
+  };
+
   return (
     <div>
-      <Container>
-        <Carousel>
-          <Carousel.Item>
-            <Row>
-              <Col>
-                <img
-                  className="d-block w-100 h-150"
-                  src="https://images.pexels.com/photos/333850/pexels-photo-333850.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=100"
-                  alt="First slide"
-                />
-                <Carousel.Caption>
-                  <h3>This is the first slide!</h3>
-                  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
-              </Col>
-              <Col>
-                <img
-                  className="d-block w-100 h-150"
-                  src="https://images.pexels.com/photos/1480688/pexels-photo-1480688.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=100"
-                  alt="Second slide"
-                />
-                <Carousel.Caption>
-                  <h3>Second slide label</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-              </Col>
-            </Row>
-          </Carousel.Item>
-          <Carousel.Item>
-            <Row>
-              <Col>
-                <img
-                  className="d-block w-100 h-150"
-                  src="https://images.pexels.com/photos/1480687/pexels-photo-1480687.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=100"
-                  alt="Third slide"
-                />
-                <Carousel.Caption>
-                  <h3>Third slide label</h3>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </Carousel.Caption>
-              </Col>
-              <Col>
-                <img
-                  className="d-block w-100 h-150"
-                  src="https://images.pexels.com/photos/1480689/pexels-photo-1480689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=100"
-                  alt="Fourth slide"
-                />
-                <Carousel.Caption>
-                  <h3>Fourth slide label</h3>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </Carousel.Caption>
-              </Col>
-            </Row>
-          </Carousel.Item>
-        </Carousel>
+      <Container maxWidth="lg" style={{paddingTop: "20px"}}>
+        <Slider {...settings}>
+          <div>
+            <img src={image1} alt="carousel" style={{ height: "300px"  , width: "300px"}} />
+          </div>
+          <div>
+            <img src={image2} alt="carousel" style={{ height: "300px"  , width: "300px"}} />
+          </div>
+          <div>
+            <img src={image3} alt="carousel" style={{height: "300px"  , width: "300px"}} />
+          </div>
+          <div>
+            <img src={image4} alt="carousel" style={{ height: "300px"  , width: "300px"}} />
+          </div>
+          <div>
+            <img src={image1} alt="carousel" style={{ height: "300px"  , width: "300px"}} />
+          </div>
+        </Slider>
       </Container>
     </div>
   );

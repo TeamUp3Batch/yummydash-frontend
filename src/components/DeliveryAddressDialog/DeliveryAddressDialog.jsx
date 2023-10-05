@@ -119,6 +119,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
     console.log("Data to be saved:", data);
     try {
       console.log("data", data);
+      // const url = `${process.env.REACT_APP_API_URL}/api/users/addNewAddress`;
       const url = "http://localhost:5000/api/users/addNewAddress";
       const result = await axios.post(url, data);
       console.log("resultvsdvsdvsd", result);

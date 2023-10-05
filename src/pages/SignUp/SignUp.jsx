@@ -45,6 +45,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const url = "http://localhost:5000/api/users/signup";
+      // const url = `${process.env.REACT_APP_API_URL}/api/users/signup`;
       const result = await axios.post(url, data);
       console.log("res", result);
       setMsg(result.data.status);

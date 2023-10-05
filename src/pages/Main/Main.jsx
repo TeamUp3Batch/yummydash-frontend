@@ -8,7 +8,7 @@ const Main = ()=> {
     <React.Fragment>
       <Header />
       <div style={{ height: '800px' }}> 
-      {/* <CardCarousel/> */}
+      <CardCarousel/>
       </div>
       <Footer />
     </React.Fragment>
