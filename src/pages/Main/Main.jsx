@@ -1,16 +1,18 @@
-import React from "react";
-import Header from "../Header/Header";
-import Footer from "../../components/Footer/Footer";
+import React from 'react';
+import Header from '../Header/Header';
+import Footer from '../../components/Footer/Footer';
+import CarouselMain from '../../components/Carousel/Carousel';
 
-const Main = ()=> {
+const Main = () => {
   return (
     <React.Fragment>
       <Header />
-      <div style={{ height: '800px' }}> {/* Adjust the height as needed */}
+      <div style={{ height: '800px' }}>
+        <CarouselMain />
       </div>
       <Footer />
     </React.Fragment>
   );
-}
+};
 
 export default Main;
