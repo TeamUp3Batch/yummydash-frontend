@@ -17,6 +17,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   // ******************************************************
   //  *  *                 Use State Hooks         *  *
   // ******************************************************
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
   const iconRef = useRef(null);
@@ -116,11 +117,8 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   const handleSave = async (e) => {
     // Save the data to the database
     e.preventDefault();
-    console.log("Data to be saved:", data);
     try {
-      console.log("data", data);
-      // const url = `${process.env.REACT_APP_API_URL}/api/users/addNewAddress`;
-      const url = "http://localhost:5000/api/users/addNewAddress";
+      const url = `${apiUrl}/api/users/addNewAddress`;
       const result = await axios.post(url, data);
       console.log("resultvsdvsdvsd", result);
       if (result.status === 201) {
