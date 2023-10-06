@@ -23,6 +23,7 @@ const LoginModal = ({ isOpen, onClose }) => {
     console.log("HELLO ");
     e.preventDefault();
     try {
+
       const url = `${apiUrl}/api/auth/login`;
       const result = await axios.post(url, data);
       if (result.data.status === "logged in") {

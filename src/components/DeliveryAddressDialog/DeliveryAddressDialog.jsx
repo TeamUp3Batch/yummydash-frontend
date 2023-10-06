@@ -1,17 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Paper from "@mui/material/Paper";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemButton from "@mui/material/ListItemButton";
-import Divider from "@mui/material/Divider";
-import AddIcon from "@mui/icons-material/Add";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Radio from "@mui/joy/Radio";
-import axios from "axios";
-import { ListItem, TextField } from "@mui/material";
+
+import React, { useState, useRef, useEffect } from 'react';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Paper from '@mui/material/Paper';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import List from '@mui/material/List';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
+import Divider from '@mui/material/Divider';
+import AddIcon from '@mui/icons-material/Add';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Radio from '@mui/joy/Radio';
+import axios from 'axios';
+import { ListItem, TextField } from '@mui/material';
 
 const DeliveryAddressDialog = ({ onSelect }) => {
   // ******************************************************
@@ -21,18 +22,17 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
   const iconRef = useRef(null);
-  const [isAddAddressDialogVisible, setAddAddressDialogVisible] =
-    useState(false);
-  const [selectedAddress, setSelectedAddress] = useState("");
+  const [isAddAddressDialogVisible, setAddAddressDialogVisible] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState('');
 
   const [data, setData] = useState({
-    email: sessionStorage.getItem("email"),
-    unitNumber: "",
-    street: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "Canada",
+    email: sessionStorage.getItem('email'),
+    unitNumber: '',
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: 'Canada',
   });
 
   const [addresses, setAddresses] = useState(null);
@@ -70,36 +70,36 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   };
 
   const dialogStyle = {
-    position: "absolute",
+    position: 'absolute',
     top: dialogPosition.top,
     left: dialogPosition.left,
     zIndex: 1000,
     // height: "400px",
-    width: "300px",
+    width: '300px',
   };
 
   const innerDialogStyle = {
-    position: "absolute",
+    position: 'absolute',
     top: dialogPosition.top,
     left: dialogPosition.left,
     zIndex: 1000,
-    height: "400px",
-    width: "300px",
+    height: '400px',
+    width: '300px',
   };
   const style = {
-    width: "100%",
+    width: '100%',
     maxWidth: 360,
-    bgcolor: "background.paper",
+    bgcolor: 'background.paper',
   };
 
   const inputStyle = {
-    color: "#0C151D",
+    color: '#0C151D',
     fontweight: 400,
-    padding: "1px 2px",
-    fontSize: "16px",
-    boxSizing: "border-box",
-    borderRadius: "1px",
-    width: "100%",
+    padding: '1px 2px',
+    fontSize: '16px',
+    boxSizing: 'border-box',
+    borderRadius: '1px',
+    width: '100%',
   };
 
   // ******************************************************
@@ -120,15 +120,15 @@ const DeliveryAddressDialog = ({ onSelect }) => {
     try {
       const url = `${apiUrl}/api/users/addNewAddress`;
       const result = await axios.post(url, data);
-      console.log("resultvsdvsdvsd", result);
+      console.log('resultvsdvsdvsd', result);
       if (result.status === 201) {
-        sessionStorage.removeItem("address");
-        sessionStorage.setItem("address", JSON.stringify(result.data.address));
+        sessionStorage.removeItem('address');
+        sessionStorage.setItem('address', JSON.stringify(result.data.address));
         setAddresses(result.data.address);
         setAddAddressDialogVisible(false);
       }
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 
@@ -145,17 +145,17 @@ const DeliveryAddressDialog = ({ onSelect }) => {
 
     // Attach the event listener when the dialog is visible
     if (isDialogVisible) {
-      window.addEventListener("click", handleClickOutside);
+      window.addEventListener('click', handleClickOutside);
     }
 
     // Clean up the event listener when the component unmounts
     return () => {
-      window.removeEventListener("click", handleClickOutside);
+      window.removeEventListener('click', handleClickOutside);
     };
   }, [isDialogVisible]);
 
   useEffect(() => {
-    const storedAddresses = JSON.parse(sessionStorage.getItem("address"));
+    const storedAddresses = JSON.parse(sessionStorage.getItem('address'));
     if (storedAddresses) {
       setAddresses(storedAddresses);
     }
@@ -168,11 +168,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   return (
     <div>
       {/* Use Material-UI's Icon component with 'ArrowDropDown' */}
-      <ArrowDropDownIcon
-        ref={iconRef}
-        onClick={openDialog}
-        style={{ cursor: "pointer" }}
-      />
+      <ArrowDropDownIcon ref={iconRef} onClick={openDialog} style={{ cursor: 'pointer' }} />
 
       {isDialogVisible && (
         <Paper elevation={3} style={dialogStyle}>
@@ -192,16 +188,12 @@ const DeliveryAddressDialog = ({ onSelect }) => {
               />
 
               <Divider dark />
-              <h5 style={{ marginLeft: "10px" }}>Edit </h5>
+              <h5 style={{ marginLeft: '10px' }}>Edit </h5>
             </ListItemButton>
             <ListItemButton onClick={openAddAddressDialog}>
               <ListItemText
                 primary={
-                  <Typography
-                    component="span"
-                    variant="h10"
-                    color="textSecondary"
-                  >
+                  <Typography component="span" variant="h10" color="textSecondary">
                     Add New Address
                   </Typography>
                 }
@@ -209,7 +201,9 @@ const DeliveryAddressDialog = ({ onSelect }) => {
               <AddIcon />
               <Divider dark />
             </ListItemButton>
+
             <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+
               <ListItem>
                 <ListItemText
                   primary={
@@ -225,12 +219,14 @@ const DeliveryAddressDialog = ({ onSelect }) => {
                           <List key={address.id}>
                             <ListItem>
                               <LocationOnIcon />
+
                               <ListItemText
                                 primaryTypographyProps={{ fontSize: "12px" }}
                               >
                                 {address.unitNumber} {address.street}{" "}
                                 {address.city} {address.state} {address.zipCode}{" "}
                                 {address.country}
+
                               </ListItemText>
                               <Radio
                                 checked={selectedAddress === address}
@@ -315,9 +311,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
               style={inputStyle}
             />
           </div>
-          <ListItemButton
-            style={{ display: "flex", justifyContent: "space-between" }}
-          >
+          <ListItemButton style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button onClick={closeAddAddressDialog}>Cancel</Button>
             <Button onClick={handleSave}>Save</Button>
           </ListItemButton>
