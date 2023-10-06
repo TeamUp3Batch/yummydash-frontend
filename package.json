@@ -25,6 +25,7 @@
     "redux": "^4.2.1",
     "sass": "^1.68.0",
     "slick-carousel": "^1.8.1",
+    "swiper": "^9.4.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
