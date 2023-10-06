@@ -7,14 +7,14 @@ import {
   TextField,
   Button,
   Snackbar,
-  Box
+  Box,
 } from "@mui/material";
 import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import Footer from "../../components/Footer/Footer";
 import LoginModal from "../../components/LoginModal/LoginModal";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
-import AlertTitle from '@mui/material/AlertTitle';
+import AlertTitle from "@mui/material/AlertTitle";
 
 // function Alert(props) {
 //   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -46,7 +46,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const url = `${apiUrl}/api/users/signup`;
-            const result = await axios.post(url, data);
+      const result = await axios.post(url, data);
       console.log("res", result);
       setMsg(result.data.status);
       if (result.data.status === "success") {
@@ -151,8 +151,8 @@ const SignUp = () => {
               />
               {error && (
                 <Alert severity="error">
-                <AlertTitle>{error}</AlertTitle>
-              </Alert>
+                  <AlertTitle>{error}</AlertTitle>
+                </Alert>
               )}
               {msg && (
                 <div className={`${styles.success} ${styles.input}`}>{msg}</div>

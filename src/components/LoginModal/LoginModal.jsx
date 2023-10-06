@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
 
-
 const LoginModal = ({ isOpen, onClose }) => {
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
   const [data, setData] = useState({
@@ -21,7 +20,7 @@ const LoginModal = ({ isOpen, onClose }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("HELLO ")
+    console.log("HELLO ");
     e.preventDefault();
     try {
       const url = `${apiUrl}/api/auth/login`;
@@ -35,9 +34,8 @@ const LoginModal = ({ isOpen, onClose }) => {
         );
         sessionStorage.setItem("email", result.data.email);
         sessionStorage.setItem("address", JSON.stringify(result.data.address));
-       
+
         navigate("/main");
-        
       }
       // Perform your validation here
     } catch (error) {
