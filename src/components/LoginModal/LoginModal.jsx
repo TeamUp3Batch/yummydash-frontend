@@ -4,7 +4,9 @@ import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
+
 const LoginModal = ({ isOpen, onClose }) => {
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -18,13 +20,11 @@ const LoginModal = ({ isOpen, onClose }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("HELLO ")
+    console.log("HELLO ");
     e.preventDefault();
     try {
-      // Getting error 
-      // console.log('data', process.env.REACT_APP_API_URL)
-      //const url = `${process.env.REACT_APP_API_URL}/api/auth/login`;
-      const url = `http://localhost:5000/api/auth/login`;
+
+      const url = `${apiUrl}/api/auth/login`;
       const result = await axios.post(url, data);
       if (result.data.status === "logged in") {
         sessionStorage.setItem("token", result.data.token);
@@ -35,9 +35,8 @@ const LoginModal = ({ isOpen, onClose }) => {
         );
         sessionStorage.setItem("email", result.data.email);
         sessionStorage.setItem("address", JSON.stringify(result.data.address));
-       
+
         navigate("/main");
-        
       }
       // Perform your validation here
     } catch (error) {

@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Paper from '@mui/material/Paper';
@@ -17,6 +18,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   // ******************************************************
   //  *  *                 Use State Hooks         *  *
   // ******************************************************
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
   const iconRef = useRef(null);
@@ -115,11 +117,8 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   const handleSave = async (e) => {
     // Save the data to the database
     e.preventDefault();
-    console.log('Data to be saved:', data);
     try {
-      console.log('data', data);
-      // const url = `${process.env.REACT_APP_API_URL}/api/users/addNewAddress`;
-      const url = 'http://localhost:5000/api/users/addNewAddress';
+      const url = `${apiUrl}/api/users/addNewAddress`;
       const result = await axios.post(url, data);
       console.log('resultvsdvsdvsd', result);
       if (result.status === 201) {
@@ -202,24 +201,32 @@ const DeliveryAddressDialog = ({ onSelect }) => {
               <AddIcon />
               <Divider dark />
             </ListItemButton>
-            <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+
+            <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+
               <ListItem>
                 <ListItemText
                   primary={
                     <div
                       style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                      }}>
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
                       {addresses && addresses.length > 0 ? (
                         addresses.map((address) => (
                           <List key={address.id}>
                             <ListItem>
                               <LocationOnIcon />
-                              <ListItemText primaryTypographyProps={{ fontSize: '12px' }}>
-                                {address.unitNumber} {address.street} {address.city} {address.state}{' '}
-                                {address.zipCode} {address.country}
+
+                              <ListItemText
+                                primaryTypographyProps={{ fontSize: "12px" }}
+                              >
+                                {address.unitNumber} {address.street}{" "}
+                                {address.city} {address.state} {address.zipCode}{" "}
+                                {address.country}
+
                               </ListItemText>
                               <Radio
                                 checked={selectedAddress === address}

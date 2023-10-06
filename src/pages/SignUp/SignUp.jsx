@@ -7,20 +7,21 @@ import {
   TextField,
   Button,
   Snackbar,
-  Box
+  Box,
 } from "@mui/material";
 import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import Footer from "../../components/Footer/Footer";
 import LoginModal from "../../components/LoginModal/LoginModal";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
-import AlertTitle from '@mui/material/AlertTitle';
+import AlertTitle from "@mui/material/AlertTitle";
 
 // function Alert(props) {
 //   return <MuiAlert elevation={6} variant="filled" {...props} />;
 // }
 
 const SignUp = () => {
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
   // Declare the following variables and functions
   const [data, setData] = useState({
     firstName: "",
@@ -44,9 +45,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/users/signup";
-      console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL)
-      //const url = `${process.env.REACT_APP_API_URL}/api/users/signup`;
+      const url = `${apiUrl}/api/users/signup`;
       const result = await axios.post(url, data);
       console.log("res", result);
       setMsg(result.data.status);
@@ -152,8 +151,8 @@ const SignUp = () => {
               />
               {error && (
                 <Alert severity="error">
-                <AlertTitle>{error}</AlertTitle>
-              </Alert>
+                  <AlertTitle>{error}</AlertTitle>
+                </Alert>
               )}
               {msg && (
                 <div className={`${styles.success} ${styles.input}`}>{msg}</div>
