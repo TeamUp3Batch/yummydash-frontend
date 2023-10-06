@@ -22,7 +22,7 @@ const CardCarousel = () => {
 
   return (
     <div>
-      <Container maxWidth="lg" style={{paddingTop: "20px"}}>
+      <Container maxWidth="lg" style={{paddingTop: "300px"}}>
         <Slider {...settings}>
           <div>
             <img src={image1} alt="carousel" style={{ height: "300px"  , width: "300px"}} />
