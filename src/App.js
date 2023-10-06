@@ -19,3 +19,5 @@ function App() {
 }
 
 export default App;
+// es-lint differnt rules to setup 
+// 
