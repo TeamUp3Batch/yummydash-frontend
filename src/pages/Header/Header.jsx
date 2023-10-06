@@ -17,13 +17,13 @@ import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
 import Typography from "@mui/material/Typography";
 
-
-
 const Header = () => {
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userName, setUserName] = useState(" ");
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
   useEffect(() => {
     const loggedIn = sessionStorage.getItem("loggedIn");
     const userName = sessionStorage.getItem("userName");
@@ -48,6 +48,10 @@ const Header = () => {
     bgcolor: "background.paper",
   };
 
+  const handleAddressSelect = (address) => {
+    setSelectedAddress(address);
+  };
+
   return (
     <div className={styles.header}>
       <div className={styles.wrapper}>
@@ -55,7 +59,10 @@ const Header = () => {
         <div className={styles.address}>
           <p>Delivery</p>
           <p>
-            Your Address Here <DeliveryAddressDialog />
+            {selectedAddress
+              ? `${selectedAddress.unitNumber}, ${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.zipCode}, ${selectedAddress.country}`
+              : "Your Address Here"}
+            <DeliveryAddressDialog onSelect={handleAddressSelect} />
           </p>
         </div>
         <div className={styles.search}>
@@ -84,16 +91,16 @@ const Header = () => {
       >
         <div className={styles.drawerContent}>
           <List sx={style} component="nav" aria-label="nav pages">
-             <ListItemText 
-             primary={
-              <Typography
-                variant="h6"
-                color="textPrimary"
-                style={{ padding: '16px' }} 
-              >
-                {userName} 
-              </Typography>
-            }
+            <ListItemText
+              primary={
+                <Typography
+                  variant="h6"
+                  color="textPrimary"
+                  style={{ padding: "16px" }}
+                >
+                  {userName}
+                </Typography>
+              }
             />
             <ListItemButton>
               <AccountCircleIcon />

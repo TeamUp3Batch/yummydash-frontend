@@ -8,6 +8,7 @@ import Footer from "../../components/Footer/Footer";
 // clean 
 const Home = () => {
   const { isAuthenticated, user } = useAuth0();
+ 
   //const isAuthenticated;
   return (
     <div>
@@ -21,7 +22,9 @@ const Home = () => {
             <SimpleHeader />
           </div>
         )}
-        <div className={style.skipMainpage}></div>
+        <div className={style.skipMainpage}>
+         
+        </div>
       </div>
       <Footer />
     </div>

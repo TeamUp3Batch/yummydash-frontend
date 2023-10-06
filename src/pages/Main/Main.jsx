@@ -1,14 +1,14 @@
-import React from 'react';
-import Header from '../Header/Header';
-import Footer from '../../components/Footer/Footer';
-import CarouselMain from '../../components/Carousel/Carousel';
+import React from "react";
+import Header from "../Header/Header";
+import Footer from "../../components/Footer/Footer";
+import CardCarousel from "../../components/Carousel/CardCarousel";
 
 const Main = () => {
   return (
     <React.Fragment>
       <Header />
-      <div style={{ height: '800px' }}>
-        <CarouselMain />
+      <div style={{ height: '800px' }}> 
+      {/* <CardCarousel/> */}
       </div>
       <Footer />
     </React.Fragment>

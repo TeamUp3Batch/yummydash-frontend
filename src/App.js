@@ -1,4 +1,3 @@
-import Profile from "../src/components/Profile/Profile";
 import SignUp from "../src/pages/SignUp/SignUp";
 import Landing from "../src/pages/LandingPage/LandingPage";
 import Main from "../src/pages/Main/Main";
@@ -13,7 +12,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="/profile" element={<Profile/>}/>
       <Route path="/signup" element={<SignUp />} />
       <Route path="/main" element={<Main />} />
     </Routes>
@@ -21,3 +19,5 @@ function App() {
 }
 
 export default App;
+// es-lint differnt rules to setup 
+// 
