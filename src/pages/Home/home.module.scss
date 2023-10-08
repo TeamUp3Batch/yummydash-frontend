@@ -1,19 +1,9 @@
 .backgroundPic {
-  background-image: url('../../img/yummyDashBackground.png' );
-  background-size: cover; /* Adjust background size as needed */
+  background-image: url('../../img/yummyDashHome.png' );
+  background-size: cover; /* Set the height to 50% of the container's height */
   background-repeat: no-repeat;
   background-position: center center;
-  
-  .skipMainpage {
-    height: 950px;
-    
-    p {
-      color: white;
-    }
-  }
+  height: 100vh;
+  position: relative;
+  width: 100%;
 }
-// better work easy 
-// es lint - rules foe  
-// mrger  format file on save
-// implementation of es lint 
-// 
