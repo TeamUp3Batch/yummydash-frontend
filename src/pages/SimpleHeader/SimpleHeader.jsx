@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import logo from "../../img/yummyDashLogo.png";
@@ -16,13 +16,6 @@ const SimpleHeader = () => {
     <div className={styles.header}>
       <div className={styles.wrapper}>
         <img className={styles.logo} src={logo} alt="Logo" />
-
-        <div className={styles.roundIcon}>
-          <Typography style={{ color: "white" }}>
-            Yummy in your Tummy?
-          </Typography>
-        </div>
-
         <Divider orientation="vertical" flexItem />
         <div className={styles.profile}>
           <img src={profile} alt="Profile" />
@@ -32,11 +25,11 @@ const SimpleHeader = () => {
             Log In
           </Button>
           <LoginModal
-              isOpen={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            />
+            isOpen={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          />
           <Link to="/signup">
             <Button className={styles.signup}>SignUp</Button>
           </Link>
