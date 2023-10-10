@@ -72,7 +72,7 @@ const Header = () => {
           <TuneIcon style={{ color: "white" }} color="action" />
           <p>Sort</p>
         </div>
-        <div className={styles.roundIcon}>
+        <div className={styles.profile}>
           <img src={flag} alt="Canada" />
         </div>
         <div className={styles.profile}>
