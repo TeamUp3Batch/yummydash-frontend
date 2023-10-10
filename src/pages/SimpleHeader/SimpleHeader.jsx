@@ -6,6 +6,7 @@ import logo from "../../img/yummyDashLogo.png";
 import profile from "../../img/accountDefault.png";
 import styles from "../SimpleHeader/simpleheader.module.scss";
 import LoginModal from "../../components/LoginModal/LoginModal";
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 
 const SimpleHeader = () => {
   const [open, setOpen] = React.useState(false);
@@ -16,12 +17,9 @@ const SimpleHeader = () => {
     <div className={styles.header}>
       <div className={styles.wrapper}>
         <img className={styles.logo} src={logo} alt="Logo" />
-        <Divider orientation="vertical" flexItem />
-        <div className={styles.profile}>
-          <img src={profile} alt="Profile" />
-        </div>
         <div className={styles.account}>
           <Button onClick={handleOpen} className={styles.login}>
+            <AccountCircleSharpIcon fontSize="large" />
             Log In
           </Button>
           <LoginModal
