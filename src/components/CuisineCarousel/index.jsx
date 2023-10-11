@@ -13,12 +13,7 @@ import classes from './swiper.module.scss';
 const MyComponent = () => {
   return (
     <div className={classes.swiper__wrapper}>
-      <Swiper
-        modules={[Navigation]}
-        spaceBetween={8}
-        slidesPerView={4}
-        navigation
-        >
+      <Swiper modules={[Navigation]} spaceBetween={8} slidesPerView={4} navigation>
         <SwiperSlide>
           <div className={classes.swiper__card}>
             <p>card name</p>

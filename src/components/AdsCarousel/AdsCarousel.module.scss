@@ -1,0 +1,56 @@
+.adsswiper__wrapper {
+  margin: 0 auto;
+  padding-top: 32px;
+  width: 920px;
+
+  .swiper__card {
+    width: 453px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  :global {
+    .swiper-button-prev,
+    .swiper-button-next {
+      height: 80px;
+      width: 40px;
+
+      background: rgba(255, 255, 255, 0.375);
+      color: #5d7074;
+      margin-top: -41px;
+    }
+
+    .swiper-button-prev {
+      border-radius: 0 60px 60px 0;
+      left: 0;
+    }
+    .swiper-button-next {
+      border-radius: 60px 0 0 60px;
+      right: 0;
+    }
+
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+      display: flex;
+      font-size: 30px !important;
+      cursor: pointer;
+    }
+
+    .swiper-button-prev:after {
+      margin-left: -14px;
+    }
+
+    .swiper-button-next:after {
+      margin-right: -14px;
+    }
+
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+}

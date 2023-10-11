@@ -13,4 +13,4 @@ const CuisineCarousel = () => {
   )
 }
 
-export default CuisineCarousel
+export default CuisineCarousel;

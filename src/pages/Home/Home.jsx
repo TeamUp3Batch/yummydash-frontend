@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 // import Header from '../Header/Header';
-import SimpleHeader from "../SimpleHeader/SimpleHeader";
-import { useAuth0 } from "@auth0/auth0-react";
-import style from "./home.module.scss";
-import Header from "../Header/Header";
-import Footer from "../../components/Footer/Footer";
-// clean 
+import SimpleHeader from '../SimpleHeader/SimpleHeader';
+import { useAuth0 } from '@auth0/auth0-react';
+import style from './home.module.scss';
+import Header from '../Header/Header';
+import Footer from '../../components/Footer/Footer';
+// clean
 const Home = () => {
   const { isAuthenticated, user } = useAuth0();
- 
+
   //const isAuthenticated;
   return (
     <div>
@@ -22,9 +22,7 @@ const Home = () => {
             <SimpleHeader />
           </div>
         )}
-        <div className={style.skipMainpage}>
-         
-        </div>
+        <div className={style.skipMainpage}></div>
       </div>
       <Footer />
     </div>
