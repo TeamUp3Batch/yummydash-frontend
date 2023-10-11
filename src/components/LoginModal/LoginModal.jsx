@@ -4,6 +4,7 @@ import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
+import {useDispatch} from 'react-redux';
 
 const LoginModal = ({ isOpen, onClose }) => {
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
@@ -12,6 +13,8 @@ const LoginModal = ({ isOpen, onClose }) => {
     password: "",
   });
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [error, setError] = useState("");
 
