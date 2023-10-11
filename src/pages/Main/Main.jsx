@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
-import YummyAdCarousel from '../../components/YummyAdCarousel/YummyAdCarousel';
+
+import AdsCarousel from '../../components/AdsCarousel/AdsCarousel';
 import CuisineCarousel from '../../components/CuisineCarousel/CuisineCarousel';
 
 const Main = () => {
@@ -9,7 +10,7 @@ const Main = () => {
     <React.Fragment>
       <Header />
       <div style={{ height: '800px' }}>
-        <YummyAdCarousel/>
+        <AdsCarousel />
         <CuisineCarousel />
       </div>
       <Footer />
