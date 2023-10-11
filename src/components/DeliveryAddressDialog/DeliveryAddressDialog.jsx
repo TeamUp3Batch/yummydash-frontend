@@ -88,7 +88,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   const inputStyle = {
     color: "#0C151D",
     fontweight: 400,
-    padding: "1px 1px",
+    padding: "4px 12px ",
     fontSize: "16px",
     boxSizing: "border-box",
     borderRadius: "1px",
@@ -273,7 +273,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
               style={inputStyle}
               label="Unit Number"
               variant="outlined"
-
+              
             />
           </div>
           <div>
@@ -303,7 +303,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
           </div>
           <div>
             <TextField
-            id="outlined-basic"
+             id="outlined-basic"
               type="text"
               name="state"
               label="State"
@@ -315,7 +315,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
           </div>
           <div>
             <TextField
-            id="outlined-basic"
+              id="outlined-basic"
               type="text"
               name="zipCode"
               label="Zip Code"
