@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "@mui/material";
-import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import logo from "../../img/yummyDashLogo.png";
 import styles from "../SimpleHeader/simpleheader.module.scss";
