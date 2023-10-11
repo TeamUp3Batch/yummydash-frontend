@@ -6,7 +6,6 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import logo from "../../img/yummyDashLogo.png";
 import flag from "../../img/canadaFlag.png";
-import profile from "../../img/accountDefault.png";
 import styles from "./header.module.scss";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
@@ -16,6 +15,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
 import Typography from "@mui/material/Typography";
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -72,11 +72,11 @@ const Header = () => {
           <TuneIcon style={{ color: "white" }} color="action" />
           <p>Sort</p>
         </div>
-        <div className={styles.roundIcon}>
+        <div className={styles.profile}>
           <img src={flag} alt="Canada" />
         </div>
-        <div className={styles.profile}>
-          <img src={profile} alt="Profile" onClick={toggleDrawer} />
+        <div>
+          <AccountCircleSharpIcon fontSize="large" onClick={toggleDrawer} sx={{ color: 'white',fontSize: 55 }}/>
         </div>
       </div>
       <Drawer

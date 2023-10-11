@@ -1,9 +1,9 @@
 import React from "react";
 
-import classes from './carousel.module.scss';
+import classes from './cuisinecarousel.module.scss';
 import MyComponent  from ".";
 
-const CarouselMain = () => {
+const CuisineCarousel = () => {
   return (
     <div className={classes.carousel__wrapper}>
       <h1>Cuisines</h1>
@@ -13,4 +13,4 @@ const CarouselMain = () => {
   )
 }
 
-export default CarouselMain
+export default CuisineCarousel

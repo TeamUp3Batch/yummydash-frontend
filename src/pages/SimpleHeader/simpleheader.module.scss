@@ -62,17 +62,11 @@
         align-items: center; /* Vertically align elements */
         flex: 1; /* Expand to fill the available space */
       
-        .needHelp {
-          display: flex;
-          align-items: center;
-          margin-right: 20px; /* Adjust margin to control spacing */
-        }
       
         .flag {
           img {
-            width: 24px;
+            width: 40px;
             margin-left: 10px; 
-            margin-right:15px;
           }
         }
       }
