@@ -3,7 +3,6 @@ import { Button } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import logo from "../../img/yummyDashLogo.png";
-import profile from "../../img/accountDefault.png";
 import styles from "../SimpleHeader/simpleheader.module.scss";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
@@ -19,7 +18,7 @@ const SimpleHeader = () => {
         <img className={styles.logo} src={logo} alt="Logo" />
         <div className={styles.account}>
           <Button onClick={handleOpen} className={styles.login}>
-            <AccountCircleSharpIcon fontSize="large" />
+            <AccountCircleSharpIcon  sx={{fontSize: 40}}/>
             Log In
           </Button>
           <LoginModal
