@@ -1,16 +1,16 @@
 import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
-import CardCarousel from '../../components/Carousel/CardCarousel';
-import CarouselMain from '../../components/Carousel/Carousel';
+import YummyAdCarousel from '../../components/YummyAdCarousel/YummyAdCarousel';
+import CuisineCarousel from '../../components/CuisineCarousel/CuisineCarousel';
 
 const Main = () => {
   return (
     <React.Fragment>
       <Header />
       <div style={{ height: '800px' }}>
-        {/* <CardCarousel/> */}
-        <CarouselMain />
+        <YummyAdCarousel/>
+        <CuisineCarousel />
       </div>
       <Footer />
     </React.Fragment>

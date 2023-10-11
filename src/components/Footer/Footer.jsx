@@ -8,10 +8,10 @@ const Footer = () => {
   return (
     <footer>
       <Container>
-       <Typography  align="center" gutterBottom color={"white"}> 
-       &copy;{new Date().getFullYear()} Yummy Dash 
-        </Typography>
-        </Container>
+      <Typography  align="center" gutterBottom color={"white"}>
+        &copy;{new Date().getFullYear()} Yummy Dash
+      </Typography>
+    </Container>
     </footer>
   );
 };
