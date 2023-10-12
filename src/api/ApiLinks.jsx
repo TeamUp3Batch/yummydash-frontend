@@ -1,1 +1,1 @@
-export const CuisinesURL = `${import.meta.env.REACT_APP_API_URL}"/api/cuisines/getAllCuisines"`;
+export const CuisinesURL = `${process.env.REACT_APP_BACKEND_URL}/api/cuisines/getAllCuisines`;
