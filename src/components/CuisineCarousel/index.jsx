@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
+//Axios
 import axios from 'axios';
 import { CuisinesURL } from '../../api/ApiLinks';
 
