@@ -1,2 +1,1 @@
-
-export const CuisinesURL = "http://localhost:5000/api/cuisines/getAllCuisines";
+export const CuisinesURL = `${import.meta.env.REACT_APP_API_URL}"/api/cuisines/getAllCuisines"`;
