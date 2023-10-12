@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
@@ -15,6 +16,7 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 import Alert from "@mui/material/Alert";
 import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
 import AlertTitle from "@mui/material/AlertTitle";
+import { useDispatch } from 'react-redux';
 
 // function Alert(props) {
 //   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -22,6 +24,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 
 const SignUp = () => {
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
+  const { loggedInUser, error } = useSelector((state) => state.auth);
   // Declare the following variables and functions
   const [data, setData] = useState({
     firstName: "",
@@ -49,14 +52,15 @@ const SignUp = () => {
       const result = await axios.post(url, data);
       console.log("res", result);
       setMsg(result.data.status);
-      if (result.data.status === "success") {
-        sessionStorage.setItem("token", result.data.token);
-        sessionStorage.setItem(
-          "userName",
-          JSON.stringify(result.data.firstName)
-        );
-        sessionStorage.setItem("loggedIn", true);
-        sessionStorage.setItem("email", result.data.email);
+      if (result.data.status === true) {
+        // sessionStorage.setItem("token", result.data.token);
+        // sessionStorage.setItem(
+        //   "userName",
+        //   JSON.stringify(result.data.firstName)
+        // );
+        // sessionStorage.setItem("loggedIn", true);
+        // sessionStorage.setItem("email", result.data.email);
+        dispatch(signUpSuccess(result.data))
         navigate("/main");
       }
       setOpenSnackbar(true);

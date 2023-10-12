@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Menu from "@mui/material/Menu"; // Import Menu component
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -12,9 +13,11 @@ import Button from "@mui/material/Button";
 import Radio from "@mui/joy/Radio";
 import axios from "axios";
 import { ListItem, TextField } from "@mui/material";
+import { useDispatch } from 'react-redux';
 
 const DeliveryAddressDialog = ({ onSelect }) => {
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
+  const { loggedInUser, isLoading, error } = useSelector((state) => state.auth);
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
   const iconRef = useRef(null);
@@ -23,7 +26,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   const [data, setData] = useState({
-    email: sessionStorage.getItem("email"),
+    email: loggedInUser.email,
     unitNumber: "",
     street: "",
     city: "",
@@ -150,8 +153,12 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   }, [isDialogVisible]);
 
   useEffect(() => {
-    const storedAddresses = JSON.parse(sessionStorage.getItem("address"));
-    if (storedAddresses) {
+    // const storedAddresses = JSON.parse(sessionStorage.getItem("address"));
+    // if (storedAddresses) {
+    //   setAddresses(storedAddresses);
+    // }
+    const storedAddresses = loggedInUser.address;
+    if(storedAddresses){
       setAddresses(storedAddresses);
     }
   }, []);

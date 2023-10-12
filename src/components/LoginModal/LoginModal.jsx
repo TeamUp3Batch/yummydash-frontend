@@ -4,6 +4,7 @@ import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
+import {loginStart, loginSuccess, loginFailure} from '../../slices/authSlice'
 import {useDispatch} from 'react-redux';
 
 const LoginModal = ({ isOpen, onClose }) => {
@@ -26,19 +27,22 @@ const LoginModal = ({ isOpen, onClose }) => {
     console.log("HELLO ");
     e.preventDefault();
     try {
-
+      dispatch(loginStart());
       const url = `${apiUrl}/api/auth/login`;
       const result = await axios.post(url, data);
-      if (result.data.status === "logged in") {
-        sessionStorage.setItem("token", result.data.token);
-        sessionStorage.setItem("loggedIn", true);
-        sessionStorage.setItem(
-          "userName",
-          JSON.stringify(result.data.firstName)
-        );
-        sessionStorage.setItem("email", result.data.email);
-        sessionStorage.setItem("address", JSON.stringify(result.data.address));
-
+      if (result.data.status === false){
+        dispatch(loginFailure(result.data.message))
+      }
+      if (result.data.status === true) {
+        // sessionStorage.setItem("token", result.data.token);
+        // sessionStorage.setItem("loggedIn", true);
+        // sessionStorage.setItem(
+        //   "userName",
+        //   JSON.stringify(result.data.firstName)
+        // );
+        // sessionStorage.setItem("email", result.data.email);
+        // sessionStorage.setItem("address", JSON.stringify(result.data.address));
+        dispatch(loginSuccess(result.data))
         navigate("/main");
       }
       // Perform your validation here

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
   name: "auth",
@@ -13,6 +13,11 @@ const authSlice = createSlice({
       state.isLoading = true;
     },
     loginSuccess: (state, action) => {
+      state.loggedInUser = action.payload;
+      state.isLoading = false;
+      state.error = false;
+    },
+    signUpSuccess: (state, action) => {
       state.loggedInUser = action.payload;
       state.isLoading = false;
       state.error = false;
