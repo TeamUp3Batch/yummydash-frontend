@@ -9,7 +9,7 @@ const Main = () => {
   return (
     <React.Fragment>
       <Header />
-      <div style={{ height: '800px' }}>
+      <div >
         <AdsCarousel />
         <CuisineCarousel />
       </div>
