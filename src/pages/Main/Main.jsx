@@ -13,7 +13,7 @@ const Main = () => {
         <AdsCarousel />
         <CuisineCarousel />
       </div>
-      {/* <Footer /> */}
+     {/* <Footer /> */}
     </React.Fragment>
   );
 };

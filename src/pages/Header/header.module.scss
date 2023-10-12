@@ -70,7 +70,7 @@
     }
 
     .profile {
-      cursor: pointer;
+      cursor: default;
       img {
         background: rgb(255, 255, 255);
         border-radius: 50%;
@@ -90,7 +90,7 @@
         background: none;
         color: #425457;
         font-weight: 700;
-        cursor: pointer;
+        cursor: default;
         margin-right: 20px;
         font-size: 16px;
       }
@@ -100,7 +100,7 @@
         color: rgba(255, 255, 255, 1);
         background-color: #425457;
         font-weight: 700;
-        cursor: pointer;
+        cursor: default;
         border-radius: 50em;
         padding: 5px 10px;
         font-size: 16px;

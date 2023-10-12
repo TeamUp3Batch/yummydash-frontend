@@ -71,7 +71,7 @@ const LoginModal = ({ isOpen, onClose }) => {
           borderRadius: "8px", // Add border-radius for rounded corners
         }}
       >
-        <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Typography id="modal-modal-title" variant="h6" component="h2"> 
           Login
         </Typography>
         <form onSubmit={handleSubmit}>
