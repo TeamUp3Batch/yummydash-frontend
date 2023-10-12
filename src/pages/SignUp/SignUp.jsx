@@ -49,7 +49,7 @@ const SignUp = () => {
       const result = await axios.post(url, data);
       console.log("res", result);
       setMsg(result.data.status);
-      if (result.data.status === "success") {
+      if (result.data.status === true) {
         sessionStorage.setItem("token", result.data.token);
         sessionStorage.setItem(
           "userName",

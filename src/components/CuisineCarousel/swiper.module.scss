@@ -11,15 +11,23 @@
       color: rgb(255, 255, 255);
       font-size: 14px;
       line-height: 17px;
-    }
+    } 
+  }
+  .swiper__card.selected .checkIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px; 
+    z-index: 1;
   }
 
   :global {
     .swiper {
-      position: inherit;
+      position: relative;
     }
     .swiper-button-next,
     .swiper-button-prev {
+      position: absolute;
       box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
         0px 1px 18px 0px rgba(0, 0, 0, 0.12);
       background-color: white;
@@ -27,11 +35,16 @@
         box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
         border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       border-radius: 50%;
-      color: black;
+      color: black !important;
       font-weight: 600;
       width: 36px;
       height: 36px;
-      margin-top: 25px;
+      top:50%;
+
+      &:active {
+        background-color: white; 
+        color: black; 
+      }
     }
 
     .swiper-button-prev:after,
@@ -50,4 +63,11 @@
       left: -23px;
     }
   }
+}
+
+.restaurant__wrapper{
+  .restaurant__list{
+    margin-top:15px;
+  }
+
 }

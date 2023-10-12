@@ -26,7 +26,7 @@ const LoginModal = ({ isOpen, onClose }) => {
 
       const url = `${apiUrl}/api/auth/login`;
       const result = await axios.post(url, data);
-      if (result.data.status === "logged in") {
+      if (result.data.status === true) {
         sessionStorage.setItem("token", result.data.token);
         sessionStorage.setItem("loggedIn", true);
         sessionStorage.setItem(
