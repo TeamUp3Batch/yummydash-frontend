@@ -16,6 +16,7 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 import Alert from "@mui/material/Alert";
 import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
 import AlertTitle from "@mui/material/AlertTitle";
+import { signUpStart, signUpFailure, signUpSuccess } from '../../slices/authSlice';
 import { useDispatch } from 'react-redux';
 
 // function Alert(props) {
@@ -24,12 +25,13 @@ import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
-  const { loggedInUser, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   // Declare the following variables and functions
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    phoneNumber: "",
     password: "",
   });
   const navigate = useNavigate();
@@ -47,9 +49,16 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("hello")
     try {
+      console.log("hello here")
+      dispatch(signUpStart());
+      console.log("i am ")
       const url = `${apiUrl}/api/users/signup`;
       const result = await axios.post(url, data);
+      if (result.data.status === false){
+        dispatch(signUpFailure(result.data.message))
+      }
       console.log("res", result);
       setMsg(result.data.status);
       if (result.data.status === true) {
@@ -60,7 +69,8 @@ const SignUp = () => {
         // );
         // sessionStorage.setItem("loggedIn", true);
         // sessionStorage.setItem("email", result.data.email);
-        dispatch(signUpSuccess(result.data))
+        dispatch(signUpSuccess(result.data));
+        console.log("navigating to main")
         navigate("/main");
       }
       setOpenSnackbar(true);
@@ -143,6 +153,17 @@ const SignUp = () => {
                 className={styles.input}
               />
               <TextField
+                type="text"
+                margin="normal"
+                variant="outlined"
+                label="Phone Number"
+                name="phoneNumber"
+                onChange={handleChange}
+                value={data.phoneNumber}
+                required
+                className={styles.input}
+              />
+              <TextField
                 type="password"
                 margin="normal"
                 variant="outlined"
@@ -153,9 +174,9 @@ const SignUp = () => {
                 required
                 className={styles.input}
               />
-              {error && (
+              {isError && (
                 <Alert severity="error">
-                  <AlertTitle>{error}</AlertTitle>
+                  <AlertTitle>{isError}</AlertTitle>
                 </Alert>
               )}
               {msg && (

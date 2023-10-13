@@ -1,4 +1,4 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
   name: "auth",
@@ -17,10 +17,17 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = false;
     },
+    signUpStart: (state) => {
+      state.isLoading = true;
+    },
     signUpSuccess: (state, action) => {
       state.loggedInUser = action.payload;
       state.isLoading = false;
       state.error = false;
+    },
+    signUpFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
     loginFailure: (state, action) => {
       state.loading = false;
@@ -34,7 +41,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
+export const { loginStart, loginSuccess, loginFailure, signUpStart, signUpSuccess, signUpFailure, logout } =
   authSlice.actions;
 
 export default authSlice.reducer;
