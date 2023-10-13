@@ -6,7 +6,9 @@ Food App inspired form the popular app skip the dishes
 
 - [Project Description](#project-descrption)
 - [Features](#features)
-- [Getting Started](#getting-started) - [Installation] (#installation) -[Main Contributors](#contributing)
+- [Getting Started](#getting-started)
+    - [Installation] (#installation)
+ -[Main Contributors](#contributing)
 
 ## Project Description
 
