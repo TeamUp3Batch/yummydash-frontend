@@ -33,7 +33,7 @@ const SignUp = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const [isError, setIsError] = useState("");
   const [msg, setMsg] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
@@ -70,7 +70,7 @@ const SignUp = () => {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        setError(error.response.data.message);
+        setIsError(error.response.data.message);
       }
     }
   };
