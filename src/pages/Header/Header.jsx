@@ -29,15 +29,6 @@ const Header = () => {
   const [userName, setUserName] = useState(" ");
   const [selectedAddress, setSelectedAddress] = useState(null);
   const { loggedInUser, error } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   const loggedIn = sessionStorage.getItem("loggedIn");
-  //   const userName = sessionStorage.getItem("userName");
-  //   if (loggedIn) {
-  //     setIsUserLoggedIn(true);
-  //     setUserName(userName.slice(1, -1).toUpperCase());
-  //   }
-  // }, [isUserLoggedIn]);
-
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };

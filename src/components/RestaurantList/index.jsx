@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import RestaurantCard from '../RestaurantCard';
-const apiUrl = process.env.REACT_APP_BACKEND_URL;
+import { getRestaurantsByCuisine } from "../../services/restaurantService"; // Import the service
+
+
 const RestaurantList = ({ selectedCuisine }) => {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `${apiUrl}/api/restaurants/getRestaurantsByCuisine`;
-        const data = {"cuisine":selectedCuisine}
-        const result = await axios.post(url, data);
-        console.log("result,",result.data)
-        setRestaurants(result.data)
+        const data = await getRestaurantsByCuisine(selectedCuisine);
+        setRestaurants(data);
       } catch (error) {
-        // Handle errors, e.g., display an error message
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
-  
+
     fetchData();
   }, [selectedCuisine]);
 

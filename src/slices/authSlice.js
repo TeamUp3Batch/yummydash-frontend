@@ -37,11 +37,39 @@ const authSlice = createSlice({
       state.loggedInUser = null;
       state.isLoading = false;
       state.error = false;
-    }
+    },
+    // Add the following reducer functions to update user data in authSlice
+    updateAddress: (state, action) => {
+      state.loggedInUser.address = action.payload;
+    },
+    deleteAddress: (state, action) => {
+      state.loggedInUser.address = action.payload;
+    },
+    updatePhoneNumber: (state, action) => {
+      state.loggedInUser.phoneNumber = action.payload;
+    },
+    updateFirstName: (state, action) => {
+      state.loggedInUser.firstName = action.payload;
+    },
+    updateLastName: (state, action) => {
+      state.loggedInUser.lastName = action.payload;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, signUpStart, signUpSuccess, signUpFailure, logout, updateAddress } =
-  authSlice.actions;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  signUpStart,
+  signUpSuccess,
+  signUpFailure,
+  logout,
+  updateAddress,
+  deleteAddress,
+  updatePhoneNumber,
+  updateFirstName,
+  updateLastName,
+} = authSlice.actions;
 
 export default authSlice.reducer;

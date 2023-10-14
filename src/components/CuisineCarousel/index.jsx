@@ -1,9 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { getCuisineList } from "../../services/restaurantService"; // Import the service
 
-//Axios
-import axios from "axios";
-import { CuisinesURL } from "../../api/ApiLinks";
 
 // Import Swiper React components
 // import Swiper core and required modules
@@ -26,7 +24,16 @@ const MyComponent = () => {
   };
 
   useEffect(() => {
-    axios.get(CuisinesURL).then((response) => setCuisineList(response.data));
+    const fetchData = async () => {
+      try {
+        const cuisines = await getCuisineList();
+        setCuisineList(cuisines);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+  
+    fetchData();
   }, []);
 
   return (
