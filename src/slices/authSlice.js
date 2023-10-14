@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
   name: "auth",
@@ -37,11 +37,11 @@ const authSlice = createSlice({
       state.loggedInUser = null;
       state.isLoading = false;
       state.error = false;
-    },
+    }
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, signUpStart, signUpSuccess, signUpFailure, logout } =
+export const { loginStart, loginSuccess, loginFailure, signUpStart, signUpSuccess, signUpFailure, logout, updateAddress } =
   authSlice.actions;
 
 export default authSlice.reducer;

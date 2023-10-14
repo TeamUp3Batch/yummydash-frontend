@@ -1,22 +1,19 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
-import {loginStart, loginSuccess, loginFailure} from '../../slices/authSlice'
-import {useDispatch} from 'react-redux';
+import { loginStart, loginSuccess, loginFailure } from "../../slices/authSlice";
+import { useDispatch } from "react-redux";
+import * as authServices from "../../services/authService"; // Import your login service
 
 const LoginModal = ({ isOpen, onClose }) => {
-  const apiUrl = process.env.REACT_APP_BACKEND_URL;
   const [data, setData] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
-
   const [error, setError] = useState("");
 
   const handleChange = ({ currentTarget: input }) => {
@@ -24,34 +21,20 @@ const LoginModal = ({ isOpen, onClose }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("HELLO ");
     e.preventDefault();
     try {
       dispatch(loginStart());
-      const url = `${apiUrl}/api/auth/login`;
-      const result = await axios.post(url, data);
-      if (result.data.status === false){
-        dispatch(loginFailure(result.data.message))
+      const result = await authServices.login(data); // Use the login function from the service
+      console.log("result",result)
+      if (result.data.status === false) {
+        dispatch(loginFailure(result.data.message));
       }
       if (result.data.status === true) {
-        // sessionStorage.setItem("token", result.data.token);
-        // sessionStorage.setItem("loggedIn", true);
-        // sessionStorage.setItem(
-        //   "userName",
-        //   JSON.stringify(result.data.firstName)
-        // );
-        // sessionStorage.setItem("email", result.data.email);
-        // sessionStorage.setItem("address", JSON.stringify(result.data.address));
-        dispatch(loginSuccess(result.data))
+        dispatch(loginSuccess(result.data));
         navigate("/main");
       }
-      // Perform your validation here
     } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
+      if (error.response && error.response.status >= 400 && error.response.status <= 500) {
         setError(error.response.data.message);
       }
     }
@@ -74,11 +57,11 @@ const LoginModal = ({ isOpen, onClose }) => {
           maxWidth: "300px",
           p: 2,
           textAlign: "center",
-          backgroundColor: "white", // Add a background color
-          borderRadius: "8px", // Add border-radius for rounded corners
+          backgroundColor: "white",
+          borderRadius: "8px",
         }}
       >
-        <Typography id="modal-modal-title" variant="h6" component="h2"> 
+        <Typography id="modal-modal-title" variant="h6" component="h2">
           Login
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -107,12 +90,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               <AlertTitle>{error}</AlertTitle>
             </Alert>
           )}
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2 }}
-          >
+          <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
             Sign In
           </Button>
         </form>

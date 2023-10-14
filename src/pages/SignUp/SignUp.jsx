@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from 'react-redux';
-import axios from "axios";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -14,18 +13,19 @@ import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import Footer from "../../components/Footer/Footer";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import Alert from "@mui/material/Alert";
-import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
+import styles from "./signUp.module.scss";
 import AlertTitle from "@mui/material/AlertTitle";
-import { signUpStart, signUpFailure, signUpSuccess } from '../../slices/authSlice';
-import { useDispatch } from 'react-redux';
-
-// function Alert(props) {
-//   return <MuiAlert elevation={6} variant="filled" {...props} />;
-// }
+import {
+  signUpStart,
+  signUpFailure,
+  signUpSuccess,
+} from "../../slices/authSlice";
+import { useDispatch } from "react-redux";
+import * as authServices from "../../services/authService"; // Import your authentication service
 
 const SignUp = () => {
-  const apiUrl = process.env.REACT_APP_BACKEND_URL;
   const dispatch = useDispatch();
+
   // Declare the following variables and functions
   const [data, setData] = useState({
     firstName: "",
@@ -49,28 +49,17 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("hello")
     try {
-      console.log("hello here")
       dispatch(signUpStart());
-      console.log("i am ")
-      const url = `${apiUrl}/api/users/signup`;
-      const result = await axios.post(url, data);
-      if (result.data.status === false){
-        dispatch(signUpFailure(result.data.message))
+      const result = await authServices.signUp(data); // Use the signUp function from the service
+      if (result.data.status === false) {
+        dispatch(signUpFailure(result.data.message));
       }
       console.log("res", result);
       setMsg(result.data.status);
       if (result.data.status === true) {
-        // sessionStorage.setItem("token", result.data.token);
-        // sessionStorage.setItem(
-        //   "userName",
-        //   JSON.stringify(result.data.firstName)
-        // );
-        // sessionStorage.setItem("loggedIn", true);
-        // sessionStorage.setItem("email", result.data.email);
         dispatch(signUpSuccess(result.data));
-        console.log("navigating to main")
+        console.log("navigating to main");
         navigate("/main");
       }
       setOpenSnackbar(true);
@@ -208,11 +197,7 @@ const SignUp = () => {
           open={openSnackbar}
           autoHideDuration={5000}
           onClose={handleCloseSnackbar}
-        >
-          {/* <Alert onClose={handleCloseSnackbar} severity="success">
-          {msg}
-        </Alert> */}
-        </Snackbar>
+        />
       </div>
       <Footer />
     </div>
