@@ -21,7 +21,7 @@ import {
   signUpSuccess,
 } from "../../slices/authSlice";
 import { useDispatch } from "react-redux";
-import * as authServices from "../../services/authService"; // Import your authentication service
+import * as authServices from "../../services/authService";
 
 const SignUp = () => {
   const dispatch = useDispatch();

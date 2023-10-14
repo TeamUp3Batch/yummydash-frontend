@@ -40,9 +40,6 @@ const Header = () => {
     } catch (error) {
       console.log(error);
     }
-    // sessionStorage.clear();
-    // setIsUserLoggedIn(false);
-    // setUserName(" ");
     
   };
   const style = {

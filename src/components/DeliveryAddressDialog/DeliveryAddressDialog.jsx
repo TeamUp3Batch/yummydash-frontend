@@ -153,10 +153,6 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   }, [isDialogVisible]);
 
   useEffect(() => {
-    // const storedAddresses = JSON.parse(sessionStorage.getItem("address"));
-    // if (storedAddresses) {
-    //   setAddresses(storedAddresses);
-    // }
     const storedAddresses = loggedInUser.address;
     if(storedAddresses){
       setAddresses(storedAddresses);

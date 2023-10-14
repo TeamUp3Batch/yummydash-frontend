@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: {
     loggedInUser: null,
     token: null,
     isLoading: false,
-    error: false,
+    error: false
   },
   reducers: {
     loginStart: (state) => {
@@ -38,7 +38,6 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = false;
     },
-    // Add the following reducer functions to update user data in authSlice
     updateAddress: (state, action) => {
       state.loggedInUser.address = action.payload;
     },
@@ -53,8 +52,8 @@ const authSlice = createSlice({
     },
     updateLastName: (state, action) => {
       state.loggedInUser.lastName = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const {
@@ -69,7 +68,7 @@ export const {
   deleteAddress,
   updatePhoneNumber,
   updateFirstName,
-  updateLastName,
+  updateLastName
 } = authSlice.actions;
 
 export default authSlice.reducer;
