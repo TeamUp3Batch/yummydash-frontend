@@ -1,6 +1,6 @@
 # Yummy Dash
 
-Food App inspired form the popular app skip the dishes
+Food App inspired from the popular app - Skip The Dishes
 
 ## Table of Contents
 
@@ -12,10 +12,10 @@ Food App inspired form the popular app skip the dishes
 
 ## Project Description
 
-The Yummy Dash web App is a ambitious project designed to
+The Yummy Dash web App is an ambitious project designed to
 replicate the core functionality of the popular food delivery service, SkipThe Dishes.
 This web application will enable users to browse, order, and enjoy a wide variety of dishes from
-from thier favourite local restaurants, all from the co,formt of thier homes.
+from thier favourite local restaurants, all from their comfort of their homes.
 This app will connect customers, restaurants, and deliver seamlessly, offering a convenient
 and efficient food delivery experience.
 
@@ -53,7 +53,7 @@ cd frontend project
 npm install
 npm start
 The app will be served at http://localhost:3000
-created .env file in your root dir and check Check .env Sample file for backend URL variable.
+create .env file in your root dir and check check .envSample file for backend url variable.
 
 ## Main Contributors
 
