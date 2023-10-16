@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import {
   Container,
   Typography,
@@ -15,68 +13,22 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 import Alert from "@mui/material/Alert";
 import styles from "./signUp.module.scss";
 import AlertTitle from "@mui/material/AlertTitle";
-import {
-  signUpStart,
-  signUpFailure,
-  signUpSuccess,
-} from "../../slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useSignUp } from "./hooks/useSignUp";
 import * as authServices from "../../services/authService";
 
 const SignUp = () => {
-  const dispatch = useDispatch();
-
-  // Declare the following variables and functions
-  const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-  const [isError, setIsError] = useState("");
-  const [msg, setMsg] = useState("");
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-
-  const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
-  };
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(signUpStart());
-      const result = await authServices.signUp(data); // Use the signUp function from the service
-      if (result.data.status === false) {
-        dispatch(signUpFailure(result.data.message));
-      }
-      console.log("res", result);
-      setMsg(result.data.status);
-      if (result.data.status === true) {
-        dispatch(signUpSuccess(result.data));
-        console.log("navigating to main");
-        navigate("/main");
-      }
-      setOpenSnackbar(true);
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setIsError(error.response.data.message);
-      }
-    }
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+  const {
+    isError,
+    msg,
+    data,
+    openSnackbar,
+    open,
+    handleOpen,
+    handleClose,
+    handleChange,
+    handleSubmit,
+    handleCloseSnackbar,
+  } = useSignUp({});
 
   return (
     <div>

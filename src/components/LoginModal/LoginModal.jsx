@@ -1,45 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
-import { loginStart, loginSuccess, loginFailure } from "../../slices/authSlice";
-import { useDispatch } from "react-redux";
-import * as authServices from "../../services/authService"; // Import your login service
+import { useLoginModal } from "./hooks/useLoginModal";
 
 const LoginModal = ({ isOpen, onClose }) => {
-  const [data, setData] = useState({
-    email: "",
-    password: "",
+  const { data, error, handleChange, handleSubmit } = useLoginModal({
+    isOpen,
+    onClose,
   });
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [error, setError] = useState("");
-
-  const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(loginStart());
-      const result = await authServices.login(data); // Use the login function from the service
-      console.log("result",result)
-      if (result.data.status === false) {
-        dispatch(loginFailure(result.data.message));
-      }
-      if (result.data.status === true) {
-        dispatch(loginSuccess(result.data));
-        navigate("/main");
-      }
-    } catch (error) {
-      if (error.response && error.response.status >= 400 && error.response.status <= 500) {
-        setError(error.response.data.message);
-      }
-    }
-    onClose();
-  };
 
   return (
     <Modal
@@ -90,7 +59,12 @@ const LoginModal = ({ isOpen, onClose }) => {
               <AlertTitle>{error}</AlertTitle>
             </Alert>
           )}
-          <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+          >
             Sign In
           </Button>
         </form>
