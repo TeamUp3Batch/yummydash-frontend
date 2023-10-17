@@ -26,11 +26,11 @@ const authSlice = createSlice({
       state.error = false;
     },
     signUpFailure: (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     },
     loginFailure: (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     },
     logout: (state) => {
