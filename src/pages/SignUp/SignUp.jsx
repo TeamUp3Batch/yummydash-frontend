@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import {
   Container,
   Typography,
@@ -13,67 +11,24 @@ import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import Footer from "../../components/Footer/Footer";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import Alert from "@mui/material/Alert";
-import styles from "./signUp.module.scss"; // Import the CSS file with the provided styles
+import styles from "./signUp.module.scss";
 import AlertTitle from "@mui/material/AlertTitle";
-
-// function Alert(props) {
-//   return <MuiAlert elevation={6} variant="filled" {...props} />;
-// }
+import { useSignUp } from "./hooks/useSignUp";
+import * as authServices from "../../services/authService";
 
 const SignUp = () => {
-  const apiUrl = process.env.REACT_APP_BACKEND_URL;
-  // Declare the following variables and functions
-  const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [msg, setMsg] = useState("");
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-
-  const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
-  };
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const url = `${apiUrl}/api/users/signup`;
-      const result = await axios.post(url, data);
-      console.log("res", result);
-      setMsg(result.data.status);
-      if (result.data.status === true) {
-        sessionStorage.setItem("token", result.data.token);
-        sessionStorage.setItem(
-          "userName",
-          JSON.stringify(result.data.firstName)
-        );
-        sessionStorage.setItem("loggedIn", true);
-        sessionStorage.setItem("email", result.data.email);
-        navigate("/main");
-      }
-      setOpenSnackbar(true);
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
-    }
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+  const {
+    isError,
+    msg,
+    data,
+    openSnackbar,
+    open,
+    handleOpen,
+    handleClose,
+    handleChange,
+    handleSubmit,
+    handleCloseSnackbar,
+  } = useSignUp({});
 
   return (
     <div>
@@ -139,6 +94,17 @@ const SignUp = () => {
                 className={styles.input}
               />
               <TextField
+                type="text"
+                margin="normal"
+                variant="outlined"
+                label="Phone Number"
+                name="phoneNumber"
+                onChange={handleChange}
+                value={data.phoneNumber}
+                required
+                className={styles.input}
+              />
+              <TextField
                 type="password"
                 margin="normal"
                 variant="outlined"
@@ -149,9 +115,9 @@ const SignUp = () => {
                 required
                 className={styles.input}
               />
-              {error && (
+              {isError && (
                 <Alert severity="error">
-                  <AlertTitle>{error}</AlertTitle>
+                  <AlertTitle>{isError}</AlertTitle>
                 </Alert>
               )}
               {msg && (
@@ -183,11 +149,7 @@ const SignUp = () => {
           open={openSnackbar}
           autoHideDuration={5000}
           onClose={handleCloseSnackbar}
-        >
-          {/* <Alert onClose={handleCloseSnackbar} severity="success">
-          {msg}
-        </Alert> */}
-        </Snackbar>
+        />
       </div>
       <Footer />
     </div>
