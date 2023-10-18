@@ -1,3 +1,4 @@
+
 import React from "react";
 import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import style from "./home.module.scss";

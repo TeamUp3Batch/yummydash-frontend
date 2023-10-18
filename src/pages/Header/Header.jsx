@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import TuneIcon from "@mui/icons-material/Tune";
 import Drawer from "@mui/material/Drawer"; // Import Drawer component
 import List from "@mui/material/List";
@@ -16,31 +17,29 @@ import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
 import Typography from "@mui/material/Typography";
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
+import { useDispatch } from 'react-redux';
+import {logout} from '../../slices/authSlice';
 
 const Header = () => {
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userName, setUserName] = useState(" ");
   const [selectedAddress, setSelectedAddress] = useState(null);
-
-  useEffect(() => {
-    const loggedIn = sessionStorage.getItem("loggedIn");
-    const userName = sessionStorage.getItem("userName");
-    if (loggedIn) {
-      setIsUserLoggedIn(true);
-      setUserName(userName.slice(1, -1).toUpperCase());
-    }
-  }, [isUserLoggedIn]);
-
+  const { loggedInUser, error } = useSelector((state) => state.auth);
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
-  const logout = () => {
-    sessionStorage.clear();
-    setIsUserLoggedIn(false);
-    setUserName(" ");
-    navigate("/");
+  const handleLogout = () => {
+    try {
+      dispatch(logout());
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
   const style = {
     width: "100%",
@@ -98,7 +97,7 @@ const Header = () => {
                   color="textPrimary"
                   style={{ padding: "16px" }}
                 >
-                  {userName}
+                  {loggedInUser.firstName.toUpperCase()}
                 </Typography>
               }
             />
@@ -117,16 +116,14 @@ const Header = () => {
               <ListItemText primary="Need Help" />
               <Divider dark />
             </ListItemButton>
-            {isUserLoggedIn && (
               <ListItemButton style={{ marginTop: "500px" }}>
                 <LogoutIcon />
                 <ListItemText
                   primary="Logout"
                   style={{ cursor: "pointer" }}
-                  onClick={() => logout()}
+                  onClick={() => handleLogout()}
                 />
               </ListItemButton>
-            )}
           </List>
         </div>
       </Drawer>
