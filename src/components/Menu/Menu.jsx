@@ -13,7 +13,6 @@ import classes from './menu.module.scss';
 
 const Menu = () => {
   const [menuList, setMenuList] = useState([]);
-  const [restauranMenu, setRestauranMenu] = useState([]);
 
   useEffect(() => {
     axios.get(MenuURL).then((response) => setMenuList(response.data));
