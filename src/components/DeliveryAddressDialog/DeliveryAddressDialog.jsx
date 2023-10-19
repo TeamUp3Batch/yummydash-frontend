@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Menu from "@mui/material/Menu"; // Import Menu component
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -12,9 +13,11 @@ import Button from "@mui/material/Button";
 import Radio from "@mui/joy/Radio";
 import axios from "axios";
 import { ListItem, TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
 
 const DeliveryAddressDialog = ({ onSelect }) => {
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
+  const { loggedInUser, isLoading, error } = useSelector((state) => state.auth);
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
   const iconRef = useRef(null);
@@ -23,7 +26,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   const [data, setData] = useState({
-    email: sessionStorage.getItem("email"),
+    email: loggedInUser.email,
     unitNumber: "",
     street: "",
     city: "",
@@ -110,22 +113,21 @@ const DeliveryAddressDialog = ({ onSelect }) => {
     try {
       const url = `${apiUrl}/api/users/addNewAddress`;
       const result = await axios.post(url, data);
-      console.log('resultvsdvsdvsd', result);
       if (result.status === 201) {
-        sessionStorage.removeItem('address');
-        sessionStorage.setItem('address', JSON.stringify(result.data.address));
+        sessionStorage.removeItem("address");
+        sessionStorage.setItem("address", JSON.stringify(result.data.address));
         setAddresses(result.data.address);
         setAddAddressDialogVisible(false);
-  
+
         // Clear input values by resetting the data state
         setData({
-          email: sessionStorage.getItem('email'),
-          unitNumber: '',
-          street: '',
-          city: '',
-          state: '',
-          zipCode: '',
-          country: 'Canada',
+          email: sessionStorage.getItem("email"),
+          unitNumber: "",
+          street: "",
+          city: "",
+          state: "",
+          zipCode: "",
+          country: "Canada",
         });
       }
     } catch (error) {
@@ -150,7 +152,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
   }, [isDialogVisible]);
 
   useEffect(() => {
-    const storedAddresses = JSON.parse(sessionStorage.getItem("address"));
+    const storedAddresses = loggedInUser.address;
     if (storedAddresses) {
       setAddresses(storedAddresses);
     }
@@ -260,7 +262,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
           onClose={closeAddAddressDialog}
           PaperProps={{
             elevation: 3,
-            sx: innerDialogStyle, 
+            sx: innerDialogStyle,
           }}
         >
           <div>
@@ -273,7 +275,6 @@ const DeliveryAddressDialog = ({ onSelect }) => {
               style={inputStyle}
               label="Unit Number"
               variant="outlined"
-              
             />
           </div>
           <div>
@@ -291,7 +292,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
           </div>
           <div>
             <TextField
-            id="outlined-basic"
+              id="outlined-basic"
               type="text"
               name="city"
               label="City"
@@ -303,7 +304,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
           </div>
           <div>
             <TextField
-             id="outlined-basic"
+              id="outlined-basic"
               type="text"
               name="state"
               label="State"
@@ -327,7 +328,7 @@ const DeliveryAddressDialog = ({ onSelect }) => {
           </div>
           <div>
             <TextField
-            id="outlined-basic"
+              id="outlined-basic"
               type="text"
               name="country"
               value="Canada"
@@ -339,8 +340,16 @@ const DeliveryAddressDialog = ({ onSelect }) => {
           <ListItemButton
             style={{ display: "flex", justifyContent: "space-between" }}
           >
-            <Button variant="outlined" color="error" onClick={closeAddAddressDialog}>Cancel</Button>
-            <Button variant="contained" color="success" onClick={handleSave}>Save</Button>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={closeAddAddressDialog}
+            >
+              Cancel
+            </Button>
+            <Button variant="contained" color="success" onClick={handleSave}>
+              Save
+            </Button>
           </ListItemButton>
         </Menu>
       )}

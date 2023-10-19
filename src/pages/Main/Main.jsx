@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 import AdsCarousel from '../../components/AdsCarousel/AdsCarousel';
-import CuisineCarousel from '../../components/CuisineCarousel/CuisineCarousel';
+import CuisineCarouselContainer from '../../components/CuisineCarousel/CuisineCarouselContainer';
 
 const Main = () => {
   return (
@@ -11,7 +11,7 @@ const Main = () => {
       <Header />
       <div>
         <AdsCarousel />
-        <CuisineCarousel />
+        <CuisineCarouselContainer />
       </div>
       {/* <Footer /> */}
     </React.Fragment>

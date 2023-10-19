@@ -22,6 +22,7 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
     "sass": "^1.68.0",
     "swiper": "^9.4.1",
     "web-vitals": "^2.1.4"
@@ -30,7 +31,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +57,11 @@
   "devDependencies": {
     "css-loader": "^6.8.1",
     "dotenv": "^16.3.1",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.0.3",
     "style-loader": "^3.3.3"
   }
 }

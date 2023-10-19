@@ -1,55 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
+import { useLoginModal } from "./hooks/useLoginModal";
 
 const LoginModal = ({ isOpen, onClose }) => {
-  const apiUrl = process.env.REACT_APP_BACKEND_URL;
-  const [data, setData] = useState({
-    email: "",
-    password: "",
+  const { data, error, handleChange, handleSubmit } = useLoginModal({
+    isOpen,
+    onClose,
   });
-  const navigate = useNavigate();
-
-  const [error, setError] = useState("");
-
-  const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
-  };
-
-  const handleSubmit = async (e) => {
-    console.log("HELLO ");
-    e.preventDefault();
-    try {
-
-      const url = `${apiUrl}/api/auth/login`;
-      const result = await axios.post(url, data);
-      if (result.data.status === true) {
-        sessionStorage.setItem("token", result.data.token);
-        sessionStorage.setItem("loggedIn", true);
-        sessionStorage.setItem(
-          "userName",
-          JSON.stringify(result.data.firstName)
-        );
-        sessionStorage.setItem("email", result.data.email);
-        sessionStorage.setItem("address", JSON.stringify(result.data.address));
-
-        navigate("/main");
-      }
-      // Perform your validation here
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
-    }
-    onClose();
-  };
 
   return (
     <Modal
@@ -67,11 +26,11 @@ const LoginModal = ({ isOpen, onClose }) => {
           maxWidth: "300px",
           p: 2,
           textAlign: "center",
-          backgroundColor: "white", // Add a background color
-          borderRadius: "8px", // Add border-radius for rounded corners
+          backgroundColor: "white",
+          borderRadius: "8px",
         }}
       >
-        <Typography id="modal-modal-title" variant="h6" component="h2"> 
+        <Typography id="modal-modal-title" variant="h6" component="h2">
           Login
         </Typography>
         <form onSubmit={handleSubmit}>
