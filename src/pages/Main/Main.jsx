@@ -4,7 +4,6 @@ import Footer from '../../components/Footer/Footer';
 
 import AdsCarousel from '../../components/AdsCarousel/AdsCarousel';
 import CuisineCarousel from '../../components/CuisineCarousel/CuisineCarousel';
-import Menu from '../../components/Menu/Menu';
 
 const Main = () => {
   return (
@@ -13,7 +12,6 @@ const Main = () => {
       <div>
         <AdsCarousel />
         <CuisineCarousel />
-        <Menu />
       </div>
       {/* <Footer /> */}
     </React.Fragment>

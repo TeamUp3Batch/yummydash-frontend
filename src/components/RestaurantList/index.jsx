@@ -10,16 +10,16 @@ const RestaurantList = ({ selectedCuisine }) => {
     const fetchData = async () => {
       try {
         const url = `${apiUrl}/api/restaurants/getRestaurantsByCuisine`;
-        const data = { cuisine: selectedCuisine };
+        const data = {"cuisine":selectedCuisine}
         const result = await axios.post(url, data);
-        console.log('result,', result.data);
-        setRestaurants(result.data);
+        //console.log("result,",result.data)
+        setRestaurants(result.data)
       } catch (error) {
         // Handle errors, e.g., display an error message
         console.error('Error:', error);
       }
     };
-
+  
     fetchData();
   }, [selectedCuisine]);
 
@@ -27,8 +27,9 @@ const RestaurantList = ({ selectedCuisine }) => {
     <div>
       <h1>Restaurants Near You</h1>
       {restaurants.map((restaurant) => (
-        <a key={restaurant._id} href={restaurant._id}>
-          <RestaurantCard cardDetails={restaurant} />
+        <a key={restaurant._id} href="/menu" value={restaurant._id}>
+        
+        <RestaurantCard cardDetails={restaurant}/>
         </a>
       ))}
     </div>
