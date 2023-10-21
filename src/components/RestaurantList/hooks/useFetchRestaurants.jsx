@@ -13,7 +13,6 @@ export const useFetchRestaurants = ({ selectedCuisine }) => {
       setIsLoading(true);
       setIsError(undefined);
       try {
-        console.log("selectedcuisne", selectedCuisine === null);
         if (selectedCuisine === null) {
           let selectedCuisine = "Vegetarian";
           const data = await getRestaurantsByCuisine(selectedCuisine);

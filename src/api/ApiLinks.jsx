@@ -1,1 +1,0 @@
-export const CuisinesURL = `${process.env.REACT_APP_BACKEND_URL}/api/cuisines/getAllCuisines`;
