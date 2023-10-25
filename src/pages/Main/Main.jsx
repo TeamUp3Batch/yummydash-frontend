@@ -5,15 +5,16 @@ import Footer from '../../components/Footer/Footer';
 import AdsCarousel from '../../components/AdsCarousel/AdsCarousel';
 import CuisineCarouselContainer from '../../components/CuisineCarousel/CuisineCarouselContainer';
 
+
 const Main = () => {
   return (
     <React.Fragment>
       <Header />
-      <div >
+      <div>
         <AdsCarousel />
         <CuisineCarouselContainer />
       </div>
-     {/* <Footer /> */}
+      <Footer />
     </React.Fragment>
   );
 };
