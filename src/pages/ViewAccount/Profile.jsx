@@ -1,22 +1,14 @@
 
-
-// import React from 'react';
-
-
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
-import AdsCarousel from '../../components/AdsCarousel/AdsCarousel';
-import CuisineCarouselContainer from '../../components/CuisineCarousel/CuisineCarouselContainer';
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -93,9 +85,7 @@ const Profile = () => {
       
         <TabPanel value={value} index={0} dir={theme.direction}>
           
-          <span> <h2>Name: </h2> </span>
-          
-                    
+          <h2>Name: </h2>
           <p>Phone: </p>
           <p>Email: </p>
           
