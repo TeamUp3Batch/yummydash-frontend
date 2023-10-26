@@ -1,16 +1,22 @@
 
 import * as React from 'react';
+import { useSelector } from 'react-redux';
+
+
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,6 +64,7 @@ const Profile = () => {
     setValue(index);
   };
 
+  const { loggedInUser, error } = useSelector((state) => state.auth);
 
   return (
     <React.Fragment>
@@ -85,13 +92,26 @@ const Profile = () => {
       
         <TabPanel value={value} index={0} dir={theme.direction}>
           
-          <h2>Name: </h2>
-          <p>Phone: </p>
-          <p>Email: </p>
+        <span>Profile Full Name: </span>{loggedInUser.firstName.toUpperCase()} <span></span>
+          {loggedInUser.lastName.toUpperCase()}
+          <br />
+          <span>Phone Number: </span> {loggedInUser.phoneNumber}
+          <br />
+          <span>Email: </span> {loggedInUser.email}
           
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Reset your password
+          <br />
+          <h3>Reset Your Password</h3>
+          <p>Enter your email address to reset your password. <br />
+          You may need to check your spam folder or unblock <br />
+          support@yummydash.com 
+          </p>
+          <br />
+
+          <TextField id="outlined-basic" label={loggedInUser.email} variant="outlined" /> <br /><br />
+          <Button variant="contained" disableElevation>  Reset Password</Button>
+
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
          <i>Under development!</i> 
