@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "yummydash-backend",
+			"path": "../yummydash-backend"
+		}
+	],
+	"settings": {}
+}

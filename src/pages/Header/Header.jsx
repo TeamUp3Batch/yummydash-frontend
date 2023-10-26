@@ -19,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import { useDispatch } from 'react-redux';
 import {logout} from '../../slices/authSlice';
+import {Profile} from '../ViewAccount/Profile'
 
 const Header = () => {
 
@@ -32,10 +33,20 @@ const Header = () => {
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
+
   const handleLogout = () => {
     try {
       dispatch(logout());
       navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
+
+  const openProfile = () => {
+    try {
+      navigate("/Profile");
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +114,11 @@ const Header = () => {
             />
             <ListItemButton>
               <AccountCircleIcon />
-              <ListItemText primary="View Account" />
+              <ListItemText 
+                primary="View Account" 
+                style={{ cursor: "pointer" }}
+                onClick={()=> openProfile()}
+              />
               <Divider dark />
             </ListItemButton>
             <ListItemButton>
@@ -124,6 +139,8 @@ const Header = () => {
                   onClick={() => handleLogout()}
                 />
               </ListItemButton>
+
+
           </List>
         </div>
       </Drawer>

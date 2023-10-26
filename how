@@ -1,0 +1,504 @@
+[33mcommit 326407dc13477995ad8d8686c1e625707bcbd266[m[33m ([m[1;36mHEAD -> [m[1;32mnaser-frontend[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 78ba671 6499565
+Author: Anitha Amarnath <41219364+anithaamarnath@users.noreply.github.com>
+Date:   Wed Oct 25 12:15:29 2023 -0700
+
+    Merge pull request #16 from TeamUp3Batch/TU-28-ui-bug
+    
+    Tu 28 UI bug
+
+[33mcommit 78ba671651745e1798fe4741170af2ef006e4c6f[m
+Merge: fb72d77 45018b2
+Author: Anitha Amarnath <41219364+anithaamarnath@users.noreply.github.com>
+Date:   Fri Oct 20 22:23:10 2023 -0700
+
+    Merge pull request #20 from TeamUp3Batch/TU-44-api-fixes
+    
+    Tu 44 api fixes
+
+[33mcommit 45018b258bcbc0ceafa894e290ad99c010c62577[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Fri Oct 20 19:26:48 2023 -0600
+
+    removed console.log
+
+[33mcommit 5a230d761b4888a769d55ac18942ca805d4ec504[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Fri Oct 20 14:54:45 2023 -0600
+
+    refactored frontend code
+
+[33mcommit 44e6364fdc8e5f90d8d2a023306f0e2f32b5395f[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Fri Oct 20 14:41:24 2023 -0600
+
+    fixed get apis with url query params
+
+[33mcommit 6499565ac55e2bdfb90c602bc10780f6ab29cc1c[m[33m ([m[1;31morigin/TU-28-ui-bug[m[33m)[m
+Author: Anitha Amarnath <41219364+anithaamarnath@users.noreply.github.com>
+Date:   Wed Oct 18 15:48:55 2023 -0700
+
+    Update header.module.scss
+
+[33mcommit 52867fbf03d608319681a47cf86787991048c398[m
+Author: Anitha Amarnath <41219364+anithaamarnath@users.noreply.github.com>
+Date:   Wed Oct 18 15:48:15 2023 -0700
+
+    Update header.module.scss
+
+[33mcommit c07b44438be03a484668d1631ac3d94487fe51ae[m
+Author: Anitha Amarnath <41219364+anithaamarnath@users.noreply.github.com>
+Date:   Wed Oct 18 15:46:50 2023 -0700
+
+    Update simpleheader.module.scss
+
+[33mcommit 8dea161a8533c49fb085afcf5008405b784b3837[m
+Merge: 7a9062b fb72d77
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Wed Oct 18 16:43:01 2023 -0600
+
+    Merge branch 'main' into TU-28-ui-bug
+
+[33mcommit fb72d77e63eccfba0627cae673210bac0fca9a2d[m[33m ([m[1;31morigin/TU-33-map-integration[m[33m)[m
+Merge: 70d1690 38bd4a3
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Wed Oct 18 12:27:07 2023 -0600
+
+    Merge pull request #17 from TeamUp3Batch/T-32-readMe-frontend
+    
+    T 32 read me frontend
+
+[33mcommit 70d1690866096076d2f6caa007e62d6996eddf42[m
+Merge: 7708fc1 94b6d65
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Wed Oct 18 12:26:51 2023 -0600
+
+    Merge pull request #18 from TeamUp3Batch/TU-15-Implementing-redux-frontend-kavitha
+    
+    Tu 15 implementing redux frontend kavitha
+
+[33mcommit 94b6d65fc2ed60e02ecfe6aa373185c2b833ac02[m[33m ([m[1;31morigin/TU-15-Implementing-redux-frontend-kavitha[m[33m)[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Tue Oct 17 15:12:07 2023 -0600
+
+    renamed CuisineCarousel and the related hooks
+
+[33mcommit a9f47a5fe7c8bf53faae3e203badfa1200d0fcec[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Mon Oct 16 21:25:11 2023 -0600
+
+    fixed isloading
+
+[33mcommit b396329cb1a5913f231ee302d46dba4cc64a6a5e[m[33m ([m[1;31morigin/TU-17-adding-spinner[m[33m)[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Mon Oct 16 17:14:32 2023 -0600
+
+    removed unused comments
+
+[33mcommit 8cdf05ddf61d3f18e2154f8b20e6bbadb011e4da[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Mon Oct 16 17:06:25 2023 -0600
+
+    seperated implementation logic from presentation
+
+[33mcommit 1e1082d83066157b5975abed460656c767bd9899[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Sat Oct 14 23:29:07 2023 -0600
+
+    defined hooks for gettingRestaurantsByCuisine
+
+[33mcommit 7a9062b530e692fa3ec765e923a4a15ad653bb98[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Sat Oct 14 20:57:03 2023 -0700
+
+    revert back to pointer
+
+[33mcommit 38bd4a3c555e8eba484eaaf44d673b673a2199a3[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Sat Oct 14 20:29:58 2023 -0700
+
+    updated read me
+
+[33mcommit 2f295afd2da2b7d583dec1cc61d24bd9fbf5a339[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Sat Oct 14 15:29:39 2023 -0600
+
+    removed eslint and prettier-debug issue
+
+[33mcommit b52e7ff87b0947861a07e358f0b76ee63f5463b6[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Sat Oct 14 03:26:04 2023 -0600
+
+    implmented prettier and eslint-backend
+
+[33mcommit fb03e49c545ac2d6b5a2d8d85638396c1d0e2e97[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Sat Oct 14 03:05:12 2023 -0600
+
+    updated store
+
+[33mcommit 065a3cb29200ddd499ff56c8a8cdfbd2beecf45a[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Sat Oct 14 03:04:13 2023 -0600
+
+    updated authSlice and imported correct services
+
+[33mcommit d7e0cf8eda51bd23588c01e918d2a2f57d74e555[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Fri Oct 13 22:06:38 2023 -0600
+
+    reducers and slices defined
+
+[33mcommit 6107e1a9dbedba7fc1e450dcd88792d80fb3a0ae[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Fri Oct 13 16:20:58 2023 -0700
+
+    formatted
+
+[33mcommit 80791203fc410de5964b3bc668633e3b8748b5ea[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Fri Oct 13 16:20:16 2023 -0700
+
+    used formated document
+
+[33mcommit ebd7f46e5ba0a48c45dc2cf19d061f69efbf0003[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Fri Oct 13 16:17:32 2023 -0700
+
+    readMe file
+
+[33mcommit 34ecb9c2b689255b34ab7ff8e6890aae0be91409[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Fri Oct 13 16:52:02 2023 -0600
+
+    signup fixed
+
+[33mcommit 8766e0fe641fc2bff4cf67357c4034ad6b401b7b[m
+Merge: b786df4 7708fc1
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Fri Oct 13 14:43:34 2023 -0600
+
+    Merge branch 'main' of https://github.com/TeamUp3Batch/yummydash-frontend into TU-15-Implementing-redux-frontend-kavitha
+
+[33mcommit 6896b3e787842df9c04d91928ef6ab6a378abea9[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Fri Oct 13 11:41:41 2023 -0700
+
+    Footer height changed
+
+[33mcommit f60fa7e6195b93adaf78f7c40d2798ae0ff19e03[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Thu Oct 12 23:19:25 2023 -0700
+
+    un commented footer
+
+[33mcommit 9529b9318183be5554a8271029fe3b0b7224ec69[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Thu Oct 12 23:19:04 2023 -0700
+
+    added media query for background image
+
+[33mcommit 51b1f244a0d034db9a50c3a7a09338ab0c5dfad0[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Thu Oct 12 23:18:27 2023 -0700
+
+    refactored home code
+
+[33mcommit 7e0b9dfba6393b8a2e0a2a723509b24ab1503671[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Thu Oct 12 23:18:00 2023 -0700
+
+    footer css bug fix
+
+[33mcommit 7708fc1f8451b8caaa44aa830c6708d48d177076[m[33m ([m[1;31morigin/development-kavitha[m[33m, [m[1;31morigin/TU-23-validation-frontend[m[33m)[m
+Merge: feb92f3 cc759df
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Thu Oct 12 15:13:11 2023 -0600
+
+    Merge pull request #14 from TeamUp3Batch/Delpoyment-bug-fix
+    
+    fix the ui bug
+
+[33mcommit cc759df0d02479ce6c156cdd67d52ae0a0be7308[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Thu Oct 12 14:10:01 2023 -0700
+
+    fix the ui bug
+
+[33mcommit feb92f3b72e4d7173edd700e6f657a31019a9dd2[m
+Merge: 27c7785 b252187
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Thu Oct 12 13:41:15 2023 -0600
+
+    Merge pull request #13 from TeamUp3Batch/TU-27-display-restaurants-by-cuisine
+    
+    Tu 27 display restaurants by cuisine
+
+[33mcommit b252187d9db90b9ed20400ec7b3b71a253d564a8[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Thu Oct 12 13:39:30 2023 -0600
+
+    added fixes
+
+[33mcommit f0642f22eab58287eefb67c40ebe13d8198e11f8[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Thu Oct 12 04:36:30 2023 -0600
+
+    get restauarnts by cuisine card
+
+[33mcommit 6d39297f4a89cfa7eee837e0757e394567c1c541[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Thu Oct 12 04:36:07 2023 -0600
+
+    get restaurants by cuisine UI
+
+[33mcommit b786df403189097fbddd6f90f2551da0597e8521[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Wed Oct 11 20:19:04 2023 -0600
+
+    Login and signup reducer
+
+[33mcommit 27c77858cb7f90ee6770e77d2e21d19ea7127d8e[m
+Merge: ef333da 9e63e20
+Author: Anitha Amarnath <41219364+anithaamarnath@users.noreply.github.com>
+Date:   Wed Oct 11 18:30:18 2023 -0700
+
+    Merge pull request #12 from TeamUp3Batch/Delpoyment-bug-fix
+    
+    fixed deployment issue
+
+[33mcommit 9e63e20a2694e0ff733cd82d03990ef9990a0d6c[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Wed Oct 11 18:29:05 2023 -0700
+
+    fixed deployment issue
+
+[33mcommit ef333da271da6718959b12c44be827d202483aa0[m
+Merge: 68ee209 132d6d7
+Author: Anitha Amarnath <41219364+anithaamarnath@users.noreply.github.com>
+Date:   Wed Oct 11 17:54:28 2023 -0700
+
+    Merge pull request #11 from TeamUp3Batch/TU-22-UI_Integration_for_cuisine_carousel
+    
+    Tu 22 UI integration for cuisine carousel
+
+[33mcommit 132d6d7088c35560b2ded1a1425773df62ceff1c[m
+Author: Kate <polyakovkate@gmail.com>
+Date:   Wed Oct 11 17:49:23 2023 -0700
+
+    changed url
+
+[33mcommit efa84970c0b58a401079a993e02f93260de249a4[m
+Author: Kate <polyakovkate@gmail.com>
+Date:   Wed Oct 11 17:25:41 2023 -0700
+
+    ready for merge
+
+[33mcommit 67d3e28d462d3544dda6e01524537ef952061021[m
+Author: Kate <polyakovkate@gmail.com>
+Date:   Wed Oct 11 17:24:03 2023 -0700
+
+    done
+
+[33mcommit 84abd56e46920fce227ccc1601aaab60cdf0c181[m
+Merge: 28b0770 68ee209
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Wed Oct 11 01:21:20 2023 -0600
+
+    Merge branch 'development-kavitha' of https://github.com/TeamUp3Batch/yummydash-frontend into TU-15-Implementing-redux-frontend-kavitha
+
+[33mcommit 68ee2097505f37f3be3c52b9830bc138a8b8d2d0[m
+Merge: ac805ef b495586
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Wed Oct 11 01:18:13 2023 -0600
+
+    Merge pull request #10 from TeamUp3Batch/TU-26-Integration_ads_carousel
+    
+    Tu 26 integration ads carousel
+
+[33mcommit b495586217be81a528d6157c4d49c77d1c498e1b[m
+Author: Kate <polyakovkate@gmail.com>
+Date:   Wed Oct 11 00:06:09 2023 -0700
+
+    ready for merge
+
+[33mcommit cf3cc4deccc9c8816fdb40f9f1595eef4593a666[m
+Merge: b229bbe ac805ef
+Author: Kate <polyakovkate@gmail.com>
+Date:   Wed Oct 11 00:02:33 2023 -0700
+
+    Merge branch 'main' into TU-26-Integration_ads_carousel
+
+[33mcommit b229bbe7a143079525e8f205773cb62da94cb650[m
+Author: Kate <polyakovkate@gmail.com>
+Date:   Tue Oct 10 23:46:39 2023 -0700
+
+    created ads carousel
+
+[33mcommit 28b07704723e1543bb0e66e404fdb02634fb08fc[m
+Merge: a4cd1c8 ac805ef
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Tue Oct 10 23:40:54 2023 -0600
+
+    Merge branch 'main' of https://github.com/TeamUp3Batch/yummydash-frontend into TU-15-Implementing-redux-frontend-kavitha
+
+[33mcommit a4cd1c8c8f16081e1e91cb19be1884a6a42c8f15[m
+Author: Kavitha Shanmugan <kavitha.shanmugan@gmail.com>
+Date:   Tue Oct 10 23:40:08 2023 -0600
+
+    added auth slices for reducer
+
+[33mcommit ac805ef6c9e6e46cdb78bf07b6e50b6f5885954b[m
+Merge: e8908ac 42acebf
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Tue Oct 10 23:38:30 2023 -0600
+
+    Merge pull request #9 from TeamUp3Batch/TU-20-feature-styling-frontend
+    
+    Tu 20 feature styling frontend
+
+[33mcommit 42acebf34384f1d842584866999abff885838f8c[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 22:29:12 2023 -0700
+
+    update padding input style
+
+[33mcommit 663d63630283a59d2ef760089cb1dd626ff8ad77[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 18:00:04 2023 -0700
+
+    Removed un used images
+
+[33mcommit 23a9bf88423c1508094e1dcd1474f43393265896[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 17:59:52 2023 -0700
+
+    renamed right file name and refactored
+
+[33mcommit de5790d72bf2ee3e86513f32a87c6fe3f9f0502c[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 17:58:58 2023 -0700
+
+    updated new images
+
+[33mcommit 3b2681a81b74ce0ac1456e9ac92b814d7cab3825[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 17:58:35 2023 -0700
+
+    Added new ad images carosuel
+
+[33mcommit a538f5e927319dc7718d82d9f8732e3d435197c3[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 17:05:59 2023 -0700
+
+    Removed Divider import
+
+[33mcommit 6fabbb84f06aa59fc5494c2fd1190bd66f97583f[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 17:02:46 2023 -0700
+
+    delted unused account images
+
+[33mcommit 213306b2e4ad1ba2f1c4aeb803ab9356bf2226cd[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 17:01:44 2023 -0700
+
+    account icon is updated and removed unused import
+
+[33mcommit 207981616d23ae98ae92d776116347f864fef709[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 16:48:07 2023 -0700
+
+    profile icon bug
+
+[33mcommit adba82b9b8e622e3ffe915135b8b1752dab5a489[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 16:47:47 2023 -0700
+
+    Fixed select input UI style- z-index
+
+[33mcommit bf28cd8a034ab6d816bcb676fe25e4b16300bd44[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Tue Oct 10 16:44:48 2023 -0700
+
+    accout icon alginment
+
+[33mcommit 633d2f1fbb10fdfceaa20e8608c028f856d7596e[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Sat Oct 7 19:39:27 2023 -0700
+
+    Added one more images for add images
+
+[33mcommit 535da6bfe2dded7700c32f274e24ace7a8f71a66[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Sat Oct 7 19:38:54 2023 -0700
+
+    Made footer sticky
+
+[33mcommit 277bf6776f7f94fd99898de7efa7a0007a155f87[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Sat Oct 7 19:38:11 2023 -0700
+
+    Remived un used css class and removed comment line
+
+[33mcommit be150a77f0143a6aec62b24092ae425d083d2206[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Sat Oct 7 19:36:58 2023 -0700
+
+    Removed tag line
+
+[33mcommit 83456454fb85081ce2f825e49c50c91ffa4a835b[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Sat Oct 7 19:36:36 2023 -0700
+
+    Removed unwanted images and added new image
+
+[33mcommit e5ff70266129c479a98c3ae32af2380d2b6ab937[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Sat Oct 7 19:35:59 2023 -0700
+
+    removed needHelp class, and changed flag size
+
+[33mcommit e8908ac54e9666b1870deee1df531609012bd411[m
+Merge: 6c339e0 5d7502d
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Fri Oct 6 00:10:43 2023 -0600
+
+    Merge pull request #8 from TeamUp3Batch/development-anitha-login
+    
+    Development anitha login
+
+[33mcommit 5d7502d4d4c1b1c573d9aeea307661bbe702497b[m
+Merge: 15f824d 6c339e0
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Fri Oct 6 00:10:20 2023 -0600
+
+    Merge branch 'main' into development-anitha-login
+
+[33mcommit 15f824d8bb61356a56be10feec4bc2363f55f3b7[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Thu Oct 5 23:03:29 2023 -0700
+
+    format the code
+
+[33mcommit aa15b901fcf0319c5fa6724358367009d9b0e3b8[m
+Merge: 0515c21 1916aa9
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Thu Oct 5 22:58:24 2023 -0700
+
+    Merge remote-tracking branch 'origin/development-anitha-login' into development-anitha-login
+
+[33mcommit 0515c2104deb8e74493b1097dfe8392c50cfc79b[m
+Author: anithaamarnath <anithaamarnath04@gmail.com>
+Date:   Thu Oct 5 22:50:52 2023 -0700
+
+    fixed dot env bug
+
+[33mcommit 6c339e04a84f055dfd4f19021b933604abca7caa[m
+Merge: 0d154c2 fe3abcc
+Author: TeamUp3Batch <144860459+TeamUp3Batch@users.noreply.github.com>
+Date:   Thu Oct 5 23:04:39 2023 -0600
+
+    Merge pull request #7 from TeamUp3Batch/TU3_cuisine_carousel
+    
+    Tu3 cuisine carousel
