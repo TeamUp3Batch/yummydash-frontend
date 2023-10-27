@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import TuneIcon from "@mui/icons-material/Tune";
-import Drawer from "@mui/material/Drawer"; // Import Drawer component
+import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -16,19 +16,16 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
 import Typography from "@mui/material/Typography";
-import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
-import { useDispatch } from 'react-redux';
-import {logout} from '../../slices/authSlice';
-import {Profile} from '../ViewAccount/Profile'
+import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
+
+import { logout } from "../../slices/authSlice";
 
 const Header = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [userName, setUserName] = useState(" ");
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedGeocodedAddress, setSelectedGeocodedAddress] = useState("");
+
   const { loggedInUser, error } = useSelector((state) => state.auth);
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -41,7 +38,6 @@ const Header = () => {
     } catch (error) {
       console.log(error);
     }
-    
   };
 
   const openProfile = () => {
@@ -50,16 +46,16 @@ const Header = () => {
     } catch (error) {
       console.log(error);
     }
-    
   };
+
+  const handleGeocodedAddressSelect = (address) => {
+    setSelectedGeocodedAddress(address);
+  };
+
   const style = {
     width: "100%",
     maxWidth: 360,
     bgcolor: "background.paper",
-  };
-
-  const handleAddressSelect = (address) => {
-    setSelectedAddress(address);
   };
 
   return (
@@ -67,12 +63,16 @@ const Header = () => {
       <div className={styles.wrapper}>
         <img className={styles.logo} src={logo} alt="Logo" />
         <div className={styles.address}>
-          <p>Delivery</p>
           <p>
-            {selectedAddress
-              ? `${selectedAddress.unitNumber}, ${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.zipCode}, ${selectedAddress.country}`
-              : "Your Address Here"}
-            <DeliveryAddressDialog onSelect={handleAddressSelect} />
+            <DeliveryAddressDialog
+              onSelect={handleGeocodedAddressSelect}
+              onGeocodedAddressSelect={handleGeocodedAddressSelect}
+            />
+           {selectedGeocodedAddress ? (
+            <p>{selectedGeocodedAddress}</p>
+          ) : (
+            <p>Your Address Here</p>
+          )}
           </p>
         </div>
         <div className={styles.search}>
@@ -86,7 +86,11 @@ const Header = () => {
           <img src={flag} alt="Canada" />
         </div>
         <div>
-          <AccountCircleSharpIcon fontSize="large" onClick={toggleDrawer} sx={{ color: 'white',fontSize: 55 }}/>
+          <AccountCircleSharpIcon
+            fontSize="large"
+            onClick={toggleDrawer}
+            sx={{ color: "white", fontSize: 55 }}
+          />
         </div>
       </div>
       <Drawer
@@ -114,10 +118,10 @@ const Header = () => {
             />
             <ListItemButton>
               <AccountCircleIcon />
-              <ListItemText 
-                primary="View Account" 
+              <ListItemText
+                primary="View Account"
                 style={{ cursor: "pointer" }}
-                onClick={()=> openProfile()}
+                onClick={() => openProfile()}
               />
               <Divider dark />
             </ListItemButton>
@@ -131,16 +135,14 @@ const Header = () => {
               <ListItemText primary="Need Help" />
               <Divider dark />
             </ListItemButton>
-              <ListItemButton style={{ marginTop: "500px" }}>
-                <LogoutIcon />
-                <ListItemText
-                  primary="Logout"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleLogout()}
-                />
-              </ListItemButton>
-
-
+            <ListItemButton style={{ marginTop: "500px" }}>
+              <LogoutIcon />
+              <ListItemText
+                primary="Logout"
+                style={{ cursor: "pointer" }}
+                onClick={() => handleLogout()}
+              />
+            </ListItemButton>
           </List>
         </div>
       </Drawer>
