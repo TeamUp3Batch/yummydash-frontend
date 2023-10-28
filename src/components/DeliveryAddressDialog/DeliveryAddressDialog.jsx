@@ -81,7 +81,6 @@ const DeliveryAddressDialog = ({ onSelect, onGeocodedAddressSelect }) => {
 
   return (
     <div>
-      
       <ArrowDropDownIcon
         ref={iconRef}
         onClick={openDialog}
