@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Axios from "axios";
 
 
 
-// Define the custom hook
-function useGeocodeAddress() {
+const useGeocodeAddress = () => {
   const [geocodedInfo, setGeocodedInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,12 +11,13 @@ function useGeocodeAddress() {
   const geocodeAddress = async (address) => {
     setIsLoading(true);
     setError(null);
+    const mapApiUrl = process.env.REACT_APP_MAPBOX_API_KEY;
 
     try {
       const response = await Axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+        `${process.env.REACT_APP_GEOMAP_URL}/${encodeURIComponent(
           address
-        )}.json?access_token=${process.env.REACT_APP_MAPBOX_API_KEY}`
+        )}.json?access_token=${mapApiUrl}`
       );
       setGeocodedInfo(response.data.features[0]);
     } catch (error) {
@@ -27,10 +27,6 @@ function useGeocodeAddress() {
     }
   };
 
-  useEffect(() => {
-    // You can use this effect to clear geocodedInfo after it has been displayed
-    // or to perform any other cleanup tasks.
-  }, [geocodedInfo]);
 
   return { geocodeAddress, geocodedInfo, isLoading, error };
 }
