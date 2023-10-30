@@ -11,9 +11,9 @@ import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Radio from "@mui/joy/Radio";
-import AddressInputWithGeocoding from "../DeliveryAddressDialog/AddressInputWithGeocoding";
+import AddressSearchMapBox from "../DeliveryAddressDialog/AddressSearchMapBox";
 
-const DeliveryAddressDialog = ({ onSelect, onGeocodedAddressSelect }) => {
+const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
   const { loggedInUser } = useSelector((state) => state.auth);
@@ -91,27 +91,10 @@ const DeliveryAddressDialog = ({ onSelect, onGeocodedAddressSelect }) => {
   }, [isDialogVisible]);
 
   useEffect(() => {
-    // * in service if user is logged in then update the address from db 
-    // * if user is not logged in then update in db 
-    // ? i want to load the all the updated list in db where im stuck
-    // * but completed to see in header file  
-    // ? cancel address window 
-    // ? only chnage geo to canada 
-    // ? ui your adderess here 
-    // ? i need to created store to update the vale ? so i can see the source of truth from the db 
-
-    //
-
-    // update the address in db
-    // new address - update the address in db
-    // test -with new address 
-
-    const storedAddresses = loggedInUser.address;
-    console.log('logged ',loggedInUser);
-    if (storedAddresses) {
-      console.log('store address ',storedAddresses);
-      setAddresses(storedAddresses);
   
+    const storedAddresses = loggedInUser.address;
+    if (storedAddresses) {
+      setAddresses(storedAddresses);
     }
   },[loggedInUser.address]);
 
@@ -216,8 +199,8 @@ const DeliveryAddressDialog = ({ onSelect, onGeocodedAddressSelect }) => {
           }}
         >
           <div>
-            <AddressInputWithGeocoding
-              onGeocodedAddressSelect={onGeocodedAddressSelect}
+            <AddressSearchMapBox
+              onSearchAddressSelect={onSearchAddressSelect}
             />
           </div>
         </Menu>

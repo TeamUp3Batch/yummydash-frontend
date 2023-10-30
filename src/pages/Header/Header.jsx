@@ -24,7 +24,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [selectedGeocodedAddress, setSelectedGeocodedAddress] = useState("");
+  const [selectedSearchAddress, setSelectedSearchAddress] = useState("");
 
   const { loggedInUser, error } = useSelector((state) => state.auth);
   const toggleDrawer = () => {
@@ -48,8 +48,8 @@ const Header = () => {
     }
   };
 
-  const handleGeocodedAddressSelect = (address) => {
-    setSelectedGeocodedAddress(address);
+  const handleSearchAddressSelect = (address) => {
+    setSelectedSearchAddress(address);
   };
 
   const style = {
@@ -65,11 +65,11 @@ const Header = () => {
         <div className={styles.address}>
           <p>
             <DeliveryAddressDialog
-              onSelect={handleGeocodedAddressSelect}
-              onGeocodedAddressSelect={handleGeocodedAddressSelect}
+              onSelect={handleSearchAddressSelect}
+              onSearchAddressSelect={handleSearchAddressSelect}
             />
-           {selectedGeocodedAddress ? (
-            <p>{selectedGeocodedAddress}</p>
+           {selectedSearchAddress ? (
+            <p>{selectedSearchAddress}</p>
           ) : (
             <p>Your Address Here</p>
           )}
