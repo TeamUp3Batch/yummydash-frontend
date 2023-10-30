@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getRestaurantsByCuisine } from "../../../services/restaurantService";
+import { getRestaurantsByCuisine, getRestaurantsBySort } from "../../../services/restaurantService";
 import { setRestaurantsByCuisine } from "../../../slices/restaurantSlice";
 export const useFetchRestaurants = ({ selectedCuisine }) => {
   const [restaurants, setRestaurants] = useState([]);

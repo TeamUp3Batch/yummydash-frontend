@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
-import TuneIcon from "@mui/icons-material/Tune";
 import Drawer from "@mui/material/Drawer"; // Import Drawer component
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
@@ -15,6 +14,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
+import SortingDialog from "../../components/SortingDialog/SortingDialog";
 import Typography from "@mui/material/Typography";
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import { useDispatch } from 'react-redux';
@@ -28,10 +28,14 @@ const Header = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userName, setUserName] = useState(" ");
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedSorting, setSelectedSorting] = useState(null);
   const { loggedInUser, error } = useSelector((state) => state.auth);
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
+  const Capitalize = (str)=>{
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   const handleLogout = () => {
     try {
       dispatch(logout());
@@ -50,6 +54,9 @@ const Header = () => {
   const handleAddressSelect = (address) => {
     setSelectedAddress(address);
   };
+  const handleSorting = (sortData) =>{
+    setSelectedSorting(sortData);
+  }
 
   return (
     <div className={styles.header}>
@@ -68,8 +75,8 @@ const Header = () => {
           <input placeholder="Search Cuisines, Restaurants, or Items" />
         </div>
         <div className={styles.sort}>
-          <TuneIcon style={{ color: "white" }} color="action" />
-          <p>Sort</p>
+          <SortingDialog onSelect={handleSorting} />
+          <p>Sort</p> <p>{ (selectedSorting) ? 'By '+Capitalize(selectedSorting) : '' }</p>
         </div>
         <div className={styles.profile}>
           <img src={flag} alt="Canada" />

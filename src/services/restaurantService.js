@@ -21,7 +21,15 @@ export const getRestaurantsByCuisine = async (selectedCuisine) => {
     throw error;
   }
 };
-
+export const getRestaurantsBySort = async (selectedSort) => {
+  const url = `${apiUrl}/api/restaurants/getRestaurantMenusByPrice`;
+  try {
+    const result = await axios.get(url);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+};
 export const getRestaurantDetailsById = async (selectedId) => {
   const url = `${apiUrl}/api/restaurants/getRestaurantDetailsById/?restaurantId=${selectedId}`;
   try {
