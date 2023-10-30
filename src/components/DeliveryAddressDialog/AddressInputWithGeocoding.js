@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useGeocodeAddress from "./hooks/useGeocodeAddress";
 import { TextField, Button } from "@mui/material";
-import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { saveAddress } from "../../services/userService";
+import { updateAddress } from "../../slices/authSlice";
 
 const AddressInputWithGeocoding = ({ onGeocodedAddressSelect }) => {
   const { loggedInUser, isLoading, error } = useSelector((state) => state.auth);
-  const apiUrl = process.env.REACT_APP_BACKEND_URL;
+  const dispatch = useDispatch();
   const [savedAddress, setSavedAddress] = useState(null);
 
   const {
@@ -48,20 +49,17 @@ const AddressInputWithGeocoding = ({ onGeocodedAddressSelect }) => {
     };
 
     try {
-      const url = `${apiUrl}/api/users/addNewAddress`;
-
-      const result = await axios.post(url, geocodedInfoData);
-
-      if (result.status === 201) {
-        setSavedAddress(result.data);
+      const savedAddress = await saveAddress(geocodedInfoData);
+      if (savedAddress) {
+        setSavedAddress(savedAddress);
+        dispatch(updateAddress(savedAddress));
       } else {
-        console.error("Error saving address:", result.data);
+        console.error("Error saving address: Unexpected response.");
       }
     } catch (error) {
       console.error("Error saving address:", error);
     }
   };
-
 
   useEffect(() => {
     if (geocodedInfo) {

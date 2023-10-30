@@ -1,17 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Menu from "@mui/material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
+import { ListItem } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Radio from "@mui/joy/Radio";
 import AddressInputWithGeocoding from "../DeliveryAddressDialog/AddressInputWithGeocoding";
 
 const DeliveryAddressDialog = ({ onSelect, onGeocodedAddressSelect }) => {
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
+  const { loggedInUser } = useSelector((state) => state.auth);
+  const [selectedAddress, setSelectedAddress] = useState("");
+  const [addresses, setAddresses] = useState(null);
   const iconRef = useRef(null);
   const [isAddAddressDialogVisible, setAddAddressDialogVisible] =
     useState(false);
@@ -37,6 +44,10 @@ const DeliveryAddressDialog = ({ onSelect, onGeocodedAddressSelect }) => {
 
   const closeAddAddressDialog = () => {
     setAddAddressDialogVisible(false);
+  };
+
+  const handleRadioSelect = (address) => {
+    onSelect(address);
   };
 
   const dialogStyle = {
@@ -78,6 +89,31 @@ const DeliveryAddressDialog = ({ onSelect, onGeocodedAddressSelect }) => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, [isDialogVisible]);
+
+  useEffect(() => {
+    // * in service if user is logged in then update the address from db 
+    // * if user is not logged in then update in db 
+    // ? i want to load the all the updated list in db where im stuck
+    // * but completed to see in header file  
+    // ? cancel address window 
+    // ? only chnage geo to canada 
+    // ? ui your adderess here 
+    // ? i need to created store to update the vale ? so i can see the source of truth from the db 
+
+    //
+
+    // update the address in db
+    // new address - update the address in db
+    // test -with new address 
+
+    const storedAddresses = loggedInUser.address;
+    console.log('logged ',loggedInUser);
+    if (storedAddresses) {
+      console.log('store address ',storedAddresses);
+      setAddresses(storedAddresses);
+  
+    }
+  },[loggedInUser.address]);
 
   return (
     <div>
@@ -128,6 +164,44 @@ const DeliveryAddressDialog = ({ onSelect, onGeocodedAddressSelect }) => {
             <AddIcon />
             <Divider dark />
           </ListItemButton>
+          <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+            <ListItem>
+              <ListItemText
+                primary={
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    {addresses && addresses.length > 0 ? (
+                      addresses.map((address) => (
+                        <List key={address.id}>
+                          <ListItem>
+                            <LocationOnIcon />
+                            <ListItemText
+                              primaryTypographyProps={{ fontSize: "12px" }}
+                            >
+                              {address.userAddress1}
+                            </ListItemText>
+                            <Radio
+                              checked={selectedAddress === address.userAddress1}
+                              onChange={() => handleRadioSelect(address.userAddress1)}
+                              value={address.id}
+                              name="address-radio"
+                            />
+                          </ListItem>
+                        </List>
+                      ))
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                }
+              />
+            </ListItem>
+          </div>
         </List>
       </Menu>
 

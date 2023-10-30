@@ -25,7 +25,7 @@ export const useLoginModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     try {
       dispatch(loginStart());
-      const result = await authServices.login(data);
+      const result = await authServices.login(data); 
       if (result.data.status === false) {
         dispatch(loginFailure(result.data.message));
       }
