@@ -1,0 +1,17 @@
+.placeOrderContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+.deliveryDetailsBox{
+    flex: 1;
+    margin-right: 10px;
+    max-width: 350px;
+    min-height: 100px;
+}
+.orderSummary{
+    flex: 2;
+    max-width: 400px;
+    min-height: 100px;
+}
