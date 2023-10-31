@@ -10,6 +10,7 @@ import {
   Typography,
   Paper,
   CardHeader,
+  Divider,
 } from "@mui/material";
 
 const buttonStyle = {
@@ -31,7 +32,9 @@ export default function OrderSummary() {
       <Card>
         <CardContent style={{ textAlign: "center" }}>
           <CardHeader title="Checkout" />
-          <Typography variant="body2">CardContent CardActions</Typography>
+          <Typography variant="body2">Subway</Typography>
+          <Divider/>
+          <Typography variant="body2">Green Goddess</Typography>
         </CardContent>
         <CardActions>
           <Button size="small" color="primary" style={buttonStyle}>
