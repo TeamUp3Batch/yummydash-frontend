@@ -20,7 +20,7 @@ import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import { useDispatch } from 'react-redux';
 import {logout} from '../../slices/authSlice';
 
-const Header = () => {
+const Header = ({setSorting}) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,6 +56,7 @@ const Header = () => {
   };
   const handleSorting = (sortData) =>{
     setSelectedSorting(sortData);
+    setSorting(sortData);
   }
 
   return (

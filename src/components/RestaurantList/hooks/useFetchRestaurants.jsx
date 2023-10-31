@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getRestaurantsByCuisine, getRestaurantsBySort } from "../../../services/restaurantService";
+import { getRestaurantsByCuisine } from "../../../services/restaurantService";
 import { setRestaurantsByCuisine } from "../../../slices/restaurantSlice";
-export const useFetchRestaurants = ({ selectedCuisine }) => {
+export const useFetchRestaurants = ({ selectedCuisine, selectedSort }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState();
@@ -15,12 +15,12 @@ export const useFetchRestaurants = ({ selectedCuisine }) => {
       try {
         if (selectedCuisine === null) {
           let selectedCuisine = "Vegetarian";
-          const data = await getRestaurantsByCuisine(selectedCuisine);
+          const data = await getRestaurantsByCuisine(selectedCuisine, selectedSort);
           dispatch(setRestaurantsByCuisine());
           setRestaurants(data);
         }
         if (selectedCuisine != null) {
-          const data = await getRestaurantsByCuisine(selectedCuisine);
+          const data = await getRestaurantsByCuisine(selectedCuisine, selectedSort);
           dispatch(setRestaurantsByCuisine());
           setRestaurants(data);
         }
@@ -32,7 +32,7 @@ export const useFetchRestaurants = ({ selectedCuisine }) => {
       }
     };
     fetchData();
-  }, [selectedCuisine, setIsLoading, setIsError]);
+  }, [selectedCuisine, selectedSort, setIsLoading, setIsError]);
   return {
     restaurants,
     isLoading,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 
@@ -7,12 +7,13 @@ import CuisineCarouselContainer from '../../components/CuisineCarousel/CuisineCa
 
 
 const Main = () => {
+  const [sorting, setSorting] = useState('rating'); // Initial sorting value
   return (
     <React.Fragment>
-      <Header />
+      <Header sorting={sorting} setSorting={setSorting}/>
       <div>
         <AdsCarousel />
-        <CuisineCarouselContainer />
+        <CuisineCarouselContainer selectedSort={sorting} />
       </div>
       <Footer />
     </React.Fragment>

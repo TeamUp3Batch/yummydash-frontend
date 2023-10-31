@@ -9,6 +9,7 @@ import axios from "axios";
 import { ListItem, TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
+import CuisineCarousel from "../CuisineCarousel/CuisineCarousel";
 
 const SortingDialog = ({ onSelect }) => {
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
@@ -131,10 +132,10 @@ const SortingDialog = ({ onSelect }) => {
                   Rating                  
               </ListItemText>
               <Radio
-                  selected={selectedSort === 'rating'}
+                  checked={selectedSort === 'rating'}
                   onChange={() => handleRadioSelect('rating')}
-                  value={sort}
-                  name="sort-radio"
+                  value="rating"
+                  name="radio-buttons"
                 />
             </ListItem>
             <ListItem>
@@ -144,10 +145,10 @@ const SortingDialog = ({ onSelect }) => {
                   Time Estimation                  
               </ListItemText>
               <Radio
-                selected={selectedSort === 'duration'}
+                checked={selectedSort === 'duration'}
                 onChange={() => handleRadioSelect('duration')}
-                value={sort}
-                name="sort-radio"
+                value="duration"
+                name="radio-buttons"
                 />
             </ListItem>
         </List>
