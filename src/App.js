@@ -7,10 +7,9 @@ import Cancel from "../src/pages/Cancel";
 import PlaceOrder from "../src/pages/PlaceOrder/PlaceOrder"
 
 
-import {
-  Routes,
-  Route
-} from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
+import menuPage from './pages/Menu/menu';
+import MenuPage from './pages/Menu/menu';
 
 function App() {
   return (
@@ -27,3 +26,5 @@ function App() {
 }
 
 export default App;
+// es-lint differnt rules to setup
+//
