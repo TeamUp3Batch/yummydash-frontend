@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import classes from "./swiper.module.scss";
-import RestaurantList from "../RestaurantList";
+import RestaurantList from "../RestaurantList/RestaurantList";
 
 const CuisineCarousel = () => {
   const {

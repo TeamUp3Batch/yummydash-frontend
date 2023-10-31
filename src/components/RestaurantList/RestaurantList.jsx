@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RestaurantCard from "../RestaurantCard";
-import { getRestaurantsByCuisine } from "../../services/restaurantService"; // Import the service
-import { useDispatch } from "react-redux";
-import { setRestaurantsByCuisine } from "../../slices/restaurantSlice";
+import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { useFetchRestaurants } from "./hooks/useFetchRestaurants";
 
 const RestaurantList = ({ selectedCuisine }) => {
