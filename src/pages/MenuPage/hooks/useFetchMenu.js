@@ -14,7 +14,8 @@ export const useFetchMenu = ({ restaurantId }) => {
       setIsError(undefined);
       try {
           const data = await getRestaurantDetailsById(restaurantId);
-          dispatch(setRestaurantDetailsById({ id: restaurantId, data }));
+          console.log("data",data)
+          //dispatch(setRestaurantDetailsById(data));
           setRestaurantDetails(data);
       } catch (error) {
         console.error("Error:", error);
