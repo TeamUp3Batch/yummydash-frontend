@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Radio from "@mui/joy/Radio";
 import AddressSearchMapBox from "../DeliveryAddressDialog/AddressSearchMapBox";
+import { updatePrimaryAddress } from "../../services/userService";
 
 const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
   const [isDialogVisible, setDialogVisible] = useState(false);
@@ -46,8 +47,18 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
     setAddAddressDialogVisible(false);
   };
 
-  const handleRadioSelect = (address) => {
+  const handleRadioSelect = async (address) => {
     onSelect(address);
+    const selectedAddress = addresses.find((item) => item._id === address._id);
+
+    if (selectedAddress) {
+      const userSelectedAddress = {
+        email: loggedInUser.email,
+        id: selectedAddress._id,
+      };
+
+      const savedAddress = await updatePrimaryAddress(userSelectedAddress);
+    }
   };
 
   const dialogStyle = {
@@ -91,12 +102,11 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
   }, [isDialogVisible]);
 
   useEffect(() => {
-  
     const storedAddresses = loggedInUser.address;
     if (storedAddresses) {
       setAddresses(storedAddresses);
     }
-  },[loggedInUser.address]);
+  }, [loggedInUser.address]);
 
   return (
     <div>
@@ -160,7 +170,7 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
                   >
                     {addresses && addresses.length > 0 ? (
                       addresses.map((address) => (
-                        <List key={address.id}>
+                        <List key={address._id}>
                           <ListItem>
                             <LocationOnIcon />
                             <ListItemText
@@ -169,9 +179,9 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
                               {address.userAddress1}
                             </ListItemText>
                             <Radio
-                              checked={selectedAddress === address.userAddress1}
-                              onChange={() => handleRadioSelect(address.userAddress1)}
-                              value={address.id}
+                              checked={selectedAddress._id === address._id}
+                              onChange={() => handleRadioSelect(address)}
+                              value={address._id}
                               name="address-radio"
                             />
                           </ListItem>
