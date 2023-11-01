@@ -26,7 +26,7 @@ const Header = () => {
   const [selectedSearchAddress, setSelectedSearchAddress] = useState("");
 
   const { loggedInUser, error } = useSelector((state) => state.auth);
- 
+
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -49,16 +49,19 @@ const Header = () => {
   };
 
   const handleSearchAddressSelect = (address) => {
-    (typeof address === 'string') ? setSelectedSearchAddress(address) : setSelectedSearchAddress(address.userAddress1); 
+    typeof address === "string"
+      ? setSelectedSearchAddress(address)
+      : setSelectedSearchAddress(address.userAddress1);
   };
 
   useEffect(() => {
-    const primaryAddress = loggedInUser.address.find(address => address.isPrimaryAddress === true);
+    const primaryAddress = loggedInUser.address.find(
+      (address) => address.isPrimaryAddress === true
+    );
     if (primaryAddress) {
       setSelectedSearchAddress(primaryAddress.userAddress1);
     }
-  }, [loggedInUser.address]); 
-
+  }, [loggedInUser.address]);
 
   const style = {
     width: "100%",
@@ -71,18 +74,12 @@ const Header = () => {
       <div className={styles.wrapper}>
         <img className={styles.logo} src={logo} alt="Logo" />
         <div className={styles.address}>
-          <p>
+          <p style={{ textAlign: "justify", whiteSpace: "pre-line" }}>
             <DeliveryAddressDialog
               onSelect={handleSearchAddressSelect}
               onSearchAddressSelect={handleSearchAddressSelect}
             />
-           {selectedSearchAddress ? (
-            <p> 
-              {selectedSearchAddress}
-              </p>
-          ) : (
-            <p>Your Delivery Address</p>
-          )}
+            {selectedSearchAddress}
           </p>
         </div>
         <div className={styles.search}>

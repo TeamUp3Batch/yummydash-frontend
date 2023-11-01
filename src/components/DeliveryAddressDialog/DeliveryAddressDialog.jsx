@@ -84,7 +84,6 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
     bgcolor: "background.paper",
   };
 
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isDialogVisible && !iconRef.current.contains(event.target)) {
@@ -110,11 +109,14 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
 
   return (
     <div>
-      <ArrowDropDownIcon
-        ref={iconRef}
-        onClick={openDialog}
-        style={{ cursor: "pointer" }}
-      />
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <span style={{ marginRight: "10px" }}>Your Delivery Address:</span>
+        <ArrowDropDownIcon
+          ref={iconRef}
+          onClick={openDialog}
+          style={{ cursor: "pointer" }}
+        />
+      </div>
 
       <Menu
         anchorEl={iconRef.current}
