@@ -8,6 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import {
+  Grid,
   Card,
   Button,
   CardActions,
@@ -62,26 +63,62 @@ const CheckoutForm = ({ clientSecret }) => {
     <div>
       <Card>
         <CardContent>
-          <CardHeader title="Checkout" />
+          <Typography
+            style={{ fontWeight: "bold", fontSize: "14px" }}
+            color="textSecondary"
+            gutterBottom
+          >
+            Checkout
+          </Typography>
           <Typography
             variant="body2"
             style={{
               fontWeight: "bold",
-              textTransform: "uppercase",
-              fontSize: "24px",
+              fontSize: "18px",
               marginTop: "16px",
               marginBottom: "16px",
             }}
           >
-            SUBWAY
+            Pizza Palace
           </Typography>
           <Divider
             style={{ backgroundColor: "#000", height: "2px", margin: "16px 0" }}
           />
-          <Typography variant="body2">8" Pepperoni Pizza</Typography>
-          <Typography variant="body2">2</Typography>
-          <Typography variant="body2">Total</Typography>
-          <Typography variant="body2">30</Typography>
+          <Grid container>
+            <Grid item xs={10} sm={10} md={10} lg={10}>
+              <Typography variant="body1" component="div">
+                8" Pepperoni Chicken Pizza
+              </Typography>
+            </Grid>
+            <Grid item xs={2} sm={2} md={2} lg={2}>
+              <Typography variant="body1" component="div">
+                $13.99
+              </Typography>
+            </Grid>
+            <Grid item xs={10} sm={10} md={10} lg={10}>
+              <Typography variant="body1" component="div">
+                Chicken Tandoori Pizza
+              </Typography>
+            </Grid>
+            <Grid item xs={2} sm={2} md={2} lg={2}>
+              <Typography variant="body1" component="div">
+                $13.99
+              </Typography>
+            </Grid>
+            <Grid item xs={10} sm={10} md={10} lg={10}>
+              <Typography variant="h6" component="div">
+                Total
+              </Typography>
+            </Grid>
+            <Grid item xs={2} sm={2} md={2} lg={2}>
+              <Typography variant="h6" component="div">
+                $27.98
+              </Typography>
+            </Grid>
+          </Grid>
+          <Divider
+            style={{ backgroundColor: "#000", height: "2px", margin: "16px 0" }}
+          />
           <CardElement />
         </CardContent>
         <CardActions>

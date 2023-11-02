@@ -9,9 +9,9 @@ const Order = () => {
   //mapbox start
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-106.659720);
-  const [lat, setLat] = useState(52.134570);
-  const [zoom, setZoom] = useState(9);
+  const [lng, setLng] = useState(-106.65972);
+  const [lat, setLat] = useState(52.13457);
+  const [zoom, setZoom] = useState(18);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -27,8 +27,16 @@ const Order = () => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-  });
-  //mapbox end
+    //mapbox end
+
+    // Add a marker function
+    const addMarker = (lng, lat) => {
+      new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
+    };
+
+    // Call the addMarker function with the desired coordinates
+    addMarker(-106.65972, 52.13457);
+  }, [lng, lat, zoom]);
 
   return (
     <div>

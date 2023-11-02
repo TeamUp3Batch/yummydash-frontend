@@ -15,3 +15,9 @@
     max-width: 400px;
     min-height: 100px;
 }
+.mapboxgl-marker {
+    width: 20px; /* Adjust the width as needed */
+    height: 20px; /* Adjust the height as needed */
+    background-color: red; /* Adjust the color as needed */
+    border-radius: 50%; /* Makes it round, adjust as needed */
+  }
