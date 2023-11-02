@@ -22,8 +22,8 @@ const RestaurantCard = ({ cardDetails }) => {
                   className="cart-items-image"
                   component="img"
                   alt="Product Image"
-                  sx={{ justifyContent: "flex-start", width: "200px" }}
-                  image="https://menu-images-static.skipthedishes.com/images/resized/small-8af7a92c68c4647eaee3.jpg"
+                  sx={{ justifyContent: "flex-start", width: "200px", padding:"5px" }}
+                  image={cardDetails.restaurantImage}
                 />
               </Grid>
               <Grid item md={4}>
@@ -45,7 +45,7 @@ const RestaurantCard = ({ cardDetails }) => {
                     height: "100%",
                   }}
                 >
-                  <Typography>30-60 min</Typography>
+                  <Typography>{cardDetails.estimatedDeliveryTime.minEstimatedTime} - {cardDetails.estimatedDeliveryTime.maxEstimatedTime} mins</Typography>
                   <div>
                     <StarRateIcon sx={{ color: "yellow" }} />
                     {cardDetails.ratings}
