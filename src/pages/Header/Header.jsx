@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TuneIcon from "@mui/icons-material/Tune";
 import Drawer from "@mui/material/Drawer";
@@ -17,7 +17,6 @@ import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
 import Typography from "@mui/material/Typography";
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
-
 import { logout } from "../../slices/authSlice";
 
 const Header = () => {
@@ -27,6 +26,7 @@ const Header = () => {
   const [selectedSearchAddress, setSelectedSearchAddress] = useState("");
 
   const { loggedInUser, error } = useSelector((state) => state.auth);
+
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -49,8 +49,19 @@ const Header = () => {
   };
 
   const handleSearchAddressSelect = (address) => {
-    setSelectedSearchAddress(address);
+    typeof address === "string"
+      ? setSelectedSearchAddress(address)
+      : setSelectedSearchAddress(address.userAddress1);
   };
+
+  useEffect(() => {
+    const primaryAddress = loggedInUser.address.find(
+      (address) => address.isPrimaryAddress === true
+    );
+    if (primaryAddress) {
+      setSelectedSearchAddress(primaryAddress.userAddress1);
+    }
+  }, [loggedInUser.address]);
 
   const style = {
     width: "100%",
@@ -63,16 +74,12 @@ const Header = () => {
       <div className={styles.wrapper}>
         <img className={styles.logo} src={logo} alt="Logo" />
         <div className={styles.address}>
-          <p>
+          <p style={{ textAlign: "justify", whiteSpace: "pre-line" }}>
             <DeliveryAddressDialog
               onSelect={handleSearchAddressSelect}
               onSearchAddressSelect={handleSearchAddressSelect}
             />
-           {selectedSearchAddress ? (
-            <p>{selectedSearchAddress}</p>
-          ) : (
-            <p>Your Address Here</p>
-          )}
+            {selectedSearchAddress}
           </p>
         </div>
         <div className={styles.search}>

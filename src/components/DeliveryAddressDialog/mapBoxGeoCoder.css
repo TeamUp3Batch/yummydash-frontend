@@ -1,29 +1,29 @@
-/* Example styles for the Mapbox Geocoder */
+
 .mapboxgl-ctrl-geocoder input {
-    width: 100%; /* Make the input field 100% width */
-    padding: 10px; /* Add padding */
-    font-size: 16px; /* Set the font size */
-    border: 1px solid #ccc; /* Add a border */
+    width: 100%;
+    padding: 10px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
   }
   
   .mapboxgl-ctrl-geocoder-results {
-    max-height: 200px; /* Limit the height of the results dropdown */
-    overflow-y: auto; /* Add a scrollbar for overflow */
+    max-height: 200px;
+    overflow-y: auto; 
   }
   
   .mapboxgl-ctrl-geocoder-suggestion {
-    padding: 10px; /* Add padding to each result */
-    cursor: pointer; /* Change cursor style on hover */
+    padding: 10px; 
+    cursor: pointer; 
   }
   
   .mapboxgl-ctrl-geocoder-suggestion:hover {
-    background-color: #f0f0f0; /* Change background color on hover */
+    background-color: #f0f0f0;
   }
   
   .mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder-icon-clear {
-    color: #ff0000; /* Style the clear button icon */
+    color: #ff0000;
   }
-  /* Change the marker color to orange */
+  
 .mapboxgl-ctrl-geocoder.mapboxgl-ctrl .mapboxgl-ctrl-geocoder-icon {
     background-color: orange;
   }
