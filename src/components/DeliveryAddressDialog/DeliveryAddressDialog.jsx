@@ -23,6 +23,7 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
   const iconRef = useRef(null);
   const [isAddAddressDialogVisible, setAddAddressDialogVisible] =
     useState(false);
+    
 
   const openDialog = () => {
     if (iconRef.current) {
@@ -50,8 +51,9 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
   const handleRadioSelect = async (address) => {
     onSelect(address);
     const selectedAddress = addresses.find((item) => item._id === address._id);
-
+    
     if (selectedAddress) {
+      setSelectedAddress(selectedAddress);
       const userSelectedAddress = {
         email: loggedInUser.email,
         id: selectedAddress._id,
