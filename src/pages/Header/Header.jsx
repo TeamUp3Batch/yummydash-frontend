@@ -62,9 +62,9 @@ const Header = ({setSorting}) => {
     bgcolor: "background.paper",
   };
 
-  const handleAddressSelect = (address) => {
-    setSelectedAddress(address);
-  };
+  // const handleAddressSelect = (address) => {
+  //   setSelectedAddress(address);
+  // };
   const handleSorting = (sortData) =>{
     setSelectedSorting(sortData);
     setSorting(sortData);

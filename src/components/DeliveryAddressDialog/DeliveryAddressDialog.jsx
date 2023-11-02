@@ -147,7 +147,7 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
             <AddIcon />
             <Divider dark />
           </ListItemButton>
-          <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+          <div style={{ maxHeight: "300px" }}>
             <ListItem>
               <ListItemText
                 primary={
