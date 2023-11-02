@@ -38,7 +38,7 @@ const AddressSearchMapBox = ({onSearchAddressSelect}) =>{
       console.error("Error saving address:", error);
     }
   };
-    useEffect(() => {
+  useEffect(() => {
     if (address) {
       onSearchAddressSelect(address);
     }
