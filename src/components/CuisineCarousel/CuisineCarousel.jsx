@@ -13,7 +13,7 @@ import "swiper/css/navigation";
 import classes from "./swiper.module.scss";
 import RestaurantList from "../RestaurantList/RestaurantList";
 
-const CuisineCarousel = () => {
+const CuisineCarousel = ({selectedSort}) => {
   const {
     cuisineList,
     selectedCuisine,
@@ -72,7 +72,7 @@ const CuisineCarousel = () => {
       </div>
       <div className={classes.restaurant__wrapper}>
         <div className={classes.restaurant__list}>
-          <RestaurantList selectedCuisine={selectedCuisine} />
+          <RestaurantList selectedCuisine={selectedCuisine} selectedSort={selectedSort} />
         </div>
       </div>
     </div>

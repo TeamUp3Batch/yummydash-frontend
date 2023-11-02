@@ -15,22 +15,26 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
+import SortingDialog from "../../components/SortingDialog/SortingDialog";
 import Typography from "@mui/material/Typography";
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
 
 import { logout } from "../../slices/authSlice";
 
-const Header = () => {
+const Header = ({setSorting}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedSearchAddress, setSelectedSearchAddress] = useState("");
+  const [selectedSorting, setSelectedSorting] = useState(null);
 
   const { loggedInUser, error } = useSelector((state) => state.auth);
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
-
+  const Capitalize = (str)=>{
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   const handleLogout = () => {
     try {
       dispatch(logout());
@@ -58,6 +62,14 @@ const Header = () => {
     bgcolor: "background.paper",
   };
 
+  const handleAddressSelect = (address) => {
+    setSelectedAddress(address);
+  };
+  const handleSorting = (sortData) =>{
+    setSelectedSorting(sortData);
+    setSorting(sortData);
+  }
+
   return (
     <div className={styles.header}>
       <div className={styles.wrapper}>
@@ -79,8 +91,8 @@ const Header = () => {
           <input placeholder="Search Cuisines, Restaurants, or Items" />
         </div>
         <div className={styles.sort}>
-          <TuneIcon style={{ color: "white" }} color="action" />
-          <p>Sort</p>
+          <SortingDialog onSelect={handleSorting} />
+          <p>Sort</p> <p>{ (selectedSorting) ? 'By '+Capitalize(selectedSorting) : '' }</p>
         </div>
         <div className={styles.profile}>
           <img src={flag} alt="Canada" />

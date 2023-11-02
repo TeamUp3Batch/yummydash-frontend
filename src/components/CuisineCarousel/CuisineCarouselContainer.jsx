@@ -3,11 +3,11 @@ import React from "react";
 import classes from "./cuisinecarousel.module.scss";
 import CuisineCarousel from "./CuisineCarousel";
 
-const CuisineCarouselContainer = () => {
+const CuisineCarouselContainer = ({selectedSort}) => {
   return (
     <div className={classes.carousel__wrapper}>
       <h1>Cuisines</h1>
-      <CuisineCarousel />
+      <CuisineCarousel selectedSort={selectedSort} />
     </div>
   );
 };
