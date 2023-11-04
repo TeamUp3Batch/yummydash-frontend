@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { useFetchRestaurants } from "./hooks/useFetchRestaurants";
 
-const RestaurantList = ({ selectedCuisine }) => {
+const RestaurantList = ({ selectedCuisine, selectedSort }) => {
   const { restaurants, isLoading, isError } = useFetchRestaurants({
     selectedCuisine,
+    selectedSort
   });
   if (isLoading) {
     return (

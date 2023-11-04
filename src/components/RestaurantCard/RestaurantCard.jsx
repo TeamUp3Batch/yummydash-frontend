@@ -25,7 +25,7 @@ const RestaurantCard = ({ cardDetails }) => {
           <Divider orientation="vertical" flexItem />
           <Grid item md={3}>
             <CardContent sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100%" }}>
-              <Typography>30-60 min</Typography>
+            <Typography>{cardDetails.estimatedDeliveryTime.minEstimatedTime} - {cardDetails.estimatedDeliveryTime.maxEstimatedTime} mins</Typography>
               <div>
                 <StarRateIcon sx={{ color: "yellow" }} />
                 {cardDetails.ratings}

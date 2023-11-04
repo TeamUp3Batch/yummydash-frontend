@@ -12,8 +12,8 @@ export const getCuisineList = async () => {
   }
 };
 
-export const getRestaurantsByCuisine = async (selectedCuisine) => {
-  const url = `${apiUrl}/api/restaurants/getRestaurantsByCuisine/?cuisine=${selectedCuisine}`;
+export const getRestaurantsByCuisine = async (selectedCuisine, selectedSort) => {
+  const url = `${apiUrl}/api/restaurants/getRestaurantsByCuisine/?cuisine=${selectedCuisine}&sort=${selectedSort}`;
   try {
     const result = await axios.get(url);
     return result.data;
@@ -21,7 +21,6 @@ export const getRestaurantsByCuisine = async (selectedCuisine) => {
     throw error;
   }
 };
-
 export const getRestaurantDetailsById = async (selectedId) => {
   const url = `${apiUrl}/api/restaurants/getRestaurantDetailsById/?restaurantId=${selectedId}`;
   try {
