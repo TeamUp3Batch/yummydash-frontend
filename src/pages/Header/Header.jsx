@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import Drawer from "@mui/material/Drawer"; // Import Drawer component
+import { useSelector, useDispatch } from "react-redux";
+import TuneIcon from "@mui/icons-material/Tune";
+import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -16,9 +19,8 @@ import HelpIcon from "@mui/icons-material/Help";
 import DeliveryAddressDialog from "../../components/DeliveryAddressDialog/DeliveryAddressDialog";
 import SortingDialog from "../../components/SortingDialog/SortingDialog";
 import Typography from "@mui/material/Typography";
-import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
-import { useDispatch } from 'react-redux';
-import {logout} from '../../slices/authSlice';
+import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
+import { logout } from "../../slices/authSlice";
 
 const Header = ({setSorting}) => {
 
@@ -30,12 +32,14 @@ const Header = ({setSorting}) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedSorting, setSelectedSorting] = useState(null);
   const { loggedInUser, error } = useSelector((state) => state.auth);
+
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
   const Capitalize = (str)=>{
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+
   const handleLogout = () => {
     try {
       dispatch(logout());
@@ -43,8 +47,31 @@ const Header = ({setSorting}) => {
     } catch (error) {
       console.log(error);
     }
-    
   };
+
+  const openProfile = () => {
+    try {
+      navigate("/Profile");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSearchAddressSelect = (address) => {
+    typeof address === "string"
+      ? setSelectedSearchAddress(address)
+      : setSelectedSearchAddress(address.userAddress1);
+  };
+
+  useEffect(() => {
+    const primaryAddress = loggedInUser.address.find(
+      (address) => address.isPrimaryAddress === true
+    );
+    if (primaryAddress) {
+      setSelectedSearchAddress(primaryAddress.userAddress1);
+    }
+  }, [loggedInUser.address]);
+
   const style = {
     width: "100%",
     maxWidth: 360,
@@ -64,12 +91,12 @@ const Header = ({setSorting}) => {
       <div className={styles.wrapper}>
         <img className={styles.logo} src={logo} alt="Logo" />
         <div className={styles.address}>
-          <p>Delivery</p>
-          <p>
-            {selectedAddress
-              ? `${selectedAddress.unitNumber}, ${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.zipCode}, ${selectedAddress.country}`
-              : "Your Address Here"}
-            <DeliveryAddressDialog onSelect={handleAddressSelect} />
+          <p style={{ textAlign: "justify", whiteSpace: "pre-line" }}>
+            <DeliveryAddressDialog
+              onSelect={handleSearchAddressSelect}
+              onSearchAddressSelect={handleSearchAddressSelect}
+            />
+            {selectedSearchAddress}
           </p>
         </div>
         <div className={styles.search}>
@@ -83,7 +110,11 @@ const Header = ({setSorting}) => {
           <img src={flag} alt="Canada" />
         </div>
         <div>
-          <AccountCircleSharpIcon fontSize="large" onClick={toggleDrawer} sx={{ color: 'white',fontSize: 55 }}/>
+          <AccountCircleSharpIcon
+            fontSize="large"
+            onClick={toggleDrawer}
+            sx={{ color: "white", fontSize: 55 }}
+          />
         </div>
       </div>
       <Drawer
@@ -111,7 +142,11 @@ const Header = ({setSorting}) => {
             />
             <ListItemButton>
               <AccountCircleIcon />
-              <ListItemText primary="View Account" />
+              <ListItemText
+                primary="View Account"
+                style={{ cursor: "pointer" }}
+                onClick={() => openProfile()}
+              />
               <Divider dark />
             </ListItemButton>
             <ListItemButton>
@@ -124,14 +159,14 @@ const Header = ({setSorting}) => {
               <ListItemText primary="Need Help" />
               <Divider dark />
             </ListItemButton>
-              <ListItemButton style={{ marginTop: "500px" }}>
-                <LogoutIcon />
-                <ListItemText
-                  primary="Logout"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleLogout()}
-                />
-              </ListItemButton>
+            <ListItemButton style={{ marginTop: "500px" }}>
+              <LogoutIcon />
+              <ListItemText
+                primary="Logout"
+                style={{ cursor: "pointer" }}
+                onClick={() => handleLogout()}
+              />
+            </ListItemButton>
           </List>
         </div>
       </Drawer>

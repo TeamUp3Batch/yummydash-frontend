@@ -1,0 +1,31 @@
+
+.mapboxgl-ctrl-geocoder input {
+    width: 100%;
+    padding: 10px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
+  }
+  
+  .mapboxgl-ctrl-geocoder-results {
+    max-height: 200px;
+    overflow-y: auto; 
+  }
+  
+  .mapboxgl-ctrl-geocoder-suggestion {
+    padding: 10px; 
+    cursor: pointer; 
+  }
+  
+  .mapboxgl-ctrl-geocoder-suggestion:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder-icon-clear {
+    color: #ff0000;
+  }
+  
+.mapboxgl-ctrl-geocoder.mapboxgl-ctrl .mapboxgl-ctrl-geocoder-icon {
+    background-color: orange;
+  }
+  
+  
