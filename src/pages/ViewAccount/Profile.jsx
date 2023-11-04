@@ -1,8 +1,6 @@
 
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-
-
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
@@ -11,12 +9,11 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
-
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import EditIcon from '@mui/icons-material/EditOutlined';
+import EditLink from '@mui/material/Link';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -69,61 +66,59 @@ const Profile = () => {
   return (
     <React.Fragment>
       <Header />
-      <div className="container">
-        <br />
-        <h1 align="center" > Account Settings</h1>
-        <br />
+        <div  style={{ height: '50%', width: '100%' }}>
+          <br />
+          <h1 align="center" > Account Settings</h1>
+          <br />
         </div>
-        <div class="col-xs-2 col-sm-6 col-md-4 col-lg-5 col-xl-6">
-      <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          textColor="inherit"
-          centered
-        >
-          <Tab label="My Account" {...a11yProps(0)} />
-          <Tab label="Password" {...a11yProps(1)} />
-          <Tab label="Gift Cards" {...a11yProps(2)} />
-          <Tab label="Payment Options" {...a11yProps(3)} />
-          <Tab label="Privacy Control" {...a11yProps(4)} />
-        </Tabs>
-      
-      
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          
-        <span>Profile Full Name: </span>{loggedInUser.firstName.toUpperCase()} <span></span>
-          {loggedInUser.lastName.toUpperCase()}
-          <br />
-          <span>Phone Number: </span> {loggedInUser.phoneNumber}
-          <br />
-          <span>Email: </span> {loggedInUser.email}
-          
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <br />
-          <h3>Reset Your Password</h3>
-          <p>Enter your email address to reset your password. <br />
-          You may need to check your spam folder or unblock <br />
-          support@yummydash.com 
-          </p>
-          <br />
-
-          <TextField id="outlined-basic" label={loggedInUser.email} variant="outlined" /> <br /><br />
-          <Button variant="contained" disableElevation>  Reset Password</Button>
-
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-         <i>Under development!</i> 
-        </TabPanel>
-        <TabPanel value={value} index={3} dir={theme.direction}>
-        <i>Under development!</i> 
-        </TabPanel>
-        <TabPanel value={value} index={4} dir={theme.direction}>
-        <i>Under development!</i> 
-        </TabPanel>
-    </Box>
-
+        
+        <div style={{ height: 500, width: '100%' }}>
+          <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              textColor="inherit"
+              centered
+            >
+              <Tab label="My Account" {...a11yProps(0)} />
+              <Tab label="Password" {...a11yProps(1)} />
+            </Tabs>
+              <TabPanel value={value} index={0} dir={theme.direction} >
+                <div style={{ textAlign: 'center' }}>
+                    <span> Full Name: </span>
+                    <span>{loggedInUser.firstName.toUpperCase()} </span>
+                    <span> {loggedInUser.lastName.toUpperCase()} </span> 
+                    <span> 
+                      <EditIcon color='primary' fontSize='small'></EditIcon>
+                      <EditLink
+                        component="button"
+                        variant="body1"
+                        onClick={() => {
+                          console.info("I'm a button.");
+                        }}
+                    >
+                        Edit Profile
+                      </EditLink>
+                  </span> 
+                    <br />
+                    <span>Phone Number: </span> {loggedInUser.phoneNumber}
+                    <br />
+                    <span>Email: </span> {loggedInUser.email}
+                </div>
+              </TabPanel>
+              <TabPanel value={value} index={1} dir={theme.direction}>
+                <div style={{ textAlign: 'center' }}>
+                  <h3>Reset Your Password</h3>
+                  <p>Enter your email address to reset your password. <br />
+                  You may need to check your spam folder or unblock <br />
+                  support@yummydash.com 
+                  </p>
+                  <br />
+                  <TextField id="outlined-basic" label={loggedInUser.email} variant="outlined" /> <br /><br />
+                  <Button variant="contained" >  Reset Password</Button>
+                </div>
+              </TabPanel>
+          </Box>
       </div>
       <Footer />
     </React.Fragment>
