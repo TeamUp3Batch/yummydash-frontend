@@ -45,6 +45,13 @@
           width: 440px;
           flex-wrap: wrap;
 
+          button {
+            background: none;
+            border: none;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+
           p {
             color: rgb(36, 46, 48);
             font-size: 14px;
@@ -130,8 +137,6 @@
           button:hover .restauranMenu__add_search_tooltip {
             visibility: visible;
           }
-
-
 
           input {
             background-color: rgb(241, 242, 244);

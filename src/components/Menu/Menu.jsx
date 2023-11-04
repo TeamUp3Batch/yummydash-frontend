@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import Modal from './Modal/Modal';
 import Star from '../../icons/star-svgrepo-com.svg';
 import Info from '../../icons/info-circle-svgrepo-com.svg';
 import classes from './menu.module.scss';
 
 const Menu = ({ restaurantDetails }) => {
+  const [modalActive, setModalActive] = useState(false);
+
   if (!restaurantDetails) {
     return (
       <div>
@@ -34,11 +38,11 @@ const Menu = ({ restaurantDetails }) => {
                     {restaurantDetails.estimatedDeliveryTime.maxEstimatedTime} mins
                   </p>
                   <span> | </span>
-                  <a href="#">Service fee apply</a>
+                  <button onClick={() => setModalActive(true)}>Service fee apply</button>
                   <p>$0.99 Delivery Fee</p>
                 </div>
                 <div className={classes.restauranMenu__add_search}>
-                  <button>
+                  <button onClick={() => setModalActive(true)}>
                     <img src={Info} alt="icon info" />
                     <span className={classes.restauranMenu__add_search_tooltip}>More Info</span>
                   </button>
@@ -77,6 +81,8 @@ const Menu = ({ restaurantDetails }) => {
           </div>
         </div>
       </div>
+
+      <Modal active={modalActive} setActive={setModalActive} />
     </div>
   );
 };
