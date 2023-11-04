@@ -1,7 +1,7 @@
-import React from "react";
-import Star from "../../icons/star-svgrepo-com.svg";
-import Info from "../../icons/info-circle-svgrepo-com.svg";
-import classes from "./menu.module.scss";
+import React from 'react';
+import Star from '../../icons/star-svgrepo-com.svg';
+import Info from '../../icons/info-circle-svgrepo-com.svg';
+import classes from './menu.module.scss';
 
 const Menu = ({ restaurantDetails }) => {
   if (!restaurantDetails) {
@@ -18,10 +18,7 @@ const Menu = ({ restaurantDetails }) => {
         <div className={classes.restaurantMenu__wrapper}>
           <div className={classes.restauranMenu__header}>
             <div className={classes.restaurantMenu__photo__wrapper}>
-              <img
-                src={restaurantDetails.restaurantImage}
-                alt={restaurantDetails.name}
-              />
+              <img src={restaurantDetails.restaurantImage} alt={restaurantDetails.name} />
             </div>
             <div className={classes.restauranMenu__text__wrapper}>
               <h1>{restaurantDetails.name}</h1>
@@ -33,7 +30,7 @@ const Menu = ({ restaurantDetails }) => {
                   <p>{restaurantDetails.address.street}</p>
                   <span> | </span>
                   <p>
-                    {restaurantDetails.estimatedDeliveryTime.minEstimatedTime} -{" "}
+                    {restaurantDetails.estimatedDeliveryTime.minEstimatedTime} -{' '}
                     {restaurantDetails.estimatedDeliveryTime.maxEstimatedTime} mins
                   </p>
                   <span> | </span>
@@ -41,7 +38,10 @@ const Menu = ({ restaurantDetails }) => {
                   <p>$0.99 Delivery Fee</p>
                 </div>
                 <div className={classes.restauranMenu__add_search}>
-                  <img src={Info} alt="icon info" />
+                  <button>
+                    <img src={Info} alt="icon info" />
+                    <span className={classes.restauranMenu__add_search_tooltip}>More Info</span>
+                  </button>
                   <input placeholder="Search menu" />
                 </div>
               </div>
@@ -53,8 +53,7 @@ const Menu = ({ restaurantDetails }) => {
               <div className={classes.restauranMenu__main__first}>
                 <h1>Place Settings</h1>
                 <p>
-                  Please list the amount of place settings that you'd like,
-                  along with your order.
+                  Please list the amount of place settings that you'd like, along with your order.
                 </p>
               </div>
               <div className={classes.restauranMenu__main__second}>
@@ -64,10 +63,7 @@ const Menu = ({ restaurantDetails }) => {
             </div>
 
             {restaurantDetails.menu.map((type) => (
-              <button
-                key={type._id}
-                className={classes.restauranMenu__dishes__wrapper}
-              >
+              <button key={type._id} className={classes.restauranMenu__dishes__wrapper}>
                 <div className={classes.restauranMenu__dishes__inside}>
                   <p>Category: {type.category}</p>
                   <div>

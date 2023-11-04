@@ -19,11 +19,13 @@
     .restauranMenu__text__wrapper {
       display: flex;
       flex-direction: column;
-      box-shadow: rgba(23, 32, 38, 0.08) 0px 2px 8px 0px, rgba(23, 32, 38, 0.06) 0px 2px 4px 0px;
+      box-shadow:
+        rgba(23, 32, 38, 0.08) 0px 2px 8px 0px,
+        rgba(23, 32, 38, 0.06) 0px 2px 4px 0px;
       padding: 25px 30px;
       background-color: white;
-      
-    z-index: 3;
+
+      z-index: 3;
 
       h1 {
         font-size: 28px;
@@ -79,18 +81,57 @@
           width: 385px;
           justify-content: space-between;
 
-          img {
-            color: #425457;
-            height: 26px;
-            width: 26px;
-            cursor: pointer;
-            padding: 12px;
+          button {
+            border: none;
+            background: none;
+
+            .restauranMenu__add_search_tooltip {
+              position: absolute;
+              z-index: 1;
+              background-color: black;
+              color: #fff;
+              font-size: 13px;
+              padding: 10px 15px;
+              top: 506px;
+              left: 1093.2px;
+              border-radius: 6px;
+              transition: all 0.25s ease-out;
+              visibility: hidden;
+            }
+
+            .restauranMenu__add_search_tooltip:after {
+              border-left: solid transparent 10px;
+              border-right: solid transparent 10px;
+              transform: rotate(180deg);
+              border-top: solid black 10px;
+              top: -9px;
+              content: ' ';
+              height: 0;
+              left: 50%;
+              margin-left: -11px;
+              position: absolute;
+              width: 0;
+            }
+
+            img {
+              color: #425457;
+              height: 26px;
+              width: 26px;
+              cursor: pointer;
+              padding: 12px;
+            }
+
+            img:hover {
+              background-color: rgb(241, 242, 244);
+              border-radius: 50%;
+            }
           }
 
-          img:hover {
-            background-color: rgb(241, 242, 244);
-            border-radius: 50%;
+          button:hover .restauranMenu__add_search_tooltip {
+            visibility: visible;
           }
+
+
 
           input {
             background-color: rgb(241, 242, 244);
