@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Drawer from "@mui/material/Drawer"; // Import Drawer component
 import { useSelector, useDispatch } from "react-redux";
 import TuneIcon from "@mui/icons-material/Tune";
-import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -20,21 +20,23 @@ import Typography from "@mui/material/Typography";
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
 import { logout } from "../../slices/authSlice";
 
-const Header = ({setSorting}) => {
+const Header = ({ setSorting }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [userName, setUserName] = useState(" ");
   const [selectedSearchAddress, setSelectedSearchAddress] = useState("");
   const [selectedSorting, setSelectedSorting] = useState(null);
-
   const { loggedInUser, error } = useSelector((state) => state.auth);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
-  const Capitalize = (str)=>{
+  const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+  };
+
   const handleLogout = () => {
     try {
       dispatch(logout());
@@ -72,14 +74,11 @@ const Header = ({setSorting}) => {
     maxWidth: 360,
     bgcolor: "background.paper",
   };
-
-  // const handleAddressSelect = (address) => {
-  //   setSelectedAddress(address);
-  // };
-  const handleSorting = (sortData) =>{
+  
+  const handleSorting = (sortData) => {
     setSelectedSorting(sortData);
     setSorting(sortData);
-  }
+  };
 
   return (
     <div className={styles.header}>
@@ -99,7 +98,8 @@ const Header = ({setSorting}) => {
         </div>
         <div className={styles.sort}>
           <SortingDialog onSelect={handleSorting} />
-          <p>Sort</p> <p>{ (selectedSorting) ? 'By '+Capitalize(selectedSorting) : '' }</p>
+          <p>Sort</p>{" "}
+          <p>{selectedSorting ? "By " + Capitalize(selectedSorting) : ""}</p>
         </div>
         <div className={styles.profile}>
           <img src={flag} alt="Canada" />

@@ -121,7 +121,7 @@ const SortingDialog = ({ onSelect }) => {
             >
                 Sort
             </ListItemText>
-            <ListItemText primaryTypographyProps={{ fontSize: "12px" }} style={{'cursor' : 'pointer', 'text-align': 'right'}} onClick={handleClear}>
+            <ListItemText primaryTypographyProps={{ fontSize: "12px" }} style={{'cursor' : 'pointer', 'textAlign': 'right'}} onClick={handleClear}>
               Clear
             </ListItemText>
             </ListItem>
