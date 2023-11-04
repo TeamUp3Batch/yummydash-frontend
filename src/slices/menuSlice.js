@@ -4,12 +4,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const menuSlice = createSlice({
   name: "menu",
   initialState: {
-    menuItems: [],
+    restaurantDetailsArray: [], // Use an array to store restaurant details
     cart: [],
   },
   reducers: {
-    setMenuItemsByRestaurant: (state, action) => {
-      state.menuItems = action.payload;
+    setRestaurantDetailsById: (state, action) => {
+        state.restaurantDetailsArray.push(action.payload);
     },
     addToCart: (state, action) => {
       state.cart.push(action.payload);
@@ -17,6 +17,6 @@ const menuSlice = createSlice({
   },
 });
 
-export const { setMenuItemsByRestaurant, addToCart } = menuSlice.actions;
+export const { setRestaurantDetailsById, addToCart } = menuSlice.actions;
 
 export default menuSlice.reducer;

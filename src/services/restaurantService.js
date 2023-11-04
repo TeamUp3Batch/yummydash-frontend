@@ -24,7 +24,7 @@ export const getRestaurantsByCuisine = async (selectedCuisine, selectedSort) => 
 export const getRestaurantDetailsById = async (selectedId) => {
   const url = `${apiUrl}/api/restaurants/getRestaurantDetailsById/?restaurantId=${selectedId}`;
   try {
-    const result = await axios.post(url);
+    const result = await axios.get(url);
     return result.data;
   } catch (error) {
     throw error;

@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  font-family: 'Arsenal', sans-serif;
+}
+
+.restaurantMenu__wrapper {
+  .restauranMenu__header {
+    top: -379px;
+    position: sticky;
+
+    .restaurantMenu__photo__wrapper {
+      height: 380px;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+    }
+
+    .restauranMenu__text__wrapper {
+      display: flex;
+      flex-direction: column;
+      box-shadow:
+        rgba(23, 32, 38, 0.08) 0px 2px 8px 0px,
+        rgba(23, 32, 38, 0.06) 0px 2px 4px 0px;
+      padding: 25px 30px;
+      background-color: white;
+
+      z-index: 3;
+
+      h1 {
+        font-size: 28px;
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 600;
+        line-height: 36px;
+        letter-spacing: 0;
+        margin-bottom: 8px;
+      }
+
+      .restauranMenu_add_container {
+        display: inline-flex;
+        justify-content: space-between;
+
+        .restauranMenu__add_text {
+          display: inline-flex;
+          width: 440px;
+          flex-wrap: wrap;
+
+          button {
+            background: none;
+            border: none;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+
+          p {
+            color: rgb(36, 46, 48);
+            font-size: 14px;
+            font-family: JETSansDigital, sans-serif;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: 0;
+          }
+
+          img {
+            margin-right: 5px;
+            margin-top: -2px;
+          }
+
+          p:last-child {
+            margin-top: 8px;
+          }
+
+          span {
+            color: rgba(0, 0, 0, 0.08);
+            margin: 0px 8px;
+          }
+
+          a {
+            cursor: pointer;
+            font-size: 14px;
+            color: rgb(60, 76, 79);
+            padding-top: 2px;
+          }
+        }
+
+        .restauranMenu__add_search {
+          display: inline-flex;
+          width: 385px;
+          justify-content: space-between;
+
+          button {
+            border: none;
+            background: none;
+
+            .restauranMenu__add_search_tooltip {
+              position: absolute;
+              z-index: 1;
+              background-color: black;
+              color: #fff;
+              font-size: 13px;
+              padding: 10px 15px;
+              top: 506px;
+              left: 1093.2px;
+              border-radius: 6px;
+              transition: all 0.25s ease-out;
+              visibility: hidden;
+            }
+
+            .restauranMenu__add_search_tooltip:after {
+              border-left: solid transparent 10px;
+              border-right: solid transparent 10px;
+              transform: rotate(180deg);
+              border-top: solid black 10px;
+              top: -9px;
+              content: ' ';
+              height: 0;
+              left: 50%;
+              margin-left: -11px;
+              position: absolute;
+              width: 0;
+            }
+
+            img {
+              color: #425457;
+              height: 26px;
+              width: 26px;
+              cursor: pointer;
+              padding: 12px;
+            }
+
+            img:hover {
+              background-color: rgb(241, 242, 244);
+              border-radius: 50%;
+            }
+          }
+
+          button:hover .restauranMenu__add_search_tooltip {
+            visibility: visible;
+          }
+
+          input {
+            background-color: rgb(241, 242, 244);
+            width: 300px;
+            height: 52px;
+            border-radius: 52px;
+            border: none;
+            padding-left: 13px;
+          }
+
+          input:focus {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+
+  .restauranMenu__main {
+    width: 727px;
+    margin: 30px auto;
+
+    .restauranMenu__main__header {
+      .restauranMenu__main__first {
+        padding: 30px 0px 16px;
+      }
+
+      h1 {
+        color: #242e30;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+      }
+
+      p {
+        color: #425457;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0;
+        margin-top: 4px;
+      }
+    }
+
+    .restauranMenu__dishes__wrapper {
+      width: 727px;
+      text-align: left;
+      background: none;
+      border: none;
+      margin-top: 25px;
+
+      .restauranMenu__dishes__inside {
+        margin: 24px;
+        color: #242e30;
+        letter-spacing: 0;
+
+        h3 {
+          font-size: 16px;
+          font-weight: 501;
+          line-height: 24px;
+          margin-top: 10px;
+        }
+
+        h4 {
+          font-size: 14px;
+          font-weight: 501;
+          line-height: 20px;
+          margin-top: 10px;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 20px;
+          margin-top: 10px;
+        }
+      }
+    }
+
+    .restauranMenu__dishes__wrapper:active,
+    .restauranMenu__dishes__wrapper:focus {
+      border-radius: 8px;
+      box-shadow: rgba(23, 32, 38, 0.15) 1px 1px 8px 6px;
+      cursor: pointer;
+      background-color: rgb(255, 255, 255);
+    }
+
+    .restauranMenu__dishes__wrapper:hover {
+      border-radius: 8px;
+      box-shadow: rgba(23, 32, 38, 0.08) 1px 1px 8px 6px;
+      cursor: pointer;
+      background-color: rgb(255, 255, 255);
+    }
+  }
+}
