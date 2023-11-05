@@ -7,6 +7,11 @@ import classes from './menu.module.scss';
 
 const Menu = ({ restaurantDetails }) => {
   const [modalActive, setModalActive] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  const onChangeSearchValue = (event) => {
+    setSearchValue(event.target.value);
+  };
 
   if (!restaurantDetails) {
     return (
@@ -46,7 +51,11 @@ const Menu = ({ restaurantDetails }) => {
                     <img src={Info} alt="icon info" />
                     <span className={classes.restauranMenu__add_search_tooltip}>More Info</span>
                   </button>
-                  <input placeholder="Search menu" />
+                  <input
+                    onChange={onChangeSearchValue}
+                    value={searchValue}
+                    placeholder="Search menu"
+                  />
                 </div>
               </div>
             </div>
@@ -66,18 +75,20 @@ const Menu = ({ restaurantDetails }) => {
               </div>
             </div>
 
-            {restaurantDetails.menu.map((type) => (
-              <button key={type._id} className={classes.restauranMenu__dishes__wrapper}>
-                <div className={classes.restauranMenu__dishes__inside}>
-                  <p>Category: {type.category}</p>
-                  <div>
-                    <h3>{type.name}</h3>
-                    <p>{type.description}</p>
-                    <h4>${type.price}</h4>
+            {restaurantDetails.menu
+              .filter((type) => type.name.toLowerCase().includes(searchValue.toLowerCase()))
+              .map((type) => (
+                <button key={type._id} className={classes.restauranMenu__dishes__wrapper}>
+                  <div className={classes.restauranMenu__dishes__inside}>
+                    <p>Category: {type.category}</p>
+                    <div>
+                      <h3>{type.name}</h3>
+                      <p>{type.description}</p>
+                      <h4>${type.price}</h4>
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              ))}
           </div>
         </div>
       </div>
