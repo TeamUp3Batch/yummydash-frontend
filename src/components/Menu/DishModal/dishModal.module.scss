@@ -1,0 +1,121 @@
+* {
+  font-family: 'Arsenal', sans-serif;
+}
+
+.dishModal {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.dishModal__active {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 25;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: all;
+
+  .dishModal__wrapper {
+    background-color: #fff;
+    width: 583px;
+    border-radius: 5px;
+    box-shadow:
+      0 2px 4px 0 rgba(0, 0, 0, 0.2),
+      0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+    .dishModal__wrapper__inside {
+      padding: 8px;
+      .dishModal__inside__header {
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 8px;
+        }
+
+        button:hover {
+          background-color: rgb(241, 242, 244);
+          border-radius: 50%;
+        }
+      }
+
+      .dishModal__inside__main {
+        padding: 32px 24px;
+
+        h4 {
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 28px;
+          letter-spacing: 0;
+        }
+
+        .dishModal__inside__count {
+          margin-top: 32px;
+          display: flex;
+          justify-content: center;
+
+          .count {
+            width: 126px;
+            height: 27px;
+            padding: 16px;
+            border: 1px solid rgb(245, 243, 241);
+            border-radius: 60px;
+            display: flex;
+            justify-content: space-between;
+
+            button {
+              background: none;
+              border: none;
+              cursor: pointer;
+            }
+          }
+        }
+
+        p {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0;
+          margin-top: 32px;
+        }
+      }
+
+      .dishModal__inside__footer {
+        padding: 16px;
+
+        button {
+          width: 100%;
+          padding: 0 30px;
+          min-height: 60px;
+          display: flex;
+          flex-wrap: wrap;
+          align-content: center;
+          border-radius: 50em;
+          border: none;
+          background-color: #242e30;
+          p {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+          }
+          p:first-child {
+            flex-basis: 87%;
+          }
+
+          p:last-child {
+            flex-basis: 13%;
+          }
+        }
+      }
+    }
+  }
+}
