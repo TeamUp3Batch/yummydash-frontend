@@ -14,13 +14,20 @@ export function useAddToCartHooks(restaurantId, menuItem) {
 
   useEffect(() => {
     if (selectCartId !== null) {
+      
       console.log("here we go",selectCartId)
       console.log("cart.menuitems",cart.menuItems)
+      console.log("menuitem",menuItem)
       const cartItem = cart.menuItems.find((item) => {
         console.log("item.menuId:", item.itemId); 
+        console.log("item.menuId2:", menuItem._id); 
         return item.itemId === menuItem._id;
       });
       console.log("cartItem",cartItem)
+      
+      if(cartItem === undefined || cartItem === null){
+        setCount(1);
+      }
       if (cartItem) {
         console.log("give me count",cartItem.quantity)
         setCount(cartItem.quantity);
@@ -73,10 +80,11 @@ export function useAddToCartHooks(restaurantId, menuItem) {
     }
   };
 
+
   return {
     count,
     increment,
     decrement,
-    addedToCart,
+    addedToCart
   };
 }

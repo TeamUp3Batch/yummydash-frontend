@@ -6,6 +6,7 @@ const menuSlice = createSlice({
   initialState: {
     cart: null,
     cartId: null,
+    checkout: null,
   },
   reducers: {
     addToCart: (state, action) => {
@@ -29,10 +30,13 @@ const menuSlice = createSlice({
         }
       }
     },
+    checkout:(state,action)=>{
+      state.checkout = action.payload;
+    },
   },
 });
 
-export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity  } =
+export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout  } =
   menuSlice.actions;
 
 export default menuSlice.reducer;

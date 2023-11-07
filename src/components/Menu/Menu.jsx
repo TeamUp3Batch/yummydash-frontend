@@ -8,11 +8,13 @@ import Info from "../../icons/info-circle-svgrepo-com.svg";
 import Close from "../../icons/icons8-close.svg";
 import emptyCart from "../../icons/icons8-food-bag-100.png";
 import classes from "./menu.module.scss";
-
-import { useDispatch, useSelector } from "react-redux";
+import { useCheckoutHooks } from "./hooks/useCheckoutHooks";
+import { useSelector } from "react-redux";
 
 const Menu = ({ restaurantDetails }) => {
+  console.log("rest",restaurantDetails)
   const cart = useSelector((state) => state.menu.cart); // Get the cart from the Redux store
+  const { proceedCheckout } = useCheckoutHooks(restaurantDetails);
   const [modalActive, setModalActive] = useState(false);
   const [dishModalActive, setDishModalActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -162,7 +164,12 @@ const Menu = ({ restaurantDetails }) => {
                     </div>
                   ))
                 ) : (
-                  <p>Your cart is empty</p> // Display a message when the cart is empty
+                  <div className={classes.checkout__empty}>
+                    <img src={emptyCart} alt="Empty Cart" />
+                    <h3>
+                      Start adding items from the menu to build your order.
+                    </h3>
+                  </div> // Display a message when the cart is empty
                 )}
                 {/* <div className={classes.checkout__itemRow}>
                   <div
@@ -178,20 +185,18 @@ const Menu = ({ restaurantDetails }) => {
                     <img src={Close} alt="Close" />
                   </button>
                 </div> */}
-
-                <div className={classes.checkout__total}>
-                  <div className={classes.checkout__total__header}>
-                    <h4>Food & Beverage Subtotal</h4>
-                    {cart ? (
-                      <h4>${cart.total}</h4> // Display total price if cart exists
-                    ) : (
-                      <h4>$0</h4> // Display $0 if cart is not defined
-                    )}
+                {cart ? (
+                  <div className={classes.checkout__total}>
+                    <div className={classes.checkout__total__header}>
+                      <h4>Food & Beverage Subtotal</h4>
+                      <h4>${cart.total}</h4>
+                    </div>
+                    <button onClick={() => proceedCheckout()}>
+                      {/* //onClick={() => proceedCheckout()} */}
+                      <h3>Checkout</h3>
+                    </button>
                   </div>
-                  <button>
-                    <h3>Checkout</h3>
-                  </button>
-                </div>
+                ) : null}
               </div>
             </div>
           </div>
