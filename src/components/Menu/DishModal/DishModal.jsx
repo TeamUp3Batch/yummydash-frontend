@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-
+import { useDispatch, useSelector } from "react-redux";
 import CloseIcon from '../../../icons/icons8-close.svg';
 import PlusIcon from '../../../icons/icons8-plus-25.png';
 import MinusIcon from '../../../icons/icons8-minus-25.png';
 import classes from './dishModal.module.scss';
+import { useAddToCartHooks } from '../hooks/useAddCartHooks';
 
-const DishModal = ({ active, setActive, type }) => {
-  const [count, setCount] = useState(1);
+const DishModal = ({ active, setActive, restaurantId, menuItem }) => {
+  const { count, plus, minus, addedToCart } = useAddToCartHooks(restaurantId, menuItem);
+  const [yourOrder, setYourOrder] = useState([]);
 
-  const plus = () => {
-    setCount(count + 1);
-  };
+  // Define the function to add to your order
+  const addToYourOrder = () => {
+    setYourOrder([...yourOrder, menuItem]);
+    console.log('your order ***', yourOrder);
+  }
 
-  const minus = () => {
-    count > 1 ? setCount(count - 1) : setCount(count);
-  };
   return (
     <div className={active ? classes.dishModal__active : classes.dishModal}>
       <div className={classes.dishModal__wrapper}>
@@ -25,8 +26,8 @@ const DishModal = ({ active, setActive, type }) => {
             </button>
           </div>
           <div className={classes.dishModal__inside__main}>
-            <h4>Name of Dishes</h4>
-            <p>description</p>
+            <h4>{menuItem ? menuItem.name : 'Name'}</h4>
+            <p>{menuItem ? menuItem.description : 'Description'}</p>
             <div className={classes.dishModal__inside__count}>
               <div className={classes.count}>
                 <button onClick={minus}>
@@ -38,13 +39,12 @@ const DishModal = ({ active, setActive, type }) => {
                 </button>
               </div>
             </div>
-            <p>Send Menu Feedback</p>
           </div>
           <div className={classes.dishModal__inside__footer}>
             <div className={classes.dishModal__footer__button}>
-              <button>
+              <button onClick={addToYourOrder}>
                 <p>Add To Cart</p>
-                <p>$ {(count * 15.74).toFixed(2)}</p>
+                <p>$ {(count * (menuItem ? menuItem.price : 0))}</p>
               </button>
             </div>
           </div>
