@@ -16,10 +16,14 @@ const restaurantSlice = createSlice({
     },
     setAllCuisines: (state,action) => {
       state.cuisines = action.payload;
+    },
+    resetRestaurantState: (state) => {
+      state.restaurants = [];
+      state.cuisines = [];
     }
   },
 });
 
-export const { setRestaurantsByCuisine, setRestaurantsNearYou, setAllCuisines } = restaurantSlice.actions;
+export const { setRestaurantsByCuisine, setRestaurantsNearYou, setAllCuisines, resetRestaurantState } = restaurantSlice.actions;
 
 export default restaurantSlice.reducer;
