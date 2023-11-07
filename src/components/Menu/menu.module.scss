@@ -164,79 +164,188 @@
   }
 
   .restauranMenu__main {
-    width: 727px;
-    margin: 30px auto;
+    display: flex;
+    flex-direction: row;
+    height: 600px;
 
-    .restauranMenu__main__header {
-      .restauranMenu__main__first {
-        padding: 30px 0px 16px;
-      }
-
-      h1 {
-        color: #242e30;
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 28px;
-      }
-
-      p {
-        color: #425457;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        letter-spacing: 0;
-        margin-top: 4px;
-      }
+    .empty {
+      overflow: hidden;
+      width: 20%;
     }
 
-    .restauranMenu__dishes__wrapper {
-      width: 727px;
-      text-align: left;
-      background: none;
-      border: none;
-      margin-top: 25px;
-
-      .restauranMenu__dishes__inside {
-        margin: 24px;
-        color: #242e30;
-        letter-spacing: 0;
-
-        h3 {
-          font-size: 16px;
-          font-weight: 501;
-          line-height: 24px;
-          margin-top: 10px;
+    .restauranMenu__main__wrapper {
+      width: 51%;
+      margin: 30px auto;
+      padding-left: 25px;
+      padding-bottom: 25px;
+      overflow: hidden;
+      overflow: scroll;
+      overflow-x: hidden;
+      .restauranMenu__main__header {
+        .restauranMenu__main__first {
+          padding: 30px 0px 16px;
         }
 
-        h4 {
-          font-size: 14px;
-          font-weight: 501;
-          line-height: 20px;
-          margin-top: 10px;
+        h1 {
+          color: #242e30;
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 28px;
         }
 
         p {
+          color: #425457;
           font-size: 14px;
-          font-weight: 500;
+          font-weight: 400;
           line-height: 20px;
-          margin-top: 10px;
+          letter-spacing: 0;
+          margin-top: 4px;
         }
+      }
+
+      .restauranMenu__dishes__wrapper {
+        width: 727px;
+        text-align: left;
+        background: none;
+        border: none;
+        margin-top: 25px;
+
+        .restauranMenu__dishes__inside {
+          margin: 24px;
+          color: #242e30;
+          letter-spacing: 0;
+
+          h3 {
+            font-size: 16px;
+            font-weight: 501;
+            line-height: 24px;
+            margin-top: 10px;
+          }
+
+          h4 {
+            font-size: 14px;
+            font-weight: 501;
+            line-height: 20px;
+            margin-top: 10px;
+          }
+
+          p {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            margin-top: 10px;
+          }
+        }
+      }
+
+      .restauranMenu__dishes__wrapper:active,
+      .restauranMenu__dishes__wrapper:focus {
+        border-radius: 8px;
+        box-shadow: rgba(23, 32, 38, 0.15) 1px 1px 8px 6px;
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
+      }
+
+      .restauranMenu__dishes__wrapper:hover {
+        border-radius: 8px;
+        box-shadow: rgba(23, 32, 38, 0.08) 1px 1px 8px 6px;
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
       }
     }
 
-    .restauranMenu__dishes__wrapper:active,
-    .restauranMenu__dishes__wrapper:focus {
-      border-radius: 8px;
-      box-shadow: rgba(23, 32, 38, 0.15) 1px 1px 8px 6px;
-      cursor: pointer;
-      background-color: rgb(255, 255, 255);
-    }
+    .restaurantMenu__checkout {
+      width: 29%;
+      margin: 100px auto;
+      overflow: hidden;
+      overflow: scroll;
+      overflow-x: hidden;
 
-    .restauranMenu__dishes__wrapper:hover {
-      border-radius: 8px;
-      box-shadow: rgba(23, 32, 38, 0.08) 1px 1px 8px 6px;
-      cursor: pointer;
-      background-color: rgb(255, 255, 255);
+      .checkout__empty {
+        margin: 100px 68px;
+        text-align: center;
+
+        h3 {
+          padding-top: 25px;
+          color: #425457;
+          font-family: 'Arsenal', sans-serif;
+        }
+      }
+
+      .checkout__cart {
+        h3 {
+          margin-left: 25px;
+          margin-bottom: 25px;
+        }
+        .checkout__itemRow {
+          display: flex;
+          flex-direction: row;
+          cursor: pointer;
+
+          border-top: 1px solid rgb(245, 243, 241);
+          border-bottom: 1px solid rgb(245, 243, 241);
+
+          .checkout__item {
+            display: flex;
+            flex-direction: row;
+            margin-left: 25px;
+            padding: 12px 0;
+            align-items: start;
+
+            .checkout__cart__quantity {
+              width: 25px;
+            }
+
+            .checkout__cart__name {
+              width: 263px;
+            }
+
+            .checkout__cart__price {
+              width: 62px;
+            }
+          }
+
+          button {
+            background: none;
+            border: none;
+            cursor: pointer;
+
+            img {
+              widows: 16px;
+              height: 16px;
+            }
+          }
+        }
+
+        .checkout__total {
+          box-shadow:
+            0 2px 4px 0 rgba(0, 0, 0, 0.2),
+            0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+          width: 375px;
+          margin: 100px 10px 10px 10px;
+          padding: 16px;
+
+          .checkout__total__header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          }
+
+          button {
+            background-color: #f36805;
+            color: #fff;
+            border: none;
+            border-radius: 50em;
+            margin-top: 36px;
+
+            h3 {
+              padding: 22px 148px;
+              margin: 0;
+            }
+          }
+        }
+      }
     }
   }
 }
