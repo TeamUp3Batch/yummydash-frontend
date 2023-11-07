@@ -5,6 +5,8 @@ import DishModal from './DishModal/DishModal';
 
 import Star from '../../icons/star-svgrepo-com.svg';
 import Info from '../../icons/info-circle-svgrepo-com.svg';
+import Close from '../../icons/icons8-close.svg';
+import emptyCart from '../../icons/icons8-food-bag-100.png';
 import classes from './menu.module.scss';
 
 const Menu = ({ restaurantDetails }) => {
@@ -65,39 +67,87 @@ const Menu = ({ restaurantDetails }) => {
           </div>
 
           <div className={classes.restauranMenu__main}>
-            <div className={classes.restauranMenu__main__header}>
-              <div className={classes.restauranMenu__main__first}>
-                <h1>Place Settings</h1>
-                <p>
-                  Please list the amount of place settings that you'd like, along with your order.
-                </p>
+            <div className={classes.empty}>
+              <Modal active={modalActive} setActive={setModalActive} />
+              <DishModal active={dishModalActive} setActive={setDishModalActive} />
+            </div>
+            <div className={classes.restauranMenu__main__wrapper}>
+              <div className={classes.restauranMenu__main__header}>
+                <div className={classes.restauranMenu__main__first}>
+                  <h1>Place Settings</h1>
+                  <p>
+                    Please list the amount of place settings that you'd like, along with your order.
+                  </p>
+                </div>
+                <div className={classes.restauranMenu__main__second}>
+                  <h1>Popular Items</h1>
+                  <p>Check out the most popular items on the menu.</p>
+                </div>
               </div>
-              <div className={classes.restauranMenu__main__second}>
-                <h1>Popular Items</h1>
-                <p>Check out the most popular items on the menu.</p>
+
+              {restaurantDetails.menu
+                .filter((type) => type.name.toLowerCase().includes(searchValue.toLowerCase()))
+                .map((type) => (
+                  <button
+                    key={type._id}
+                    className={classes.restauranMenu__dishes__wrapper}
+                    onClick={() => setDishModalActive(true)}>
+                    <div className={classes.restauranMenu__dishes__inside}>
+                      <p>Category: {type.category}</p>
+                      <div>
+                        <h3>{type.name}</h3>
+                        <p>{type.description}</p>
+                        <h4>${type.price}</h4>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+            </div>
+            <div className={classes.restaurantMenu__checkout}>
+              {/* <div className={classes.checkout__empty}>
+                <img src={emptyCart} alt="Empty Cart" />
+                <h3>Start adding items from the menu to build your order.</h3>
+              </div> */}
+
+              <div className={classes.checkout__cart}>
+                <h3>Your order</h3>
+                <div className={classes.checkout__itemRow}>
+                  <div className={classes.checkout__item} onClick={() => setDishModalActive(true)}>
+                    <p className={classes.checkout__cart__quantity}>5</p>
+                    <p className={classes.checkout__cart__name}>Coca-Cola</p>
+                    <p className={classes.checkout__cart__price}>$25</p>
+                  </div>
+
+                  <button>
+                    <img src={Close} alt="Close" />
+                  </button>
+                </div>
+                <div className={classes.checkout__itemRow}>
+                  <div className={classes.checkout__item} onClick={() => setDishModalActive(true)}>
+                    <p className={classes.checkout__cart__quantity}>5</p>
+                    <p className={classes.checkout__cart__name}>Coca-Cola</p>
+                    <p className={classes.checkout__cart__price}>$25</p>
+                  </div>
+
+                  <button>
+                    <img src={Close} alt="Close" />
+                  </button>
+                </div>
+
+                <div className={classes.checkout__total}>
+                  <div className={classes.checkout__total__header}>
+                    <h4>Food & Beverage Subtotal</h4>
+                    <h4>$25</h4>
+                  </div>
+                  <button>
+                    <h3>Checkout</h3>
+                  </button>
+                </div>
               </div>
             </div>
-
-            {restaurantDetails.menu
-              .filter((type) => type.name.toLowerCase().includes(searchValue.toLowerCase()))
-              .map((type) => (
-                <button key={type._id} className={classes.restauranMenu__dishes__wrapper} onClick={() => setDishModalActive(true)}>
-                  <div className={classes.restauranMenu__dishes__inside}>
-                    <p>Category: {type.category}</p>
-                    <div>
-                      <h3>{type.name}</h3>
-                      <p>{type.description}</p>
-                      <h4>${type.price}</h4>
-                    </div>
-                  </div>
-                </button>
-              ))}
           </div>
         </div>
       </div>
-
-      <Modal active={modalActive} setActive={setModalActive} />
-      <DishModal active={dishModalActive} setActive={setDishModalActive} />
     </div>
   );
 };
