@@ -12,20 +12,27 @@ const menuSlice = createSlice({
       state.cart = action.payload;
     },
     setCartId: (state, action) => {
-      state.cartId= action.payload;
+      state.cartId = action.payload;
     },
-    removeFromCart: (state, action) => {
-      state.cart.menuItems = state.cart.menuItems.filter(item => item._id !== action.payload._id);
-    },
-    resetMenuState :(state) => {
+    resetMenuState: (state) => {
       state.cart = null;
       state.cartId = null;
-
-    }
-
+    },
+    updateCartItemQuantity: (state, action) => {
+      const { menuId, quantity } = action.payload;
+      if (state.cart && state.cart.menuItems) {
+        const cartItem = state.cart.menuItems.find(
+          (item) => item.menuId === menuId
+        );
+        if (cartItem) {
+          cartItem.quantity = quantity;
+        }
+      }
+    },
   },
 });
 
-export const { addToCart, setCartId, removeFromCart, resetMenuState  } = menuSlice.actions;
+export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity  } =
+  menuSlice.actions;
 
 export default menuSlice.reducer;

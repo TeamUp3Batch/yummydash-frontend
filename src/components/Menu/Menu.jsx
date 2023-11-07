@@ -9,7 +9,10 @@ import Close from "../../icons/icons8-close.svg";
 import emptyCart from "../../icons/icons8-food-bag-100.png";
 import classes from "./menu.module.scss";
 
+import { useDispatch, useSelector } from "react-redux";
+
 const Menu = ({ restaurantDetails }) => {
+  const cart = useSelector((state) => state.menu.cart); // Get the cart from the Redux store
   const [modalActive, setModalActive] = useState(false);
   const [dishModalActive, setDishModalActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -88,7 +91,7 @@ const Menu = ({ restaurantDetails }) => {
                 active={dishModalActive}
                 setActive={setDishModalActive}
                 restaurantId={restaurantDetails._id}
-                menuItem={selectedMenuItem} 
+                menuItem={selectedMenuItem}
               />
             </div>
             <div className={classes.restauranMenu__main__wrapper}>
@@ -135,7 +138,33 @@ const Menu = ({ restaurantDetails }) => {
 
               <div className={classes.checkout__cart}>
                 <h3>Your order</h3>
-                <div className={classes.checkout__itemRow}>
+                {cart ? (
+                  cart.menuItems.map((cartItem) => (
+                    <div className={classes.checkout__itemRow}>
+                      <div
+                        className={classes.checkout__item}
+                        onClick={() => setDishModalActive(true)}
+                      >
+                        <p className={classes.checkout__cart__quantity}>
+                          {cartItem.quantity}
+                        </p>
+                        <p className={classes.checkout__cart__name}>
+                          {cartItem.name}
+                        </p>
+                        <p className={classes.checkout__cart__price}>
+                          {cartItem.price}
+                        </p>
+                      </div>
+
+                      <button>
+                        <img src={Close} alt="Close" />
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>Your cart is empty</p> // Display a message when the cart is empty
+                )}
+                {/* <div className={classes.checkout__itemRow}>
                   <div
                     className={classes.checkout__item}
                     onClick={() => setDishModalActive(true)}
@@ -148,26 +177,16 @@ const Menu = ({ restaurantDetails }) => {
                   <button>
                     <img src={Close} alt="Close" />
                   </button>
-                </div>
-                <div className={classes.checkout__itemRow}>
-                  <div
-                    className={classes.checkout__item}
-                    onClick={() => setDishModalActive(true)}
-                  >
-                    <p className={classes.checkout__cart__quantity}>5</p>
-                    <p className={classes.checkout__cart__name}>Coca-Cola</p>
-                    <p className={classes.checkout__cart__price}>$25</p>
-                  </div>
-
-                  <button>
-                    <img src={Close} alt="Close" />
-                  </button>
-                </div>
+                </div> */}
 
                 <div className={classes.checkout__total}>
                   <div className={classes.checkout__total__header}>
                     <h4>Food & Beverage Subtotal</h4>
-                    <h4>$25</h4>
+                    {cart ? (
+                      <h4>${cart.total}</h4> // Display total price if cart exists
+                    ) : (
+                      <h4>$0</h4> // Display $0 if cart is not defined
+                    )}
                   </div>
                   <button>
                     <h3>Checkout</h3>
