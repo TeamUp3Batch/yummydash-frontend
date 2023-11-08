@@ -8,6 +8,9 @@ import Info from "../../icons/info-circle-svgrepo-com.svg";
 import Close from "../../icons/icons8-close.svg";
 import emptyCart from "../../icons/icons8-food-bag-100.png";
 import classes from "./menu.module.scss";
+import { removeCart } from "../../slices/menuSlice";
+import { deleteCart } from "../../services/cartService";
+
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,6 +20,7 @@ const Menu = ({ restaurantDetails }) => {
   const [dishModalActive, setDishModalActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [selectedMenuItem, setSelectedMenuItem] = useState(null);
+  const dispatch = useDispatch();
 
   const onChangeSearchValue = (event) => {
     setSearchValue(event.target.value);
@@ -26,6 +30,27 @@ const Menu = ({ restaurantDetails }) => {
   const handleMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
     setDishModalActive(true);
+  };
+
+  // Handle close button click to remove item from the cart
+  const handleRemoveItemFromCart = async (item) => {
+    const foundMenuItem = cart.menuItems.find(
+      (element) => element.itemId === item.itemId
+    );
+    const cartId = cart._id;
+    const removeCartDetials  = {
+      cartId : cartId,
+      menuId : foundMenuItem.itemId
+    }
+    const response = await deleteCart(removeCartDetials);
+    if (response.status === 201) {
+      if (response.data.cart === undefined) {
+        dispatch(removeCart(null));
+      } else {
+        dispatch(removeCart(response.data.cart));
+      }
+      
+    }
   };
 
   if (!restaurantDetails) {
@@ -141,10 +166,7 @@ const Menu = ({ restaurantDetails }) => {
                 {cart ? (
                   cart.menuItems.map((cartItem) => (
                     <div className={classes.checkout__itemRow}>
-                      <div
-                        className={classes.checkout__item}
-                        onClick={() => setDishModalActive(true)}
-                      >
+                      <div className={classes.checkout__item}>
                         <p className={classes.checkout__cart__quantity}>
                           {cartItem.quantity}
                         </p>
@@ -156,7 +178,9 @@ const Menu = ({ restaurantDetails }) => {
                         </p>
                       </div>
 
-                      <button>
+                      <button
+                        onClick={() => handleRemoveItemFromCart(cartItem)}
+                      >
                         <img src={Close} alt="Close" />
                       </button>
                     </div>
