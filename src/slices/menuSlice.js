@@ -29,10 +29,19 @@ const menuSlice = createSlice({
         }
       }
     },
+    removeCart:(state, action) => {
+      state.cart = action.payload;
+    }
+   
   },
 });
 
-export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity  } =
-  menuSlice.actions;
+export const {
+  addToCart,
+  setCartId,
+  resetMenuState,
+  updateCartItemQuantity,
+  removeCart,
+} = menuSlice.actions;
 
 export default menuSlice.reducer;
