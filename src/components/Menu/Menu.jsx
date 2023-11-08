@@ -10,6 +10,7 @@ import emptyCart from "../../icons/icons8-food-bag-100.png";
 import classes from "./menu.module.scss";
 import { removeCart } from "../../slices/menuSlice";
 import { deleteCart } from "../../services/cartService";
+import { setCartId } from "../../slices/menuSlice";
 
 
 import { useDispatch, useSelector } from "react-redux";
@@ -46,8 +47,10 @@ const Menu = ({ restaurantDetails }) => {
     if (response.status === 201) {
       if (response.data.cart === undefined) {
         dispatch(removeCart(null));
+        dispatch(setCartId(null));
       } else {
         dispatch(removeCart(response.data.cart));
+        
       }
       
     }
