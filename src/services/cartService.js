@@ -32,3 +32,13 @@ export const addToCartItem = async (data) => {
       throw error;
     }
   }
+
+  export const deleteCart = async (data) => {
+    const url = `${apiUrl}/api/cart/removeItemOrRemoveCart`;
+    try {
+      const result = await axios.post(url, data);
+      return result; 
+    } catch (error) {
+      throw error;
+    }
+  }
