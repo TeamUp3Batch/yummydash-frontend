@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const DishModal = ({ active, setActive, restaurantId, menuItem }) => {
   const { count, increment, decrement, addedToCart } = useAddToCartHooks(restaurantId, menuItem);
-  const [yourOrder, setYourOrder] = useState([]);
 
 
   return (
