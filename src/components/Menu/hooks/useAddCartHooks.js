@@ -10,6 +10,7 @@ export function useAddToCartHooks(restaurantId, menuItem) {
   const selectCartId = useSelector((state) => state.menu.cartId);
   const cart = useSelector((state) => state.menu.cart);
   const dispatch = useDispatch();
+  console.log("selectCartId", selectCartId)
   
 
   useEffect(() => {
@@ -59,10 +60,8 @@ export function useAddToCartHooks(restaurantId, menuItem) {
           cartId: null,
         };
       }
-      
 
       const result = await updateCartItem(cartDetails);
-      console.log("result", result.data)
       dispatch(addToCart(result.data));
       dispatch(setCartId(result.data._id));
       dispatch(updateCartItemQuantity({ menuId: menuItem._id, quantity: count })); // Update item count
