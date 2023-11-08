@@ -8,22 +8,20 @@ export function useAddToCartHooks(restaurantId, menuItem) {
   const [count, setCount] = useState(1);
   const { loggedInUser } = useSelector((state) => state.auth);
   const selectCartId = useSelector((state) => state.menu.cartId);
-  const cart = useSelector((state) => state.menu.cart); // Get the cart from the Redux store
+  const cart = useSelector((state) => state.menu.cart);
   const dispatch = useDispatch();
-  console.log("selectCartId", selectCartId);
+  
 
   useEffect(() => {
     if (selectCartId !== null) {
-      console.log("here we go",selectCartId)
-      console.log("cart.menuitems",cart.menuItems)
-      const cartItem = cart.menuItems.find((item) => {
-        console.log("item.menuId:", item.itemId); 
+      const cartItem = cart?.menuItems?.find((item) => {
         return item.itemId === menuItem._id;
       });
-      console.log("cartItem",cartItem)
       if (cartItem) {
-        console.log("give me count",cartItem.quantity)
         setCount(cartItem.quantity);
+      }
+      if(cartItem === undefined || cartItem === null){
+        setCount(1);
       }
     }
   }, [selectCartId, cart, menuItem]);
@@ -31,13 +29,12 @@ export function useAddToCartHooks(restaurantId, menuItem) {
   // Function to increment the count
   const increment = () => {
     setCount(count + 1);
-    console.log("incremented code",count)
+
   };
 
   const decrement = () => {
     if (count > 1) {
       setCount(count - 1);
-      console.log("decremented",count)
     }
   };
 
@@ -62,9 +59,10 @@ export function useAddToCartHooks(restaurantId, menuItem) {
           cartId: null,
         };
       }
-      console.log("cartdetails",cartDetails)
+      
 
       const result = await updateCartItem(cartDetails);
+      console.log("result", result.data)
       dispatch(addToCart(result.data));
       dispatch(setCartId(result.data._id));
       dispatch(updateCartItemQuantity({ menuId: menuItem._id, quantity: count })); // Update item count
