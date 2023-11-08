@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
-
 import CloseIcon from '../../../icons/icons8-close.svg';
 import PlusIcon from '../../../icons/icons8-plus-25.png';
 import MinusIcon from '../../../icons/icons8-minus-25.png';
 import classes from './dishModal.module.scss';
+import { useAddToCartHooks } from '../hooks/useAddCartHooks';
+import { useDispatch, useSelector } from "react-redux";
 
-const DishModal = ({ active, setActive, type }) => {
-  const [count, setCount] = useState(1);
 
-  const plus = () => {
-    setCount(count + 1);
-  };
 
-  const minus = () => {
-    count > 1 ? setCount(count - 1) : setCount(count);
-  };
+const DishModal = ({ active, setActive, restaurantId, menuItem }) => {
+  const { count, increment, decrement, addedToCart } = useAddToCartHooks(restaurantId, menuItem);
+
+
   return (
     <div className={active ? classes.dishModal__active : classes.dishModal}>
       <div className={classes.dishModal__wrapper}>
@@ -25,26 +22,25 @@ const DishModal = ({ active, setActive, type }) => {
             </button>
           </div>
           <div className={classes.dishModal__inside__main}>
-            <h4>Name of Dishes</h4>
-            <p>description</p>
+            <h4>{menuItem ? menuItem.name : 'Name'}</h4>
+            <p>{menuItem ? menuItem.description : 'Description'}</p>
             <div className={classes.dishModal__inside__count}>
-              <div className={classes.count}>
-                <button onClick={minus}>
+              <div className={classes.counting}>
+                <button onClick={decrement}>
                   <img src={MinusIcon} alt="Minus" />
                 </button>
                 <h2>{count}</h2>
-                <button onClick={plus}>
+                <button onClick={increment}>
                   <img src={PlusIcon} alt="Plus" />
                 </button>
               </div>
             </div>
-            <p>Send Menu Feedback</p>
           </div>
           <div className={classes.dishModal__inside__footer}>
             <div className={classes.dishModal__footer__button}>
-              <button>
+              <button onClick={addedToCart}>
                 <p>Add To Cart</p>
-                <p>$ {(count * 15.74).toFixed(2)}</p>
+                <p>$ {(count * (menuItem ? menuItem.price : 0))}</p>
               </button>
             </div>
           </div>

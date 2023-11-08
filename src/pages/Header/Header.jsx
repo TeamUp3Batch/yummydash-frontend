@@ -19,6 +19,8 @@ import SortingDialog from "../../components/SortingDialog/SortingDialog";
 import Typography from "@mui/material/Typography";
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
 import { logout } from "../../slices/authSlice";
+import { resetMenuState } from "../../slices/menuSlice";
+import { resetRestaurantState } from "../../slices/restaurantSlice";
 
 const Header = ({ setSorting }) => {
   const dispatch = useDispatch();
@@ -39,6 +41,8 @@ const Header = ({ setSorting }) => {
 
   const handleLogout = () => {
     try {
+      dispatch(resetMenuState());
+      dispatch(resetRestaurantState());
       dispatch(logout());
       navigate("/");
     } catch (error) {
