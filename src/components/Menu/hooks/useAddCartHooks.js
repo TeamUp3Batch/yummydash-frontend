@@ -16,7 +16,7 @@ export function useAddToCartHooks(restaurantId, menuItem) {
   useEffect(() => {
     if (selectCartId !== null) {
       const cartItem = cart?.menuItems?.find((item) => {
-        return item.itemId === menuItem._id;
+        return item.itemId === menuItem?._id;
       });
       if (cartItem) {
         setCount(cartItem.quantity);
