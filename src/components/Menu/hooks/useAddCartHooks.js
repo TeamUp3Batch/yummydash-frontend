@@ -10,7 +10,7 @@ export function useAddToCartHooks(restaurantId, menuItem) {
   const selectCartId = useSelector((state) => state.menu.cartId);
   const cart = useSelector((state) => state.menu.cart);
   const dispatch = useDispatch();
-  console.log("selectCartId", selectCartId)
+ 
   
 
   useEffect(() => {
