@@ -1,26 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Modal from "./Modal/Modal";
-import DishModal from "./DishModal/DishModal";
+import Modal from './Modal/Modal';
+import DishModal from './DishModal/DishModal';
 
-import Star from "../../icons/star-svgrepo-com.svg";
-import Info from "../../icons/info-circle-svgrepo-com.svg";
-import Close from "../../icons/icons8-close.svg";
-import emptyCart from "../../icons/icons8-food-bag-100.png";
-import classes from "./menu.module.scss";
-import { removeCart } from "../../slices/menuSlice";
-import { deleteCart } from "../../services/cartService";
-import { setCartId } from "../../slices/menuSlice";
+import Star from '../../icons/star-svgrepo-com.svg';
+import Info from '../../icons/info-circle-svgrepo-com.svg';
+import Close from '../../icons/icons8-close.svg';
+import emptyCart from '../../icons/icons8-food-bag-100.png';
+import classes from './menu.module.scss';
+import { removeCart } from '../../slices/menuSlice';
+import { deleteCart } from '../../services/cartService';
+import { setCartId } from '../../slices/menuSlice';
 
-
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Menu = ({ restaurantDetails }) => {
   const cart = useSelector((state) => state.menu.cart); // Get the cart from the Redux store
-  console.log("cart vercel", cart)
+  //console.log('cart vercel', cart);
   const [modalActive, setModalActive] = useState(false);
   const [dishModalActive, setDishModalActive] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const [selectedMenuItem, setSelectedMenuItem] = useState(null);
   const dispatch = useDispatch();
 
@@ -36,14 +35,12 @@ const Menu = ({ restaurantDetails }) => {
 
   // Handle close button click to remove item from the cart
   const handleRemoveItemFromCart = async (item) => {
-    const foundMenuItem = cart.menuItems.find(
-      (element) => element.itemId === item.itemId
-    );
+    const foundMenuItem = cart.menuItems.find((element) => element.itemId === item.itemId);
     const cartId = cart._id;
-    const removeCartDetials  = {
-      cartId : cartId,
-      menuId : foundMenuItem.itemId
-    }
+    const removeCartDetials = {
+      cartId: cartId,
+      menuId: foundMenuItem.itemId,
+    };
     const response = await deleteCart(removeCartDetials);
     if (response.status === 201) {
       if (response.data.cart === undefined) {
@@ -51,9 +48,7 @@ const Menu = ({ restaurantDetails }) => {
         dispatch(setCartId(null));
       } else {
         dispatch(removeCart(response.data.cart));
-        
       }
-      
     }
   };
 
@@ -71,10 +66,7 @@ const Menu = ({ restaurantDetails }) => {
         <div className={classes.restaurantMenu__wrapper}>
           <div className={classes.restauranMenu__header}>
             <div className={classes.restaurantMenu__photo__wrapper}>
-              <img
-                src={restaurantDetails.restaurantImage}
-                alt={restaurantDetails.name}
-              />
+              <img src={restaurantDetails.restaurantImage} alt={restaurantDetails.name} />
             </div>
             <div className={classes.restauranMenu__text__wrapper}>
               <h1>{restaurantDetails.name}</h1>
@@ -86,22 +78,17 @@ const Menu = ({ restaurantDetails }) => {
                   <p>{restaurantDetails.address.street}</p>
                   <span> | </span>
                   <p>
-                    {restaurantDetails.estimatedDeliveryTime.minEstimatedTime} -{" "}
-                    {restaurantDetails.estimatedDeliveryTime.maxEstimatedTime}{" "}
-                    mins
+                    {restaurantDetails.estimatedDeliveryTime.minEstimatedTime} -{' '}
+                    {restaurantDetails.estimatedDeliveryTime.maxEstimatedTime} mins
                   </p>
                   <span> | </span>
-                  <button onClick={() => setModalActive(true)}>
-                    Service fee apply
-                  </button>
+                  <button onClick={() => setModalActive(true)}>Service fee apply</button>
                   <p>$0.99 Delivery Fee</p>
                 </div>
                 <div className={classes.restauranMenu__add_search}>
                   <button onClick={() => setModalActive(true)}>
                     <img src={Info} alt="icon info" />
-                    <span className={classes.restauranMenu__add_search_tooltip}>
-                      More Info
-                    </span>
+                    <span className={classes.restauranMenu__add_search_tooltip}>More Info</span>
                   </button>
                   <input
                     onChange={onChangeSearchValue}
@@ -128,8 +115,7 @@ const Menu = ({ restaurantDetails }) => {
                 <div className={classes.restauranMenu__main__first}>
                   <h1>Place Settings</h1>
                   <p>
-                    Please list the amount of place settings that you'd like,
-                    along with your order.
+                    Please list the amount of place settings that you'd like, along with your order.
                   </p>
                 </div>
                 <div className={classes.restauranMenu__main__second}>
@@ -139,9 +125,7 @@ const Menu = ({ restaurantDetails }) => {
               </div>
 
               {restaurantDetails.menu
-                .filter((type) =>
-                  type.name.toLowerCase().includes(searchValue.toLowerCase())
-                )
+                .filter((type) => type.name.toLowerCase().includes(searchValue.toLowerCase()))
                 .map((type) => (
                   <button
                     key={type._id}
@@ -153,73 +137,47 @@ const Menu = ({ restaurantDetails }) => {
                       <div>
                         <h3>{type.name}</h3>
                         <p>{type.description}</p>
-                        <h4>${type.price}</h4>
+                        <h4>${(type.price).toFixed(2)}</h4>
                       </div>
                     </div>
                   </button>
                 ))}
             </div>
             <div className={classes.restaurantMenu__checkout}>
-              {/* <div className={classes.checkout__empty}>
-                <img src={emptyCart} alt="Empty Cart" />
-                <h3>Start adding items from the menu to build your order.</h3>
-              </div> */}
-
               <div className={classes.checkout__cart}>
                 <h3>Your order</h3>
+
                 {cart ? (
                   cart?.menuItems?.map((cartItem) => (
-                    <div className={classes.checkout__itemRow}>
-                      <div className={classes.checkout__item}>
-                        <p className={classes.checkout__cart__quantity}>
-                          {cartItem.quantity}
-                        </p>
-                        <p className={classes.checkout__cart__name}>
-                          {cartItem.name}
-                        </p>
-                        <p className={classes.checkout__cart__price}>
-                          {cartItem.price}
-                        </p>
-                      </div>
+                    <>
+                      <div className={classes.checkout__itemRow}>
+                        <div className={classes.checkout__item}>
+                          <p className={classes.checkout__cart__quantity}>{cartItem.quantity}</p>
+                          <p className={classes.checkout__cart__name}>{cartItem.name}</p>
+                          <p className={classes.checkout__cart__price}>{(cartItem.price).toFixed(2)}</p>
+                        </div>
 
-                      <button
-                        onClick={() => handleRemoveItemFromCart(cartItem)}
-                      >
-                        <img src={Close} alt="Close" />
-                      </button>
-                    </div>
+                        <button onClick={() => handleRemoveItemFromCart(cartItem)}>
+                          <img src={Close} alt="Close" />
+                        </button>
+                      </div>
+                      <div className={classes.checkout__total}>
+                        <div className={classes.checkout__total__header}>
+                          <h4>Food & Beverage Subtotal</h4>
+                          <h4>${(cart.total).toFixed(2)}</h4>
+                        </div>
+                        <button>
+                          <h3>Checkout</h3>
+                        </button>
+                      </div>
+                    </>
                   ))
                 ) : (
-                  <p>Your cart is empty</p> // Display a message when the cart is empty
+                  <div className={classes.checkout__empty}>
+                    <img src={emptyCart} alt="Empty Cart" />
+                    <h3>Start adding items from the menu to build your order.</h3>
+                  </div>
                 )}
-                {/* <div className={classes.checkout__itemRow}>
-                  <div
-                    className={classes.checkout__item}
-                    onClick={() => setDishModalActive(true)}
-                  >
-                    <p className={classes.checkout__cart__quantity}>5</p>
-                    <p className={classes.checkout__cart__name}>Coca-Cola</p>
-                    <p className={classes.checkout__cart__price}>$25</p>
-                  </div>
-
-                  <button>
-                    <img src={Close} alt="Close" />
-                  </button>
-                </div> */}
-
-                <div className={classes.checkout__total}>
-                  <div className={classes.checkout__total__header}>
-                    <h4>Food & Beverage Subtotal</h4>
-                    {cart ? (
-                      <h4>${cart.total}</h4> // Display total price if cart exists
-                    ) : (
-                      <h4>$0</h4> // Display $0 if cart is not defined
-                    )}
-                  </div>
-                  <button>
-                    <h3>Checkout</h3>
-                  </button>
-                </div>
               </div>
             </div>
           </div>

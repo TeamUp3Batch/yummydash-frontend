@@ -248,7 +248,7 @@
 
       .restauranMenu__dishes__wrapper:hover {
         border-radius: 8px;
-        box-shadow: rgba(23, 32, 38, 0.08) 1px 1px 8px 6px;
+        box-shadow: 1px 1px 8px 6px rgba(23, 32, 38, 0.08);
         cursor: pointer;
         background-color: rgb(255, 255, 255);
       }
@@ -290,7 +290,7 @@
             flex-direction: row;
             margin-left: 25px;
             padding: 12px 0;
-            align-items: start;
+            align-items: flex-start;
 
             .checkout__cart__quantity {
               width: 25px;
@@ -322,7 +322,7 @@
             0 2px 4px 0 rgba(0, 0, 0, 0.2),
             0px -2px 4px 0px rgba(0, 0, 0, 0.05);
 
-          width: 375px;
+          width: 365px;
           margin: 100px 10px 10px 10px;
           padding: 16px;
 
@@ -340,7 +340,7 @@
             margin-top: 36px;
 
             h3 {
-              padding: 22px 148px;
+              padding: 22px 142px;
               margin: 0;
             }
           }
