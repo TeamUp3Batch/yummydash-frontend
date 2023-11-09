@@ -42,7 +42,7 @@ const DishModal = ({ active, setActive, restaurantId, menuItem }) => {
             <div className={classes.dishModal__footer__button}>
               <button onClick={onClickButton}>
                 <p>Add To Cart</p>
-                <p>$ {count * (menuItem ? menuItem.price : 0)}</p>
+                <p>$ {count * (menuItem ? menuItem.price : 0).toFixed(2)}</p>
               </button>
             </div>
           </div>
