@@ -190,22 +190,11 @@ const Menu = ({ restaurantDetails }) => {
                     </div>
                   ))
                 ) : (
-                  <p>Your cart is empty</p> // Display a message when the cart is empty
+                  <div className={classes.checkout__empty}>
+                  <img src={emptyCart} alt="Empty Cart" />
+                  <h3>Start adding items from the menu to build your order.</h3>
+                </div> // Display a message when the cart is empty
                 )}
-                {/* <div className={classes.checkout__itemRow}>
-                  <div
-                    className={classes.checkout__item}
-                    onClick={() => setDishModalActive(true)}
-                  >
-                    <p className={classes.checkout__cart__quantity}>5</p>
-                    <p className={classes.checkout__cart__name}>Coca-Cola</p>
-                    <p className={classes.checkout__cart__price}>$25</p>
-                  </div>
-
-                  <button>
-                    <img src={Close} alt="Close" />
-                  </button>
-                </div> */}
 
                 <div className={classes.checkout__total}>
                   <div className={classes.checkout__total__header}>
