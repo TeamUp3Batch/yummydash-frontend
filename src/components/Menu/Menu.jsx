@@ -146,38 +146,48 @@ const Menu = ({ restaurantDetails }) => {
             <div className={classes.restaurantMenu__checkout}>
               <div className={classes.checkout__cart}>
                 <h3>Your order</h3>
-
-                {cart ? (
+                 {cart ? (
                   cart?.menuItems?.map((cartItem) => (
-                    <>
-                      <div className={classes.checkout__itemRow}>
-                        <div className={classes.checkout__item}>
-                          <p className={classes.checkout__cart__quantity}>{cartItem.quantity}</p>
-                          <p className={classes.checkout__cart__name}>{cartItem.name}</p>
-                          <p className={classes.checkout__cart__price}>{(cartItem.price).toFixed(2)}</p>
-                        </div>
+                    <div className={classes.checkout__itemRow}>
+                      <div className={classes.checkout__item}>
+                        <p className={classes.checkout__cart__quantity}>
+                          {cartItem.quantity}
+                        </p>
+                        <p className={classes.checkout__cart__name}>
+                          {cartItem.name}
+                        </p>
+                        <p className={classes.checkout__cart__price}>
+                          {cartItem.price}
+                        </p>
+                      </div>
 
-                        <button onClick={() => handleRemoveItemFromCart(cartItem)}>
-                          <img src={Close} alt="Close" />
-                        </button>
-                      </div>
-                      <div className={classes.checkout__total}>
-                        <div className={classes.checkout__total__header}>
-                          <h4>Food & Beverage Subtotal</h4>
-                          <h4>${(cart.total).toFixed(2)}</h4>
-                        </div>
-                        <button>
-                          <h3>Checkout</h3>
-                        </button>
-                      </div>
-                    </>
+                      <button
+                        onClick={() => handleRemoveItemFromCart(cartItem)}
+                      >
+                        <img src={Close} alt="Close" />
+                      </button>
+                    </div>
                   ))
                 ) : (
                   <div className={classes.checkout__empty}>
-                    <img src={emptyCart} alt="Empty Cart" />
-                    <h3>Start adding items from the menu to build your order.</h3>
-                  </div>
+                  <img src={emptyCart} alt="Empty Cart" />
+                  <h3>Start adding items from the menu to build your order.</h3>
+                </div> // Display a message when the cart is empty
                 )}
+
+                <div className={classes.checkout__total}>
+                  <div className={classes.checkout__total__header}>
+                    <h4>Food & Beverage Subtotal</h4>
+                    {cart ? (
+                      <h4>${cart.total}</h4> // Display total price if cart exists
+                    ) : (
+                      <h4>$0</h4> // Display $0 if cart is not defined
+                    )}
+                  </div>
+                  <button>
+                    <h3>Checkout</h3>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -188,3 +198,6 @@ const Menu = ({ restaurantDetails }) => {
 };
 
 export default Menu;
+
+
+              
