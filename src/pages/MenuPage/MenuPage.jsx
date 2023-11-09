@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from '../Header/Header';
-import Footer from '../../components/Footer/Footer';
+//import Footer from '../../components/Footer/Footer';
 import Menu from "../../components/Menu/Menu";
 import { useParams } from 'react-router-dom';
 import { useFetchMenu } from "./hooks/useFetchMenu";

@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Menu = ({ restaurantDetails }) => {
   const cart = useSelector((state) => state.menu.cart); // Get the cart from the Redux store
-  console.log('cart vercel', cart);
+  //console.log('cart vercel', cart);
   const [modalActive, setModalActive] = useState(false);
   const [dishModalActive, setDishModalActive] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -137,7 +137,7 @@ const Menu = ({ restaurantDetails }) => {
                       <div>
                         <h3>{type.name}</h3>
                         <p>{type.description}</p>
-                        <h4>${type.price}</h4>
+                        <h4>${(type.price).toFixed(2)}</h4>
                       </div>
                     </div>
                   </button>
@@ -154,7 +154,7 @@ const Menu = ({ restaurantDetails }) => {
                         <div className={classes.checkout__item}>
                           <p className={classes.checkout__cart__quantity}>{cartItem.quantity}</p>
                           <p className={classes.checkout__cart__name}>{cartItem.name}</p>
-                          <p className={classes.checkout__cart__price}>{cartItem.price}</p>
+                          <p className={classes.checkout__cart__price}>{(cartItem.price).toFixed(2)}</p>
                         </div>
 
                         <button onClick={() => handleRemoveItemFromCart(cartItem)}>
@@ -164,7 +164,7 @@ const Menu = ({ restaurantDetails }) => {
                       <div className={classes.checkout__total}>
                         <div className={classes.checkout__total__header}>
                           <h4>Food & Beverage Subtotal</h4>
-                          <h4>${cart.total}</h4>
+                          <h4>${(cart.total).toFixed(2)}</h4>
                         </div>
                         <button>
                           <h3>Checkout</h3>

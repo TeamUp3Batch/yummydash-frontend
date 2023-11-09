@@ -248,7 +248,7 @@
 
       .restauranMenu__dishes__wrapper:hover {
         border-radius: 8px;
-        box-shadow: rgba(23, 32, 38, 0.08) 1px 1px 8px 6px;
+        box-shadow: 1px 1px 8px 6px rgba(23, 32, 38, 0.08);
         cursor: pointer;
         background-color: rgb(255, 255, 255);
       }
@@ -290,7 +290,7 @@
             flex-direction: row;
             margin-left: 25px;
             padding: 12px 0;
-            align-items: start;
+            align-items: flex-start;
 
             .checkout__cart__quantity {
               width: 25px;
