@@ -7,17 +7,27 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import RestaurantTwoToneIcon from '@mui/icons-material/RestaurantTwoTone';
 import PersonPinCircleRoundedIcon from '@mui/icons-material/PersonPinCircleRounded';
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 //mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const PlaceOrder = () => {
   const { checkout } = useSelector((state) => state.menu);
+  const navigate = useNavigate();
   //mapbox start
   const [viewport, setViewport] = useState({
-    latitude: 52.13457, // Latitude of the marker
-    longitude: -106.65972, // Longitude of the marker
+    latitude: 52.114371, // Latitude of the marker
+    longitude: -106.631472, // Longitude of the marker
     zoom: 12, // Initial zoom level
   });
-
+  useEffect(() => {
+    if (checkout && checkout.userAddress && checkout.userAddress.latitude && checkout.userAddress.longitude) {
+      setViewport({
+        latitude: checkout.userAddress.latitude,
+        longitude: checkout.userAddress.longitude,
+        zoom: 12, 
+      });
+    }
+  }, [checkout]);
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <ReactMapGL
@@ -29,8 +39,8 @@ const PlaceOrder = () => {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
       >
         <Marker
-          latitude={52.13457}
-          longitude={-106.65972}
+          latitude={checkout.userAddress.latitude}
+          longitude={checkout.userAddress.longitude}
           offsetLeft={-3.5 * viewport.zoom}
           offsetTop={-7 * viewport.zoom}
         >

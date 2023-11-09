@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   Elements,
@@ -33,6 +34,7 @@ const buttonStyle = {
 };
 
 const CheckoutForm = ({ clientSecret }) => {
+  const { checkout } = useSelector((state) => state.menu);
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -79,42 +81,28 @@ const CheckoutForm = ({ clientSecret }) => {
               marginBottom: "16px",
             }}
           >
-            Pizza Palace
+            {checkout.restaurantName}
           </Typography>
           <Divider
             style={{ backgroundColor: "#000", height: "2px", margin: "16px 0" }}
           />
           <Grid container>
-            <Grid item xs={10} sm={10} md={10} lg={10}>
-              <Typography variant="body1" component="div">
-                8" Pepperoni Chicken Pizza
-              </Typography>
-            </Grid>
-            <Grid item xs={2} sm={2} md={2} lg={2}>
-              <Typography variant="body1" component="div">
-                $13.99
-              </Typography>
-            </Grid>
-            <Grid item xs={10} sm={10} md={10} lg={10}>
-              <Typography variant="body1" component="div">
-                Chicken Tandoori Pizza
-              </Typography>
-            </Grid>
-            <Grid item xs={2} sm={2} md={2} lg={2}>
-              <Typography variant="body1" component="div">
-                $13.99
-              </Typography>
-            </Grid>
-            <Grid item xs={10} sm={10} md={10} lg={10}>
-              <Typography variant="h6" component="div">
-                Total
-              </Typography>
-            </Grid>
-            <Grid item xs={2} sm={2} md={2} lg={2}>
-              <Typography variant="h6" component="div">
-                $27.98
-              </Typography>
-            </Grid>
+            {checkout
+              ? checkout.lineItems.map((lineItem) => (
+                  <div>
+                    <Grid item xs={8} sm={8} md={8} lg={8}>
+                      <Typography variant="body1" component="div">
+                        {lineItem.name}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={2} sm={2} md={2} lg={2}>
+                      <Typography variant="body1" component="div">
+                        {lineItem.price}
+                      </Typography>
+                    </Grid>
+                  </div>
+                ))
+              : null}
           </Grid>
           <Divider
             style={{ backgroundColor: "#000", height: "2px", margin: "16px 0" }}
