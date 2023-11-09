@@ -47,8 +47,8 @@ const PlaceOrder = () => {
           <PersonPinCircleRoundedIcon/>
         </Marker>
         <Marker
-          latitude={52.114371}
-          longitude={-106.631472}
+          latitude={checkout.restaurantAddress.latitude}
+          longitude={checkout.restaurantAddress.longitude}
           offsetLeft={-3.5 * viewport.zoom}
           offsetTop={-7 * viewport.zoom}
         >

@@ -28,7 +28,7 @@ const DeliveryDetailsBox = () => {
               style={{ padding: "0", fontSize: "10px", textTransform: "none" }}
             >
               Back to Menu
-             // navigate("/main");
+             {/* // navigate("/main"); */}
             </Button>
           </CardActions>
         }

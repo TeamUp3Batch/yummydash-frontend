@@ -63,7 +63,7 @@ const CheckoutForm = ({ clientSecret }) => {
 
   return (
     <div>
-      <Card>
+      <Card style={{ width: "100%" }}>
         <CardContent>
           <Typography
             style={{ fontWeight: "bold", fontSize: "14px" }}
@@ -89,18 +89,11 @@ const CheckoutForm = ({ clientSecret }) => {
           <Grid container>
             {checkout
               ? checkout.lineItems.map((lineItem) => (
-                  <div>
-                    <Grid item xs={8} sm={8} md={8} lg={8}>
-                      <Typography variant="body1" component="div">
-                        {lineItem.name}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={2} sm={2} md={2} lg={2}>
-                      <Typography variant="body1" component="div">
-                        {lineItem.price}
-                      </Typography>
-                    </Grid>
-                  </div>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                <Typography variant="body1" component="div">
+                  {lineItem.quantity} {lineItem.name} {lineItem.price}
+                </Typography>
+              </Grid>
                 ))
               : null}
           </Grid>
