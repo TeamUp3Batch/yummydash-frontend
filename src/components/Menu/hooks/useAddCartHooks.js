@@ -15,6 +15,7 @@ export function useAddToCartHooks(restaurantId, menuItem) {
 
   useEffect(() => {
     if (selectCartId !== null) {
+      
       const cartItem = cart?.menuItems?.find((item) => {
         return item.itemId === menuItem?._id;
       });
@@ -70,10 +71,11 @@ export function useAddToCartHooks(restaurantId, menuItem) {
     }
   };
 
+
   return {
     count,
     increment,
     decrement,
-    addedToCart,
+    addedToCart
   };
 }

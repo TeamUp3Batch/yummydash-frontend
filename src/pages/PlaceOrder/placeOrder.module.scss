@@ -1,0 +1,40 @@
+.placeOrderContainer{
+    top: 30px;
+    position:absolute;
+    z-index: 20;
+    left: 20px;
+    display: flex;
+    justify-content: flex-start;
+
+    
+}
+.deliveryDetailsBox{
+    flex: 1;
+    margin-right: 10px;
+    max-width: 350px;
+    min-height: 100px;
+}
+.orderSummary{
+    flex: 1;
+    max-width: 400px;
+    min-height: 100px;
+}
+.mapboxgl-marker {
+    width: 20px; /* Adjust the width as needed */
+    height: 20px; /* Adjust the height as needed */
+    background-color: red; /* Adjust the color as needed */
+    border-radius: 50%; /* Makes it round, adjust as needed */
+  }
+.mapContainer{
+    position: absolute;
+    z-index: 0;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    border-width: 0px;
+    margin: 0px;
+    cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur), default;
+    touch-action: none;
+}
