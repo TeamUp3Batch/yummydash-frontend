@@ -168,7 +168,7 @@ const Menu = ({ restaurantDetails }) => {
               <div className={classes.checkout__cart}>
                 <h3>Your order</h3>
                 {cart ? (
-                  cart?.menuItems.map((cartItem) => (
+                  cart?.menuItems?.map((cartItem) => (
                     <div className={classes.checkout__itemRow}>
                       <div className={classes.checkout__item}>
                         <p className={classes.checkout__cart__quantity}>
