@@ -1,0 +1,55 @@
+* {
+  font-family: 'Arsenal', sans-serif;
+}
+
+.deliveryBox {
+  background-color: #fff;
+  width: 300px;
+  border-radius: 5px;
+  box-shadow:
+    0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+  .deliveryBox__wrapper {
+    padding: 25px;
+
+    .deliveryBox__header {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+      }
+    }
+
+    .deliveryBox__time {
+      margin-top: 25px;
+      display: flex;
+      gap: 15px;
+
+      img {
+        width: 18px;
+        height: 18px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .deliveryBox__address {
+      margin-top: 10px;
+      display: flex;
+      gap: 15px;
+      img {
+        width: 18px;
+        height: 18px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}

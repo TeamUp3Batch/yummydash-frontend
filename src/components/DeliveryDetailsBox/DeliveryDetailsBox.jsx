@@ -1,50 +1,32 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Divider,
-  Typography,
-} from "@mui/material";
-import Button from "@mui/material/Button";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import PersonPinIcon from "@mui/icons-material/PersonPin";
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+import clockTwo from '../../icons/clock-two-svgrepo-com.svg';
+import addressProfile from '../../icons/profile-user-with-earth-symbol-svgrepo-com.svg';
+
+import classes from './DeliveryDetailsBox.module.scss';
 
 const DeliveryDetailsBox = () => {
   const { checkout } = useSelector((state) => state.menu);
   return (
-    <Card>
-      <CardHeader
-        variant="caption"
-        color="text.secondary"
-        subheader="Your Delivery"
-        style={{ fontSize: "10px", fontWeight: "bold" }}
-        action={
-          <CardActions disableSpacing>
-            <Button
-              aria-label="back-to-menu"
-              style={{ padding: "0", fontSize: "10px", textTransform: "none" }}
-            >
-              Back to Menu
-             {/* // navigate("/main"); */}
-            </Button>
-          </CardActions>
-        }
-      />
-      <Divider />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          <AccessTimeIcon />
-          {checkout.estimatedTime} mins
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          <PersonPinIcon />
-          {checkout.userAddress.userAddress1}
-        </Typography>
-      </CardContent>
-    </Card>
+    <div className={classes.deliveryBox}>
+      <div className={classes.deliveryBox__wrapper}>
+        <div className={classes.deliveryBox__header}>
+          <h3>Your Delivery</h3>
+          <button>
+            <p>Back to Menu</p>
+          </button>
+        </div>
+        <div className={classes.deliveryBox__time}>
+          <img src={clockTwo} alt="Clock" />
+          <p>{checkout.estimatedTime} mins</p>
+        </div>
+        <div className={classes.deliveryBox__address}>
+          <img src={addressProfile} alt="Address Profile" />
+          <p>{checkout.userAddress.userAddress1}</p>
+        </div>
+      </div>
+    </div>
   );
 };
 
