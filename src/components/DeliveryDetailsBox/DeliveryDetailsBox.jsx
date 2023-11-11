@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import clockTwo from '../../icons/clock-two-svgrepo-com.svg';
 import addressProfile from '../../icons/profile-user-with-earth-symbol-svgrepo-com.svg';
 
 import classes from './DeliveryDetailsBox.module.scss';
-
 
 const DeliveryDetailsBox = () => {
   const { checkout } = useSelector((state) => state.menu);
@@ -14,9 +14,11 @@ const DeliveryDetailsBox = () => {
       <div className={classes.deliveryBox__wrapper}>
         <div className={classes.deliveryBox__header}>
           <h3>Your Delivery</h3>
-          <button>
-            <p>Back to Menu</p>
-          </button>
+          <Link to='../main'>
+            <button>
+              <p>Back to Menu</p>
+            </button>
+          </Link>
         </div>
         <div className={classes.deliveryBox__time}>
           <img src={clockTwo} alt="Clock" />

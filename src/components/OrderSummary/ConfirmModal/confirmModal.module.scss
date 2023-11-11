@@ -71,7 +71,11 @@
           }
         }
       }
+      a {
+        text-decoration: none;
+      }
       .confirmModal__wrapper_button {
+        text-decoration: none;
         cursor: pointer;
         flex-wrap: wrap;
         align-content: center;

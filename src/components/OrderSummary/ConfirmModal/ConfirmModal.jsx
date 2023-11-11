@@ -7,12 +7,8 @@ import HomeVideo from '../../../img/WhatsApp Video 2023-11-04 at 17.50.57_19e157
 import classes from './confirmModal.module.scss';
 
 const ConfirmModal = ({ active, setActive }) => {
-  const buttonEvent = () => {
-    setActive(false);
-  };
-
   return (
-    <div className={classes.confirmModal__active}>
+    <div className={active ? classes.confirmModal__active : classes.confirmModal}>
       <div className={classes.confirmModal__wrapper}>
         <div className={classes.confirmModal__wrapper_text}>
           <img src={CheckIconBlack} alt="Check Icon" />
@@ -32,7 +28,7 @@ const ConfirmModal = ({ active, setActive }) => {
             </div>
           </div>
           <Link to="../main">
-            <div className={classes.confirmModal__wrapper_button} onClick={buttonEvent}>
+            <div className={classes.confirmModal__wrapper_button} onClick={() => setActive(false)}>
               <h4>I UNDERSTAND</h4>
             </div>
           </Link>
