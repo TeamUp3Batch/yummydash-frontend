@@ -1,0 +1,90 @@
+* {
+  font-family: 'Arsenal', sans-serif;
+  p {
+    font-size: 16px;
+  }
+}
+
+.confirmModal {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.confirmModal__active {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 45;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .confirmModal__wrapper {
+    background-color: #fff;
+    width: 345px;
+    border-radius: 5px;
+    box-shadow:
+      0 2px 4px 0 rgba(0, 0, 0, 0.2),
+      0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+    .confirmModal__wrapper_text {
+      padding: 24px 24px;
+      text-align: center;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+
+      video {
+        width: 250px;
+        height: 250px;
+      }
+
+      h4 {
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+
+      p {
+        margin-bottom: 16px;
+      }
+
+      .confirmModal__group {
+        display: flex;
+        justify-content: space-around;
+
+        div {
+          display: flex;
+
+          img {
+            padding-right: 5px;
+            width: 20px;
+            height: 20px;
+          }
+          p {
+            font-weight: bold;
+          }
+        }
+      }
+      .confirmModal__wrapper_button {
+        cursor: pointer;
+        flex-wrap: wrap;
+        align-content: center;
+        border-radius: 50em;
+        border: none;
+        background-color: #242e30;
+
+        h4 {
+          color: #fff;
+          padding: 15px 0;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

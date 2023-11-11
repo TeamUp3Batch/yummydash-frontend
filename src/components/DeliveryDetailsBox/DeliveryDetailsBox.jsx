@@ -6,6 +6,7 @@ import addressProfile from '../../icons/profile-user-with-earth-symbol-svgrepo-c
 
 import classes from './DeliveryDetailsBox.module.scss';
 
+
 const DeliveryDetailsBox = () => {
   const { checkout } = useSelector((state) => state.menu);
   return (

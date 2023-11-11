@@ -7,13 +7,16 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 
 import { Button, Paper } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
+import ConfirmModal from './ConfirmModal/ConfirmModal';
 
 import classes from './orderSummary.module.scss';
+
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
 const CheckoutForm = ({ clientSecret }) => {
+  const [confirmModalActive, setConfirmModalActive] = useState(false);
   const { checkout } = useSelector((state) => state.menu);
   const stripe = useStripe();
   const elements = useElements();
@@ -43,6 +46,7 @@ const CheckoutForm = ({ clientSecret }) => {
 
   return (
     <div>
+    
     {/* Order Summary */}
       <div className={classes.orderSummary}>
         <div className={classes.orderSummary__wrapper}>
@@ -92,6 +96,7 @@ const CheckoutForm = ({ clientSecret }) => {
           </div>
         </div>
       </div> */}
+      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive}/>
     </div>
   );
 };

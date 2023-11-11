@@ -8,6 +8,8 @@ import RestaurantTwoToneIcon from '@mui/icons-material/RestaurantTwoTone';
 import PersonPinCircleRoundedIcon from '@mui/icons-material/PersonPinCircleRounded';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+
 //mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const PlaceOrder = () => {
