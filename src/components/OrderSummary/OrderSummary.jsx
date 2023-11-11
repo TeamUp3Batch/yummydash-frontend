@@ -43,6 +43,7 @@ const CheckoutForm = ({ clientSecret }) => {
 
   return (
     <div>
+    {/* Order Summary */}
       <div className={classes.orderSummary}>
         <div className={classes.orderSummary__wrapper}>
           <div className={classes.orderSummary__header}>
@@ -69,6 +70,28 @@ const CheckoutForm = ({ clientSecret }) => {
           </div>
         </div>
       </div>
+
+      {/* Processing orders */}
+      {/* <div className={classes.processing}>
+        <div className={classes.processing__wrapper}>
+          <div className={classes.processing__header}>
+            <h2>{checkout.restaurantName} <span>is preparing your order:</span></h2>
+            <h2>Receipt</h2>
+          </div>
+          <div className={classes.processing__main}>
+
+            {checkout
+              ? checkout.lineItems.map((lineItem) => (
+                  <div className={classes.processing__dishes}>
+                    <p className={classes.processing__quantity}>{lineItem.quantity}</p>
+                    <p className={classes.processing__name}>{lineItem.name}</p>
+                    <p className={classes.processing__price}>${lineItem.price}</p>
+                  </div>
+                ))
+              : null}
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 };
