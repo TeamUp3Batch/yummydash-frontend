@@ -89,17 +89,21 @@ const CheckoutForm = ({ clientSecret }) => {
           <Grid container>
             {checkout
               ? checkout.lineItems.map((lineItem) => (
-                <Grid item xs={12} sm={12} md={12} lg={12}>
-                <Typography variant="body1" component="div">
-                  {lineItem.quantity} {lineItem.name} {lineItem.price}
-                </Typography>
-              </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Typography variant="body1" component="div">
+                      {lineItem.quantity} {lineItem.name} {lineItem.price}
+                    </Typography>
+                  </Grid>
                 ))
               : null}
           </Grid>
+
           <Divider
             style={{ backgroundColor: "#000", height: "2px", margin: "16px 0" }}
           />
+          {checkout && checkout.totalprice && (
+            <Typography>{checkout.totalprice}</Typography>
+          )}
           <CardElement />
         </CardContent>
         <CardActions>
@@ -123,12 +127,15 @@ const CheckoutForm = ({ clientSecret }) => {
 
 export default function OrderSummary() {
   const [clientSecret, setClientSecret] = useState("");
+  const { checkout } = useSelector((state) => state.menu);
 
   useEffect(() => {
+    console.log("checkout", checkout.totalprice);
     const fetchClientSecret = async () => {
+      const priceInCents = parseInt(checkout.totalprice * 100);
       const url = `${apiUrl}/api/cart/placeOrder`;
       try {
-        const response = await axios.post(url, { amount: 50000 });
+        const response = await axios.post(url, { amount: priceInCents });
         setClientSecret(response.data.clientSecret);
       } catch (error) {
         throw error;
@@ -136,7 +143,7 @@ export default function OrderSummary() {
     };
 
     fetchClientSecret();
-  }, []);
+  }, [checkout.totalprice]);
 
   return (
     <Paper>
