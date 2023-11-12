@@ -1,10 +1,10 @@
-import SignUp from "../src/pages/SignUp/SignUp";
-import Landing from "../src/pages/LandingPage/LandingPage";
-import Main from "../src/pages/Main/Main";
-import Profile from "./pages/ViewAccount/Profile";
-import MenuPage from "./pages/MenuPage/MenuPage";
-import PlaceOrder from "../src/pages/PlaceOrder/PlaceOrder";
-import DeliveryPage from "../src/pages/DeliveryPage/DeliveryPage";
+import SignUp from "../src/UserApp/pages/SignUp/SignUp";
+import Landing from "../src/UserApp/pages/LandingPage/LandingPage";
+import Main from "../src/UserApp/pages/Main/Main";
+import Profile from "../src/UserApp/pages/Profile/Profile";
+import MenuPage from "../src/UserApp/pages/MenuPage/MenuPage";
+import PlaceOrder from "../src/UserApp/pages/PlaceOrder/PlaceOrder";
+import DeliveryPage from "../src/UserApp/pages/DeliveryPage/DeliveryPage";
 
 import { Routes, Route } from "react-router-dom";
 
