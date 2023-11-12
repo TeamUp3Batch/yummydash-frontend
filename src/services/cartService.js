@@ -42,3 +42,13 @@ export const addToCartItem = async (data) => {
       throw error;
     }
   }
+
+  export const getAllOrdersByRestaurantId = async (restaurantId) => {
+    const url = `${apiUrl}/api/cart/getAllOrdersByRestaurantId/?restaurantId=${restaurantId}`;
+    try {
+      const result = await axios.get(url);
+      return result.data;
+    } catch (error) {
+      throw error;
+    }
+  };
