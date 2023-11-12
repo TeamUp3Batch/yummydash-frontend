@@ -69,6 +69,12 @@
           margin: 0;
         }
       }
+
+      .orderSummary__checkout__total {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
     }
   }
 }
@@ -126,6 +132,12 @@
           width: 75px;
           text-align: right;
         }
+      }
+
+      .processing__total {
+        display: flex;
+        justify-content: space-between;
+        padding: 25px 25px 0 25px;
       }
     }
   }

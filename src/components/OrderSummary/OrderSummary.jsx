@@ -27,7 +27,6 @@ import ConfirmModal from './ConfirmModal/ConfirmModal';
 
 import classes from './orderSummary.module.scss';
 
-
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -93,12 +92,13 @@ const CheckoutForm = ({ clientSecret }) => {
           </div>
           <div className={classes.orderSummary__checkout}>
           {checkout && checkout.totalprice && (
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-             <Typography style={{ fontWeight: 'bold' }}>Total</Typography>
-            <Typography>{checkout.totalprice}</Typography>
-            </div>
+           <div className={classes.orderSummary__checkout__total}>
+           <h3>Total</h3>
+           <h3>${checkout.totalprice}</h3>
+         </div>
           )}
             <CardElement />
+
             <Button onClick={handleCheckout}>
               <h3>Checkout</h3>
             </Button>
