@@ -35,11 +35,14 @@ const menuSlice = createSlice({
     },
     removeCart:(state, action) => {
       state.cart = action.payload;
+    },
+    updateCartStatus:(state,action) =>{
+      state.cart.orderStatus = action.payload
     }
   },
 });
 
-export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout, removeCart  } =
+export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout, removeCart, updateCartStatus  } =
   menuSlice.actions;
 
 

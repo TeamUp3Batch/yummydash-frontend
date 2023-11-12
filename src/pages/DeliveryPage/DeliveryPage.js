@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 const DeliveryPage = () => {
   const { checkout } = useSelector((state) => state.menu);
   const [viewState, setViewState] = useState({
-    longitude: -106.659733,
-    latitude: 52.134574,
+    longitude: checkout?.userAddress?.longitude||-106.659733,
+    latitude: checkout?.userAddress?.latitude||52.134574,
     zoom: 15,
     dragPan: true, // Enable drag pan
   });

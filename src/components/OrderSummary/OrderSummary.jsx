@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { updateOrderStatus } from "../../services/paymentService";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateCartStatus } from "../../slices/menuSlice";
 import axios from "axios";
 import {
   Elements,
@@ -38,27 +41,43 @@ const CheckoutForm = ({ clientSecret }) => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleCheckout = async (e) => {
     e.preventDefault();
 
-    await stripe
-      .confirmCardPayment(clientSecret, {
+    try {
+      const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
-      })
-      .then((result) => {
-        if (result.paymentIntent.status === "succeeded") {
-          // Payment succeeded, redirect to the delivery page
+      });
+
+      if (result.paymentIntent.status === "succeeded") {
+        const updateObj = {
+          cartId: checkout.cartId,
+          restaurantId: checkout.restaurantId,
+          userId: checkout.userId,
+          newOrderStatus: "payment",
+        };
+        const response = await updateOrderStatus(updateObj);
+        console.log("hello",response)
+        if (response.status === 201) {
+          dispatch(updateCartStatus(response.data.orderStatus))
           navigate("/delivery");
-        } else {
-          // Handle other cases (e.g., if payment is not succeeded)
-          // You can display an error message or take appropriate actions
-          console.warn("Payment not succeeded");
+          // if (response.data.cart === undefined) {
+          //   // dispatch(removeCart(null));
+          //   // dispatch(setCartId(null));
+          // } else {
+          //   dispatch(removeCart(response.data.cart));
+          // }
         }
-      })
-      .catch((err) => console.warn(err));
+      } else {
+        console.warn("Payment not succeeded");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
   };
 
   return (
