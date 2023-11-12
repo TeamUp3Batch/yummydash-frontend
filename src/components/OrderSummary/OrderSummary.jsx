@@ -23,20 +23,16 @@ import {
   Divider,
 } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
+import ConfirmModal from './ConfirmModal/ConfirmModal';
+
+import classes from './orderSummary.module.scss';
+
+
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
-const buttonStyle = {
-  color: "white",
-  backgroundColor: "#F36805",
-  borderRadius: "50em",
-  textTransform: "none",
-  width: "100%", // Cover the width
-  padding: "8px 16px", // Padding on both left and right
-  textAlign: "center",
-};
-
 const CheckoutForm = ({ clientSecret }) => {
+  const [confirmModalActive, setConfirmModalActive] = useState(false);
   const { checkout } = useSelector((state) => state.menu);
   const stripe = useStripe();
   const elements = useElements();
@@ -61,16 +57,10 @@ const CheckoutForm = ({ clientSecret }) => {
           newOrderStatus: "payment",
         };
         const response = await updateOrderStatus(updateObj);
-        console.log("hello",response)
         if (response.status === 201) {
+          setConfirmModalActive(true);
           dispatch(updateCartStatus(response.data.orderStatus))
           navigate("/delivery");
-          // if (response.data.cart === undefined) {
-          //   // dispatch(removeCart(null));
-          //   // dispatch(setCartId(null));
-          // } else {
-          //   dispatch(removeCart(response.data.cart));
-          // }
         }
       } else {
         console.warn("Payment not succeeded");
@@ -78,75 +68,51 @@ const CheckoutForm = ({ clientSecret }) => {
     } catch (err) {
       console.warn(err);
     }
-  };
+      }
 
   return (
-    <div>
-      <Card style={{ width: "100%" }}>
-        <CardContent>
-          <Typography
-            style={{ fontWeight: "bold", fontSize: "14px" }}
-            color="textSecondary"
-            gutterBottom
-          >
-            Checkout
-          </Typography>
-          <Typography
-            variant="body2"
-            style={{
-              fontWeight: "bold",
-              fontSize: "18px",
-              marginTop: "16px",
-              marginBottom: "16px",
-            }}
-          >
-            {checkout.restaurantName}
-          </Typography>
-          <Divider
-            style={{ backgroundColor: "#000", height: "2px", margin: "16px 0" }}
-          />
-          <Grid container>
+    
+   <div>
+    <div className={classes.orderSummary}>
+    <div className={classes.orderSummary__wrapper}>
+          <div className={classes.orderSummary__header}>
+            <h2>Checkout</h2>
+          </div>
+          <div className={classes.orderSummary__main}>
+            <h3>{checkout.restaurantName}</h3>
+
             {checkout
               ? checkout.lineItems.map((lineItem) => (
-                  <Grid item xs={12} sm={12} md={12} lg={12}>
-                    <Typography variant="body1" component="div">
-                      {lineItem.quantity} {lineItem.name} {lineItem.price}
-                    </Typography>
-                  </Grid>
+                  <div className={classes.orderSummary__dishes}>
+                    <p className={classes.orderSummary__quantity}>{lineItem.quantity}</p>
+                    <p className={classes.orderSummary__name}>{lineItem.name}</p>
+                    <p className={classes.orderSummary__price}>${lineItem.price}</p>
+                  </div>
                 ))
               : null}
-          </Grid>
-
-          <Divider
-            style={{ backgroundColor: "#000", height: "2px", margin: "16px 0" }}
-          />
+          </div>
+          <div className={classes.orderSummary__checkout}>
           {checkout && checkout.totalprice && (
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+             <Typography style={{ fontWeight: 'bold' }}>Total</Typography>
             <Typography>{checkout.totalprice}</Typography>
+            </div>
           )}
-          <CardElement />
-        </CardContent>
-        <CardActions>
-          <Button
-            size="small"
-            color="primary"
-            style={{
-              background: "#4caf50",
-              color: "white",
-              fontWeight: "bold",
-            }}
-            onClick={handleCheckout}
-          >
-            Checkout
-          </Button>
-        </CardActions>
-      </Card>
+            <CardElement />
+            <Button onClick={handleCheckout}>
+              <h3>Checkout</h3>
+            </Button>
+          </div>
+        </div>
     </div>
+    <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive}/>
+   </div>
   );
 };
 
 export default function OrderSummary() {
-  const [clientSecret, setClientSecret] = useState("");
   const { checkout } = useSelector((state) => state.menu);
+  const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
     console.log("checkout", checkout.totalprice);
