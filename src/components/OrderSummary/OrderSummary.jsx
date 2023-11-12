@@ -11,7 +11,6 @@ import ConfirmModal from './ConfirmModal/ConfirmModal';
 
 import classes from './orderSummary.module.scss';
 
-
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -24,7 +23,6 @@ const CheckoutForm = ({ clientSecret }) => {
 
   const handleCheckout = async (e) => {
     e.preventDefault();
-    
 
     await stripe
       .confirmCardPayment(clientSecret, {
@@ -48,8 +46,7 @@ const CheckoutForm = ({ clientSecret }) => {
 
   return (
     <div>
-    
-    {/* Order Summary */}
+      {/* Order Summary */}
       <div className={classes.orderSummary}>
         <div className={classes.orderSummary__wrapper}>
           <div className={classes.orderSummary__header}>
@@ -69,7 +66,12 @@ const CheckoutForm = ({ clientSecret }) => {
               : null}
           </div>
           <div className={classes.orderSummary__checkout}>
+            <div className={classes.orderSummary__checkout__total}>
+              <h3>Total</h3>
+              <h3>$255</h3>
+            </div>
             <CardElement />
+
             <Button onClick={handleCheckout}>
               <h3>Checkout</h3>
             </Button>
@@ -81,24 +83,31 @@ const CheckoutForm = ({ clientSecret }) => {
       {/* <div className={classes.processing}>
         <div className={classes.processing__wrapper}>
           <div className={classes.processing__header}>
-            <h2>{checkout.restaurantName} <span>is preparing your order:</span></h2>
+            <h2>
+              {checkout.restaurantName} <span>is preparing your order:</span>
+            </h2>
             <h2>Receipt</h2>
           </div>
           <div className={classes.processing__main}>
-
             {checkout
               ? checkout.lineItems.map((lineItem) => (
-                  <div className={classes.processing__dishes}>
-                    <p className={classes.processing__quantity}>{lineItem.quantity}</p>
-                    <p className={classes.processing__name}>{lineItem.name}</p>
-                    <p className={classes.processing__price}>${lineItem.price}</p>
-                  </div>
+                  <>
+                    <div className={classes.processing__dishes}>
+                      <p className={classes.processing__quantity}>{lineItem.quantity}</p>
+                      <p className={classes.processing__name}>{lineItem.name}</p>
+                      <p className={classes.processing__price}>${lineItem.price}</p>
+                    </div>
+                    <div className={classes.processing__total}>
+                      <h2>Total</h2>
+                      <h2>$255</h2>
+                    </div>
+                  </>
                 ))
               : null}
           </div>
         </div>
       </div> */}
-      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive}/>
+      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive} />
     </div>
   );
 };
