@@ -1,12 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-
-import { Button, Paper } from '@mui/material';
-import { loadStripe } from '@stripe/stripe-js';
+import React, { useState, useEffect } from "react";
+import { updateOrderStatus } from "../../services/paymentService";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateCartStatus } from "../../slices/menuSlice";
+import axios from "axios";
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
+import {
+  Grid,
+  Card,
+  Button,
+  CardActions,
+  CardContent,
+  Typography,
+  Paper,
+  CardHeader,
+  Divider,
+} from "@mui/material";
+import { loadStripe } from "@stripe/stripe-js";
 import ConfirmModal from './ConfirmModal/ConfirmModal';
 
 import classes from './orderSummary.module.scss';
@@ -20,35 +36,44 @@ const CheckoutForm = ({ clientSecret }) => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleCheckout = async (e) => {
     e.preventDefault();
 
-    await stripe
-      .confirmCardPayment(clientSecret, {
+    try {
+      const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
-      })
-      .then((result) => {
-        if (result.paymentIntent.status === 'succeeded') {
-          // Payment succeeded, redirect to the delivery page
-          //navigate('/delivery');
+      });
+
+      if (result.paymentIntent.status === "succeeded") {
+        const updateObj = {
+          cartId: checkout.cartId,
+          restaurantId: checkout.restaurantId,
+          userId: checkout.userId,
+          newOrderStatus: "payment",
+        };
+        const response = await updateOrderStatus(updateObj);
+        if (response.status === 201) {
           setConfirmModalActive(true);
-        } else {
-          // Handle other cases (e.g., if payment is not succeeded)
-          // You can display an error message or take appropriate actions
-          console.warn('Payment not succeeded');
+          dispatch(updateCartStatus(response.data.orderStatus))
+          navigate("/delivery");
         }
-      })
-      .catch((err) => console.warn(err));
-  };
+      } else {
+        console.warn("Payment not succeeded");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+      }
 
   return (
-    <div>
-      {/* Order Summary */}
-      <div className={classes.orderSummary}>
-        <div className={classes.orderSummary__wrapper}>
+    
+   <div>
+    <div className={classes.orderSummary}>
+    <div className={classes.orderSummary__wrapper}>
           <div className={classes.orderSummary__header}>
             <h2>Checkout</h2>
           </div>
@@ -66,10 +91,12 @@ const CheckoutForm = ({ clientSecret }) => {
               : null}
           </div>
           <div className={classes.orderSummary__checkout}>
-            <div className={classes.orderSummary__checkout__total}>
-              <h3>Total</h3>
-              <h3>$255</h3>
-            </div>
+          {checkout && checkout.totalprice && (
+           <div className={classes.orderSummary__checkout__total}>
+           <h3>Total</h3>
+           <h3>${checkout.totalprice}</h3>
+         </div>
+          )}
             <CardElement />
 
             <Button onClick={handleCheckout}>
@@ -77,49 +104,23 @@ const CheckoutForm = ({ clientSecret }) => {
             </Button>
           </div>
         </div>
-      </div>
-
-      {/* Processing orders */}
-      {/* <div className={classes.processing}>
-        <div className={classes.processing__wrapper}>
-          <div className={classes.processing__header}>
-            <h2>
-              {checkout.restaurantName} <span>is preparing your order:</span>
-            </h2>
-            <h2>Receipt</h2>
-          </div>
-          <div className={classes.processing__main}>
-            {checkout
-              ? checkout.lineItems.map((lineItem) => (
-                  <>
-                    <div className={classes.processing__dishes}>
-                      <p className={classes.processing__quantity}>{lineItem.quantity}</p>
-                      <p className={classes.processing__name}>{lineItem.name}</p>
-                      <p className={classes.processing__price}>${lineItem.price}</p>
-                    </div>
-                    <div className={classes.processing__total}>
-                      <h2>Total</h2>
-                      <h2>$255</h2>
-                    </div>
-                  </>
-                ))
-              : null}
-          </div>
-        </div>
-      </div> */}
-      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive} />
     </div>
+    <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive}/>
+   </div>
   );
 };
 
 export default function OrderSummary() {
+  const { checkout } = useSelector((state) => state.menu);
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
+    console.log("checkout", checkout.totalprice);
     const fetchClientSecret = async () => {
+      const priceInCents = parseInt(checkout.totalprice * 100);
       const url = `${apiUrl}/api/cart/placeOrder`;
       try {
-        const response = await axios.post(url, { amount: 50000 });
+        const response = await axios.post(url, { amount: priceInCents });
         setClientSecret(response.data.clientSecret);
       } catch (error) {
         throw error;
@@ -127,7 +128,7 @@ export default function OrderSummary() {
     };
 
     fetchClientSecret();
-  }, []);
+  }, [checkout.totalprice]);
 
   return (
     <Paper>
