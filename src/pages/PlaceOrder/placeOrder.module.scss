@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
 }
 .mapboxgl-marker {
   width: 20px; /* Adjust the width as needed */

@@ -24,6 +24,7 @@ const CheckoutForm = ({ clientSecret }) => {
 
   const handleCheckout = async (e) => {
     e.preventDefault();
+    
 
     await stripe
       .confirmCardPayment(clientSecret, {
@@ -34,7 +35,8 @@ const CheckoutForm = ({ clientSecret }) => {
       .then((result) => {
         if (result.paymentIntent.status === 'succeeded') {
           // Payment succeeded, redirect to the delivery page
-          navigate('/delivery');
+          //navigate('/delivery');
+          setConfirmModalActive(true);
         } else {
           // Handle other cases (e.g., if payment is not succeeded)
           // You can display an error message or take appropriate actions
