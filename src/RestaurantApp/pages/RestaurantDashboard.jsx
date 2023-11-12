@@ -19,7 +19,7 @@ const RestaurantHomePage = () => {
     const fetchData = async () => {
       try {
         const data = await getAllOrdersByRestaurantId(restaurantId);
-        console.log(data)
+        
         setRestaurantOrderDetails(data);
       } catch (error) {
         console.error("Error fetching data:", error);
