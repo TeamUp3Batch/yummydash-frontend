@@ -12,15 +12,8 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import {
-  Grid,
-  Card,
   Button,
-  CardActions,
-  CardContent,
-  Typography,
-  Paper,
-  CardHeader,
-  Divider,
+  Paper
 } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
 import ConfirmModal from './ConfirmModal/ConfirmModal';
@@ -117,7 +110,6 @@ export default function OrderSummary() {
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
-    console.log("checkout", checkout.totalprice);
     const fetchClientSecret = async () => {
       const priceInCents = parseInt(checkout.totalprice * 100);
       const url = `${apiUrl}/api/cart/placeOrder`;

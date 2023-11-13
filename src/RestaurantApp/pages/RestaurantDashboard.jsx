@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { getAllOrdersByRestaurantId } from "../../services/cartService";
+import React, { useState, useEffect } from 'react';
+import { getAllOrdersByRestaurantId,  updateOrderStatusByRestaurant} from '../../services/cartService';
 import {
   Table,
   TableBody,
@@ -8,30 +8,86 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@mui/material";
-import RestuarantHeader from '../components/RestaurantHeader/RestaurantHeader';
+  Button,
+} from '@mui/material';
+import RestaurantHeader from '../components/RestaurantHeader/RestaurantHeader';
+import OrderDetailsModal from '../components/OrderStatusModal/OrderStatusModal';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
+
 
 const RestaurantDashboard = () => {
   const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [error, setError] = useState(null); 
   const restaurantId = '6527a6e0fdb8bf79ffc03c4f';
 
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getAllOrdersByRestaurantId(restaurantId);
-        
         setRestaurantOrderDetails(data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
   }, [restaurantId]);
 
+  const handleOpenModal = (orderId) => {
+    setSelectedOrderId(orderId);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedOrderId(null);
+  };
+
+  const handleCloseError = () => {
+    setError(null);
+  };
+
+  const handleConfirmOrder = async () => {
+    let data = {}
+    if(restaurantOrderDetails[0].orderStatus === 'payment') {
+        data = {
+        cartId: restaurantOrderDetails[0]._id,
+        restaurantId: restaurantId,
+        userId: restaurantOrderDetails[0].userId,
+        newOrderStatus: 'acceptance' 
+      }
+    } else if(restaurantOrderDetails[0].orderStatus === 'acceptance') {
+        data = {
+        cartId: restaurantOrderDetails[0]._id,
+        restaurantId: restaurantId,
+        userId: restaurantOrderDetails[0].userId,
+        newOrderStatus: 'preparation' 
+      }
+    } else if(restaurantOrderDetails[0].orderStatus === 'preparation') {
+      data = {
+        cartId: restaurantOrderDetails[0]._id,
+        restaurantId: restaurantId,
+        userId: restaurantOrderDetails[0].userId,
+        newOrderStatus: 'pickup' 
+      }
+    }
+   
+   
+    try {
+      const result = await updateOrderStatusByRestaurant(data);
+      handleCloseModal();
+      
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while updating order status.');
+    }
+  }
+
   return (
     <div>
-      <RestuarantHeader />
+      <RestaurantHeader />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div
           style={{
@@ -50,7 +106,6 @@ const RestaurantDashboard = () => {
                   <TableCell>Total</TableCell>
                   <TableCell>Status</TableCell>
                   <TableCell>Actions</TableCell>
-
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -67,14 +122,32 @@ const RestaurantDashboard = () => {
                     </TableCell>
                     <TableCell>{order.total}</TableCell>
                     <TableCell>{order.orderStatus}</TableCell>
+                    <TableCell>
+                      <Button onClick={() => handleOpenModal(order._id)}>
+                        View Details
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
+          <OrderDetailsModal
+            open={!!selectedOrderId}
+            onClose={handleCloseModal}
+            selectedOrderId={selectedOrderId}
+            onConfirm={handleConfirmOrder}
+          />
         </div>
       </div>
+      <Snackbar open={!!error} autoHideDuration={6000} onClose={handleCloseError}>
+        <Alert onClose={handleCloseError} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </div>
+    
   );
 };
+
 export default RestaurantDashboard;
