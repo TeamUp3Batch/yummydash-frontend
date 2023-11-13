@@ -6,6 +6,7 @@ import MenuPage from "./pages/MenuPage/MenuPage";
 import PlaceOrder from "../src/pages/PlaceOrder/PlaceOrder";
 import DeliveryPage from "../src/pages/DeliveryPage/DeliveryPage";
 import RestaurantDashboard from "./RestaurantApp/pages/RestaurantDashboard";
+import DriverDashboard from "./DriverApp/pages/DriverDashboard";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/menu/:restaurantId" element={<MenuPage />} />
       <Route path="/order" element={<PlaceOrder />} />
       <Route path="/delivery" element={<DeliveryPage />} />
+      <Route path="/driverApp" element={<DriverDashboard/>}/>
     </Routes>
   );
 }

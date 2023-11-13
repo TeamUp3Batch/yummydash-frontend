@@ -32,10 +32,10 @@ const SimpleHeader = () => {
             Partner
             </Button>
           </Link>
-          <Link to="/courier">
+          <Link to="/driverApp">
             <Button className={styles.signup}>
             <DriveEtaIcon  sx={{fontSize: 30}}/>
-            Courier
+            Driver
             </Button>
           </Link>
           <Button onClick={handleOpen} className={styles.login}>
