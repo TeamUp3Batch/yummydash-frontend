@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from 'react';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,62 +6,72 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import Title from "./Title";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import { getAllOrdersByRestaurantId,  updateOrderStatusByRestaurant} from '../../services/cartService';
+import OrderDriverStatusModal from '../components/OrderDriverStatusModal/OrderDriverStatusModal';
 
-// Generate Order Data
-function createData(
-  id,
-  orderId,
-  orderDetails,
-  customerDetails,
-  pickupAddress,
-  deliveryAddress
-) {
-  return {
-    id,
-    orderId,
-    orderDetails,
-    customerDetails,
-    pickupAddress,
-    deliveryAddress,
+
+
+const Orders = () => {
+  const restaurantId = '6527a6e0fdb8bf79ffc03c4f';
+  const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAllOrdersByRestaurantId(restaurantId);
+        setRestaurantOrderDetails(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
+  }, [restaurantId]);
+
+  const handleOpenModal = (orderId) => {
+    setSelectedOrderId(orderId);
   };
-}
+  const handleCloseModal = () => {
+    setSelectedOrderId(null);
+  };
+  const handleCloseError = () => {
+    setError(null);
+  };
+  
+  const handleAcceptOrder = async () => {
+    let data = {}
+    if(restaurantOrderDetails[0].orderStatus === 'ready') {
+        data = {
+        cartId: restaurantOrderDetails[0]._id,
+        restaurantId: restaurantId,
+        userId: restaurantOrderDetails[0].userId,
+        newOrderStatus: 'pickup' 
+      }
+    } else if(restaurantOrderDetails[0].orderStatus === 'pickup') {
+      data = {
+        cartId: restaurantOrderDetails[0]._id,
+        restaurantId: restaurantId,
+        userId: restaurantOrderDetails[0].userId,
+        newOrderStatus: 'delivery' 
+      }
+    }
 
-const rows = [
-  createData(
-    0,
-    "#123455",
-    "45$ - 3 items",
-    "Alicia Patricia +13062556663",
-    "134 seven street",
-    "431 3rd Ave N"
-  ),
-  createData(
-    1,
-    "#987654",
-    "30$ - 2 items",
-    "John Smith +14015551234",
-    "246 main road",
-    "789 Elm St"
-  ),
-  createData(
-    2,
-    "#567890",
-    "60$ - 4 items",
-    "Emily Johnson +12025559876",
-    "876 Oak Lane",
-    "321 Pine Ave"
-  ),
-  createData(
-    3,
-    "#456789",
-    "25$ - 1 item",
-    "Michael Davis +15043006789",
-    "432 Birch St",
-    "567 Cedar Road"
-  ),
-];
+   
+    try {
+      const result = await updateOrderStatusByRestaurant(data);    
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError(error.message);
+    }
+  }
+  
 
-export default function Orders() {
+  
+ 
   return (
     <React.Fragment>
       <Title>Incoming Orders</Title>
@@ -77,31 +87,35 @@ export default function Orders() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.orderId}</TableCell>
-              <TableCell>{row.orderDetails}</TableCell>
-              <TableCell>{row.customerDetails}</TableCell>
-              <TableCell>{row.pickupAddress}</TableCell>
-              <TableCell>{row.deliveryAddress}</TableCell>
+          {restaurantOrderDetails.map((restaurantOrderDetail) => (
+            <TableRow key={restaurantOrderDetail._id}>
+              <TableCell>{restaurantOrderDetail._id}</TableCell>
+              <TableCell>${restaurantOrderDetail.total} - {restaurantOrderDetail.menuItems.length} items</TableCell>
+              <TableCell>{restaurantOrderDetail.userName.toUpperCase()}</TableCell>
+              <TableCell>{restaurantOrderDetail.restaurantAddress}</TableCell>
+              <TableCell>{restaurantOrderDetail.userAddress}</TableCell>
               <TableCell>
-                <Button style={{ backgroundColor: "green", color: "white" }}>
-                  Accept
-                </Button>
-                <Button
-                  style={{
-                    backgroundColor: "red",
-                    color: "white",
-                    marginLeft: "8px",
-                  }}
-                >
-                  Reject
-                </Button>
+              <Button onClick={() => handleOpenModal(restaurantOrderDetail._id)}>
+                        View Details
+                      </Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <OrderDriverStatusModal
+            open={!!selectedOrderId}
+            onClose={handleCloseModal}
+            onConfirm={handleAcceptOrder}
+            orderId={selectedOrderId}
+          />
+      <Snackbar open={!!error} autoHideDuration={6000} onClose={handleCloseError}>
+        <Alert onClose={handleCloseError} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </React.Fragment>
   );
 }
+
+export default Orders;
