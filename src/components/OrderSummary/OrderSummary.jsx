@@ -115,7 +115,6 @@ export default function OrderSummary() {
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
-    console.log("checkout", checkout.totalprice);
     const fetchClientSecret = async () => {
       const priceInCents = parseInt(checkout.totalprice * 100);
       const url = `${apiUrl}/api/cart/placeOrder`;

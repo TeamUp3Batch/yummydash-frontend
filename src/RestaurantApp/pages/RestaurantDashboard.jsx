@@ -17,9 +17,6 @@ import OrderDetailsModal from '../components/OrderStatusModal/OrderStatusModal';
 const RestaurantDashboard = () => {
   const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
-  const [userOrderId, setUserOrderId] = useState(null);
-  const [orderStatus, setOrderStatus] = useState(null);
-
   const restaurantId = '6527a6e0fdb8bf79ffc03c4f';
 
 
@@ -27,7 +24,6 @@ const RestaurantDashboard = () => {
     const fetchData = async () => {
       try {
         const data = await getAllOrdersByRestaurantId(restaurantId);
-        console.log('data get', data)
         setRestaurantOrderDetails(data);
       } catch (error) {
         console.error('Error fetching data:', error);
