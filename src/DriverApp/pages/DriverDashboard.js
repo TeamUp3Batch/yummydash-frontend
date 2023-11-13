@@ -24,6 +24,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import DriverHeader from "../components/DriverHeader/DriverHeader";
 
 import Orders from "../components/Orders";
 
@@ -105,6 +106,7 @@ export default function DriverDashboard() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      {/* <DriverHeader/> */}
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>

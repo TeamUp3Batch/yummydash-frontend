@@ -8,7 +8,7 @@ const DriverHeader = () => {
   return (
     <div className={styles.header}>
       <div className={styles.wrapper}>
-      <h1>Driver Portal</h1>>
+      <h1>Driver Portal</h1>
         <img className={styles.logo} src={logo} alt="Logo" />
         
           </div>
