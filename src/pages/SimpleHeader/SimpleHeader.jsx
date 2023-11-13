@@ -26,7 +26,7 @@ const SimpleHeader = () => {
             Admin
             </Button>
           </Link>
-          <Link to="/restaurantHomePage">
+          <Link to="/restaurantDashboard">
             <Button className={styles.signup}>
             <RestaurantIcon  sx={{fontSize: 30}}/>
             Partner

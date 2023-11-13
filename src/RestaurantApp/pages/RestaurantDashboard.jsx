@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import RestuarantHeader from '../components/RestaurantHeader/RestaurantHeader';
 
-const RestaurantHomePage = () => {
+const RestaurantDashboard = () => {
   const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
   const restaurantId = '6527a6e0fdb8bf79ffc03c4f';
 
@@ -77,4 +77,4 @@ const RestaurantHomePage = () => {
     </div>
   );
 };
-export default RestaurantHomePage;
+export default RestaurantDashboard;
