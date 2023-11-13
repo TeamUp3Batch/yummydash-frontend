@@ -41,6 +41,8 @@ const OrderDetailsModal = ({ open, onClose, selectedOrderId, onConfirm }) => {
             </div>
           )}
           <Button onClick={onConfirm}>Confirm</Button>
+          <Button onClick={onConfirm}>Preparing</Button>
+          <Button onClick={onConfirm}>Ready</Button>
           <Button onClick={onClose}>Close</Button>
         </div>
       </Fade>

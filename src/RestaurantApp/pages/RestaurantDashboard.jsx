@@ -58,6 +58,20 @@ const RestaurantDashboard = () => {
         userId: restaurantOrderDetails[0].userId,
         newOrderStatus: 'acceptance' 
       }
+    } else if(restaurantOrderDetails[0].orderStatus === 'acceptance') {
+        data = {
+        cartId: restaurantOrderDetails[0]._id,
+        restaurantId: restaurantId,
+        userId: restaurantOrderDetails[0].userId,
+        newOrderStatus: 'preparation' 
+      }
+    } else if(restaurantOrderDetails[0].orderStatus === 'preparation') {
+      data = {
+        cartId: restaurantOrderDetails[0]._id,
+        restaurantId: restaurantId,
+        userId: restaurantOrderDetails[0].userId,
+        newOrderStatus: 'pickup' 
+      }
     }
    
    
