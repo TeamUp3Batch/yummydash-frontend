@@ -18,7 +18,6 @@ export function useCheckoutHooks(restaurantDetails) {
         const userId = loggedInUser._id;
         const cartId = selectCartId
         const data = await proceedToCheckout({ cartId, restaurantId, userId });
-        console.log("checkout data", data);
         if (data.status === "success") {
           dispatch(checkout(data));
           navigate("/order");
