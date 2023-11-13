@@ -12,15 +12,8 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import {
-  Grid,
-  Card,
   Button,
-  CardActions,
-  CardContent,
-  Typography,
-  Paper,
-  CardHeader,
-  Divider,
+  Paper
 } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
 import ConfirmModal from './ConfirmModal/ConfirmModal';
