@@ -52,3 +52,15 @@ export const addToCartItem = async (data) => {
       throw error;
     }
   };
+
+  export const updateOrderStatusByRestaurant = async (data) => {
+   
+    const url = `${apiUrl}/api/cart/updateOrderStatus`;
+    try {
+      const result = await axios.post(url, data);
+      return result.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+

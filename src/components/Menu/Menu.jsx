@@ -16,7 +16,6 @@ import { setCartId } from "../../slices/menuSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Menu = ({ restaurantDetails }) => {
-  console.log("rest", restaurantDetails);
   const cart = useSelector((state) => state.menu.cart); // Get the cart from the Redux store
   const { proceedCheckout } = useCheckoutHooks(restaurantDetails);
   const [modalActive, setModalActive] = useState(false);
