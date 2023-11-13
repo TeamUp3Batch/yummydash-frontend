@@ -21,7 +21,7 @@ function App() {
       <Route path="/menu/:restaurantId" element={<MenuPage />} />
       <Route path="/order" element={<PlaceOrder />} />
       <Route path="/delivery" element={<DeliveryPage />} />
-      <Route path="/driverApp" element={<DriverDashboard/>}/>
+      <Route path="/driverDashBoard" element={<DriverDashboard/>}/>
     </Routes>
   );
 }

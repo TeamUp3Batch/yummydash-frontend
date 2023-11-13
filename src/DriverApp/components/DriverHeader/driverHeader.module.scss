@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    font-family: 'Arsenal', sans-serif;
+  }
+  
+  .header {
+    width: 100%;
+    background-color: #1B2024;
+  
+    .wrapper {
+      position: sticky;
+      height: 90px;
+      border-bottom: 1px solid #f5f3f1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+      padding: 0 45px;
+  
+      .logo {
+        width: 100px;
+      }
+    }
+}
+  
+      
+      
+      
+    
+  
+      
+  
+    
