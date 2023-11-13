@@ -12,14 +12,18 @@ import {
 } from '@mui/material';
 import RestaurantHeader from '../components/RestaurantHeader/RestaurantHeader';
 import OrderDetailsModal from '../components/OrderStatusModal/OrderStatusModal';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
 
 
 const RestaurantDashboard = () => {
   const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [error, setError] = useState(null); 
   const restaurantId = '6527a6e0fdb8bf79ffc03c4f';
 
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,20 +45,29 @@ const RestaurantDashboard = () => {
     setSelectedOrderId(null);
   };
 
+  const handleCloseError = () => {
+    setError(null);
+  };
+
   const handleConfirmOrder = async () => {
-    const data = {
-      cartId: restaurantOrderDetails[0]._id,
-      restaurantId: restaurantId,
-      userId: restaurantOrderDetails[0].userId,
-      newOrderStatus: 'acceptance',
+    let data = {}
+    if(restaurantOrderDetails[0].orderStatus === 'payment') {
+        data = {
+        cartId: restaurantOrderDetails[0]._id,
+        restaurantId: restaurantId,
+        userId: restaurantOrderDetails[0].userId,
+        newOrderStatus: 'acceptance' 
+      }
     }
+   
    
     try {
       const result = await updateOrderStatusByRestaurant(data);
-      console.log(result);
+      handleCloseModal();
       
     } catch (error) {
       console.error('Error fetching data:', error);
+      setError('An error occurred while updating order status.');
     }
   }
 
@@ -113,7 +126,13 @@ const RestaurantDashboard = () => {
           />
         </div>
       </div>
+      <Snackbar open={!!error} autoHideDuration={6000} onClose={handleCloseError}>
+        <Alert onClose={handleCloseError} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </div>
+    
   );
 };
 
