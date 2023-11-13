@@ -47,8 +47,10 @@ const CheckoutForm = ({ clientSecret }) => {
           card: elements.getElement(CardElement),
         },
       });
+      console.log('result', result);
+      console.log('result paymentIntent', result.paymentIntent);
 
-      if (result.paymentIntent.status === "succeeded") {
+      if (result?.paymentIntent?.status === "succeeded") {
         const updateObj = {
           cartId: checkout.cartId,
           restaurantId: checkout.restaurantId,
