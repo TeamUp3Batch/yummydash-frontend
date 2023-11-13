@@ -70,7 +70,7 @@ const RestaurantDashboard = () => {
         cartId: restaurantOrderDetails[0]._id,
         restaurantId: restaurantId,
         userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: 'pickup' 
+        newOrderStatus: 'ready' 
       }
     }
    
