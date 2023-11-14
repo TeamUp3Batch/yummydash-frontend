@@ -105,7 +105,6 @@ export default function DriverDashboard() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      {/* <DriverHeader/> */}
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
