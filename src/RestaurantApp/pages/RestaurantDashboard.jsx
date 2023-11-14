@@ -1,153 +1,250 @@
-import React, { useState, useEffect } from 'react';
-import { getAllOrdersByRestaurantId,  updateOrderStatusByRestaurant} from '../../services/cartService';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Button,
-} from '@mui/material';
-import RestaurantHeader from '../components/RestaurantHeader/RestaurantHeader';
-import OrderDetailsModal from '../components/OrderStatusModal/OrderStatusModal';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import * as React from "react";
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import MuiDrawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Link from "@mui/material/Link";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import CheckIcon from "@mui/icons-material/Check";
+import CancelIcon from "@mui/icons-material/Cancel";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import logo from "../../img/yummyDashLogo.png";
 
 
+import RestaurantOrder from "../components/RestauarnatOrder/RestaurantOrder";
 
-const RestaurantDashboard = () => {
-  const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
-  const [selectedOrderId, setSelectedOrderId] = useState(null);
-  const [error, setError] = useState(null); 
-  const restaurantId = '6527a6e0fdb8bf79ffc03c4f';
+const drawerWidth = 240;
 
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getAllOrdersByRestaurantId(restaurantId);
-        setRestaurantOrderDetails(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
 
-    fetchData();
-  }, [restaurantId]);
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  "& .MuiDrawer-paper": {
+    position: "relative",
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: "border-box",
+    ...(!open && {
+      overflowX: "hidden",
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: theme.spacing(7),
+      [theme.breakpoints.up("sm")]: {
+        width: theme.spacing(9),
+      },
+    }),
+  },
+}));
 
-  const handleOpenModal = (orderId) => {
-    setSelectedOrderId(orderId);
+const defaultTheme = createTheme();
+
+export default function RestaurantDashboard() {
+  const [open, setOpen] = React.useState(true);
+  const [selectedSection, setSelectedSection] =
+    React.useState("incomingOrders");
+
+  const toggleDrawer = () => {
+    setOpen(!open);
   };
 
-  const handleCloseModal = () => {
-    setSelectedOrderId(null);
+  const handleSectionClick = (section) => {
+    setSelectedSection(section);
   };
 
-  const handleCloseError = () => {
-    setError(null);
-  };
-
-  const handleConfirmOrder = async () => {
-    let data = {}
-    if(restaurantOrderDetails[0].orderStatus === 'payment') {
-        data = {
-        cartId: restaurantOrderDetails[0]._id,
-        restaurantId: restaurantId,
-        userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: 'acceptance' 
-      }
-    } else if(restaurantOrderDetails[0].orderStatus === 'acceptance') {
-        data = {
-        cartId: restaurantOrderDetails[0]._id,
-        restaurantId: restaurantId,
-        userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: 'preparation' 
-      }
-    } else if(restaurantOrderDetails[0].orderStatus === 'preparation') {
-      data = {
-        cartId: restaurantOrderDetails[0]._id,
-        restaurantId: restaurantId,
-        userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: 'ready' 
-      }
+  const renderSectionContent = () => {
+    switch (selectedSection) {
+      case "incomingOrders":
+        return <RestaurantOrder />;
+      case "fulfilledOrders":
+        return <Typography variant="h4">Fulfilled Orders Content</Typography>;
+      case "cancelledOrders":
+        return <Typography variant="h4">Cancelled Orders Content</Typography>;
+      case "profile":
+        return <Typography variant="h4">Profile Content</Typography>;
+      case "menu":
+        return <Typography variant="h4">Menu Content</Typography>;
+      default:
+        return null;
     }
-   
-   
-    try {
-      const result = await updateOrderStatusByRestaurant(data);
-      handleCloseModal();
-      
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setError('An error occurred while updating order status.');
-    }
-  }
+  };
 
   return (
-    <div>
-      <RestaurantHeader />
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <div
-          style={{
-            marginLeft: 200,
-            marginTop: 50,
-            transition: 'margin 0.3s',
+    <ThemeProvider theme={defaultTheme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open}>
+          <Toolbar sx={{ pr: "24px" }}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{
+                marginRight: "36px",
+                ...(open && { display: "none" }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
+            >
+              Restaurant Dashboard
+            </Typography>
+            <img style={{ width: '5%' }} src={logo} alt="Logo" />
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <Toolbar
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              px: [1],
+            }}
+          >
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+          <List component="nav">
+            <Link
+              href="#"
+              color="inherit"
+              underline="none"
+              onClick={() => handleSectionClick("incomingOrders")}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Incoming Orders" />
+              </ListItem>
+            </Link>
+
+            <Link
+              href="#"
+              color="inherit"
+              underline="none"
+              onClick={() => handleSectionClick("fulfilledOrders")}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText primary="Fulfilled Orders" />
+              </ListItem>
+            </Link>
+
+            <Link
+              href="#"
+              color="inherit"
+              underline="none"
+              onClick={() => handleSectionClick("cancelledOrders")}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <CancelIcon />
+                </ListItemIcon>
+                <ListItemText primary="Cancelled Orders" />
+              </ListItem>
+            </Link>
+
+            <Link
+              href="#"
+              color="inherit"
+              underline="none"
+              onClick={() => handleSectionClick("profile")}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Profile" />
+              </ListItem>
+            </Link>
+            <Link
+              href="#"
+              color="inherit"
+              underline="none"
+              onClick={() => handleSectionClick("menu")}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <MenuBookIcon />
+                </ListItemIcon>
+                <ListItemText primary="Menu" />
+              </ListItem>
+            </Link>
+          </List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
           }}
         >
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Order ID</TableCell>
-                  <TableCell>User ID</TableCell>
-                  <TableCell>Menu Item</TableCell>
-                  <TableCell>Total</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {restaurantOrderDetails.map((order) => (
-                  <TableRow key={order._id}>
-                    <TableCell>{order._id}</TableCell>
-                    <TableCell>{order.userId}</TableCell>
-                    <TableCell>
-                      {order.menuItems.map((menuItem) => (
-                        <div key={menuItem._id}>
-                          {menuItem.name} - {menuItem.quantity}
-                        </div>
-                      ))}
-                    </TableCell>
-                    <TableCell>{order.total}</TableCell>
-                    <TableCell>{order.orderStatus}</TableCell>
-                    <TableCell>
-                      <Button onClick={() => handleOpenModal(order._id)}>
-                        View Details
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <OrderDetailsModal
-            open={!!selectedOrderId}
-            onClose={handleCloseModal}
-            selectedOrderId={selectedOrderId}
-            onConfirm={handleConfirmOrder}
-          />
-        </div>
-      </div>
-      <Snackbar open={!!error} autoHideDuration={6000} onClose={handleCloseError}>
-        <Alert onClose={handleCloseError} severity="error">
-          {error}
-        </Alert>
-      </Snackbar>
-    </div>
-    
+          <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  {renderSectionContent()}
+                </Paper>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
-};
-
-export default RestaurantDashboard;
+}

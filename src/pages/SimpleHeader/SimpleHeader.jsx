@@ -26,13 +26,13 @@ const SimpleHeader = () => {
             Admin
             </Button>
           </Link>
-          <Link to="/restaurantDashboard">
+          <Link to="/restaurantSignUp">
             <Button className={styles.signup}>
             <RestaurantIcon  sx={{fontSize: 30}}/>
             Partner
             </Button>
           </Link>
-          <Link to="/driverDashBoard">
+          <Link to="/driverSignUp">
             <Button className={styles.signup}>
             <DriveEtaIcon  sx={{fontSize: 30}}/>
             Driver
