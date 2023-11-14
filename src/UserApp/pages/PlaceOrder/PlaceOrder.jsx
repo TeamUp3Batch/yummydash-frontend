@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import DeliveryDetailsBox from "../../components/DeliveryDetailsBox/DeliveryDetailsBox";
 import classes from "./placeOrder.module.scss";
@@ -7,14 +7,13 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import RestaurantTwoToneIcon from "@mui/icons-material/RestaurantTwoTone";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
 
 
 //mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const PlaceOrder = () => {
   const { checkout } = useSelector((state) => state.menu);
-  const navigate = useNavigate();
   //mapbox start
   const [viewport, setViewport] = useState({
     latitude: checkout?.userAddress?.latitude || 56, // Latitude of the marker

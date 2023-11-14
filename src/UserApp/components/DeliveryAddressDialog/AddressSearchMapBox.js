@@ -8,8 +8,8 @@ import { saveAddress } from "../../../services/userService";
 
 
 const AddressSearchMapBox = ({onSearchAddressSelect}) =>{
-  const { address, latitude, longitude, setAddress } = useMapboxSearch();
-  const { loggedInUser, isLoading, error } = useSelector((state) => state.auth);
+  const { address, latitude, longitude } = useMapboxSearch();
+  const { loggedInUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [savedAddress, setSavedAddress] = useState(null);
     const [isSaving, setIsSaving] = useState(false);
