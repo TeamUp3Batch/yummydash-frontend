@@ -16,7 +16,6 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -24,7 +23,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import DriverHeader from "../components/DriverHeader/DriverHeader";
+import logo from "../../img/yummyDashLogo.png"
+
 
 import Orders from "../components/Orders";
 
@@ -106,7 +106,6 @@ export default function DriverDashboard() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      {/* <DriverHeader/> */}
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -130,13 +129,10 @@ export default function DriverDashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Driver Dashboard
             </Typography>
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
+            <img style={{ width: '5%' }} src={logo} alt="Logo" />
+            
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
