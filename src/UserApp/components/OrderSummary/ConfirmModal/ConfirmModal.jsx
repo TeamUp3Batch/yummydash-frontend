@@ -27,7 +27,7 @@ const ConfirmModal = ({ active, setActive }) => {
               <p>Packaging</p>
             </div>
           </div>
-          <Link to="../main">
+          <Link to="../delivery">
             <div className={classes.confirmModal__wrapper_button} onClick={() => setActive(false)}>
               <h4>I UNDERSTAND</h4>
             </div>
