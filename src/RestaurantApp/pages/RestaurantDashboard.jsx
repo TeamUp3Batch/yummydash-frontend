@@ -76,7 +76,7 @@ const Drawer = styled(MuiDrawer, {
 
 const defaultTheme = createTheme();
 
-export default function DriverDashboard() {
+export default function RestaurantDashboard() {
   const [open, setOpen] = React.useState(true);
   const [selectedSection, setSelectedSection] =
     React.useState("incomingOrders");
