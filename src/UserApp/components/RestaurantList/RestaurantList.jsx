@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { useFetchRestaurants } from "./hooks/useFetchRestaurants";
 

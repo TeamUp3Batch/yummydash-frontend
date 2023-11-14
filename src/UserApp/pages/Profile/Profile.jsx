@@ -57,11 +57,8 @@ const Profile = () => {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
 
-  const { loggedInUser, error } = useSelector((state) => state.auth);
+  const { loggedInUser } = useSelector((state) => state.auth);
 
   return (
     <React.Fragment>

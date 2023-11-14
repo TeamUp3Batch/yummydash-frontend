@@ -5,20 +5,16 @@ import Menu from "@mui/material/Menu"; // Import Menu component
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import Radio from "@mui/joy/Radio";
-import axios from "axios";
-import { ListItem, TextField } from "@mui/material";
-import { useDispatch } from "react-redux";
-import Button from "@mui/material/Button";
-import CuisineCarousel from "../CuisineCarousel/CuisineCarousel";
+import { ListItem } from "@mui/material";
+
 
 const SortingDialog = ({ onSelect }) => {
-  const apiUrl = process.env.REACT_APP_BACKEND_URL;
-  const { loggedInUser, isLoading, error } = useSelector((state) => state.auth);
+  const { loggedInUser } = useSelector((state) => state.auth);
   const [isDialogVisible, setDialogVisible] = useState(false);
   const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
   const [selectedSort, setSelectedSort] = useState(false);
   const iconRef = useRef(null);
-  const [sort, setSort] = useState(null);
+
   const handleClear = async () =>{
     onSelect('');
   }
@@ -49,30 +45,6 @@ const SortingDialog = ({ onSelect }) => {
     width: "300px",
   };
 
-  const innerDialogStyle = {
-    position: "absolute",
-    top: dialogPosition.top,
-    left: dialogPosition.left,
-    zIndex: 1000,
-    height: "400px",
-    width: "350px",
-  };
-  const style = {
-    width: "100%",
-    maxWidth: 360,
-    bgcolor: "background.paper",
-  };
-
-  const inputStyle = {
-    color: "#0C151D",
-    fontweight: 400,
-    padding: "4px 12px ",
-    fontSize: "16px",
-    boxSizing: "border-box",
-    borderRadius: "1px",
-    width: "100%",
-    margin: "2px 0px 10px",
-  };  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isDialogVisible && !iconRef.current.contains(event.target)) {

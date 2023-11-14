@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getCuisineList } from "../../../../services/restaurantService";
 import { setAllCuisines } from "../../../../slices/restaurantSlice";
 
-export const useCuisineCarousel = ({}) => {
+export const useCuisineCarousel = () => {
   const [cuisineList, setCuisineList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState();
