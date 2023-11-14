@@ -1,10 +1,10 @@
-import SignUp from "../src/pages/SignUp/SignUp";
-import Landing from "../src/pages/LandingPage/LandingPage";
-import Main from "../src/pages/Main/Main";
-import Profile from "./pages/ViewAccount/Profile";
-import MenuPage from "./pages/MenuPage/MenuPage";
-import PlaceOrder from "../src/pages/PlaceOrder/PlaceOrder";
-import DeliveryPage from "../src/pages/DeliveryPage/DeliveryPage";
+import SignUp from "./UserApp/pages/SignUp/SignUp";
+import Landing from "./UserApp/pages/LandingPage/LandingPage";
+import Main from "./UserApp/pages/Main/Main";
+import Profile from "./UserApp/pages/ViewAccount/Profile";
+import MenuPage from "./UserApp/pages/MenuPage/MenuPage";
+import PlaceOrder from "./UserApp/pages/PlaceOrder/PlaceOrder";
+import DeliveryPage from "./UserApp/pages/DeliveryPage/DeliveryPage";
 import RestaurantDashboard from "./RestaurantApp/pages/RestaurantDashboard";
 import DriverDashboard from "./DriverApp/pages/DriverDashboard";
 
