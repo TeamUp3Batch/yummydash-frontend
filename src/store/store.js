@@ -5,12 +5,16 @@ import storage from 'redux-persist/lib/storage';
 import authReducer from "../slices/authSlice";
 import restaurantReducer from '../slices/restaurantSlice';
 import menuReducer from '../slices/menuSlice';
+import driverReducer from '../slices/driverSlice';
+import partnerReducer from '../slices/partnerSlice';
 
 
 const rootReducer = combineReducers({
   auth: authReducer,
   restaurant: restaurantReducer,
   menu: menuReducer,
+  driver: driverReducer,
+  partner: partnerReducer
 });
 
 const persistConfig = {

@@ -12,22 +12,27 @@ import {
   Fade,
 } from "@mui/material";
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import { usePartnerSignUp } from "./hooks/usePartnerSignUp";
 
 const RestaurantSignUp = () => {
+  const { 
+    isError,
+    data,
+    loginData,
+    msg,
+    handleChange,
+    handleSubmit,
+    handleLoginSubmit,
+    handleLoginChange
+  } = usePartnerSignUp({});
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     password: "",
   });
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  
 
   const handleLoginClick = () => {
     setLoginModalOpen(true);
@@ -35,13 +40,6 @@ const RestaurantSignUp = () => {
 
   const handleLoginModalClose = () => {
     setLoginModalOpen(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your signup logic here
-    console.log("Signup data:", formData);
-    // You can make an API call to handle the signup process
   };
 
   return (
@@ -66,22 +64,24 @@ const RestaurantSignUp = () => {
             margin="normal"
             required
             fullWidth
-            id="businessName"
+            id="name"
             label="Business Name"
-            name="businessName"
-            autoComplete="bname"
+            name="name"
+            autoComplete="name"
             autoFocus
+            value={data.name}
             onChange={handleChange}
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            id="businessPhonenumber"
+            id="phoneNumber"
             label="Business Phonenumber"
-            name="business Phonenumber"
-            autoComplete="bphonenumber"
+            name="phoneNumber"
+            autoComplete="phoneNumber"
             autoFocus
+            value={data.phoneNumber}
             onChange={handleChange}
             />
          
@@ -93,6 +93,7 @@ const RestaurantSignUp = () => {
             label="Business Email Address"
             name="email"
             autoComplete="email"
+            value={data.email}
             onChange={handleChange}
           />
           <TextField
@@ -104,6 +105,7 @@ const RestaurantSignUp = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={data.password}
             onChange={handleChange}
           />
           <Button
@@ -147,25 +149,29 @@ const RestaurantSignUp = () => {
             <Typography variant="h6" component="div" gutterBottom>
               Patner Login
             </Typography>
-            <form>
+            <form onSubmit={handleLoginSubmit}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="loginEmail"
+                id="email"
                 label="Email Address"
-                name="loginEmail"
+                name="email"
                 autoComplete="email"
+                onChange={handleLoginChange}
+                value={loginData.email}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="loginPassword"
+                name="password"
                 label="Password"
                 type="password"
-                id="loginPassword"
+                id="password"
                 autoComplete="current-password"
+                onChange={handleLoginChange}
+                value={loginData.password}
               />
               <Button
                 type="submit"
