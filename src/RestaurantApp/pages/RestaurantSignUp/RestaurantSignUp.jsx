@@ -66,10 +66,10 @@ const RestaurantSignUp = () => {
             margin="normal"
             required
             fullWidth
-            id="firstName"
-            label="First Name"
-            name="firstName"
-            autoComplete="fname"
+            id="businessName"
+            label="Business Name"
+            name="businessName"
+            autoComplete="bname"
             autoFocus
             onChange={handleChange}
           />
@@ -77,18 +77,20 @@ const RestaurantSignUp = () => {
             margin="normal"
             required
             fullWidth
-            id="lastName"
-            label="Last Name"
-            name="lastName"
-            autoComplete="lname"
+            id="businessPhonenumber"
+            label="Business Phonenumber"
+            name="business Phonenumber"
+            autoComplete="bphonenumber"
+            autoFocus
             onChange={handleChange}
-          />
+            />
+         
           <TextField
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Business Email Address"
             name="email"
             autoComplete="email"
             onChange={handleChange}
