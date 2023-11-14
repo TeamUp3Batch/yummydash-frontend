@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './modal.module.scss';
 
-const Modal = ({ active, setActive }) => {
+const ToolTipModal = ({ active, setActive }) => {
   return (
     <div className={active ? classes.modal__active : classes.modal}>
       <div className={classes.modal__wrapper}>
@@ -34,4 +34,4 @@ const Modal = ({ active, setActive }) => {
   );
 };
 
-export default Modal;
+export default ToolTipModal;
