@@ -22,6 +22,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import logo from "../../img/yummyDashLogo.png";
 
 
@@ -98,6 +99,8 @@ export default function DriverDashboard() {
         return <Typography variant="h4">Cancelled Orders Content</Typography>;
       case "profile":
         return <Typography variant="h4">Profile Content</Typography>;
+      case "menu":
+        return <Typography variant="h4">Menu Content</Typography>;
       default:
         return null;
     }
@@ -201,6 +204,19 @@ export default function DriverDashboard() {
                   <AccountCircleIcon />
                 </ListItemIcon>
                 <ListItemText primary="Profile" />
+              </ListItem>
+            </Link>
+            <Link
+              href="#"
+              color="inherit"
+              underline="none"
+              onClick={() => handleSectionClick("menu")}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <MenuBookIcon />
+                </ListItemIcon>
+                <ListItemText primary="Menu" />
               </ListItem>
             </Link>
           </List>
