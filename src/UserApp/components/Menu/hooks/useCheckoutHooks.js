@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import react from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { proceedToCheckout } from "../../../../services/paymentService";

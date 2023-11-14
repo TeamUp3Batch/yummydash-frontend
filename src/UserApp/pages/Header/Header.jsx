@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Drawer from "@mui/material/Drawer"; // Import Drawer component
 import { useSelector, useDispatch } from "react-redux";
-import TuneIcon from "@mui/icons-material/Tune";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -26,11 +25,9 @@ const Header = ({ setSorting }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [userName, setUserName] = useState(" ");
   const [selectedSearchAddress, setSelectedSearchAddress] = useState("");
   const [selectedSorting, setSelectedSorting] = useState(null);
-  const { loggedInUser, error } = useSelector((state) => state.auth);
+  const { loggedInUser } = useSelector((state) => state.auth);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
