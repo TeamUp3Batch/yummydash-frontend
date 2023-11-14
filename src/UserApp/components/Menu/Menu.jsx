@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Modal from "./Modal/Modal";
+import Modal from "./ToolTipModal/ToolTipModal";
 import DishModal from "./DishModal/DishModal";
 
 import Star from "../../../icons/star-svgrepo-com.svg";
