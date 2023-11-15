@@ -10,6 +10,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { getAllOrdersByRestaurantId,  updateOrderStatusByRestaurant} from '../../../services/cartService';
 import OrderDetailsModal from '../OrderDetailsModal/OrderDetailsModal'
+import { useSelector } from 'react-redux'
 
 
 
@@ -17,8 +18,8 @@ const RestaurantOrder = () => {
   const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [error, setError] = useState(null);
-
-  const restaurantId = '6527a6e0fdb8bf79ffc03c4f';
+  const { loggedInPartner } = useSelector((state) => state.partner);
+  const restaurantId = loggedInPartner.restaurantId;
 
   
   useEffect(() => {
@@ -32,7 +33,7 @@ const RestaurantOrder = () => {
     };
 
     fetchData();
-  }, [restaurantId]);
+  }, []);
 
   const handleOpenModal = (orderId) => {
     setSelectedOrderId(orderId);
@@ -45,40 +46,56 @@ const RestaurantOrder = () => {
   };
   
   const handleConfirmOrder = async () => {
-    let data = {}
-    if(restaurantOrderDetails[0].orderStatus === 'payment') {
-        data = {
-        cartId: restaurantOrderDetails[0]._id,
-        restaurantId: restaurantId,
-        userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: 'acceptance' 
-      }
-    } else if(restaurantOrderDetails[0].orderStatus === 'acceptance') {
-        data = {
-        cartId: restaurantOrderDetails[0]._id,
-        restaurantId: restaurantId,
-        userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: 'preparation' 
-      }
-    } else if(restaurantOrderDetails[0].orderStatus === 'preparation') {
-      data = {
-        cartId: restaurantOrderDetails[0]._id,
-        restaurantId: restaurantId,
-        userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: 'ready' 
-      }
+    if (!selectedOrderId) {
+      return; // No order selected
     }
-   
-   
+  
+    const selectedOrderIndex = restaurantOrderDetails.findIndex(order => order._id === selectedOrderId);
+  
+    if (selectedOrderIndex === -1) {
+      return; // Selected order not found
+    }
+  
+    let newOrderStatus;
+  
+    switch (restaurantOrderDetails[selectedOrderIndex].orderStatus) {
+      case 'payment':
+        newOrderStatus = 'acceptance';
+        break;
+      case 'acceptance':
+        newOrderStatus = 'preparation';
+        break;
+      case 'preparation':
+        newOrderStatus = 'ready';
+        break;
+      default:
+        return; // Invalid order status
+    }
+  
+    const data = {
+      cartId: selectedOrderId,
+      restaurantId: restaurantId,
+      userId: restaurantOrderDetails[selectedOrderIndex].userId,
+      newOrderStatus: newOrderStatus,
+    };
+  
     try {
       const result = await updateOrderStatusByRestaurant(data);
+  
+      // Update the local state with the modified order
+      setRestaurantOrderDetails(prevState => {
+        const updatedOrderDetails = [...prevState];
+        updatedOrderDetails[selectedOrderIndex].orderStatus = newOrderStatus;
+        return updatedOrderDetails;
+      });
+  
       handleCloseModal();
-      
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error updating order status:', error);
       setError('An error occurred while updating order status.');
     }
-  }
+  };
+  
 
   
  
