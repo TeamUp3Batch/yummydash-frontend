@@ -30,7 +30,7 @@ import { useNavigate } from "react-router-dom";
 
 import RestaurantOrder from "../components/RestauarnatOrder/RestaurantOrder";
 import RestaurantMenu from "../components/RestaurantMenu/RestaurantMenu";
-import Profile from "../components/Profile";
+import Profile from "../components/Profile/Profile";
 
 const drawerWidth = 240;
 
