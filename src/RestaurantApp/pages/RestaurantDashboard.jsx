@@ -31,6 +31,7 @@ import { useNavigate } from "react-router-dom";
 
 import RestaurantOrder from "../components/RestauarnatOrder/RestaurantOrder";
 import RestaurantMenu from "../components/RestaurantMenu/RestaurantMenu";
+import Profile from "../components/Profile";
 
 const drawerWidth = 240;
 
@@ -107,7 +108,7 @@ export default function RestaurantDashboard() {
       case "fulfilledOrders":
         return <Typography variant="h4">Fulfilled Orders Content</Typography>;
       case "profile":
-        return <Typography variant="h4">Profile Content</Typography>;
+        return <Profile />;
       case "menu":
         return <RestaurantMenu />;
       default:
