@@ -10,7 +10,6 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -19,14 +18,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import CheckIcon from "@mui/icons-material/Check";
-import CancelIcon from "@mui/icons-material/Cancel";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import logo from "../../img/yummyDashLogo.png";
-
 import Orders from "../components/Orders";
 import PickedUpOrders from "../components/PickedUpOrders";
 import FulFilledOrders from "../components/FulFilledOrders";
@@ -90,6 +87,7 @@ export default function DriverDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
+
     dispatch(logoutDriver());
     navigate("/");
   };
@@ -110,10 +108,8 @@ export default function DriverDashboard() {
         return <PickedUpOrders />;
       case "fulfilledOrders":
       return <FulFilledOrders />;
-      //return <Typography variant="h4">Fulfilled Orders Content</Typography>;
       case "profile":
         return <Profile/>
-        // return <Typography variant="h4">Profile Content</Typography>;
       default:
         return null;
     }
