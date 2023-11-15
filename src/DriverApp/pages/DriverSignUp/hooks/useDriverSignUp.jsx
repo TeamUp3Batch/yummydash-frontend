@@ -50,7 +50,6 @@ export const useDriverSignUp = () => {
       setMsg(result.data.status);
       if (result.data.status === true) {
         dispatch(signUpDriverSuccess(result.data));
-        console.log("result data", result.data);
         navigate("/driverDashboard");
       }
       // setOpenSnackbar(true);

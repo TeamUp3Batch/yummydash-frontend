@@ -83,7 +83,7 @@ const RestaurantMenu = () => {
       menuID: menuItemId,
       restaurantId: restaurantId,
     };
-    console.log("menuItemId", data);
+
     try {
       const deletedMenuDetails = await deleteMenuItem(data);
       if (deletedMenuDetails) {
