@@ -1,0 +1,154 @@
+* {
+  font-family: 'Arsenal', sans-serif;
+  h2 {
+    font-size: 15px;
+  }
+
+  p {
+    font-size: 13.5px;
+  }
+}
+
+.processingForm {
+  z-index: 25;
+  margin: 25px;
+  position: relative;
+  float: right;
+  background-color: #fff;
+  width: 300px;
+  border-radius: 5px;
+  box-shadow:
+    0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+  .processingForm__wrapper {
+    .processingForm__header {
+      border-bottom: 1px solid rgb(245, 243, 241);
+      padding: 25px;
+
+      h2 {
+        span {
+          font-size: 16px;
+          font-weight: normal;
+        }
+      }
+    }
+
+    .processingForm__main {
+      border-bottom: 1px solid rgb(245, 243, 241);
+      padding-bottom: 25px;
+
+      .processingForm__switch {
+        padding: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 5px 10px;
+        }
+
+        button:first-child {
+          border: 1px solid grey;
+          border-radius: 7px 0 0 7px;
+        }
+        button:last-child {
+          border: 1px solid grey;
+          border-radius: 0 7px 7px 0;
+        }
+
+        .receptIcon__tooltip,
+        .trackerIcon__tooltip {
+          position: absolute;
+          z-index: 1;
+          background-color: black;
+          color: #fff;
+          font-size: 13px;
+          padding: 10px 15px;
+          border-radius: 6px;
+          transition: all 0.25s ease-out;
+          top: 160.2px;
+          visibility: hidden;
+        }
+
+        .trackerIcon__tooltip {
+          right: 45.4px;
+        }
+
+        .receptIcon__tooltip {
+          right: 7.917px;
+        }
+
+        .receptIcon__tooltip:after,
+        .trackerIcon__tooltip:after {
+          border-left: solid transparent 10px;
+          border-right: solid transparent 10px;
+          transform: rotate(180deg);
+          border-top: solid black 10px;
+          top: -9px;
+          content: ' ';
+          height: 0;
+          left: 50%;
+          margin-left: -11px;
+          position: absolute;
+          width: 0;
+        }
+
+        button:first-child:hover .trackerIcon__tooltip {
+          visibility: visible;
+        }
+        button:last-child:hover .receptIcon__tooltip {
+          visibility: visible;
+        }
+      }
+
+      .processingForm__dishes {
+        padding: 25px 25px 5px 25px;
+        display: flex;
+
+        p {
+          font-size: 16px;
+        }
+
+        .processingForm__quantity {
+          width: 25px;
+        }
+
+        .processingForm__name {
+          width: 200px;
+        }
+
+        .processingForm__price {
+          width: 75px;
+          text-align: right;
+        }
+      }
+
+      .processingForm__total {
+        display: flex;
+        justify-content: space-between;
+        padding: 25px 25px 0 25px;
+      }
+
+      .processingForm__table {
+        margin: 25px;
+        display: flex;
+
+        img {
+          padding-right: 7px;
+        }
+
+        .processingForm__work {
+          padding-right: 81px;
+        }
+
+        .processingForm__time {
+          float: right;
+        }
+      }
+    }
+  }
+}
