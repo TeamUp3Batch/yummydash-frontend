@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
-import Title from "../RestaurantTitle";
+import Title from "../RestaurantTitle/RestaurantTitle";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { getAllOrdersByRestaurantId,  updateOrderStatusByRestaurant} from '../../../services/cartService';
@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux'
 
 const RestaurantOrder = () => {
   const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState(null); 
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [error, setError] = useState(null);
   const { loggedInPartner } = useSelector((state) => state.partner);
@@ -78,6 +79,7 @@ const RestaurantOrder = () => {
       userId: restaurantOrderDetails[selectedOrderIndex].userId,
       newOrderStatus: newOrderStatus,
     };
+    setSelectedOrderStatus(newOrderStatus)
   
     try {
       const result = await updateOrderStatusByRestaurant(data);
@@ -141,6 +143,7 @@ const RestaurantOrder = () => {
             onClose={handleCloseModal}
             selectedOrderId={selectedOrderId}
             onConfirm={handleConfirmOrder}
+            onSelectedOrderStatus={selectedOrderStatus}
           />
       <Snackbar open={!!error} autoHideDuration={6000} onClose={handleCloseError}>
         <Alert onClose={handleCloseError} severity="error">
