@@ -21,3 +21,34 @@ export const driverLogin = async (data) => {
     throw error;
   }
 };
+
+export const getReadyOrders = async () => {
+  const url = `${apiUrl}/api/driver/getReadyOrders`;
+  try {
+    const result = await axios.get(url);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getOrdersPickedByDriver = async (driverId) => {
+  const url = `${apiUrl}/api/driver/getOrdersPickedByDriver?driverId=${driverId}`;
+  try {
+    const result = await axios.get(url);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getOrdersCompletedByDriver = async (driverId) => {
+  const url = `${apiUrl}/api/driver/getOrdersCompletedByDriver?driverId=${driverId}`;
+  try {
+    const result = await axios.get(url);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
