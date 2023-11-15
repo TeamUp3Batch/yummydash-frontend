@@ -26,6 +26,7 @@ const ProcessingForm = ({ clientSecret }) => {
   const [driving, setDriving] = useState(false);
   const [collecting, setCollecting] = useState(false);
   const [delivering, setDelivering] = useState(false);
+  const [orderTrackerData,setOrderTrackerData] = useState(false);
 
   useEffect(()=>{
     console.log("hellooo")
@@ -35,6 +36,35 @@ const ProcessingForm = ({ clientSecret }) => {
        
           const data = await getOrderDetailsByOrderId(userId,cartId);
           console.log("here we come data",data)
+          const { orderTracker } = data;
+          setOrderTrackerData(data)
+
+      // Check orderTracker status and update state accordingly
+      if (orderTracker && orderTracker.acceptance && orderTracker.acceptance.status) {
+        setPlaced(true);
+        setConfirmed(true);
+      }
+
+      if (orderTracker &&  orderTracker.ready && orderTracker.ready.status) {
+        setPlaced(true);
+        setConfirmed(true);
+        setDriving(true);
+      }
+
+      if (orderTracker &&  orderTracker.pickup && orderTracker.pickup.status) {
+        setPlaced(true);
+        setConfirmed(true);
+        setDriving(true);
+        setCollecting(true);
+      }
+      if (orderTracker &&  orderTracker.delivery && orderTracker.delivery.status) {
+        setPlaced(true);
+        setConfirmed(true);
+        setDriving(true);
+        setCollecting(true);
+        setDelivering(true);
+      }
+        
         
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -42,8 +72,12 @@ const ProcessingForm = ({ clientSecret }) => {
     };
 
     fetchOrderStatus();
+    const intervalId = setInterval(fetchOrderStatus, 30000);
 
-  },[cartId])
+  // Clean up the interval when the component unmounts or when the dependencies change
+  return () => clearInterval(intervalId);
+
+  },[cartId, loggedInUser._id])
 
   return (
     <div className={classes.processingForm}>
@@ -91,7 +125,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Order confirmed</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}> {new Date(orderTrackerData.orderTracker.acceptance.timestamp).toLocaleTimeString()}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -104,9 +138,9 @@ const ProcessingForm = ({ clientSecret }) => {
                   <div className={classes.processingForm__table}>
                     <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
                     <p className={classes.processingForm__work}>
-                      <b>Driving to restaurant</b>
+                      <b>Arrived At Restaurant</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{new Date(orderTrackerData.orderTracker.ready.timestamp).toLocaleTimeString()}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -121,7 +155,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Collecting your order</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{new Date(orderTrackerData.orderTracker.pickup.timestamp).toLocaleTimeString()}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -136,7 +170,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Delivering your order</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{new Date(orderTrackerData.orderTracker.delivery.timestamp).toLocaleTimeString()}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
