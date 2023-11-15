@@ -36,7 +36,6 @@ const partnerSlice = createSlice({
     },
     logoutPartner: (state) => {
       state.loggedInPartner = null;
-
       state.isLoading = false;
       state.error = false;
     },

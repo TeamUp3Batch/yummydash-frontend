@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -86,9 +86,6 @@ export default function DriverDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
-    // Implement the logic to clear session or perform logout actions
-    // For example, you can make an API call to logout the user
-    // and then redirect to the login page
     console.log("Logout button clicked");
     dispatch(logoutDriver());
     navigate("/");
@@ -108,8 +105,6 @@ export default function DriverDashboard() {
         return <Orders />;
       case "fulfilledOrders":
         return <Typography variant="h4">Fulfilled Orders Content</Typography>;
-      case "cancelledOrders":
-        return <Typography variant="h4">Cancelled Orders Content</Typography>;
       case "profile":
         return <Typography variant="h4">Profile Content</Typography>;
       default:
@@ -190,20 +185,6 @@ export default function DriverDashboard() {
                   <CheckIcon />
                 </ListItemIcon>
                 <ListItemText primary="Fulfilled Orders" />
-              </ListItem>
-            </Link>
-
-            <Link
-              href="#"
-              color="inherit"
-              underline="none"
-              onClick={() => handleSectionClick("cancelledOrders")}
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <CancelIcon />
-                </ListItemIcon>
-                <ListItemText primary="Cancelled Orders" />
               </ListItem>
             </Link>
 
