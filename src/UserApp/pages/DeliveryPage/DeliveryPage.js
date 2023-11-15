@@ -8,12 +8,22 @@ import { useSelector } from 'react-redux';
 
 import receptIcon from '../../../icons/receipt-svgrepo-com.svg';
 import trackerIcon from '../../../icons/list-ul-alt-svgrepo-com.svg';
+import circleDotIcon from '../../../icons/circle-dot-svgrepo-com.svg';
+import pointerOrange from '../../../icons/pointer-map-pointer-orange.svg';
+import pointerGrey from '../../../icons/pointer-map-pointer-grey.svg';
+import checkCircleOrange from '../../../icons/check-circle-orange.svg';
 
 import classes from './deliveryPage.module.scss';
 
 const ProcessingForm = ({ clientSecret }) => {
   const { checkout } = useSelector((state) => state.menu);
   const [tracker, setTracker] = useState(true);
+  const [placed, setPlaced] = useState(true);
+  const [confirmed, setConfirmed] = useState(false);
+  const [driving, setDriving] = useState(false);
+  const [collecting, setCollecting] = useState(false);
+  const [delivering, setDelivering] = useState(false);
+
   //const stripe = useStripe();
   //const elements = useElements();
   //const navigate = useNavigate();
@@ -74,21 +84,83 @@ const ProcessingForm = ({ clientSecret }) => {
                   </button>
                 </div>
               </div>
-              {/* {checkout
-              ? checkout.lineItems.map((lineItem) => (
-                  <>
-                    <div className={classes.processingForm__dishes}>
-                      <p className={classes.processingForm__quantity}>{lineItem.quantity}</p>
-                      <p className={classes.processingForm__name}>{lineItem.name}</p>
-                      <p className={classes.processingForm__price}>${lineItem.price}</p>
-                    </div>
-                    <div className={classes.processingForm__total}>
-                      <h2>Total</h2>
-                      <h2>${checkout.totalprice}</h2>
-                    </div>
-                  </>
-                ))
-              : null} */}
+
+              <div>
+                {placed ? (
+                  <div className={classes.processingForm__table}>
+                    <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
+                    <p className={classes.processingForm__work}>
+                      <b>Order placed</b>
+                    </p>
+                    <p className={classes.processingForm__time}>3:45 PM</p>
+                  </div>
+                ) : (
+                  <div className={classes.processingForm__table}>
+                    <img src={circleDotIcon} alt="CircleIcon" width="20px" />
+                    <p>Order placed</p>
+                  </div>
+                )}
+
+                {confirmed ? (
+                  <div className={classes.processingForm__table}>
+                    <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
+                    <p className={classes.processingForm__work}>
+                      <b>Order confirmed</b>
+                    </p>
+                    <p className={classes.processingForm__time}>3:45 PM</p>
+                  </div>
+                ) : (
+                  <div className={classes.processingForm__table}>
+                    <img src={circleDotIcon} alt="CircleIcon" width="20px" />
+                    <p>Order confirmed</p>
+                  </div>
+                )}
+
+                {driving ? (
+                  <div className={classes.processingForm__table}>
+                    <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
+                    <p className={classes.processingForm__work}>
+                      <b>Driving to restaurant</b>
+                    </p>
+                    <p className={classes.processingForm__time}>3:45 PM</p>
+                  </div>
+                ) : (
+                  <div className={classes.processingForm__table}>
+                    <img src={circleDotIcon} alt="CircleIcon" width="20px" />
+                    <p>Driving to restaurant</p>
+                  </div>
+                )}
+
+                {collecting ? (
+                  <div className={classes.processingForm__table}>
+                    <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
+                    <p className={classes.processingForm__work}>
+                      <b>Collecting your order</b>
+                    </p>
+                    <p className={classes.processingForm__time}>3:45 PM</p>
+                  </div>
+                ) : (
+                  <div className={classes.processingForm__table}>
+                    <img src={circleDotIcon} alt="CircleIcon" width="20px" />
+                    <p>Collecting your order</p>
+                  </div>
+                )}
+
+                {delivering ? (
+                  <div className={classes.processingForm__table}>
+                    <img src={pointerOrange} alt="Pointer Delivery" width="20px" />
+                    <p className={classes.processingForm__work}>
+                      <b>Delivering your order</b>
+                    </p>
+                    <p className={classes.processingForm__time}>3:45 PM</p>
+                  </div>
+                ) : (
+                  <div className={classes.processingForm__table}>
+                    <img src={pointerGrey} alt="Pointer Delivery" width="20px" />
+                    <p>Delivering your order</p>
+                  </div>
+                )}
+              </div>
             </div>
           </>
         ) : (

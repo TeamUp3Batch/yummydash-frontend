@@ -132,6 +132,23 @@
         justify-content: space-between;
         padding: 25px 25px 0 25px;
       }
+
+      .processingForm__table {
+        margin: 25px;
+        display: flex;
+
+        img {
+          padding-right: 7px;
+        }
+
+        .processingForm__work {
+          padding-right: 81px;
+        }
+
+        .processingForm__time {
+          float: right;
+        }
+      }
     }
   }
 }
