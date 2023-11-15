@@ -24,43 +24,6 @@ const ProcessingForm = ({ clientSecret }) => {
   const [collecting, setCollecting] = useState(false);
   const [delivering, setDelivering] = useState(false);
 
-  //const stripe = useStripe();
-  //const elements = useElements();
-  //const navigate = useNavigate();
-  //const dispatch = useDispatch();
-
-  // const handleCheckout = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const result = await stripe.confirmCardPayment(clientSecret, {
-  //       payment_method: {
-  //         card: elements.getElement(CardElement),
-  //       },
-  //     });
-
-  //     if (result?.paymentIntent?.status === 'succeeded') {
-  //       const updateObj = {
-  //         cartId: checkout.cartId,
-  //         restaurantId: checkout.restaurantId,
-  //         userId: checkout.userId,
-  //         newOrderStatus: 'payment',
-  //       };
-  //       const response = await updateOrderStatus(updateObj);
-  //       if (response.status === 201) {
-
-  //         dispatch(updateCartStatus(response.data.orderStatus));
-  //         setConfirmModalActive(true);
-  //         // navigate('/delivery');
-  //       }
-  //     } else {
-  //       console.warn('Payment not succeeded');
-  //     }
-  //   } catch (err) {
-  //     console.warn(err);
-  //   }
-  // };
-
   return (
     <div className={classes.processingForm}>
       <div className={classes.processingForm__wrapper}>
