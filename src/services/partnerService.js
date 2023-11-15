@@ -20,6 +20,7 @@ export const partnerLogin = async (data) => {
     } catch (error) {
       throw error;
     }
+
 };
 export const getMenuItemsByRestaurant = async (selectedId) => {
   const url = `${apiUrl}/api/restaurants/getMenuItemsByRestaurant/?restaurantId=${selectedId}`;
@@ -60,6 +61,5 @@ export const updateMenuItemToRestaurant = async (data) => {
     throw error;
   }
 };
-
 
 

@@ -21,6 +21,7 @@ export const usePartnerSignUp = () => {
     password: "",
   });
   const [loginData, setLoginData] = useState({
+
     email: "",
     password: "",
   });

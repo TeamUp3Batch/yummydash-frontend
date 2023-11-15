@@ -13,6 +13,7 @@ const partnerSlice = createSlice({
       state.isLoading = true;
     },
     loginPartnerSuccess: (state, action) => {
+
       state.loggedInPartner = action.payload;
       state.isLoading = false;
       state.error = false;
@@ -35,6 +36,7 @@ const partnerSlice = createSlice({
     },
     logoutPartner: (state) => {
       state.loggedInPartner = null;
+
       state.isLoading = false;
       state.error = false;
     },
