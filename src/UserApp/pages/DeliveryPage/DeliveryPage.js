@@ -6,6 +6,8 @@ import RestaurantTwoToneIcon from '@mui/icons-material/RestaurantTwoTone';
 import PersonPinCircleRoundedIcon from '@mui/icons-material/PersonPinCircleRounded';
 import { useSelector } from 'react-redux';
 
+import {getOrderDetailsByOrderId} from  '../../../services/cartService'
+
 import receptIcon from '../../../icons/receipt-svgrepo-com.svg';
 import trackerIcon from '../../../icons/list-ul-alt-svgrepo-com.svg';
 import circleDotIcon from '../../../icons/circle-dot-svgrepo-com.svg';
@@ -16,13 +18,32 @@ import checkCircleOrange from '../../../icons/check-circle-orange.svg';
 import classes from './deliveryPage.module.scss';
 
 const ProcessingForm = ({ clientSecret }) => {
-  const { checkout } = useSelector((state) => state.menu);
+  const { cartId, checkout } = useSelector((state) => state.menu);
+  const { loggedInUser } = useSelector((state) => state.auth);
   const [tracker, setTracker] = useState(true);
   const [placed, setPlaced] = useState(true);
   const [confirmed, setConfirmed] = useState(false);
   const [driving, setDriving] = useState(false);
   const [collecting, setCollecting] = useState(false);
   const [delivering, setDelivering] = useState(false);
+
+  useEffect(()=>{
+    console.log("hellooo")
+    const fetchOrderStatus = async () => {
+       const userId = loggedInUser._id;
+      try {
+       
+          const data = await getOrderDetailsByOrderId(userId,cartId);
+          console.log("here we come data",data)
+        
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchOrderStatus();
+
+  },[cartId])
 
   return (
     <div className={classes.processingForm}>
