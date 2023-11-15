@@ -90,7 +90,6 @@ export default function DriverDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
-    console.log("Logout button clicked");
     dispatch(logoutDriver());
     navigate("/");
   };
