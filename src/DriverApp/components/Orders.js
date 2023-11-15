@@ -28,9 +28,7 @@ const Orders = () => {
     const fetchData = async () => {
       try {
         const data = await getReadyOrders();
-        console.log("hellodata",data.data.orders)
         setRestaurantOrderDetails(data.data.orders);
-        console.log("restaurantOrderDetails",restaurantOrderDetails)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -70,6 +68,7 @@ const Orders = () => {
 
     try {
       const result = await updateOrderStatusByRestaurant(data);
+      
     } catch (error) {
       console.error("Error fetching data:", error);
       setError(error.message);

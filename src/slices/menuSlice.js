@@ -18,6 +18,7 @@ const menuSlice = createSlice({
     resetMenuState: (state) => {
       state.cart = null;
       state.cartId = null;
+      state.checkout = null
     },
     updateCartItemQuantity: (state, action) => {
       const { menuId, quantity } = action.payload;
