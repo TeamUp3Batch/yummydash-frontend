@@ -20,4 +20,46 @@ export const partnerLogin = async (data) => {
     } catch (error) {
       throw error;
     }
-  };
+
+};
+export const getMenuItemsByRestaurant = async (selectedId) => {
+  const url = `${apiUrl}/api/restaurants/getMenuItemsByRestaurant/?restaurantId=${selectedId}`;
+  try {
+    const result = await axios.get(url);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const addMenuItemToRestaurant = async (data) => {
+  const url = `${apiUrl}/api/menu/addMenuItemToRestaurant`;
+  try {
+    const result = await axios.post(url, data);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteMenuItem = async (data) => {
+  const url = `${apiUrl}/api/menu/deleteMenuItem`;
+  try {
+    const result = await axios.post(url, data);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateMenuItemToRestaurant = async (data) => {
+  const url = `${apiUrl}/api/menu/updateMenuItemToRestaurant`;
+  try {
+    const result = await axios.post(url, data);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+

@@ -27,6 +27,7 @@ import logo from "../../img/yummyDashLogo.png";
 
 
 import RestaurantOrder from "../components/RestauarnatOrder/RestaurantOrder";
+import RestaurantMenu from "../components/RestaurantMenu/RestaurantMenu";
 
 const drawerWidth = 240;
 
@@ -100,7 +101,7 @@ export default function RestaurantDashboard() {
       case "profile":
         return <Typography variant="h4">Profile Content</Typography>;
       case "menu":
-        return <Typography variant="h4">Menu Content</Typography>;
+        return <RestaurantMenu />;
       default:
         return null;
     }
