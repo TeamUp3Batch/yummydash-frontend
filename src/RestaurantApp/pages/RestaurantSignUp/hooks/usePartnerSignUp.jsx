@@ -21,7 +21,8 @@ export const usePartnerSignUp = () => {
     password: "",
   });
   const [loginData, setLoginData] = useState({
-    name: "",
+
+    email: "",
     password: "",
   });
   const navigate = useNavigate();

@@ -13,7 +13,8 @@ const partnerSlice = createSlice({
       state.isLoading = true;
     },
     loginPartnerSuccess: (state, action) => {
-      state.loggedInUser = action.payload;
+
+      state.loggedInPartner = action.payload;
       state.isLoading = false;
       state.error = false;
     },
@@ -21,7 +22,7 @@ const partnerSlice = createSlice({
       state.isLoading = true;
     },
     signUpPartnerSuccess: (state, action) => {
-      state.loggedInUser = action.payload;
+      state.loggedInPartner = action.payload;
       state.isLoading = false;
       state.error = false;
     },
@@ -34,7 +35,8 @@ const partnerSlice = createSlice({
       state.error = action.payload;
     },
     logoutPartner: (state) => {
-      state.loggedInUser = null;
+      state.loggedInPartner = null;
+
       state.isLoading = false;
       state.error = false;
     },
