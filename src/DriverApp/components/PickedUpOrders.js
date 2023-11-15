@@ -79,7 +79,6 @@ const PickedUpOrders = () => {
     };
   
     try {
-      console.log("data jkedkdjdkja",data)
       await updateOrderStatusByRestaurant(data);
       // Update the local state with the modified order
       setRestaurantOrderDetails(prevState => {

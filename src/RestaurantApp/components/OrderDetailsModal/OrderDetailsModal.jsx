@@ -6,7 +6,8 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const OrderDetailsModal = ({ open, onClose, selectedOrderId, onConfirm }) => {
+const OrderDetailsModal = ({ open, onClose, selectedOrderId, onConfirm, onSelectedOrderStatus }) => {
+
   return (
     <Modal
       open={open}
@@ -40,10 +41,15 @@ const OrderDetailsModal = ({ open, onClose, selectedOrderId, onConfirm }) => {
               </Typography>
             </div>
           )}
-          <Button onClick={onConfirm}>Confirm</Button>
-          <Button onClick={onConfirm}>Preparing</Button>
-          <Button onClick={onConfirm}>Ready</Button>
-          <Button onClick={onClose}>Close</Button>
+          <Button onClick={() => onConfirm('acceptance')} disabled={onSelectedOrderStatus === 'acceptance'}>
+        Confirm
+      </Button>
+      <Button onClick={() => onConfirm('preparing')} disabled={onSelectedOrderStatus === 'preparing'}>
+        Preparing
+      </Button>
+      <Button onClick={() => onConfirm('ready')} disabled={onSelectedOrderStatus === 'ready'}>
+        Ready
+      </Button>
         </div>
       </Fade>
     </Modal>
