@@ -35,7 +35,6 @@ const ProcessingForm = ({ clientSecret }) => {
       try {
        
           const data = await getOrderDetailsByOrderId(userId,cartId);
-          console.log("here we come data",data)
           const { orderTracker } = data;
           setOrderTrackerData(data)
 
