@@ -13,7 +13,7 @@ const driverSlice = createSlice({
       state.isLoading = true;
     },
     loginDriverSuccess: (state, action) => {
-      state.loggedInUser = action.payload;
+      state.loggedInDriver = action.payload;
       state.isLoading = false;
       state.error = false;
     },
@@ -21,7 +21,7 @@ const driverSlice = createSlice({
       state.isLoading = true;
     },
     signUpDriverSuccess: (state, action) => {
-      state.loggedInUser = action.payload;
+      state.loggedInDriver = action.payload;
       state.isLoading = false;
       state.error = false;
     },
@@ -34,24 +34,24 @@ const driverSlice = createSlice({
       state.error = action.payload;
     },
     logoutDriver: (state) => {
-      state.loggedInUser = null;
+      state.loggedInDriver = null;
       state.isLoading = false;
       state.error = false;
     },
     updateDriverAddress: (state, action) => {
-      state.loggedInUser.address = action.payload;
+      state.loggedInDriver.address = action.payload;
     },
     deleteDriverAddress: (state, action) => {
-      state.loggedInUser.address = action.payload;
+      state.loggedInDriver.address = action.payload;
     },
     updateDriverPhoneNumber: (state, action) => {
-      state.loggedInUser.phoneNumber = action.payload;
+      state.loggedInDriver.phoneNumber = action.payload;
     },
     updateDriverFirstName: (state, action) => {
-      state.loggedInUser.firstName = action.payload;
+      state.loggedInDriver.firstName = action.payload;
     },
     updateDriverLastName: (state, action) => {
-      state.loggedInUser.lastName = action.payload;
+      state.loggedInDriver.lastName = action.payload;
     }
   }
 });

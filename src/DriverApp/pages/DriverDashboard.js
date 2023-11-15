@@ -1,5 +1,6 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import LogoutIcon from '@mui/icons-material/Logout';
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -23,10 +24,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import logo from "../../img/yummyDashLogo.png"
-
+import logo from "../../img/yummyDashLogo.png";
 
 import Orders from "../components/Orders";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutDriver } from "../../slices/driverSlice";
 
 const drawerWidth = 240;
 
@@ -80,6 +83,16 @@ export default function DriverDashboard() {
   const [open, setOpen] = React.useState(true);
   const [selectedSection, setSelectedSection] =
     React.useState("incomingOrders");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    // Implement the logic to clear session or perform logout actions
+    // For example, you can make an API call to logout the user
+    // and then redirect to the login page
+    console.log("Logout button clicked");
+    dispatch(logoutDriver());
+    navigate("/");
+  };
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -131,8 +144,10 @@ export default function DriverDashboard() {
             >
               Driver Dashboard
             </Typography>
-            <img style={{ width: '5%' }} src={logo} alt="Logo" />
-            
+            <img style={{ width: "5%" }} src={logo} alt="Logo" />
+            <IconButton color="inherit" onClick={handleLogout}>
+              <LogoutIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

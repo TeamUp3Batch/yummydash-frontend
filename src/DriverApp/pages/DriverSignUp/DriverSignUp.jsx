@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   Button,
@@ -12,22 +13,20 @@ import {
   Fade,
 } from "@mui/material";
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
+import { useDriverSignUp } from "./hooks/useDriverSignUp";
 
 const DriverSignUp = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+  const {
+    isError,
+    data,
+    loginData,
+    msg,
+    handleChange,
+    handleSubmit,
+    handleLoginSubmit,
+    handleLoginChange,
+  } = useDriverSignUp({});
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const handleLoginClick = () => {
     setLoginModalOpen(true);
@@ -35,13 +34,6 @@ const DriverSignUp = () => {
 
   const handleLoginModalClose = () => {
     setLoginModalOpen(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your signup logic here
-    console.log("Signup data:", formData);
-    // You can make an API call to handle the signup process
   };
 
   return (
@@ -71,7 +63,8 @@ const DriverSignUp = () => {
             name="firstName"
             autoComplete="fname"
             autoFocus
-            onChange={handleChange}
+            value={data.firstName}
+            onChange={(e) => handleChange(e)}
           />
           <TextField
             margin="normal"
@@ -81,7 +74,8 @@ const DriverSignUp = () => {
             label="Last Name"
             name="lastName"
             autoComplete="lname"
-            onChange={handleChange}
+            value={data.lastName}
+            onChange={(e) => handleChange(e)}
           />
           <TextField
             margin="normal"
@@ -91,8 +85,20 @@ const DriverSignUp = () => {
             label="Email Address"
             name="email"
             autoComplete="email"
-            onChange={handleChange}
+            value={data.email}
+            onChange={(e) => handleChange(e)}
           />
+          <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="phoneNumber"
+          label="Phone Number"
+          name="phoneNumber"
+          autoComplete="tel"
+          value={data.phoneNumber}
+          onChange={(e) => handleChange(e)}
+        />
           <TextField
             margin="normal"
             required
@@ -102,7 +108,8 @@ const DriverSignUp = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={handleChange}
+            value={data.password}
+            onChange={(e) => handleChange(e)}
           />
           <Button
             type="submit"
@@ -145,25 +152,29 @@ const DriverSignUp = () => {
             <Typography variant="h6" component="div" gutterBottom>
               Driver Login
             </Typography>
-            <form>
+            <form onSubmit={handleLoginSubmit}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="loginEmail"
+                id="email"
+                type="email"
                 label="Email Address"
-                name="loginEmail"
+                name="email"
                 autoComplete="email"
+                onChange={handleLoginChange}
+                value={loginData.email}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="loginPassword"
+                name="password"
                 label="Password"
                 type="password"
-                id="loginPassword"
-                autoComplete="current-password"
+                id="password"autoComplete="current-password"
+                onChange={handleLoginChange}
+                value={loginData.password}
               />
               <Button
                 type="submit"
