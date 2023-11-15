@@ -10,6 +10,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { getAllOrdersByRestaurantId,  updateOrderStatusByRestaurant} from '../../../services/cartService';
 import OrderDetailsModal from '../OrderDetailsModal/OrderDetailsModal'
+import { useSelector } from 'react-redux'
 
 
 
@@ -17,8 +18,8 @@ const RestaurantOrder = () => {
   const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [error, setError] = useState(null);
-
-  const restaurantId = '6527a6e0fdb8bf79ffc03c4f';
+  const { loggedInPartner } = useSelector((state) => state.partner);
+  const restaurantId = loggedInPartner.restaurantId;
 
   
   useEffect(() => {
