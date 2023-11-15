@@ -21,12 +21,16 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import logo from "../../img/yummyDashLogo.png";
 
 import Orders from "../components/Orders";
+import PickedUpOrders from "../components/PickedUpOrders";
+import FulFilledOrders from "../components/FulFilledOrders";
+import Profile from "../components/Profile";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutDriver } from "../../slices/driverSlice";
@@ -103,10 +107,14 @@ export default function DriverDashboard() {
     switch (selectedSection) {
       case "incomingOrders":
         return <Orders />;
+      case "pickedUpOrders":
+        return <PickedUpOrders />;
       case "fulfilledOrders":
-        return <Typography variant="h4">Fulfilled Orders Content</Typography>;
+      return <FulFilledOrders />;
+      //return <Typography variant="h4">Fulfilled Orders Content</Typography>;
       case "profile":
-        return <Typography variant="h4">Profile Content</Typography>;
+        return <Profile/>
+        // return <Typography variant="h4">Profile Content</Typography>;
       default:
         return null;
     }
@@ -171,6 +179,20 @@ export default function DriverDashboard() {
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary="Incoming Orders" />
+              </ListItem>
+            </Link>
+
+            <Link
+              href="#"
+              color="inherit"
+              underline="none"
+              onClick={() => handleSectionClick("pickedUpOrders")}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <DeliveryDiningIcon />
+                </ListItemIcon>
+                <ListItemText primary="PickedUp Orders" />
               </ListItem>
             </Link>
 

@@ -171,7 +171,7 @@ const Menu = ({ restaurantDetails }) => {
                           {cartItem.name}
                         </p>
                         <p className={classes.checkout__cart__price}>
-                          {cartItem.price}
+                        {parseFloat(cartItem.price.toFixed(2))}
                         </p>
                       </div>
 
