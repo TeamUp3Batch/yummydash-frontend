@@ -52,3 +52,13 @@ export const getOrdersCompletedByDriver = async (driverId) => {
   }
 };
 
+export const getDriverProfile = async (driverId) => {
+  const url = `${apiUrl}/api/driver/getDriverProfile?driverId=${driverId}`;
+  try {
+    const result = await axios.get(url);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+

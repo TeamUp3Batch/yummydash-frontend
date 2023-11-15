@@ -7,6 +7,7 @@ import PersonPinCircleRoundedIcon from '@mui/icons-material/PersonPinCircleRound
 import { useSelector } from 'react-redux';
 
 import {getOrderDetailsByOrderId} from  '../../../services/cartService'
+import {getDriverProfile} from '../../../services/driverService'
 
 import receptIcon from '../../../icons/receipt-svgrepo-com.svg';
 import trackerIcon from '../../../icons/list-ul-alt-svgrepo-com.svg';
@@ -19,15 +20,17 @@ import classes from './deliveryPage.module.scss';
 import { formattedTime } from '../../../utils/formattedTimeStamp';
 
 const ProcessingForm = ({ clientSecret }) => {
-  const { cartId, checkout } = useSelector((state) => state.menu);
+  const { cartId, checkout, cart } = useSelector((state) => state.menu);
   const { loggedInUser } = useSelector((state) => state.auth);
   const [tracker, setTracker] = useState(true);
   const [placed, setPlaced] = useState(true);
   const [confirmed, setConfirmed] = useState(false);
+  const [preparing, setPreparing] = useState(false);
   const [driving, setDriving] = useState(false);
   const [collecting, setCollecting] = useState(false);
   const [delivering, setDelivering] = useState(false);
   const [orderTrackerData,setOrderTrackerData] = useState("");
+  const [driverName, setDriverName ] = useState("");
 
   useEffect(()=>{
     const fetchOrderStatus = async () => {
@@ -36,6 +39,7 @@ const ProcessingForm = ({ clientSecret }) => {
        
           const data = await getOrderDetailsByOrderId(userId,cartId);
           const { orderTracker } = data;
+          console.log("inital data",data)
           setOrderTrackerData(data)
 
       // Check orderTracker status and update state accordingly
@@ -44,9 +48,16 @@ const ProcessingForm = ({ clientSecret }) => {
         setConfirmed(true);
       }
 
+      if (orderTracker && orderTracker.preparation && orderTracker.preparation.status) {
+        setPlaced(true);
+        setConfirmed(true);
+        setPreparing(true);
+      }
+
       if (orderTracker &&  orderTracker.ready && orderTracker.ready.status) {
         setPlaced(true);
         setConfirmed(true);
+        setPreparing(false);
         setDriving(true);
       }
 
@@ -55,6 +66,9 @@ const ProcessingForm = ({ clientSecret }) => {
         setConfirmed(true);
         setDriving(true);
         setCollecting(true);
+        const driverDetails = await getDriverProfile(orderTrackerData.driverId)
+        if(driverDetails){setDriverName(driverDetails.firstName)}
+        
       }
       if (orderTracker &&  orderTracker.delivery && orderTracker.delivery.status) {
         setPlaced(true);
@@ -83,7 +97,7 @@ const ProcessingForm = ({ clientSecret }) => {
       <div className={classes.processingForm__wrapper}>
         <div className={classes.processingForm__header}>
           <h2>
-            {checkout.restaurantName} <span>is preparing your order:</span>
+            {checkout.restaurantName}{preparing?(<span>  is preparing your order:</span>):(<div></div>)}
           </h2>
         </div>
         {tracker ? (
@@ -109,7 +123,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Order placed</b>
                     </p>
-                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.payment.timestamp)}</p>
+                    <p className={classes.processingForm__time}>{formattedTime(cart.orderTracker.payment.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
