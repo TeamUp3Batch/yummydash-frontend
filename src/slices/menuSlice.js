@@ -39,11 +39,14 @@ const menuSlice = createSlice({
     },
     updateCartStatus:(state,action) =>{
       state.cart.orderStatus = action.payload
+    },
+    updateOrderTracker:(state,action) =>{
+      state.cart.orderTracker = action.payload
     }
   },
 });
 
-export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout, removeCart, updateCartStatus  } =
+export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout, removeCart, updateCartStatus, updateOrderTracker  } =
   menuSlice.actions;
 
 

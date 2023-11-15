@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { updateOrderStatus } from '../../../services/paymentService';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { updateCartStatus } from '../../../slices/menuSlice';
+import { updateCartStatus, updateOrderTracker } from '../../../slices/menuSlice';
 import axios from 'axios';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 //import { useNavigate } from 'react-router-dom';
@@ -44,6 +44,7 @@ const CheckoutForm = ({ clientSecret }) => {
         if (response.status === 201) {
           
           dispatch(updateCartStatus(response.data.orderStatus));
+          dispatch(updateOrderTracker(response.data.orderTracker));
           setConfirmModalActive(true);
           // navigate('/delivery');
         }
