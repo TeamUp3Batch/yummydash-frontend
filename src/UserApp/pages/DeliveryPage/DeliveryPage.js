@@ -6,6 +6,9 @@ import RestaurantTwoToneIcon from '@mui/icons-material/RestaurantTwoTone';
 import PersonPinCircleRoundedIcon from '@mui/icons-material/PersonPinCircleRounded';
 import { useSelector } from 'react-redux';
 
+import {getOrderDetailsByOrderId} from  '../../../services/cartService'
+import {getDriverProfile} from '../../../services/driverService'
+
 import receptIcon from '../../../icons/receipt-svgrepo-com.svg';
 import trackerIcon from '../../../icons/list-ul-alt-svgrepo-com.svg';
 import circleDotIcon from '../../../icons/circle-dot-svgrepo-com.svg';
@@ -14,22 +17,87 @@ import pointerGrey from '../../../icons/pointer-map-pointer-grey.svg';
 import checkCircleOrange from '../../../icons/check-circle-orange.svg';
 
 import classes from './deliveryPage.module.scss';
+import { formattedTime } from '../../../utils/formattedTimeStamp';
 
 const ProcessingForm = ({ clientSecret }) => {
-  const { checkout } = useSelector((state) => state.menu);
+  const { cartId, checkout, cart } = useSelector((state) => state.menu);
+  const { loggedInUser } = useSelector((state) => state.auth);
   const [tracker, setTracker] = useState(true);
   const [placed, setPlaced] = useState(true);
   const [confirmed, setConfirmed] = useState(false);
+  const [preparing, setPreparing] = useState(false);
   const [driving, setDriving] = useState(false);
   const [collecting, setCollecting] = useState(false);
   const [delivering, setDelivering] = useState(false);
+  const [orderTrackerData,setOrderTrackerData] = useState("");
+  const [driverName, setDriverName ] = useState("");
+
+  useEffect(()=>{
+    const fetchOrderStatus = async () => {
+       const userId = loggedInUser._id;
+      try {
+       
+          const data = await getOrderDetailsByOrderId(userId,cartId);
+          const { orderTracker } = data;
+          console.log("inital data",data)
+          setOrderTrackerData(data)
+
+      // Check orderTracker status and update state accordingly
+      if (orderTracker && orderTracker.acceptance && orderTracker.acceptance.status) {
+        setPlaced(true);
+        setConfirmed(true);
+      }
+
+      if (orderTracker && orderTracker.preparation && orderTracker.preparation.status) {
+        setPlaced(true);
+        setConfirmed(true);
+        setPreparing(true);
+      }
+
+      if (orderTracker &&  orderTracker.ready && orderTracker.ready.status) {
+        setPlaced(true);
+        setConfirmed(true);
+        setPreparing(false);
+        setDriving(true);
+      }
+
+      if (orderTracker &&  orderTracker.pickup && orderTracker.pickup.status) {
+        setPlaced(true);
+        setConfirmed(true);
+        setDriving(true);
+        setCollecting(true);
+        //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
+        //if(driverDetails){setDriverName(driverDetails.firstName)}
+        
+      }
+      if (orderTracker &&  orderTracker.delivery && orderTracker.delivery.status) {
+        setPlaced(true);
+        setConfirmed(true);
+        setDriving(true);
+        setCollecting(true);
+        setDelivering(true);
+      }
+        
+        
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchOrderStatus();
+    const intervalId = setInterval(fetchOrderStatus, 10000);
+
+  // Clean up the interval when the component unmounts or when the dependencies change
+  return () => clearInterval(intervalId);
+
+  },[cartId, loggedInUser._id])
 
   return (
     <div className={classes.processingForm}>
       <div className={classes.processingForm__wrapper}>
         <div className={classes.processingForm__header}>
           <h2>
-            {checkout.restaurantName} <span>is preparing your order:</span>
+            {checkout.restaurantName}{preparing?(<span>  is preparing your order:</span>):(<div></div>)}
           </h2>
         </div>
         {tracker ? (
@@ -55,7 +123,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Order placed</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{formattedTime(cart.orderTracker.payment.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -70,7 +138,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Order confirmed</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.acceptance.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -83,9 +151,9 @@ const ProcessingForm = ({ clientSecret }) => {
                   <div className={classes.processingForm__table}>
                     <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
                     <p className={classes.processingForm__work}>
-                      <b>Driving to restaurant</b>
+                      <b>Arrived At Restaurant</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.ready.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -100,7 +168,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Collecting your order</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.pickup.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -115,7 +183,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Delivering your order</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.delivery.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>

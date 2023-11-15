@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { updateOrderStatus } from '../../../services/paymentService';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { updateCartStatus } from '../../../slices/menuSlice';
+import { updateCartStatus, updateOrderTracker } from '../../../slices/menuSlice';
 import axios from 'axios';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 //import { useNavigate } from 'react-router-dom';
@@ -44,6 +44,7 @@ const CheckoutForm = ({ clientSecret }) => {
         if (response.status === 201) {
           
           dispatch(updateCartStatus(response.data.orderStatus));
+          dispatch(updateOrderTracker(response.data.orderTracker));
           setConfirmModalActive(true);
           // navigate('/delivery');
         }
@@ -70,7 +71,7 @@ const CheckoutForm = ({ clientSecret }) => {
                   <div className={classes.orderSummary__dishes}>
                     <p className={classes.orderSummary__quantity}>{lineItem.quantity}</p>
                     <p className={classes.orderSummary__name}>{lineItem.name}</p>
-                    <p className={classes.orderSummary__price}>${lineItem.price}</p>
+                    <p className={classes.orderSummary__price}>$ {parseFloat(lineItem.price.toFixed(2))}</p>
                   </div>
                 ))
               : null}
@@ -79,7 +80,7 @@ const CheckoutForm = ({ clientSecret }) => {
             {checkout && checkout.totalprice && (
               <div className={classes.orderSummary__checkout__total}>
                 <h3>Total</h3>
-                <h3>${checkout.totalprice}</h3>
+                <h3>${parseFloat(checkout.totalprice.toFixed(2))}</h3>
               </div>
             )}
             <CardElement />

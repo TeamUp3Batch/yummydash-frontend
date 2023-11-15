@@ -64,3 +64,15 @@ export const addToCartItem = async (data) => {
     }
   };
 
+  export const getOrderDetailsByOrderId = async (userId,cartId) => {
+   
+    const url = `${apiUrl}/api/cart/getOrderDetailsByOrderId?userId=${userId}&cartId=${cartId}`;
+    try {
+      const result = await axios.get(url);
+      return result.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+

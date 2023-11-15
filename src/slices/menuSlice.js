@@ -18,6 +18,7 @@ const menuSlice = createSlice({
     resetMenuState: (state) => {
       state.cart = null;
       state.cartId = null;
+      state.checkout = null
     },
     updateCartItemQuantity: (state, action) => {
       const { menuId, quantity } = action.payload;
@@ -38,11 +39,14 @@ const menuSlice = createSlice({
     },
     updateCartStatus:(state,action) =>{
       state.cart.orderStatus = action.payload
+    },
+    updateOrderTracker:(state,action) =>{
+      state.cart.orderTracker = action.payload
     }
   },
 });
 
-export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout, removeCart, updateCartStatus  } =
+export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout, removeCart, updateCartStatus, updateOrderTracker  } =
   menuSlice.actions;
 
 

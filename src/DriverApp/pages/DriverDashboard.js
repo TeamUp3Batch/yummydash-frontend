@@ -1,5 +1,6 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import LogoutIcon from "@mui/icons-material/Logout";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -9,7 +10,6 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -18,15 +18,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import CheckIcon from "@mui/icons-material/Check";
-import CancelIcon from "@mui/icons-material/Cancel";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import logo from "../../img/yummyDashLogo.png"
-
-
+import logo from "../../img/yummyDashLogo.png";
 import Orders from "../components/Orders";
+import PickedUpOrders from "../components/PickedUpOrders";
+import FulFilledOrders from "../components/FulFilledOrders";
+import Profile from "../components/Profile";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutDriver } from "../../slices/driverSlice";
 
 const drawerWidth = 240;
 
@@ -80,6 +84,13 @@ export default function DriverDashboard() {
   const [open, setOpen] = React.useState(true);
   const [selectedSection, setSelectedSection] =
     React.useState("incomingOrders");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+
+    dispatch(logoutDriver());
+    navigate("/");
+  };
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -93,12 +104,12 @@ export default function DriverDashboard() {
     switch (selectedSection) {
       case "incomingOrders":
         return <Orders />;
+      case "pickedUpOrders":
+        return <PickedUpOrders />;
       case "fulfilledOrders":
-        return <Typography variant="h4">Fulfilled Orders Content</Typography>;
-      case "cancelledOrders":
-        return <Typography variant="h4">Cancelled Orders Content</Typography>;
+      return <FulFilledOrders />;
       case "profile":
-        return <Typography variant="h4">Profile Content</Typography>;
+        return <Profile/>
       default:
         return null;
     }
@@ -131,8 +142,10 @@ export default function DriverDashboard() {
             >
               Driver Dashboard
             </Typography>
-            <img style={{ width: '5%' }} src={logo} alt="Logo" />
-            
+            <img style={{ width: "5%" }} src={logo} alt="Logo" />
+            <IconButton color="inherit" onClick={handleLogout}>
+              <LogoutIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -168,13 +181,13 @@ export default function DriverDashboard() {
               href="#"
               color="inherit"
               underline="none"
-              onClick={() => handleSectionClick("fulfilledOrders")}
+              onClick={() => handleSectionClick("pickedUpOrders")}
             >
               <ListItem button>
                 <ListItemIcon>
-                  <CheckIcon />
+                  <DeliveryDiningIcon />
                 </ListItemIcon>
-                <ListItemText primary="Fulfilled Orders" />
+                <ListItemText primary="PickedUp Orders" />
               </ListItem>
             </Link>
 
@@ -182,13 +195,13 @@ export default function DriverDashboard() {
               href="#"
               color="inherit"
               underline="none"
-              onClick={() => handleSectionClick("cancelledOrders")}
+              onClick={() => handleSectionClick("fulfilledOrders")}
             >
               <ListItem button>
                 <ListItemIcon>
-                  <CancelIcon />
+                  <CheckIcon />
                 </ListItemIcon>
-                <ListItemText primary="Cancelled Orders" />
+                <ListItemText primary="Fulfilled Orders" />
               </ListItem>
             </Link>
 

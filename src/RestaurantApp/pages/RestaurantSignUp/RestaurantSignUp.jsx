@@ -25,14 +25,8 @@ const RestaurantSignUp = () => {
     handleLoginSubmit,
     handleLoginChange
   } = usePartnerSignUp({});
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
-  
 
   const handleLoginClick = () => {
     setLoginModalOpen(true);

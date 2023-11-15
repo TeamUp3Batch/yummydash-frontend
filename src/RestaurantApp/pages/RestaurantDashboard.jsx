@@ -1,4 +1,5 @@
 import * as React from "react";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -17,17 +18,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import CheckIcon from "@mui/icons-material/Check";
-import CancelIcon from "@mui/icons-material/Cancel";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import logo from "../../img/yummyDashLogo.png";
-
+import { useSelector, useDispatch } from "react-redux";
+import { logoutPartner } from "../../slices/partnerSlice";
+import { useNavigate } from "react-router-dom";
 
 import RestaurantOrder from "../components/RestauarnatOrder/RestaurantOrder";
 import RestaurantMenu from "../components/RestaurantMenu/RestaurantMenu";
+import Profile from "../components/Profile/Profile";
 
 const drawerWidth = 240;
 
@@ -78,6 +81,13 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 export default function RestaurantDashboard() {
+  const { loggedInPartner } = useSelector((state) => state.partner);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logoutPartner());
+    navigate("/");
+  };
   const [open, setOpen] = React.useState(true);
   const [selectedSection, setSelectedSection] =
     React.useState("incomingOrders");
@@ -96,10 +106,8 @@ export default function RestaurantDashboard() {
         return <RestaurantOrder />;
       case "fulfilledOrders":
         return <Typography variant="h4">Fulfilled Orders Content</Typography>;
-      case "cancelledOrders":
-        return <Typography variant="h4">Cancelled Orders Content</Typography>;
       case "profile":
-        return <Typography variant="h4">Profile Content</Typography>;
+        return <Profile />;
       case "menu":
         return <RestaurantMenu />;
       default:
@@ -132,9 +140,12 @@ export default function RestaurantDashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Restaurant Dashboard
+              Restaurant Dashboard - {loggedInPartner.name}
             </Typography>
-            <img style={{ width: '5%' }} src={logo} alt="Logo" />
+            <img style={{ width: "5%" }} src={logo} alt="Logo" />
+            <IconButton color="inherit" onClick={handleLogout}>
+              <LogoutIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -177,20 +188,6 @@ export default function RestaurantDashboard() {
                   <CheckIcon />
                 </ListItemIcon>
                 <ListItemText primary="Fulfilled Orders" />
-              </ListItem>
-            </Link>
-
-            <Link
-              href="#"
-              color="inherit"
-              underline="none"
-              onClick={() => handleSectionClick("cancelledOrders")}
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <CancelIcon />
-                </ListItemIcon>
-                <ListItemText primary="Cancelled Orders" />
               </ListItem>
             </Link>
 
