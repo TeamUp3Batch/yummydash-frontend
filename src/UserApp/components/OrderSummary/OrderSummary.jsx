@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { updateOrderStatus } from "../../../services/paymentService";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { updateCartStatus } from "../../../slices/menuSlice";
-import axios from "axios";
-import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
-import { useNavigate } from "react-router-dom";
-import {
-  Button,
-  Paper
-} from "@mui/material";
-import { loadStripe } from "@stripe/stripe-js";
+import React, { useState, useEffect } from 'react';
+import { updateOrderStatus } from '../../../services/paymentService';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { updateCartStatus } from '../../../slices/menuSlice';
+import axios from 'axios';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+//import { useNavigate } from 'react-router-dom';
+import { Button, Paper } from '@mui/material';
+import { loadStripe } from '@stripe/stripe-js';
 import ConfirmModal from './ConfirmModal/ConfirmModal';
 
 import classes from './orderSummary.module.scss';
@@ -28,7 +20,7 @@ const CheckoutForm = ({ clientSecret }) => {
   const { checkout } = useSelector((state) => state.menu);
   const stripe = useStripe();
   const elements = useElements();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleCheckout = async (e) => {
@@ -40,33 +32,33 @@ const CheckoutForm = ({ clientSecret }) => {
           card: elements.getElement(CardElement),
         },
       });
-     
-      if (result?.paymentIntent?.status === "succeeded") {
+
+      if (result?.paymentIntent?.status === 'succeeded') {
         const updateObj = {
           cartId: checkout.cartId,
           restaurantId: checkout.restaurantId,
           userId: checkout.userId,
-          newOrderStatus: "payment",
+          newOrderStatus: 'payment',
         };
         const response = await updateOrderStatus(updateObj);
         if (response.status === 201) {
+          
+          dispatch(updateCartStatus(response.data.orderStatus));
           setConfirmModalActive(true);
-          dispatch(updateCartStatus(response.data.orderStatus))
-          navigate("/delivery");
+          // navigate('/delivery');
         }
       } else {
-        console.warn("Payment not succeeded");
+        console.warn('Payment not succeeded');
       }
     } catch (err) {
       console.warn(err);
     }
-      }
+  };
 
   return (
-    
-   <div>
-    <div className={classes.orderSummary}>
-    <div className={classes.orderSummary__wrapper}>
+    <div>
+      <div className={classes.orderSummary}>
+        <div className={classes.orderSummary__wrapper}>
           <div className={classes.orderSummary__header}>
             <h2>Checkout</h2>
           </div>
@@ -84,12 +76,12 @@ const CheckoutForm = ({ clientSecret }) => {
               : null}
           </div>
           <div className={classes.orderSummary__checkout}>
-          {checkout && checkout.totalprice && (
-           <div className={classes.orderSummary__checkout__total}>
-           <h3>Total</h3>
-           <h3>${checkout.totalprice}</h3>
-         </div>
-          )}
+            {checkout && checkout.totalprice && (
+              <div className={classes.orderSummary__checkout__total}>
+                <h3>Total</h3>
+                <h3>${checkout.totalprice}</h3>
+              </div>
+            )}
             <CardElement />
 
             <Button onClick={handleCheckout}>
@@ -97,9 +89,9 @@ const CheckoutForm = ({ clientSecret }) => {
             </Button>
           </div>
         </div>
+      </div>
+      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive} />
     </div>
-    <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive}/>
-   </div>
   );
 };
 
