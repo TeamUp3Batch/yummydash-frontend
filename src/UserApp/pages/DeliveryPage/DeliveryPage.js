@@ -66,8 +66,8 @@ const ProcessingForm = ({ clientSecret }) => {
         setConfirmed(true);
         setDriving(true);
         setCollecting(true);
-        const driverDetails = await getDriverProfile(orderTrackerData.driverId)
-        if(driverDetails){setDriverName(driverDetails.firstName)}
+        //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
+        //if(driverDetails){setDriverName(driverDetails.firstName)}
         
       }
       if (orderTracker &&  orderTracker.delivery && orderTracker.delivery.status) {
