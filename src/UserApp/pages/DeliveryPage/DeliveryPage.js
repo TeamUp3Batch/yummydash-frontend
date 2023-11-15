@@ -16,6 +16,7 @@ import pointerGrey from '../../../icons/pointer-map-pointer-grey.svg';
 import checkCircleOrange from '../../../icons/check-circle-orange.svg';
 
 import classes from './deliveryPage.module.scss';
+import { formattedTime } from '../../../utils/formattedTimeStamp';
 
 const ProcessingForm = ({ clientSecret }) => {
   const { cartId, checkout } = useSelector((state) => state.menu);
@@ -26,10 +27,9 @@ const ProcessingForm = ({ clientSecret }) => {
   const [driving, setDriving] = useState(false);
   const [collecting, setCollecting] = useState(false);
   const [delivering, setDelivering] = useState(false);
-  const [orderTrackerData,setOrderTrackerData] = useState(false);
+  const [orderTrackerData,setOrderTrackerData] = useState("");
 
   useEffect(()=>{
-    console.log("hellooo")
     const fetchOrderStatus = async () => {
        const userId = loggedInUser._id;
       try {
@@ -71,7 +71,7 @@ const ProcessingForm = ({ clientSecret }) => {
     };
 
     fetchOrderStatus();
-    const intervalId = setInterval(fetchOrderStatus, 30000);
+    const intervalId = setInterval(fetchOrderStatus, 10000);
 
   // Clean up the interval when the component unmounts or when the dependencies change
   return () => clearInterval(intervalId);
@@ -109,7 +109,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Order placed</b>
                     </p>
-                    <p className={classes.processingForm__time}>3:45 PM</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.payment.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -124,7 +124,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Order confirmed</b>
                     </p>
-                    <p className={classes.processingForm__time}> {new Date(orderTrackerData.orderTracker.acceptance.timestamp).toLocaleTimeString()}</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.acceptance.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -139,7 +139,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Arrived At Restaurant</b>
                     </p>
-                    <p className={classes.processingForm__time}>{new Date(orderTrackerData.orderTracker.ready.timestamp).toLocaleTimeString()}</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.ready.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -154,7 +154,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Collecting your order</b>
                     </p>
-                    <p className={classes.processingForm__time}>{new Date(orderTrackerData.orderTracker.pickup.timestamp).toLocaleTimeString()}</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.pickup.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -169,7 +169,7 @@ const ProcessingForm = ({ clientSecret }) => {
                     <p className={classes.processingForm__work}>
                       <b>Delivering your order</b>
                     </p>
-                    <p className={classes.processingForm__time}>{new Date(orderTrackerData.orderTracker.delivery.timestamp).toLocaleTimeString()}</p>
+                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.delivery.timestamp)}</p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
