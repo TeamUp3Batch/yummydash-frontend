@@ -150,13 +150,13 @@ const ProcessingForm = ({ clientSecret }) => {
                         <p className={classes.processingForm__name}>{lineItem.name}</p>
                         <p className={classes.processingForm__price}>${lineItem.price}</p>
                       </div>
-                      <div className={classes.processingForm__total}>
-                        <h2>Total</h2>
-                        <h2>${checkout.totalprice}</h2>
-                      </div>
                     </>
                   ))
                 : null}
+              <div className={classes.processingForm__total}>
+                <h2>Total</h2>
+                <h2>${checkout.totalprice}</h2>
+              </div>
             </div>
           </>
         )}
