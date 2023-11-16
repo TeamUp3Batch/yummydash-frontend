@@ -1,33 +1,56 @@
 // OrderStatusModal.js
 
-import React from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-} from '@mui/material';
 
-const OrderDriverStatusModal = ({ open, onClose, onConfirm, orderId }) => {
+import React from 'react';
+import Modal from '@mui/material/Modal';
+import Backdrop from '@mui/material/Backdrop';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
+const OrderDriverStatusModal = ({ open, onClose, selectedOrderId, onConfirm, onSelectedOrderStatus }) => {
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Order Status</DialogTitle>
-      <DialogContent>
-        <p>Your Order ID: {orderId}</p>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="warning">
-          Cancel
-        </Button>
-        <Button onClick={onConfirm} color="success" >
-          Accept
-        </Button>
-        <Button onClick={onConfirm} color="success">
-          Delivery
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <Modal
+    open={open}
+    onClose={onClose}
+    closeAfterTransition
+    BackdropComponent={Backdrop}
+    BackdropProps={{
+      timeout: 500,
+    }}
+  >
+    <Fade in={open}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: 'white',
+          padding: 20,
+          borderRadius: 8,
+          outline: 'none',
+        }}
+      >
+        <Typography variant="h5" gutterBottom>
+          Order Details
+        </Typography>
+        {selectedOrderId && (
+          <div>
+            <Typography variant="body1">
+              Order ID: {selectedOrderId}
+            </Typography>
+          </div>
+        )}
+        <Button onClick={() => onConfirm('pickup')} disabled={onSelectedOrderStatus === 'pickup'}>
+      PickUp
+    </Button>
+    <Button onClick={() => onConfirm('delivery')} disabled={onSelectedOrderStatus === 'delivery'}>
+      Delivery
+    </Button>
+      </div>
+    </Fade>
+  </Modal>
   );
 };
 
