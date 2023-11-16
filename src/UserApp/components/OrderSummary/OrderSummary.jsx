@@ -54,6 +54,8 @@ const CheckoutForm = ({ clientSecret }) => {
     } catch (err) {
       console.warn(err);
     }
+
+    console.log (checkout.restaurantName)
   };
 
   return (

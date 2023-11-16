@@ -1,0 +1,108 @@
+* {
+  font-family: 'Arsenal', sans-serif;
+
+  p {
+    font-size: 25px;
+  }
+}
+
+// .confirmModal {
+//   opacity: 0;
+//   pointer-events: none;
+//   display: none;
+// }
+
+.restaurantRating__active {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 55;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .__wrapper {
+    background-color: #fff;
+    width: 345px;
+    height: 515px;
+    border-radius: 5px;
+    box-shadow:
+      0 2px 4px 0 rgba(0, 0, 0, 0.2),
+      0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+    .__image {
+      img {
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+      }
+    }
+
+    .__icons {
+      display: flex;
+      justify-content: center;
+      margin-top: -40px;
+      background-color: #fff;
+      gap: 25px;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow:
+          0 2px 4px 0 rgba(0, 0, 0, 0.2),
+          0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+        img {
+          width: 35px;
+          padding: 20px;
+        }
+      }
+
+      button:hover,
+      button:active,
+      button:focus,
+      button:focus-within {
+        border: 2px solid black;
+
+        img {
+          padding: 18px;
+        }
+      }
+    }
+
+    .__text {
+      margin: 35px 15px 25px 15px;
+      display: flex;
+      justify-content: center;
+
+      p {
+        font-size: 20px;
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .__backButton {
+      cursor: pointer;
+      border-radius: 50em;
+      border: none;
+      background-color: #242e30;
+      margin: 60px 15px 25px 15px;
+      display: flex;
+      justify-content: center;
+
+      h4 {
+        color: #fff;
+        padding: 18px 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

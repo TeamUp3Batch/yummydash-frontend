@@ -4,6 +4,8 @@ import SimpleHeader from "../SimpleHeader/SimpleHeader";
 import style from "./home.module.scss";
 import Header from "../Header/Header";
 import Footer from "../../components/Footer/Footer";
+import RestaurantRating from "../../components/OrderSummary/RestaurantRating/RestaurantRating";
+
 
 const Home = () => {
   const isAuthenticated = false;
@@ -22,6 +24,7 @@ const Home = () => {
         )}
       </div>
       <Footer />
+      <RestaurantRating />
     </div>
   );
 };
