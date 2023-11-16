@@ -17,10 +17,10 @@ import { getReadyOrders } from "../../services/driverService";
 import { useSelector } from "react-redux";
 
 const Orders = () => {
-  const restaurantId = "6527a6e0fdb8bf79ffc03c4f";
   const [restaurantOrderDetails, setRestaurantOrderDetails] = useState([]);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [error, setError] = useState(null);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState(null);
   const { loggedInDriver } = useSelector((state) => state.driver);
 
   useEffect(() => {
@@ -47,30 +47,54 @@ const Orders = () => {
   };
 
   const handleAcceptOrder = async () => {
-    let data = {};
-    if (restaurantOrderDetails[0].orderStatus === "ready") {
-      data = {
-        cartId: restaurantOrderDetails[0]._id,
-        restaurantId: restaurantId,
-        userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: "pickup",
-        driverId: loggedInDriver._id,
-      };
-    } else if (restaurantOrderDetails[0].orderStatus === "pickup") {
-      data = {
-        cartId: restaurantOrderDetails[0]._id,
-        restaurantId: restaurantId,
-        userId: restaurantOrderDetails[0].userId,
-        newOrderStatus: "delivery",
-      };
+    if (!selectedOrderId) {
+      return; // No order selected
     }
 
+    const selectedOrderIndex = restaurantOrderDetails.findIndex(
+      (order) => order._id === selectedOrderId
+    );
+
+    if (selectedOrderIndex === -1) {
+      return; // Selected order not found
+    }
+
+    let newOrderStatus;
+
+    switch (restaurantOrderDetails[selectedOrderIndex].orderStatus) {
+      case "ready":
+        newOrderStatus = "pickup";
+        break;
+      case "pickup":
+        newOrderStatus = "delivery";
+        break;
+      default:
+        return; // Invalid order status
+    }
+
+    const data = {
+      cartId: selectedOrderId,
+      restaurantId: restaurantOrderDetails[selectedOrderIndex].restaurantId,
+      userId: restaurantOrderDetails[selectedOrderIndex].userId,
+      newOrderStatus: newOrderStatus,
+      driverId: loggedInDriver._id,
+    };
+    setSelectedOrderStatus(newOrderStatus);
+
     try {
-      const result = await updateOrderStatusByRestaurant(data);
-      
+      await updateOrderStatusByRestaurant(data);
+
+      // Update the local state with the modified order
+      setRestaurantOrderDetails((prevState) => {
+        const updatedOrderDetails = [...prevState];
+        updatedOrderDetails[selectedOrderIndex].orderStatus = newOrderStatus;
+        return updatedOrderDetails;
+      });
+
+      handleCloseModal();
     } catch (error) {
-      console.error("Error fetching data:", error);
-      setError(error.message);
+      console.error("Error updating order status:", error);
+      setError("An error occurred while updating order status.");
     }
   };
 
@@ -82,7 +106,7 @@ const Orders = () => {
           <TableRow>
             <TableCell>Order ID</TableCell>
             <TableCell>Order Details</TableCell>
-            <TableCell>Customer Details</TableCell>
+            <TableCell>Customer Name</TableCell>
             <TableCell>Pickup Address</TableCell>
             <TableCell>Delivery Address</TableCell>
             <TableCell>Order Status</TableCell>
@@ -117,8 +141,9 @@ const Orders = () => {
       <OrderDriverStatusModal
         open={!!selectedOrderId}
         onClose={handleCloseModal}
+        selectedOrderId={selectedOrderId}
         onConfirm={handleAcceptOrder}
-        orderId={selectedOrderId}
+        onSelectedOrderStatus={selectedOrderStatus}
       />
       <Snackbar
         open={!!error}

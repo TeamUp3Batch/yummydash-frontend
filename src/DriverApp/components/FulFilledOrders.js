@@ -51,7 +51,7 @@ const FulFilledOrders = () => {
         <TableHead>
           <TableRow>
             <TableCell>Order ID</TableCell>
-            <TableCell>Customer Details</TableCell>
+            <TableCell>Customer Name</TableCell>
             <TableCell>Pickup Address</TableCell>
             <TableCell>Delivery Address</TableCell>
             <TableCell>Order Status</TableCell>

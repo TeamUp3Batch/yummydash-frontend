@@ -15,7 +15,7 @@ const ConfirmModal = ({ active, setActive }) => {
           <br />
           <video src={HomeVideo} loop autoPlay muted></video>
           <h4>Order Confirmed</h4>
-          <p>Restaurant has confirmed your order and will be responsible for its:</p>
+          <p>Restaurant has confirmed your order and will be responsible for its packaging</p>
 
           <div className={classes.confirmModal__group}>
             <div>

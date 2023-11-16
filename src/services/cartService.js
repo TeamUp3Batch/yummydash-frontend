@@ -75,4 +75,15 @@ export const addToCartItem = async (data) => {
     }
   };
 
+  export const updateRestaurantRatingByUser = async (data) => {
+    const url = `${apiUrl}/api/cart/updateRestaurantRatingByUser`;
+    try {
+      const result = await axios.post(url, data);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  
+  };
+
 
