@@ -102,10 +102,8 @@ export default function RestaurantDashboard() {
 
   const renderSectionContent = () => {
     switch (selectedSection) {
-      case "incomingOrders":
+      case "orders":
         return <RestaurantOrder />;
-      case "fulfilledOrders":
-        return <Typography variant="h4">Fulfilled Orders Content</Typography>;
       case "profile":
         return <Profile />;
       case "menu":
@@ -167,30 +165,17 @@ export default function RestaurantDashboard() {
               href="#"
               color="inherit"
               underline="none"
-              onClick={() => handleSectionClick("incomingOrders")}
+              onClick={() => handleSectionClick("orders")}
             >
               <ListItem button>
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Incoming Orders" />
+                <ListItemText primary="Orders" />
               </ListItem>
             </Link>
 
-            <Link
-              href="#"
-              color="inherit"
-              underline="none"
-              onClick={() => handleSectionClick("fulfilledOrders")}
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText primary="Fulfilled Orders" />
-              </ListItem>
-            </Link>
-
+  
             <Link
               href="#"
               color="inherit"

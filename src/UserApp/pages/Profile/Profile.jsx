@@ -1,19 +1,15 @@
-
-import * as React from 'react';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Header from '../Header/Header';
-import Footer from '../../components/Footer/Footer';
+import * as React from "react";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Header from "../Header/Header";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import EditIcon from '@mui/icons-material/EditOutlined';
-import EditLink from '@mui/material/Link';
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,10 +40,9 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
-
 
 const Profile = () => {
   const theme = useTheme();
@@ -57,67 +52,48 @@ const Profile = () => {
     setValue(newValue);
   };
 
-
   const { loggedInUser } = useSelector((state) => state.auth);
+  const buttonStyle = {
+    color: '#FFFFFF',
+    backgroundColor: '#F36805', 
+  };
 
   return (
     <React.Fragment>
       <Header />
-        <div  style={{ height: '50%', width: '100%' }}>
-          <br />
-          <h1 align="center" > Account Settings</h1>
-          <br />
-        </div>
-        
-        <div style={{ height: 500, width: '100%' }}>
-          <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              textColor="inherit"
-              centered
-            >
-              <Tab label="My Account" {...a11yProps(0)} />
-              <Tab label="Password" {...a11yProps(1)} />
-            </Tabs>
-              <TabPanel value={value} index={0} dir={theme.direction} >
-                <div style={{ textAlign: 'center' }}>
-                    <span> Full Name: </span>
-                    <span>{loggedInUser.firstName.toUpperCase()} </span>
-                    <span> {loggedInUser.lastName.toUpperCase()} </span> 
-                    <span> 
-                      <EditIcon color='primary' fontSize='small'></EditIcon>
-                      <EditLink
-                        component="button"
-                        variant="body1"
-                        onClick={() => {
-                          console.info("I'm a button.");
-                        }}
-                    >
-                        Edit Profile
-                      </EditLink>
-                  </span> 
-                    <br />
-                    <span>Phone Number: </span> {loggedInUser.phoneNumber}
-                    <br />
-                    <span>Email: </span> {loggedInUser.email}
-                </div>
-              </TabPanel>
-              <TabPanel value={value} index={1} dir={theme.direction}>
-                <div style={{ textAlign: 'center' }}>
-                  <h3>Reset Your Password</h3>
-                  <p>Enter your email address to reset your password. <br />
-                  You may need to check your spam folder or unblock <br />
-                  support@yummydash.com 
-                  </p>
-                  <br />
-                  <TextField id="outlined-basic" label={loggedInUser.email} variant="outlined" /> <br /><br />
-                  <Button variant="contained" >  Reset Password</Button>
-                </div>
-              </TabPanel>
-          </Box>
+      <div style={{ height: "50%", width: "100%" }}>
+        <br />
+        <h1 align="center"> Account Settings</h1>
+        <br />
       </div>
-      <Footer />
+
+      <div style={{ height: 500, width: "100%" }}>
+        <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            textColor="inherit"
+            centered
+          >
+            <Tab label="My Account" {...a11yProps(0)} />
+          </Tabs>
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <div style={{ textAlign: "center" }}>
+              <span> Full Name: </span>
+              <span>{loggedInUser.firstName.toUpperCase()} </span>
+              <span> {loggedInUser.lastName.toUpperCase()} </span>
+              <br />
+              <span>Phone Number: </span> {loggedInUser.phoneNumber}
+              <br />
+              <span>Email: </span> {loggedInUser.email}
+              <br />
+              <Link to="../main">
+                <Button variant="outlined" style={buttonStyle}>Back to Restaurant</Button>
+              </Link>
+            </div>
+          </TabPanel>
+        </Box>
+      </div>
     </React.Fragment>
   );
 };

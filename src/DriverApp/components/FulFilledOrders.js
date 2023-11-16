@@ -4,11 +4,10 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Button from "@mui/material/Button";
+
 import Title from "./Title";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import OrderDriverStatusModal from "../components/OrderDriverStatusModal/OrderDriverStatusModal";
 import { getOrdersCompletedByDriver } from "../../services/driverService";
 
 import { useSelector } from "react-redux";

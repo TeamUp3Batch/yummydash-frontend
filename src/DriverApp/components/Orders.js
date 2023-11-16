@@ -9,7 +9,6 @@ import Title from "./Title";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import {
-  getAllOrdersByRestaurantId,
   updateOrderStatusByRestaurant,
 } from "../../services/cartService";
 import OrderDriverStatusModal from "../components/OrderDriverStatusModal/OrderDriverStatusModal";

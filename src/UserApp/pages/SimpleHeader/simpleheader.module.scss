@@ -93,7 +93,7 @@
           background: none;
           color: #eaeced;
           font-weight: 700;
-          cursor: default;
+          cursor: pointer;
           margin-right: 20px;
           font-size: 16px;
         }
@@ -103,10 +103,11 @@
           color: rgb(10, 9, 9);
           background-color: #e5ebed;
           font-weight: 700;
-          cursor: default;
+          cursor: pointer;
           border-radius: 50em;
           padding: 5px 10px;
           font-size: 16px;
+          margin: 10px;
         }
         .whiteColorText {
           color: white;
