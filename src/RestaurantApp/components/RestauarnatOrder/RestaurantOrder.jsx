@@ -50,8 +50,11 @@ const RestaurantOrder = () => {
     if (!selectedOrderId) {
       return; // No order selected
     }
+
+   
   
     const selectedOrderIndex = restaurantOrderDetails.findIndex(order => order._id === selectedOrderId);
+    // const orderStauts
   
     if (selectedOrderIndex === -1) {
       return; // Selected order not found
@@ -108,7 +111,7 @@ const RestaurantOrder = () => {
         <TableHead>
           <TableRow>
           <TableCell>Order ID</TableCell>
-                  <TableCell>User ID</TableCell>
+                  <TableCell>Customer Name</TableCell>
                   <TableCell>Menu Item</TableCell>
                   <TableCell>Total</TableCell>
                   <TableCell>Status</TableCell>
@@ -119,7 +122,7 @@ const RestaurantOrder = () => {
         {restaurantOrderDetails.map((order) => (
                   <TableRow key={order._id}>
                     <TableCell>{order._id}</TableCell>
-                    <TableCell>{order.userId}</TableCell>
+                    <TableCell>{order.userName.toUpperCase()}</TableCell>
                     <TableCell>
                       {order.menuItems.map((menuItem) => (
                         <div key={menuItem._id}>
