@@ -25,11 +25,11 @@ const PickedUpOrders = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-        const driverId = loggedInDriver._id
+      const driverId = loggedInDriver._id;
       try {
-        if(driverId){
-        const data = await getOrdersPickedByDriver(driverId);
-        setRestaurantOrderDetails(data.data.orders);
+        if (driverId) {
+          const data = await getOrdersPickedByDriver(driverId);
+          setRestaurantOrderDetails(data.data.orders);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -53,23 +53,25 @@ const PickedUpOrders = () => {
     if (!selectedOrderId) {
       return; // No order selected
     }
-  
-    const selectedOrderIndex = restaurantOrderDetails.findIndex(order => order._id === selectedOrderId);
-  
+
+    const selectedOrderIndex = restaurantOrderDetails.findIndex(
+      (order) => order._id === selectedOrderId
+    );
+
     if (selectedOrderIndex === -1) {
       return; // Selected order not found
     }
-  
+
     let newOrderStatus;
-  
+
     switch (restaurantOrderDetails[selectedOrderIndex].orderStatus) {
-      case 'pickup':
-        newOrderStatus = 'delivery';
+      case "pickup":
+        newOrderStatus = "delivery";
         break;
       default:
         return; // Invalid order status
     }
-  
+
     const data = {
       cartId: selectedOrderId,
       restaurantId: restaurantOrderDetails[selectedOrderIndex].restaurantId,
@@ -77,20 +79,20 @@ const PickedUpOrders = () => {
       driverId: loggedInDriver._id,
       newOrderStatus: newOrderStatus,
     };
-  
+
     try {
       await updateOrderStatusByRestaurant(data);
       // Update the local state with the modified order
-      setRestaurantOrderDetails(prevState => {
+      setRestaurantOrderDetails((prevState) => {
         const updatedOrderDetails = [...prevState];
         updatedOrderDetails[selectedOrderIndex].orderStatus = newOrderStatus;
         return updatedOrderDetails;
       });
-  
+
       handleCloseModal();
     } catch (error) {
-      console.error('Error updating order status:', error);
-      setError('An error occurred while updating order status.');
+      console.error("Error updating order status:", error);
+      setError("An error occurred while updating order status.");
     }
   };
 
@@ -102,7 +104,7 @@ const PickedUpOrders = () => {
           <TableRow>
             <TableCell>Order ID</TableCell>
             <TableCell>Order Details</TableCell>
-            <TableCell>Customer Details</TableCell>
+            <TableCell>Customer Name</TableCell>
             <TableCell>Pickup Address</TableCell>
             <TableCell>Delivery Address</TableCell>
             <TableCell>Order Status</TableCell>

@@ -39,7 +39,6 @@ const ProcessingForm = ({ clientSecret }) => {
        
           const data = await getOrderDetailsByOrderId(userId,cartId);
           const { orderTracker } = data;
-          console.log("inital data",data)
           setOrderTrackerData(data)
 
       // Check orderTracker status and update state accordingly
