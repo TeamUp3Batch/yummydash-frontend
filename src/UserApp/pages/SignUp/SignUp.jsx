@@ -8,7 +8,6 @@ import {
   Box,
 } from "@mui/material";
 import SimpleHeader from "../SimpleHeader/SimpleHeader";
-import Footer from "../../components/Footer/Footer";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import Alert from "@mui/material/Alert";
 import styles from "./signUp.module.scss";
@@ -151,7 +150,7 @@ const SignUp = () => {
           onClose={handleCloseSnackbar}
         />
       </div>
-      <Footer />
+
     </div>
   );
 };
