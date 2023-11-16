@@ -1,26 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { updateOrderStatus } from '../../../services/paymentService';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { updateCartStatus, updateOrderTracker } from '../../../slices/menuSlice';
-import axios from 'axios';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-//import { useNavigate } from 'react-router-dom';
-import { Button, Paper } from '@mui/material';
-import { loadStripe } from '@stripe/stripe-js';
-import ConfirmModal from './ConfirmModal/ConfirmModal';
+import React, { useState, useEffect } from "react";
+import { updateOrderStatus } from "../../../services/paymentService";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  updateCartStatus,
+  updateOrderTracker,
+} from "../../../slices/menuSlice";
+import axios from "axios";
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
+import { Button, Paper } from "@mui/material";
+import { loadStripe } from "@stripe/stripe-js";
+// import ConfirmModal from './ConfirmModal/ConfirmModal';
 
-import classes from './orderSummary.module.scss';
+import classes from "./orderSummary.module.scss";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
 const CheckoutForm = ({ clientSecret }) => {
-  const [confirmModalActive, setConfirmModalActive] = useState(false);
+  // const [confirmModalActive, setConfirmModalActive] = useState(false);
   const { checkout } = useSelector((state) => state.menu);
   const stripe = useStripe();
   const elements = useElements();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleCheckout = async (e) => {
@@ -33,23 +41,22 @@ const CheckoutForm = ({ clientSecret }) => {
         },
       });
 
-      if (result?.paymentIntent?.status === 'succeeded') {
+      if (result?.paymentIntent?.status === "succeeded") {
         const updateObj = {
           cartId: checkout.cartId,
           restaurantId: checkout.restaurantId,
           userId: checkout.userId,
-          newOrderStatus: 'payment',
+          newOrderStatus: "payment",
         };
         const response = await updateOrderStatus(updateObj);
         if (response.status === 201) {
-          
           dispatch(updateCartStatus(response.data.orderStatus));
           dispatch(updateOrderTracker(response.data.orderTracker));
-          setConfirmModalActive(true);
-          // navigate('/delivery');
+          //setConfirmModalActive(true);
+          navigate("/delivery");
         }
       } else {
-        console.warn('Payment not succeeded');
+        console.warn("Payment not succeeded");
       }
     } catch (err) {
       console.warn(err);
@@ -69,9 +76,15 @@ const CheckoutForm = ({ clientSecret }) => {
             {checkout
               ? checkout.lineItems.map((lineItem) => (
                   <div className={classes.orderSummary__dishes}>
-                    <p className={classes.orderSummary__quantity}>{lineItem.quantity}</p>
-                    <p className={classes.orderSummary__name}>{lineItem.name}</p>
-                    <p className={classes.orderSummary__price}>$ {parseFloat(lineItem.price.toFixed(2))}</p>
+                    <p className={classes.orderSummary__quantity}>
+                      {lineItem.quantity}
+                    </p>
+                    <p className={classes.orderSummary__name}>
+                      {lineItem.name}
+                    </p>
+                    <p className={classes.orderSummary__price}>
+                      $ {parseFloat(lineItem.price.toFixed(2))}
+                    </p>
                   </div>
                 ))
               : null}
@@ -91,14 +104,14 @@ const CheckoutForm = ({ clientSecret }) => {
           </div>
         </div>
       </div>
-      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive} />
+      {/* <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive} /> */}
     </div>
   );
 };
 
 export default function OrderSummary() {
   const { checkout } = useSelector((state) => state.menu);
-  const [clientSecret, setClientSecret] = useState('');
+  const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
     const fetchClientSecret = async () => {

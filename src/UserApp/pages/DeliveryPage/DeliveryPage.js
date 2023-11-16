@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import Header from '../Header/Header';
-import ReactMapGL, { GeolocateControl, Source, Layer, Marker } from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import RestaurantTwoToneIcon from '@mui/icons-material/RestaurantTwoTone';
-import PersonPinCircleRoundedIcon from '@mui/icons-material/PersonPinCircleRounded';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import Header from "../Header/Header";
+import ReactMapGL, {
+  GeolocateControl,
+  Source,
+  Layer,
+  Marker,
+} from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import RestaurantTwoToneIcon from "@mui/icons-material/RestaurantTwoTone";
+import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
+import { useSelector } from "react-redux";
 
-import {getOrderDetailsByOrderId} from  '../../../services/cartService'
-import {getDriverProfile} from '../../../services/driverService'
+import { getOrderDetailsByOrderId } from "../../../services/cartService";
+import { getDriverProfile } from "../../../services/driverService";
 
-import receptIcon from '../../../icons/receipt-svgrepo-com.svg';
-import trackerIcon from '../../../icons/list-ul-alt-svgrepo-com.svg';
-import circleDotIcon from '../../../icons/circle-dot-svgrepo-com.svg';
-import pointerOrange from '../../../icons/pointer-map-pointer-orange.svg';
-import pointerGrey from '../../../icons/pointer-map-pointer-grey.svg';
-import checkCircleOrange from '../../../icons/check-circle-orange.svg';
+import receptIcon from "../../../icons/receipt-svgrepo-com.svg";
+import trackerIcon from "../../../icons/list-ul-alt-svgrepo-com.svg";
+import circleDotIcon from "../../../icons/circle-dot-svgrepo-com.svg";
+import pointerOrange from "../../../icons/pointer-map-pointer-orange.svg";
+import pointerGrey from "../../../icons/pointer-map-pointer-grey.svg";
+import checkCircleOrange from "../../../icons/check-circle-orange.svg";
 
-import classes from './deliveryPage.module.scss';
-import { formattedTime } from '../../../utils/formattedTimeStamp';
+import classes from "./deliveryPage.module.scss";
+import { formattedTime } from "../../../utils/formattedTimeStamp";
 
+import RestaurantRating from "../../components/OrderSummary/RestaurantRating/RestaurantRating";
+import ConfirmModal from "../../components/OrderSummary/ConfirmModal/ConfirmModal";
 const ProcessingForm = ({ clientSecret }) => {
   const { cartId, checkout, cart } = useSelector((state) => state.menu);
   const { loggedInUser } = useSelector((state) => state.auth);
@@ -29,55 +36,71 @@ const ProcessingForm = ({ clientSecret }) => {
   const [driving, setDriving] = useState(false);
   const [collecting, setCollecting] = useState(false);
   const [delivering, setDelivering] = useState(false);
-  const [orderTrackerData,setOrderTrackerData] = useState("");
-  const [driverName, setDriverName ] = useState("");
+  const [orderTrackerData, setOrderTrackerData] = useState("");
+  const [driverName, setDriverName] = useState("");
+  const [confirmRatingActive, setConfirmRatingActive] = useState(false);
+  const [confirmModalActive, setConfirmModalActive] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchOrderStatus = async () => {
-       const userId = loggedInUser._id;
+      const userId = loggedInUser._id;
       try {
-       
-          const data = await getOrderDetailsByOrderId(userId,cartId);
-          const { orderTracker } = data;
-          setOrderTrackerData(data)
+        const data = await getOrderDetailsByOrderId(userId, cartId);
+        const { orderTracker } = data;
+        setOrderTrackerData(data);
 
-      // Check orderTracker status and update state accordingly
-      if (orderTracker && orderTracker.acceptance && orderTracker.acceptance.status) {
-        setPlaced(true);
-        setConfirmed(true);
-      }
+        // Check orderTracker status and update state accordingly
+        if (
+          orderTracker &&
+          orderTracker.acceptance &&
+          orderTracker.acceptance.status
+        ) {
+          setPlaced(true);
+          setConfirmed(true);
+          setConfirmModalActive(true);
+        }
 
-      if (orderTracker && orderTracker.preparation && orderTracker.preparation.status) {
-        setPlaced(true);
-        setConfirmed(true);
-        setPreparing(true);
-      }
+        if (
+          orderTracker &&
+          orderTracker.preparation &&
+          orderTracker.preparation.status
+        ) {
+          setPlaced(true);
+          setConfirmed(true);
+          setPreparing(true);
+          setConfirmModalActive(false);
+        }
 
-      if (orderTracker &&  orderTracker.ready && orderTracker.ready.status) {
-        setPlaced(true);
-        setConfirmed(true);
-        setPreparing(false);
-        setDriving(true);
-      }
+        if (orderTracker && orderTracker.ready && orderTracker.ready.status) {
+          setPlaced(true);
+          setConfirmed(true);
+          setPreparing(false);
+          setDriving(true);
+          setConfirmModalActive(false);
+        }
 
-      if (orderTracker &&  orderTracker.pickup && orderTracker.pickup.status) {
-        setPlaced(true);
-        setConfirmed(true);
-        setDriving(true);
-        setCollecting(true);
-        //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
-        //if(driverDetails){setDriverName(driverDetails.firstName)}
-        
-      }
-      if (orderTracker &&  orderTracker.delivery && orderTracker.delivery.status) {
-        setPlaced(true);
-        setConfirmed(true);
-        setDriving(true);
-        setCollecting(true);
-        setDelivering(true);
-      }
-        
-        
+        if (orderTracker && orderTracker.pickup && orderTracker.pickup.status) {
+          setPlaced(true);
+          setConfirmed(true);
+          setDriving(true);
+          setCollecting(true);
+          setConfirmModalActive(false);
+          //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
+          //if(driverDetails){setDriverName(driverDetails.firstName)}
+        }
+        if (
+          orderTracker &&
+          orderTracker.delivery &&
+          orderTracker.delivery.status
+        ) {
+          setPlaced(true);
+          setConfirmed(true);
+          setDriving(true);
+          setCollecting(true);
+          setDelivering(true);
+          setConfirmModalActive(false);
+          setConfirmRatingActive(true);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -86,17 +109,17 @@ const ProcessingForm = ({ clientSecret }) => {
     fetchOrderStatus();
     const intervalId = setInterval(fetchOrderStatus, 10000);
 
-  // Clean up the interval when the component unmounts or when the dependencies change
-  return () => clearInterval(intervalId);
-
-  },[cartId, loggedInUser._id])
+    // Clean up the interval when the component unmounts or when the dependencies change
+    return () => clearInterval(intervalId);
+  }, [cartId, loggedInUser._id]);
 
   return (
     <div className={classes.processingForm}>
       <div className={classes.processingForm__wrapper}>
         <div className={classes.processingForm__header}>
           <h2>
-            {checkout.restaurantName}{preparing?(<span>  is preparing your order:</span>):(<div></div>)}
+            {checkout.restaurantName}
+            {preparing ? <span> is preparing your order:</span> : <div></div>}
           </h2>
         </div>
         {tracker ? (
@@ -118,11 +141,17 @@ const ProcessingForm = ({ clientSecret }) => {
               <div>
                 {placed ? (
                   <div className={classes.processingForm__table}>
-                    <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
+                    <img
+                      src={checkCircleOrange}
+                      alt="CircleIcon"
+                      width="20px"
+                    />
                     <p className={classes.processingForm__work}>
                       <b>Order placed</b>
                     </p>
-                    <p className={classes.processingForm__time}>{formattedTime(cart.orderTracker.payment.timestamp)}</p>
+                    <p className={classes.processingForm__time}>
+                      {formattedTime(cart.orderTracker.payment.timestamp)}
+                    </p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -133,11 +162,19 @@ const ProcessingForm = ({ clientSecret }) => {
 
                 {confirmed ? (
                   <div className={classes.processingForm__table}>
-                    <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
+                    <img
+                      src={checkCircleOrange}
+                      alt="CircleIcon"
+                      width="20px"
+                    />
                     <p className={classes.processingForm__work}>
                       <b>Order confirmed</b>
                     </p>
-                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.acceptance.timestamp)}</p>
+                    <p className={classes.processingForm__time}>
+                      {formattedTime(
+                        orderTrackerData.orderTracker.acceptance.timestamp
+                      )}
+                    </p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -148,11 +185,19 @@ const ProcessingForm = ({ clientSecret }) => {
 
                 {driving ? (
                   <div className={classes.processingForm__table}>
-                    <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
+                    <img
+                      src={checkCircleOrange}
+                      alt="CircleIcon"
+                      width="20px"
+                    />
                     <p className={classes.processingForm__work}>
                       <b>Arrived At Restaurant</b>
                     </p>
-                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.ready.timestamp)}</p>
+                    <p className={classes.processingForm__time}>
+                      {formattedTime(
+                        orderTrackerData.orderTracker.ready.timestamp
+                      )}
+                    </p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -163,11 +208,19 @@ const ProcessingForm = ({ clientSecret }) => {
 
                 {collecting ? (
                   <div className={classes.processingForm__table}>
-                    <img src={checkCircleOrange} alt="CircleIcon" width="20px" />
+                    <img
+                      src={checkCircleOrange}
+                      alt="CircleIcon"
+                      width="20px"
+                    />
                     <p className={classes.processingForm__work}>
                       <b>Collecting your order</b>
                     </p>
-                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.pickup.timestamp)}</p>
+                    <p className={classes.processingForm__time}>
+                      {formattedTime(
+                        orderTrackerData.orderTracker.pickup.timestamp
+                      )}
+                    </p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
@@ -178,15 +231,27 @@ const ProcessingForm = ({ clientSecret }) => {
 
                 {delivering ? (
                   <div className={classes.processingForm__table}>
-                    <img src={pointerOrange} alt="Pointer Delivery" width="20px" />
+                    <img
+                      src={pointerOrange}
+                      alt="Pointer Delivery"
+                      width="20px"
+                    />
                     <p className={classes.processingForm__work}>
                       <b>Delivering your order</b>
                     </p>
-                    <p className={classes.processingForm__time}>{formattedTime(orderTrackerData.orderTracker.delivery.timestamp)}</p>
+                    <p className={classes.processingForm__time}>
+                      {formattedTime(
+                        orderTrackerData.orderTracker.delivery.timestamp
+                      )}
+                    </p>
                   </div>
                 ) : (
                   <div className={classes.processingForm__table}>
-                    <img src={pointerGrey} alt="Pointer Delivery" width="20px" />
+                    <img
+                      src={pointerGrey}
+                      alt="Pointer Delivery"
+                      width="20px"
+                    />
                     <p>Delivering your order</p>
                   </div>
                 )}
@@ -201,7 +266,9 @@ const ProcessingForm = ({ clientSecret }) => {
                 <div>
                   <button onClick={() => setTracker(true)}>
                     <img src={trackerIcon} alt="tracker" width="20px" />
-                    <span className={classes.trackerIcon__tooltip}>Tracker</span>
+                    <span className={classes.trackerIcon__tooltip}>
+                      Tracker
+                    </span>
                   </button>
                   <button onClick={() => setTracker(false)}>
                     <img src={receptIcon} alt="receipt" width="20px" />
@@ -213,9 +280,15 @@ const ProcessingForm = ({ clientSecret }) => {
                 ? checkout.lineItems.map((lineItem) => (
                     <>
                       <div className={classes.processingForm__dishes}>
-                        <p className={classes.processingForm__quantity}>{lineItem.quantity}</p>
-                        <p className={classes.processingForm__name}>{lineItem.name}</p>
-                        <p className={classes.processingForm__price}>${lineItem.price}</p>
+                        <p className={classes.processingForm__quantity}>
+                          {lineItem.quantity}
+                        </p>
+                        <p className={classes.processingForm__name}>
+                          {lineItem.name}
+                        </p>
+                        <p className={classes.processingForm__price}>
+                          ${lineItem.price}
+                        </p>
                       </div>
                     </>
                   ))
@@ -228,12 +301,22 @@ const ProcessingForm = ({ clientSecret }) => {
           </>
         )}
       </div>
+      <RestaurantRating
+        active={confirmRatingActive}
+        setActive={setConfirmRatingActive}
+        cartId={cartId}
+        userId={checkout.userId}
+        restaurantId={checkout.restaurantId}
+        restaurantName={checkout.restaurantName}
+      />     
+      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive} />
     </div>
   );
 };
 
 const DeliveryPage = () => {
   const { checkout } = useSelector((state) => state.menu);
+  const [confirmRatingActive, setConfirmRatingActive] = useState(false);
   const [viewState, setViewState] = useState({
     longitude: checkout?.userAddress?.longitude || -106.659733,
     latitude: checkout?.userAddress?.latitude || 52.134574,
@@ -259,31 +342,31 @@ const DeliveryPage = () => {
   const getRoutes = async () => {
     try {
       const response = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&language=en&overview=full&access_token=${process.env.REACT_APP_MAPBOX_API_KEY}`,
+        `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&language=en&overview=full&access_token=${process.env.REACT_APP_MAPBOX_API_KEY}`
       );
 
       const data = await response.json();
       const coords = data.routes[0].geometry.coordinates;
       setCoords(coords);
     } catch (error) {
-      console.error('Error fetching routes:', error);
+      console.error("Error fetching routes:", error);
     }
   };
 
   const geojson = {
-    type: 'Feature',
+    type: "Feature",
     geometry: {
-      type: 'LineString',
+      type: "LineString",
       coordinates: coords,
     },
   };
 
   const lineStyle = {
-    id: 'roadLayer',
-    type: 'line',
+    id: "roadLayer",
+    type: "line",
     paint: {
-      'line-color': 'blue',
-      'line-width': 4,
+      "line-color": "blue",
+      "line-width": 4,
     },
   };
 
@@ -302,10 +385,11 @@ const DeliveryPage = () => {
 
       <ReactMapGL
         {...viewState}
-        style={{ height: '100vh', width: '100vw' }}
+        style={{ height: "100vh", width: "100vw" }}
         onViewportChange={(nextViewState) => setViewState(nextViewState)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}>
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
+      >
         <ProcessingForm />
         <Source id="routeSource" type="geojson" data={geojson}>
           <Layer {...lineStyle} />
@@ -330,6 +414,8 @@ const DeliveryPage = () => {
 
         <GeolocateControl />
       </ReactMapGL>
+
+      {/* <RestaurantRating active={confirmRatingActive} setActive={setconfirmRatingActive} /> */}
     </div>
   );
 };
