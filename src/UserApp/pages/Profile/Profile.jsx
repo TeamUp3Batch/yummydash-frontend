@@ -53,6 +53,10 @@ const Profile = () => {
   };
 
   const { loggedInUser } = useSelector((state) => state.auth);
+  const buttonStyle = {
+    color: '#FFFFFF',
+    backgroundColor: '#F36805', 
+  };
 
   return (
     <React.Fragment>
@@ -84,7 +88,7 @@ const Profile = () => {
               <span>Email: </span> {loggedInUser.email}
               <br />
               <Link to="../main">
-                <Button variant="outlined">Back to Restaurant</Button>
+                <Button variant="outlined" style={buttonStyle}>Back to Restaurant</Button>
               </Link>
             </div>
           </TabPanel>

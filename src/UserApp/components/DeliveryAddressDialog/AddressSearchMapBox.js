@@ -13,6 +13,12 @@ const AddressSearchMapBox = ({onSearchAddressSelect}) =>{
   const dispatch = useDispatch();
   const [savedAddress, setSavedAddress] = useState(null);
     const [isSaving, setIsSaving] = useState(false);
+    const buttonStyle = {
+      color: '#FFFFFF',
+      backgroundColor: '#F36805', 
+      margin: "0 auto",
+      display: "block",
+    };
  
   const handleSave = async (e) => {
     e.preventDefault();
@@ -43,6 +49,7 @@ const AddressSearchMapBox = ({onSearchAddressSelect}) =>{
       onSearchAddressSelect(address);
     }
   }, [address, onSearchAddressSelect]);
+  
 
   return (
     <div>
@@ -51,13 +58,9 @@ const AddressSearchMapBox = ({onSearchAddressSelect}) =>{
         <Button
           type="submit"
           variant="contained"
-          color="success"
+          style={buttonStyle}
           onClick={handleSave}
           disabled={isSaving}
-          style={{
-            margin: "0 auto",
-            display: "block",
-          }}
         >
           {isSaving ? "Saving..." : "Save"}
         </Button>
