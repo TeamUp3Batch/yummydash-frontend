@@ -7,7 +7,6 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 
 const SimpleHeader = () => {
@@ -20,12 +19,6 @@ const SimpleHeader = () => {
       <div className={styles.wrapper}>
         <img className={styles.logo} src={logo} alt="Logo" />
         <div className={styles.account}>
-        <Link to="/admin">
-            <Button className={styles.signup}>
-            <AdminPanelSettingsIcon  sx={{fontSize: 30}}/>
-            Admin
-            </Button>
-          </Link>
           <Link to="/restaurantSignUp">
             <Button className={styles.signup}>
             <RestaurantIcon  sx={{fontSize: 30}}/>
@@ -38,9 +31,9 @@ const SimpleHeader = () => {
             Driver
             </Button>
           </Link>
-          <Button onClick={handleOpen} className={styles.login}>
-            <AccountCircleSharpIcon  sx={{fontSize: 40}}/>
-            Log In
+          <Button onClick={handleOpen} className={styles.signup}>
+            <AccountCircleSharpIcon  sx={{fontSize: 30}}/>
+            LogIn
           </Button>
           <LoginModal
             isOpen={open}
