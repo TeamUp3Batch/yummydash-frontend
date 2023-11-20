@@ -58,7 +58,6 @@ const RestaurantRating = ({
   };
 
   return (
-    // <div className={active ? classes.confirmModal__active : classes.confirmModal}>
     <div
       className={
         active ? classes.restaurantRating__active : classes.confirmModal

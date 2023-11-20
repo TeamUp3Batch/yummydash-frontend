@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 
 import AdsCarousel from '../../components/AdsCarousel/AdsCarousel';
 import CuisineCarouselContainer from '../../components/CuisineCarousel/CuisineCarouselContainer';
+import CourierRating from '../../components/OrderSummary/CourierRating/CourierRating';
 
 
 const Main = () => {
@@ -14,6 +15,7 @@ const Main = () => {
         <AdsCarousel />
         <CuisineCarouselContainer selectedSort={sorting} />
       </div>
+      <CourierRating />
     </React.Fragment>
   );
 };
