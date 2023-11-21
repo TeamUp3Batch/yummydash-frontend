@@ -55,6 +55,7 @@ const FulFilledOrders = () => {
             <TableCell>Pickup Address</TableCell>
             <TableCell>Delivery Address</TableCell>
             <TableCell>Order Status</TableCell>
+            <TableCell>Updated Time</TableCell>
             <TableCell>Customer Rating</TableCell>
           </TableRow>
         </TableHead>
@@ -68,6 +69,13 @@ const FulFilledOrders = () => {
               <TableCell>{restaurantOrderDetail.restaurantAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.userAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.orderStatus}</TableCell>
+              <TableCell>
+      {restaurantOrderDetail.orderTracker[restaurantOrderDetail.orderStatus] ? (
+        new Date(restaurantOrderDetail.orderTracker[restaurantOrderDetail.orderStatus].timestamp).toLocaleString()
+      ) : (
+        "N/A"
+      )}
+    </TableCell>
               <TableCell>5</TableCell>
             </TableRow>
           ))}

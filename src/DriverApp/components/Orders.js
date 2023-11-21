@@ -8,9 +8,7 @@ import Button from "@mui/material/Button";
 import Title from "./Title";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import {
-  updateOrderStatusByRestaurant,
-} from "../../services/cartService";
+import { updateOrderStatusByRestaurant } from "../../services/cartService";
 import OrderDriverStatusModal from "../components/OrderDriverStatusModal/OrderDriverStatusModal";
 import { getReadyOrders } from "../../services/driverService";
 
@@ -34,7 +32,7 @@ const Orders = () => {
     };
 
     fetchData();
-  }, []);
+  }, [restaurantOrderDetails]);
 
   const handleOpenModal = (orderId) => {
     setSelectedOrderId(orderId);
@@ -110,6 +108,7 @@ const Orders = () => {
             <TableCell>Pickup Address</TableCell>
             <TableCell>Delivery Address</TableCell>
             <TableCell>Order Status</TableCell>
+            <TableCell>Date & Time</TableCell>
             <TableCell>Order Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -127,6 +126,17 @@ const Orders = () => {
               <TableCell>{restaurantOrderDetail.restaurantAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.userAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.orderStatus}</TableCell>
+              <TableCell>
+                {restaurantOrderDetail.orderTracker[
+                  restaurantOrderDetail.orderStatus
+                ]
+                  ? new Date(
+                      restaurantOrderDetail.orderTracker[
+                        restaurantOrderDetail.orderStatus
+                      ].timestamp
+                    ).toLocaleString()
+                  : "N/A"}
+              </TableCell>
               <TableCell>
                 <Button
                   onClick={() => handleOpenModal(restaurantOrderDetail._id)}
