@@ -180,13 +180,7 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
           sx: dialogStyle,
         }}
       >
-        <List sx={style} component="nav" aria-label="nav pages">
-          <ListItemButton>
-            <h3> Delivery</h3>
-            <Divider dark />
-          </ListItemButton>
-
-          
+        <List sx={style} component="nav" aria-label="nav pages"> 
           <ListItemButton onClick={openAddAddressDialog}>
             <ListItemText
               primary={
