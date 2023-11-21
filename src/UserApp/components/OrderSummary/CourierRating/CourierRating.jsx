@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { resetMenuState } from '../../../../slices/menuSlice';
-import { resetRestaurantState } from '../../../../slices/restaurantSlice';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { resetMenuState } from "../../../../slices/menuSlice";
+import { resetRestaurantState } from "../../../../slices/restaurantSlice";
 
 import { updateDriverRatingByUser } from "../../../../services/cartService";
-import { getDriverProfile } from '../../../../services/driverService';
+import { getDriverProfile } from "../../../../services/driverService";
 
-import likeIcon from '../../../../icons/like-svgrepo-com.svg';
-import dislikeIcon from '../../../../icons/dislike-svgrepo-com.svg';
-import restphoto from '../../../../img/restaurantPhoto.jpeg';
+import likeIcon from "../../../../icons/like-svgrepo-com.svg";
+import dislikeIcon from "../../../../icons/dislike-svgrepo-com.svg";
+import restphoto from "../../../../img/restaurantPhoto.jpeg";
 
-import classes from './courierRating.module.scss';
+import classes from "./courierRating.module.scss";
 
-const CourierRating = ({ activeDriver, setActiveDriver, cartId, userId, driverId, driverRating }) => {
-
-  console.log("lala", getDriverProfile);
+const CourierRating = ({
+  activeDriver,
+  setActiveDriver,
+  cartId,
+  userId,
+  driverId,
+  driverName
+}) => {
 
   const dispatch = useDispatch();
   const [courierRating, setCourierRating] = useState(null);
@@ -38,26 +43,23 @@ const CourierRating = ({ activeDriver, setActiveDriver, cartId, userId, driverId
           driverRating: courierRating,
         };
         const response = await updateDriverRatingByUser(data);
-
-        // Handle response as needed
-        if (response.ok) {
-          // Handle success (e.g., show a success message)
+        if (response) {          
+          console.log("success")
         } else {
-          // Handle failure (e.g., show an error message)
         }
       } catch (error) {
         console.error("Error submitting rating:", error);
       }
       dispatch(resetMenuState());
       dispatch(resetRestaurantState());
-      //setActive(false);
+      setActiveDriver(false)
     } else {
-      // Handle if the user hasn't selected a rating (optional)
+      console.log("Error submitting rating:");
     }
   };
 
   return (
-    <div className={classes.courierRating__active}>
+    <div className={activeDriver ? classes.courierRating__active: classes.confirmModal }>
       {/* <div
     className={active ? classes.restaurantRating__active : classes.confirmModal}
     /> */}
@@ -65,7 +67,9 @@ const CourierRating = ({ activeDriver, setActiveDriver, cartId, userId, driverId
         <div className={classes.__image}>
           <img src={restphoto} alt="restaurant" />
           <h3>Courier Feedback</h3>
-          <p>How did your courier <span>(name)</span> do?</p>
+          <p>
+            How did your courier <span>{driverName}</span> do?
+          </p>
         </div>
         <div className={classes.__icons}>
           <button onClick={handleDislikeClick}>
@@ -76,7 +80,10 @@ const CourierRating = ({ activeDriver, setActiveDriver, cartId, userId, driverId
           </button>
         </div>
         <div className={classes.__text}>
-          <p>Couriers are responsible for your order's transportation and handling.</p>
+          <p>
+            Couriers are responsible for your order's transportation and
+            handling.
+          </p>
         </div>
 
         <Link to="../main">

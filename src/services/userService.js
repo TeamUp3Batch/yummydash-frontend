@@ -42,7 +42,6 @@ export const updatePrimaryAddress = async (selectedAddress) => {
 export const deleteUserAddress = async (data) => {
   
   const url = `${apiUrl}/api/users/deleteUserAddress`;
-  console.log('data', data);
   try {
     const result = await axios.post(url, data);
     if (result.status === 201) {
