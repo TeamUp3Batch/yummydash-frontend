@@ -61,4 +61,3 @@ export const getDriverProfile = async (driverId) => {
     throw error;
   }
 };
-

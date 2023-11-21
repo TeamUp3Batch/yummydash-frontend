@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { resetMenuState } from '../../../../slices/menuSlice';
 import { resetRestaurantState } from '../../../../slices/restaurantSlice';
 
+import { updateDriverRatingByUser } from "../../../../services/cartService";
+
 import likeIcon from '../../../../icons/like-svgrepo-com.svg';
 import dislikeIcon from '../../../../icons/dislike-svgrepo-com.svg';
 import restphoto from '../../../../img/restaurantPhoto.jpeg';
@@ -20,7 +22,7 @@ const CourierRating = () => {
         <div className={classes.__image}>
           <img src={restphoto} alt="restaurant" />
           <h3>Courier Feedback</h3>
-          <p>How did you courier <span>(name)</span> do?</p>
+          <p>How did your courier <span>(name)</span> do?</p>
         </div>
         <div className={classes.__icons}>
           <button>
