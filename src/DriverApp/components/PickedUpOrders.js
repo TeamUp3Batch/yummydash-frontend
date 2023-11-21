@@ -37,7 +37,7 @@ const PickedUpOrders = () => {
     };
 
     fetchData();
-  }, []);
+  }, [restaurantOrderDetails]);
 
   const handleOpenModal = (orderId) => {
     setSelectedOrderId(orderId);
@@ -108,6 +108,7 @@ const PickedUpOrders = () => {
             <TableCell>Pickup Address</TableCell>
             <TableCell>Delivery Address</TableCell>
             <TableCell>Order Status</TableCell>
+            <TableCell>Date & Time</TableCell>
             <TableCell>Order Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -125,6 +126,17 @@ const PickedUpOrders = () => {
               <TableCell>{restaurantOrderDetail.restaurantAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.userAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.orderStatus}</TableCell>
+              <TableCell>
+                {restaurantOrderDetail.orderTracker[
+                  restaurantOrderDetail.orderStatus
+                ]
+                  ? new Date(
+                      restaurantOrderDetail.orderTracker[
+                        restaurantOrderDetail.orderStatus
+                      ].timestamp
+                    ).toLocaleString()
+                  : "N/A"}
+              </TableCell>
               <TableCell>
                 <Button
                   onClick={() => handleOpenModal(restaurantOrderDetail._id)}
