@@ -81,7 +81,7 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
   
     // Check if the address is the primary address
     if (addressToDelete && addressToDelete.isPrimaryAddress) {
-      setError('Can\'t delete as selected is a primary address to delivery.');
+      setError("Can't delete as selected is a primary address for delivery");
       return;
     }
   
