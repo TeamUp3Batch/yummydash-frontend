@@ -138,10 +138,19 @@ if (
     <div className={classes.processingForm}>
       <div className={classes.processingForm__wrapper}>
         <div className={classes.processingForm__header}>
-          <h2>
-            {checkout.restaurantName}
-            {preparing ? <span> is preparing your order </span> : <div></div>}
-          </h2>
+          {(driverName && orderTrackerData.orderTracker.pickup) ? (
+            <h2>
+              {driverName}{" "}
+              <span>
+                is picking up your order from {checkout.restaurantName}{" "}
+              </span>
+            </h2>
+          ) : (
+            <h2>
+              {checkout.restaurantName}
+              {preparing ? <span> is preparing your order:</span> : <div></div>}
+            </h2>
+          )}
         </div>
         {tracker ? (
           <>
@@ -329,8 +338,13 @@ if (
         userId={checkout.userId}
         restaurantId={checkout.restaurantId}
         restaurantName={checkout.restaurantName}
-      />     
-      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive} />
+        driverId={orderTrackerData.driverId}
+        driverName={driverName}
+      />
+      <ConfirmModal
+        active={confirmModalActive}
+        setActive={setConfirmModalActive}
+      />
     </div>
   );
 };

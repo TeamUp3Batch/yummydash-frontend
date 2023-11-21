@@ -12,7 +12,7 @@
   display: none;
 }
 
-.restaurantRating__active {
+.courierRating__active {
   background-color: rgba(255, 255, 255, 0.5);
   position: fixed;
   left: 0;
@@ -37,13 +37,28 @@
       img {
         width: 100%;
         border-radius: 5px 5px 0 0;
+        background: linear-gradient(rgba(255, 255, 255, 0) 15%, rgba(0, 0, 0, 0.6) 100%);
+      }
+
+      h3 {
+        margin-top: -166px;
+        color: #fff;
+        text-align: center;
+        font-size: 25px;
+      }
+
+      p {
+        color: #fff;
+        text-align: center;
+        margin-top: 30px;
+        font-weight: bold;
       }
     }
 
     .__icons {
       display: flex;
       justify-content: center;
-      margin-top: -40px;
+      margin-top: 44px;
       background-color: #fff;
       gap: 25px;
 
@@ -53,6 +68,7 @@
         cursor: pointer;
         background-color: #fff;
         border-radius: 50%;
+        border: 2px solid #fff;
         box-shadow:
           0 2px 4px 0 rgba(0, 0, 0, 0.2),
           0px -2px 4px 0px rgba(0, 0, 0, 0.05);
@@ -68,10 +84,6 @@
       button:focus,
       button:focus-within {
         border: 2px solid black;
-
-        img {
-          padding: 18px;
-        }
       }
     }
 
@@ -81,7 +93,9 @@
       justify-content: center;
 
       p {
-        font-size: 20px;
+        font-size: 16px;
+        color: grey;
+        text-align: center;
       }
     }
 
