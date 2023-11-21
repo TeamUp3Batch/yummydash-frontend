@@ -38,3 +38,23 @@ export const updatePrimaryAddress = async (selectedAddress) => {
     throw error;
   }
 };
+
+export const deleteUserAddress = async (data) => {
+  
+  const url = `${apiUrl}/api/users/deleteUserAddress`;
+  console.log('data', data);
+  try {
+    const result = await axios.post(url, data);
+    if (result.status === 201) {
+      return result.data.addresses;
+    } else if (result.status === 400) {
+      throw new Error("Bad Request");
+    } else if (result.status === 404) {
+      throw new Error("Not Found");
+    } else {
+      throw new Error("Server Error");
+    }
+  } catch (error) {
+    throw error;
+  }
+};

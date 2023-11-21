@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import Menu from "@mui/material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import List from "@mui/material/List";
@@ -11,8 +11,13 @@ import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Radio from "@mui/joy/Radio";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import DeleteIcon from '@mui/icons-material/Delete';
 import AddressSearchMapBox from "../DeliveryAddressDialog/AddressSearchMapBox";
-import { updatePrimaryAddress } from "../../../services/userService";
+import { updatePrimaryAddress, deleteUserAddress } from "../../../services/userService";
+import { updateAddress } from "../../../slices/authSlice";
+
 
 const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
   const [isDialogVisible, setDialogVisible] = useState(false);
@@ -20,10 +25,12 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
   const { loggedInUser } = useSelector((state) => state.auth);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [addresses, setAddresses] = useState(null);
+  const [error, setError] = useState('');
+  const dispatch = useDispatch();
   const iconRef = useRef(null);
   const [isAddAddressDialogVisible, setAddAddressDialogVisible] =
     useState(false);
-    
+
 
   const openDialog = () => {
     if (iconRef.current) {
@@ -48,6 +55,10 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
     setAddAddressDialogVisible(false);
   };
 
+  const handleCloseError = () => {
+    setError('');
+  };
+
   const handleRadioSelect = async (address) => {
     onSelect(address);
     const selectedAddress = addresses.find((item) => item._id === address._id);
@@ -62,6 +73,34 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
       const savedAddress = await updatePrimaryAddress(userSelectedAddress);
     }
   };
+
+  const handleCancelClick = async (addressId) => {
+  
+    // Find the address to be deleted
+    const addressToDelete = addresses.find(address => address._id === addressId);
+  
+    // Check if the address is the primary address
+    if (addressToDelete && addressToDelete.isPrimaryAddress) {
+      setError("Can't delete as selected is a primary address for delivery");
+      return;
+    }
+  
+    
+    const removeAddress = {
+      email: loggedInUser.email,
+      id: addressId,
+    };
+  
+    try {
+      const deletedAddress = await deleteUserAddress(removeAddress);
+      setSelectedAddress(deletedAddress);
+      dispatch(updateAddress(deletedAddress));
+    } catch (error) {
+      console.error('Error deleting address:', error);
+      setError('An error occurred while deleting the address.');
+    }
+  };
+  
 
   const dialogStyle = {
     position: "absolute",
@@ -109,6 +148,18 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
     }
   }, [loggedInUser.address]);
 
+  useEffect(() => {
+    if (addresses && addresses.length > 0) {
+      const primaryAddress = addresses.find(
+        (address) => address.isPrimaryAddress === true
+      );
+      if (primaryAddress) {
+        setSelectedAddress(primaryAddress);
+        onSelect(primaryAddress);
+      }
+    }
+  }, [addresses]);
+
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -129,23 +180,7 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
           sx: dialogStyle,
         }}
       >
-        <List sx={style} component="nav" aria-label="nav pages">
-          <ListItemButton>
-            <h3> Delivery</h3>
-            <Divider dark />
-          </ListItemButton>
-
-          <ListItemButton>
-            <ListItemText
-              secondary={
-                <Typography component="span" variant="h8" color="textPrimary">
-                  Select Your Location
-                </Typography>
-              }
-            />
-            <Divider dark />
-            <h5 style={{ marginLeft: "10px" }}>Edit</h5>
-          </ListItemButton>
+        <List sx={style} component="nav" aria-label="nav pages"> 
           <ListItemButton onClick={openAddAddressDialog}>
             <ListItemText
               primary={
@@ -183,10 +218,15 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
                               {address.userAddress1}
                             </ListItemText>
                             <Radio
-                              checked={selectedAddress._id === address._id}
+                              checked={selectedAddress && selectedAddress._id === address._id}
                               onChange={() => handleRadioSelect(address)}
                               value={address._id}
                               name="address-radio"
+                              style={{ marginRight: '5px' }}
+                            />
+                            <DeleteIcon
+                              style={{ cursor: 'pointer', marginLeft: '5px' }}
+                              onClick={() => handleCancelClick(address._id)}
                             />
                           </ListItem>
                         </List>
@@ -219,6 +259,22 @@ const DeliveryAddressDialog = ({ onSelect, onSearchAddressSelect }) => {
           </div>
         </Menu>
       )}
+
+<Snackbar
+        open={!!error}
+        autoHideDuration={6000}
+        onClose={handleCloseError}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseError}
+          severity="error"
+        >
+          {error}
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 };
