@@ -1,48 +1,65 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Title from '../Title/Title';
+import * as React from "react";
+import { usePartnerList } from "./hooks/usePartnerList";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import Rating from "@mui/material/Rating";
+import Title from "../Title";
 
-const restaurantData = [
-  { title: 'Restaurant 1', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', active: true },
-  { title: 'Restaurant 2', content: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.', active: false },
-  { title: 'Restaurant 3', content: 'Fusce auctor nulla non quam lacinia, sit amet fermentum quam volutpat.', active: true },
-  { title: 'Restaurant 4', content: 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.', active: false },
-  { title: 'Restaurant 5', content: 'Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', active: true },
-  { title: 'Restaurant 6', content: 'Nulla quis lorem ut libero malesuada feugiat.', active: false },
-  { title: 'Restaurant 7', content: 'Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.', active: true },
-  { title: 'Restaurant 8', content: 'Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada.', active: false },
-  { title: 'Restaurant 9', content: 'Vivamus suscipit tortor eget felis porttitor volutpat.', active: true },
-  { title: 'Restaurant 10', content: 'Sed porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.', active: false },
-];
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 
-const RestaurantList = () => {
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
+export default function PartnersList() {
+  const { partnerList, isLoading, isError } = usePartnerList({});
   return (
-    <>
-    <Title>Restaurant</Title>
-    <Grid container spacing={2}>
-      {restaurantData.map((restaurant, index) => (
-        <Grid item key={index} xs={12} sm={6} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                {restaurant.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {restaurant.content}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                <strong>Active:</strong> {restaurant.active ? 'Yes' : 'No'}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
-    </>
+    <React.Fragment>
+      <Title>Partners List</Title>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <StyledTableRow>
+              <StyledTableCell>Name</StyledTableCell>
+              <StyledTableCell>Email</StyledTableCell>
+              <StyledTableCell>Phone Number</StyledTableCell>
+              <StyledTableCell>Edit</StyledTableCell>
+            </StyledTableRow>
+          </TableHead>
+          <TableBody>
+            {partnerList?.map((row) => (
+              <StyledTableRow key={row._id}>
+                <StyledTableCell>
+                  {row.name}
+                </StyledTableCell>
+                <StyledTableCell>{row.email}</StyledTableCell>
+                <StyledTableCell>{row.phoneNumber}</StyledTableCell>
+                <StyledTableCell>Edit</StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </React.Fragment>
   );
-};
-
-export default RestaurantList;
+}

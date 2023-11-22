@@ -57,3 +57,13 @@ export const deleteUserAddress = async (data) => {
     throw error;
   }
 };
+
+export const getAllUsers = async () => {
+  const url = `${apiUrl}/api/users/getAllUsers`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
