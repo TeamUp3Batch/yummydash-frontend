@@ -61,3 +61,13 @@ export const getDriverProfile = async (driverId) => {
     throw error;
   }
 };
+
+export const getAllDrivers = async () => {
+  const url = `${apiUrl}/api/driver/getAllDrivers`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
