@@ -7,7 +7,7 @@ import likeIcon from "../../../../icons/like-svgrepo-com.svg";
 import dislikeIcon from "../../../../icons/dislike-svgrepo-com.svg";
 import restphoto from "../../../../img/restaurantPhoto.jpeg";
 import { updateRestaurantRatingByUser } from "../../../../services/cartService";
-
+import CourierRating from '../CourierRating/CourierRating';
 import classes from "./restaurantRating.module.scss";
 
 const RestaurantRating = ({
@@ -16,10 +16,14 @@ const RestaurantRating = ({
   cartId,
   userId,
   restaurantId,
-  restaurantName
+  restaurantName,
+  driverName,
+  driverId
 }) => {
   const dispatch = useDispatch();
+  const {  checkout, cart } = useSelector((state) => state.menu);
   const [userRating, setUserRating] = useState(null);
+  const [driverRatingActive, setdriverRatingActive] = useState(false);
 
   const handleLikeClick = () => {
     setUserRating(5);
@@ -41,24 +45,24 @@ const RestaurantRating = ({
         const response = await updateRestaurantRatingByUser(data);
 
         // Handle response as needed
-        if (response.ok) {
-          // Handle success (e.g., show a success message)
+        if (response) {
+          console.log("success")
         } else {
-          // Handle failure (e.g., show an error message)
+          console.error("error in submission")
         }
       } catch (error) {
         console.error("Error submitting rating:", error);
       }
-      dispatch(resetMenuState());
-      dispatch(resetRestaurantState());
+      // dispatch(resetMenuState());
+      // dispatch(resetRestaurantState());
       setActive(false);
+      setdriverRatingActive(true);
     } else {
-      // Handle if the user hasn't selected a rating (optional)
+      alert("please select a rating")
     }
   };
 
   return (
-    // <div className={active ? classes.confirmModal__active : classes.confirmModal}>
     <div
       className={
         active ? classes.restaurantRating__active : classes.confirmModal
@@ -80,12 +84,17 @@ const RestaurantRating = ({
           <p>Let {restaurantName} know about your experience.</p>
         </div>
 
-        <Link to="../main">
+       
           <div className={classes.__backButton} onClick={submitRating}>
-            <h4>Submit and Back to Menu</h4>
+            <h4>Submit feedback</h4>
           </div>
-        </Link>
       </div>
+      <CourierRating  activeDriver={driverRatingActive}
+        setActiveDriver={setdriverRatingActive}
+        cartId={cartId}
+        userId={checkout.userId}
+        driverId={driverId}
+        driverName={driverName} />
     </div>
   );
 };
