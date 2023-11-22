@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
@@ -16,9 +15,9 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import CheckIcon from "@mui/icons-material/Check";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
@@ -28,10 +27,15 @@ import logo from "../../img/yummyDashLogo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutPartner } from "../../slices/partnerSlice";
 import { useNavigate } from "react-router-dom";
+import BentoIcon from '@mui/icons-material/Bento';
+import AirportShuttleIcon from '@mui/icons-material/AirportShuttle';
+import GroupIcon from '@mui/icons-material/Group';
+import Dashboard from "./Dashboard";
+import RestaurantList from "../components/RestaurantList/RestaurantList";
+import DriverList from "../components/DriverList/DriverList";
+import UserList from "../components/UserList/UserList";
 
-import RestaurantOrder from "../components/RestauarnatOrder/RestaurantOrder";
-import RestaurantMenu from "../components/RestaurantMenu/RestaurantMenu";
-import Profile from "../components/Profile/Profile";
+
 
 const drawerWidth = 240;
 
@@ -39,18 +43,20 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
+  transition: theme.transitions.create(["background-color", "color", "width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
+    transition: theme.transitions.create(["background-color", "color", "width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
+  backgroundColor: theme.palette.common.white,
+  color: theme.palette.common.black,
 }));
 
 const Drawer = styled(MuiDrawer, {
@@ -76,13 +82,24 @@ const Drawer = styled(MuiDrawer, {
         width: theme.spacing(9),
       },
     }),
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.common.black,
   },
 }));
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#000', // Black
+    },
+    secondary: {
+      main: '#fffee', // White
+    },
+  },
+});
 
-export default function RestaurantDashboard() {
-  const { loggedInPartner } = useSelector((state) => state.partner);
+export default function AdminDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -90,7 +107,8 @@ export default function RestaurantDashboard() {
     navigate("/");
   };
   const [open, setOpen] = React.useState(true);
-  const [selectedSection, setSelectedSection] = React.useState("orders");
+  const [selectedSection, setSelectedSection] =
+    React.useState("dashboard");
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -102,12 +120,14 @@ export default function RestaurantDashboard() {
 
   const renderSectionContent = () => {
     switch (selectedSection) {
-      case "orders":
-        return <RestaurantOrder />;
-      case "profile":
-        return <Profile />;
-      case "menu":
-        return <RestaurantMenu />;
+      case "dashboard":
+        return <Dashboard />;
+      case "Restaurant List":
+        return <RestaurantList  />;
+      case "Driver List":
+        return <DriverList />
+      case "User List":
+        return <UserList />
       default:
         return null;
     }
@@ -138,7 +158,7 @@ export default function RestaurantDashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Restaurant Dashboard - {loggedInPartner.name}
+              Admin Dashboard 
             </Typography>
             <img style={{ width: "5%" }} src={logo} alt="Logo" />
             <IconButton color="inherit" onClick={handleLogout}>
@@ -160,18 +180,32 @@ export default function RestaurantDashboard() {
             </IconButton>
           </Toolbar>
           <Divider />
+          
           <List component="nav">
+          <Link
+              href="#"
+              color="inherit"
+              underline="none"
+              onClick={() => handleSectionClick("dashboard")}
+            >
+              <ListItem Button>
+                <ListItemIcon>
+               <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItem>
+            </Link>
             <Link
               href="#"
               color="inherit"
               underline="none"
-              onClick={() => handleSectionClick("orders")}
+              onClick={() => handleSectionClick("Restaurant List")}
             >
-              <ListItem button>
+              <ListItem Button>
                 <ListItemIcon>
-                  <InboxIcon />
+                  <BentoIcon />
                 </ListItemIcon>
-                <ListItemText primary="Orders" />
+                <ListItemText primary="Restaurant List" />
               </ListItem>
             </Link>
 
@@ -180,26 +214,26 @@ export default function RestaurantDashboard() {
               href="#"
               color="inherit"
               underline="none"
-              onClick={() => handleSectionClick("profile")}
+              onClick={() => handleSectionClick("Driver List")}
             >
-              <ListItem button>
+              <ListItem Button>
                 <ListItemIcon>
-                  <AccountCircleIcon />
+                  <AirportShuttleIcon />
                 </ListItemIcon>
-                <ListItemText primary="Profile" />
+                <ListItemText primary="Driver List" />
               </ListItem>
             </Link>
             <Link
               href="#"
               color="inherit"
               underline="none"
-              onClick={() => handleSectionClick("menu")}
+              onClick={() => handleSectionClick("User List")}
             >
-              <ListItem button>
+              <ListItem Button>
                 <ListItemIcon>
-                  <MenuBookIcon />
+                  <GroupIcon />
                 </ListItemIcon>
-                <ListItemText primary="Menu" />
+                <ListItemText primary="User List" />
               </ListItem>
             </Link>
           </List>
