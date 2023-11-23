@@ -72,4 +72,15 @@ export const getAllPartners = async () => {
   }
 };
 
+export const updateRestaurantDetails = async (data) => {
+
+  const url = `${apiUrl}/api/restaurants/updateRestaurantDetails`;
+  try {
+    const response = await axios.post(url, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+
+}
 
