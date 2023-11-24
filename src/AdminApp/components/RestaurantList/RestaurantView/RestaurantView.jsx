@@ -64,7 +64,7 @@ const RestaurantView = ({
     marginBottom: "16px",
   };
 
-  const { restaurantDetails, isLoading, isError } = useFetchMenu({
+  const { restaurantDetails, isLoading, isError, refetch } = useFetchMenu({
     restaurantId,
   });
 
@@ -97,6 +97,7 @@ const RestaurantView = ({
 
   const handleSaveClick = async (e) => {
     // Handle save logic, update backend, etc.
+    e.preventDefault();
     try {
       const savedDetails = await updateRestaurantDetails(editableDetails);
       if (savedDetails) {
@@ -117,6 +118,7 @@ const RestaurantView = ({
           },
         })
        setEditableDetails(savedDetails);
+       refetch();
       } else {
         console.error("Error saving address: Unexpected response.");
       }
