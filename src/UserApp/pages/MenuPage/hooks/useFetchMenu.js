@@ -10,7 +10,9 @@ export const useFetchMenu = ({ restaurantId }) => {
       setIsLoading(true);
       setIsError(undefined);
       try {
+        console.log("restaurantId",restaurantId)
           const data = await getRestaurantDetailsById(restaurantId);
+          console.log("data here",data)
           setRestaurantDetails(data);
       } catch (error) {
         console.error("Error:", error);

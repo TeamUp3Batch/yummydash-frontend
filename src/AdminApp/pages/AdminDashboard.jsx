@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -27,15 +27,14 @@ import logo from "../../img/yummyDashLogo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutPartner } from "../../slices/partnerSlice";
 import { useNavigate } from "react-router-dom";
-import BentoIcon from '@mui/icons-material/Bento';
-import AirportShuttleIcon from '@mui/icons-material/AirportShuttle';
-import GroupIcon from '@mui/icons-material/Group';
+import BentoIcon from "@mui/icons-material/Bento";
+import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
+import GroupIcon from "@mui/icons-material/Group";
 import Dashboard from "./Dashboard";
 import RestaurantList from "../components/RestaurantList/RestaurantList";
 import DriverList from "../components/DriverList/DriverList";
 import UserList from "../components/UserList/UserList";
-
-
+import RestaurantView from "../components/RestaurantList/RestaurantView/RestaurantView";
 
 const drawerWidth = 240;
 
@@ -43,17 +42,23 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["background-color", "color", "width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  transition: theme.transitions.create(
+    ["background-color", "color", "width", "margin"],
+    {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }
+  ),
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["background-color", "color", "width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    transition: theme.transitions.create(
+      ["background-color", "color", "width", "margin"],
+      {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }
+    ),
   }),
   backgroundColor: theme.palette.common.white,
   color: theme.palette.common.black,
@@ -89,12 +94,12 @@ const Drawer = styled(MuiDrawer, {
 
 const defaultTheme = createTheme({
   palette: {
-    mode: 'light',
+    mode: "light",
     primary: {
-      main: '#000', // Black
+      main: "#000", // Black
     },
     secondary: {
-      main: '#fffee', // White
+      main: "#fffee", // White
     },
   },
 });
@@ -107,8 +112,9 @@ export default function AdminDashboard() {
     navigate("/");
   };
   const [open, setOpen] = React.useState(true);
-  const [selectedSection, setSelectedSection] =
-    React.useState("dashboard");
+  const [selectedSection, setSelectedSection] = React.useState("dashboard");
+  const [showRestaurantView, setShowRestaurantView] = React.useState(false);
+  const [selectedRestaurantId, setSelectedRestaurantId] = React.useState(null);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -118,16 +124,36 @@ export default function AdminDashboard() {
     setSelectedSection(section);
   };
 
+  const handleBreadcrumbClick = () => {
+    setShowRestaurantView(false);
+    setSelectedRestaurantId(null);
+  };
+
   const renderSectionContent = () => {
     switch (selectedSection) {
       case "dashboard":
         return <Dashboard />;
       case "Restaurant List":
-        return <RestaurantList  />;
+        if (showRestaurantView) {
+          return (
+            <RestaurantView
+              restaurantId={selectedRestaurantId}
+              setShowRestaurantView={setShowRestaurantView}
+            />
+          );
+        } else {
+          return (
+            <RestaurantList
+              setShowRestaurantView={setShowRestaurantView}
+              setSelectedRestaurantId={setSelectedRestaurantId}
+              handleBreadcrumbClick={handleBreadcrumbClick}
+            />
+          );
+        }
       case "Driver List":
-        return <DriverList />
+        return <DriverList />;
       case "User List":
-        return <UserList />
+        return <UserList />;
       default:
         return null;
     }
@@ -158,7 +184,7 @@ export default function AdminDashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Admin Dashboard 
+              Admin Dashboard
             </Typography>
             <img style={{ width: "5%" }} src={logo} alt="Logo" />
             <IconButton color="inherit" onClick={handleLogout}>
@@ -180,9 +206,9 @@ export default function AdminDashboard() {
             </IconButton>
           </Toolbar>
           <Divider />
-          
+
           <List component="nav">
-          <Link
+            <Link
               href="#"
               color="inherit"
               underline="none"
@@ -190,7 +216,7 @@ export default function AdminDashboard() {
             >
               <ListItem Button>
                 <ListItemIcon>
-               <DashboardIcon />
+                  <DashboardIcon />
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" />
               </ListItem>
@@ -209,7 +235,6 @@ export default function AdminDashboard() {
               </ListItem>
             </Link>
 
-  
             <Link
               href="#"
               color="inherit"
