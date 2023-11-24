@@ -44,7 +44,6 @@ const CourierRating = ({
         };
         const response = await updateDriverRatingByUser(data);
         if (response) {          
-          console.log("success")
         } else {
         }
       } catch (error) {

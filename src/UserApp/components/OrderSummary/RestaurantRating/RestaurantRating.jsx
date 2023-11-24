@@ -46,7 +46,6 @@ const RestaurantRating = ({
 
         // Handle response as needed
         if (response) {
-          console.log("success")
         } else {
           console.error("error in submission")
         }
