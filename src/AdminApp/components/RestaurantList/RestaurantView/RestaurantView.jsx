@@ -70,9 +70,7 @@ const RestaurantView = ({
 
   useEffect(() => {
     if (restaurantDetails) {
-      console.log("restaurantDetails",restaurantDetails)
       setEditableDetails(restaurantDetails);
-      console.log("editable details",editableDetails)
     }
   }, [restaurantDetails]);
 
@@ -100,10 +98,25 @@ const RestaurantView = ({
   const handleSaveClick = async (e) => {
     // Handle save logic, update backend, etc.
     try {
-      const savedRestaurantDetails = await updateRestaurantDetails(editableDetails);
-      if (savedRestaurantDetails) {
-        console.log("saved rest details",savedRestaurantDetails)
-       setEditableDetails(savedRestaurantDetails);
+      const savedDetails = await updateRestaurantDetails(editableDetails);
+      if (savedDetails) {
+        setEditableDetails({
+          _id: "",
+          name: "",
+          cuisine: "",
+          restaurantImage: "",
+          estimatedDeliveryTime: {
+            minEstimatedTime: "",
+            medEstimatedTime: "",
+            maxEstimatedTime: "",
+          },
+          contact: {
+            phone: "",
+            email: "",
+            website: "",
+          },
+        })
+       setEditableDetails(savedDetails);
       } else {
         console.error("Error saving address: Unexpected response.");
       }
