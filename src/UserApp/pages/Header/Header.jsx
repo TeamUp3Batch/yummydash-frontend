@@ -55,6 +55,14 @@ const Header = ({ setSorting }) => {
     }
   };
 
+  const openViewHistory = () => {
+    try {
+      navigate("/ViewHistory");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSearchAddressSelect = (address) => {
     typeof address === "string"
       ? setSelectedSearchAddress(address)
@@ -147,7 +155,11 @@ const Header = ({ setSorting }) => {
             </ListItemButton>
             <ListItemButton>
               <ListAltIcon />
-              <ListItemText primary="Order History" />
+              <ListItemText 
+              primary="Order History"
+              style={{ cursor: "pointer" }}
+              onClick={() => openViewHistory()}
+               />
               <Divider dark />
             </ListItemButton>
             <ListItemButton>

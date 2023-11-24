@@ -97,3 +97,13 @@ export const addToCartItem = async (data) => {
   
   };
 
+  export const getAllOrdersByUserId = async (userId) => {
+    const url = `${apiUrl}/api/cart/getAllOrdersByUserId?userId=${userId}`;
+    try {
+      const result = await axios.get(url);
+      return result.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
