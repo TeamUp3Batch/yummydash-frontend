@@ -25,7 +25,6 @@ const RestaurantList = ({ selectedCuisine, selectedSort, searchQuery }) => {
     );
   }
   if (searchResults.restaurants) {
-    console.log("serach", searchResults.restaurants);
     return (
       <div>
         <h1>Search Results</h1>
