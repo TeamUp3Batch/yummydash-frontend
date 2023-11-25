@@ -21,7 +21,7 @@ import { logout } from "../../../slices/authSlice";
 import { resetMenuState } from "../../../slices/menuSlice";
 import { resetRestaurantState } from "../../../slices/restaurantSlice";
 
-const Header = ({ setSorting }) => {
+const Header = ({ setSorting, setSearchQuery }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control the drawer
@@ -69,6 +69,19 @@ const Header = ({ setSorting }) => {
       : setSelectedSearchAddress(address.userAddress1);
   };
 
+
+  //for searching
+  const handleFormSubmit = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+  const formData = new FormData(event.target); // Get form data
+  const query = formData.get('searchInput'); // Get the value of 'searchInput'
+  setSearchQuery(query);
+    // if (event.key === 'Enter') {
+    //   const query = event.target.value;
+    //   setSearchQuery(query);
+    // }
+  };
+
   useEffect(() => {
     const primaryAddress = loggedInUser.address.find(
       (address) => address.isPrimaryAddress === true
@@ -102,9 +115,11 @@ const Header = ({ setSorting }) => {
             {selectedSearchAddress}
           </p>
         </div>
+        <form onSubmit={handleFormSubmit}>
         <div className={styles.search}>
-          <input placeholder="Search Cuisines, Restaurants, or Items" />
+          <input placeholder="Search Menus or Restaurants" name="searchInput"/>
         </div>
+        </form>
         <div className={styles.sort}>
           <SortingDialog onSelect={handleSorting} />
           <p>Sort</p>{" "}

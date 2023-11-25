@@ -12,7 +12,10 @@ export const getCuisineList = async () => {
   }
 };
 
-export const getRestaurantsByCuisine = async (selectedCuisine, selectedSort) => {
+export const getRestaurantsByCuisine = async (
+  selectedCuisine,
+  selectedSort
+) => {
   const url = `${apiUrl}/api/restaurants/getRestaurantsByCuisine/?cuisine=${selectedCuisine}&sort=${selectedSort}`;
   try {
     const result = await axios.get(url);
@@ -31,5 +34,12 @@ export const getRestaurantDetailsById = async (selectedId) => {
   }
 };
 
-
-
+export const restaurantSearch = async (searchQuery) => {
+  const url = `${apiUrl}/api/restaurants/restaurantSearch/?searchItem=${searchQuery}`;
+  try {
+    const result = await axios.get(url);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+};
