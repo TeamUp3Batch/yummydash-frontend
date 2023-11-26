@@ -54,7 +54,7 @@ export const addToCartItem = async (data) => {
   };
 
   export const updateOrderStatusByRestaurant = async (data) => {
-   
+  
     const url = `${apiUrl}/api/cart/updateOrderStatus`;
     try {
       const result = await axios.post(url, data);
@@ -65,7 +65,7 @@ export const addToCartItem = async (data) => {
   };
 
   export const getOrderDetailsByOrderId = async (userId,cartId) => {
-   
+  
     const url = `${apiUrl}/api/cart/getOrderDetailsByOrderId?userId=${userId}&cartId=${cartId}`;
     try {
       const result = await axios.get(url);
@@ -86,4 +86,24 @@ export const addToCartItem = async (data) => {
   
   };
 
+  export const updateDriverRatingByUser = async (data) => {
+    const url = `${apiUrl}/api/cart/updateDriverRatingByUser`;
+    try {
+      const result = await axios.post(url, data);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  
+  };
+
+  export const getAllOrdersByUserId = async (userId) => {
+    const url = `${apiUrl}/api/cart/getAllOrdersByUserId?userId=${userId}`;
+    try {
+      const result = await axios.get(url);
+      return result.data;
+    } catch (error) {
+      throw error;
+    }
+  };
 

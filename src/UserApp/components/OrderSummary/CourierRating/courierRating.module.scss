@@ -1,0 +1,122 @@
+* {
+  font-family: 'Arsenal', sans-serif;
+
+  p {
+    font-size: 25px;
+  }
+}
+
+.confirmModal {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.courierRating__active {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 55;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .__wrapper {
+    background-color: #fff;
+    width: 345px;
+    height: 515px;
+    border-radius: 5px;
+    box-shadow:
+      0 2px 4px 0 rgba(0, 0, 0, 0.2),
+      0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+    .__image {
+      img {
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+        background: linear-gradient(rgba(255, 255, 255, 0) 15%, rgba(0, 0, 0, 0.6) 100%);
+      }
+
+      h3 {
+        margin-top: -166px;
+        color: #fff;
+        text-align: center;
+        font-size: 25px;
+      }
+
+      p {
+        color: #fff;
+        text-align: center;
+        margin-top: 30px;
+        font-weight: bold;
+      }
+    }
+
+    .__icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 44px;
+      background-color: #fff;
+      gap: 25px;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        background-color: #fff;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow:
+          0 2px 4px 0 rgba(0, 0, 0, 0.2),
+          0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+
+        img {
+          width: 35px;
+          padding: 20px;
+        }
+      }
+
+      button:hover,
+      button:active,
+      button:focus,
+      button:focus-within {
+        border: 2px solid black;
+      }
+    }
+
+    .__text {
+      margin: 35px 15px 25px 15px;
+      display: flex;
+      justify-content: center;
+
+      p {
+        font-size: 16px;
+        color: grey;
+        text-align: center;
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .__backButton {
+      cursor: pointer;
+      border-radius: 50em;
+      border: none;
+      background-color: #242e30;
+      margin: 60px 15px 25px 15px;
+      display: flex;
+      justify-content: center;
+
+      h4 {
+        color: #fff;
+        padding: 18px 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

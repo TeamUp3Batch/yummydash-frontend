@@ -7,10 +7,14 @@ import PlaceOrder from "./UserApp/pages/PlaceOrder/PlaceOrder";
 import DeliveryPage from "./UserApp/pages/DeliveryPage/DeliveryPage";
 import RestaurantDashboard from "./RestaurantApp/pages/RestaurantDashboard";
 import DriverDashboard from "./DriverApp/pages/DriverDashboard";
-
 import { Routes, Route } from "react-router-dom";
 import RestaurantSignUp from "./RestaurantApp/pages/RestaurantSignUp/RestaurantSignUp";
 import DriverSignUp from "./DriverApp/pages/DriverSignUp/DriverSignUp";
+import AdminDashboard from "./AdminApp/pages/AdminDashboard";
+import RestaurantView from "./AdminApp/components/RestaurantList/RestaurantView/RestaurantView";
+import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
+
+
 
 function App() {
   return (
@@ -26,6 +30,8 @@ function App() {
       <Route path="/delivery" element={<DeliveryPage />} />
       <Route path="/driverDashBoard" element={<DriverDashboard/>}/>
       <Route path="/driverSignup" element={<DriverSignUp/>}/>
+      <Route path="/admin" element={<AdminDashboard/>}/>
+      <Route path="/viewHistory" element={<OrderHistory />} />
     </Routes>
   );
 }

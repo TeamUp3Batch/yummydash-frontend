@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
@@ -89,8 +90,7 @@ export default function RestaurantDashboard() {
     navigate("/");
   };
   const [open, setOpen] = React.useState(true);
-  const [selectedSection, setSelectedSection] =
-    React.useState("incomingOrders");
+  const [selectedSection, setSelectedSection] = React.useState("orders");
 
   const toggleDrawer = () => {
     setOpen(!open);

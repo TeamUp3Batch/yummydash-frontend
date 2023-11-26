@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Header/Header";
+import { useDispatch } from "react-redux";
+import HeaderWhite from "../HeaderWhite/HeaderWhite";
 import ReactMapGL, {
   GeolocateControl,
   Source,
@@ -10,6 +11,10 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import RestaurantTwoToneIcon from "@mui/icons-material/RestaurantTwoTone";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import { useSelector } from "react-redux";
+
+import {
+  updateCartStatus,
+} from "../../../slices/menuSlice";
 
 import { getOrderDetailsByOrderId } from "../../../services/cartService";
 import { getDriverProfile } from "../../../services/driverService";
@@ -27,6 +32,7 @@ import { formattedTime } from "../../../utils/formattedTimeStamp";
 import RestaurantRating from "../../components/OrderSummary/RestaurantRating/RestaurantRating";
 import ConfirmModal from "../../components/OrderSummary/ConfirmModal/ConfirmModal";
 const ProcessingForm = ({ clientSecret }) => {
+  const dispatch = useDispatch();
   const { cartId, checkout, cart } = useSelector((state) => state.menu);
   const { loggedInUser } = useSelector((state) => state.auth);
   const [tracker, setTracker] = useState(true);
@@ -47,60 +53,75 @@ const ProcessingForm = ({ clientSecret }) => {
       try {
         const data = await getOrderDetailsByOrderId(userId, cartId);
         const { orderTracker } = data;
+        const { orderStatus } = data;
         setOrderTrackerData(data);
 
         // Check orderTracker status and update state accordingly
-        if (
-          orderTracker &&
-          orderTracker.acceptance &&
-          orderTracker.acceptance.status
-        ) {
-          setPlaced(true);
-          setConfirmed(true);
-          setConfirmModalActive(true);
-        }
+       if (
+  orderTracker &&
+  orderTracker.delivery &&
+  orderTracker.delivery.status
+) {
+  setPlaced(true);
+  setConfirmed(true);
+  setConfirmModalActive(false);
+  setDriving(true);
+  setCollecting(true);
+  setDelivering(true);
+  setConfirmRatingActive(true);
+}
 
-        if (
-          orderTracker &&
-          orderTracker.preparation &&
-          orderTracker.preparation.status
-        ) {
-          setPlaced(true);
-          setConfirmed(true);
-          setPreparing(true);
-          setConfirmModalActive(false);
-        }
+if (
+  orderTracker &&
+  orderTracker.pickup &&
+  orderTracker.pickup.status
+) {
+  setPlaced(true);
+  setConfirmed(true);
+  setConfirmModalActive(false);
+  setDriving(true);
+  setCollecting(true);
+  //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
+  //if(driverDetails){setDriverName(driverDetails.firstName)}
+}
 
-        if (orderTracker && orderTracker.ready && orderTracker.ready.status) {
-          setPlaced(true);
-          setConfirmed(true);
-          setPreparing(false);
-          setDriving(true);
-          setConfirmModalActive(false);
-        }
+if (
+  orderTracker &&
+  orderTracker.ready &&
+  orderTracker.ready.status
+) {
+  setPlaced(true);
+  setConfirmed(true);
+  setConfirmModalActive(false);
+  setPreparing(false);
+  setDriving(true);
+  setConfirmModalActive(false);
+}
 
-        if (orderTracker && orderTracker.pickup && orderTracker.pickup.status) {
-          setPlaced(true);
-          setConfirmed(true);
-          setDriving(true);
-          setCollecting(true);
-          setConfirmModalActive(false);
-          //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
-          //if(driverDetails){setDriverName(driverDetails.firstName)}
-        }
-        if (
-          orderTracker &&
-          orderTracker.delivery &&
-          orderTracker.delivery.status
-        ) {
-          setPlaced(true);
-          setConfirmed(true);
-          setDriving(true);
-          setCollecting(true);
-          setDelivering(true);
-          setConfirmModalActive(false);
-          setConfirmRatingActive(true);
-        }
+if (
+  orderTracker &&
+  orderTracker.preparation &&
+  orderTracker.preparation.status
+) {
+  setPlaced(true);
+  setConfirmed(true);
+  setConfirmModalActive(false);
+  setPreparing(true);
+}
+
+if (
+  
+  cart.orderStatus != "acceptance" &&
+  orderTracker &&
+  orderTracker.acceptance &&
+  orderTracker.acceptance.status && 
+  orderStatus != "preparation"
+) {
+  setPlaced(true);
+  setConfirmed(true);
+  setConfirmModalActive(true);
+  dispatch(updateCartStatus(orderStatus));
+}
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -117,10 +138,19 @@ const ProcessingForm = ({ clientSecret }) => {
     <div className={classes.processingForm}>
       <div className={classes.processingForm__wrapper}>
         <div className={classes.processingForm__header}>
-          <h2>
-            {checkout.restaurantName}
-            {preparing ? <span> is preparing your order:</span> : <div></div>}
-          </h2>
+          {(driverName && orderTrackerData.orderTracker.pickup) ? (
+            <h2>
+              {driverName}{" "}
+              <span>
+                is picking up your order from {checkout.restaurantName}{" "}
+              </span>
+            </h2>
+          ) : (
+            <h2>
+              {checkout.restaurantName}
+              {preparing ? <span> is preparing your order:</span> : <div></div>}
+            </h2>
+          )}
         </div>
         {tracker ? (
           <>
@@ -308,8 +338,13 @@ const ProcessingForm = ({ clientSecret }) => {
         userId={checkout.userId}
         restaurantId={checkout.restaurantId}
         restaurantName={checkout.restaurantName}
-      />     
-      <ConfirmModal active={confirmModalActive} setActive={setConfirmModalActive} />
+        driverId={orderTrackerData.driverId}
+        driverName={driverName}
+      />
+      <ConfirmModal
+        active={confirmModalActive}
+        setActive={setConfirmModalActive}
+      />
     </div>
   );
 };
@@ -380,7 +415,7 @@ const DeliveryPage = () => {
 
   return (
     <div onWheel={handleZoom}>
-      <Header />
+      <HeaderWhite />
       {/* <div>DeliveryPage</div> */}
 
       <ReactMapGL

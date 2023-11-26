@@ -1,6 +1,6 @@
 # Yummy Dash
 
-Food App inspired from the popular app - Skip The Dishes
+Online Food Ordering Website/App inspired from the popular - Skip The Dishes
 
 ## Table of Contents
 

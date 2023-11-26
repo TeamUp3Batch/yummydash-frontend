@@ -62,4 +62,25 @@ export const updateMenuItemToRestaurant = async (data) => {
   }
 };
 
+export const getAllPartners = async () => {
+  const url = `${apiUrl}/api/partner/getAllPartners`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateRestaurantDetails = async (data) => {
+
+  const url = `${apiUrl}/api/restaurants/updateRestaurantDetails`;
+  try {
+    const response = await axios.post(url, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+
+}
 
