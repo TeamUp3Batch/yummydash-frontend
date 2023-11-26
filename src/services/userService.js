@@ -67,3 +67,28 @@ export const getAllUsers = async () => {
     throw error;
   }
 };
+
+
+export const getUserProfileByEmail = async (userEmail) => {
+
+  const url = `${apiUrl}/api/users/getUserProfileByEmail/?emailId=${userEmail}`;
+
+  try {
+    const result = await axios.get(url);
+    return result.data.users;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateUserProfile = async (data) => {
+
+  const url = `${apiUrl}/api/users/updateUserProfileByEmail`;
+  
+  try {
+    const result = await axios.post(url, data);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+};
