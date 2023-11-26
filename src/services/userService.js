@@ -69,17 +69,6 @@ export const getAllUsers = async () => {
 };
 
 
-export const getUserProfileByEmail = async (userEmail) => {
-
-  const url = `${apiUrl}/api/users/getUserProfileByEmail/?emailId=${userEmail}`;
-
-  try {
-    const result = await axios.get(url);
-    return result.data.users;
-  } catch (error) {
-    throw error;
-  }
-};
 
 export const updateUserProfile = async (data) => {
 
