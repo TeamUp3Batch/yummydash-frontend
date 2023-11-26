@@ -1,6 +1,5 @@
 import React from "react";
-import Header from '../Header/Header';
-//import Footer from '../../components/Footer/Footer';
+import HeaderWhite from "../HeaderWhite/HeaderWhite"
 import Menu from "../../components/Menu/Menu";
 import { useParams } from 'react-router-dom';
 import { useFetchMenu } from "./hooks/useFetchMenu";
@@ -28,7 +27,7 @@ const MenuPage = () => {
 
   return (
     <React.Fragment>
-      <Header />
+      <HeaderWhite />
       <Menu restaurantDetails={restaurantDetails} />
     </React.Fragment>
   );

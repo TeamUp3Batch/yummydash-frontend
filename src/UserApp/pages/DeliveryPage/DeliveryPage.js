@@ -12,9 +12,7 @@ import RestaurantTwoToneIcon from "@mui/icons-material/RestaurantTwoTone";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import { useSelector } from "react-redux";
 
-import {
-  updateCartStatus,
-} from "../../../slices/menuSlice";
+import { updateCartStatus } from "../../../slices/menuSlice";
 
 import { getOrderDetailsByOrderId } from "../../../services/cartService";
 import { getDriverProfile } from "../../../services/driverService";
@@ -46,6 +44,7 @@ const ProcessingForm = ({ clientSecret }) => {
   const [driverName, setDriverName] = useState("");
   const [confirmRatingActive, setConfirmRatingActive] = useState(false);
   const [confirmModalActive, setConfirmModalActive] = useState(false);
+  const [isConfirmPressed, setIsConfirmPressed] = useState(false);
 
   useEffect(() => {
     const fetchOrderStatus = async () => {
@@ -55,73 +54,66 @@ const ProcessingForm = ({ clientSecret }) => {
         const { orderTracker } = data;
         const { orderStatus } = data;
         setOrderTrackerData(data);
+        dispatch(updateCartStatus(orderStatus));
 
         // Check orderTracker status and update state accordingly
-       if (
-  orderTracker &&
-  orderTracker.delivery &&
-  orderTracker.delivery.status
-) {
-  setPlaced(true);
-  setConfirmed(true);
-  setConfirmModalActive(false);
-  setDriving(true);
-  setCollecting(true);
-  setDelivering(true);
-  setConfirmRatingActive(true);
-}
+        if (
+          orderTracker &&
+          orderTracker.delivery &&
+          orderTracker.delivery.status
+        ) {
+          setPlaced(true);
+          setConfirmed(true);
+          setConfirmModalActive(false);
+          setDriving(true);
+          setCollecting(true);
+          setDelivering(true);
+          setConfirmRatingActive(true);
+        }
 
-if (
-  orderTracker &&
-  orderTracker.pickup &&
-  orderTracker.pickup.status
-) {
-  setPlaced(true);
-  setConfirmed(true);
-  setConfirmModalActive(false);
-  setDriving(true);
-  setCollecting(true);
-  //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
-  //if(driverDetails){setDriverName(driverDetails.firstName)}
-}
+        if (orderTracker && orderTracker.pickup && orderTracker.pickup.status) {
+          setPlaced(true);
+          setConfirmed(true);
+          setConfirmModalActive(false);
+          setDriving(true);
+          setCollecting(true);
+          //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
+          //if(driverDetails){setDriverName(driverDetails.firstName)}
+        }
 
-if (
-  orderTracker &&
-  orderTracker.ready &&
-  orderTracker.ready.status
-) {
-  setPlaced(true);
-  setConfirmed(true);
-  setConfirmModalActive(false);
-  setPreparing(false);
-  setDriving(true);
-  setConfirmModalActive(false);
-}
+        if (orderTracker && orderTracker.ready && orderTracker.ready.status) {
+          setPlaced(true);
+          setConfirmed(true);
+          setConfirmModalActive(false);
+          setPreparing(false);
+          setDriving(true);
+          setConfirmModalActive(false);
+        }
 
-if (
-  orderTracker &&
-  orderTracker.preparation &&
-  orderTracker.preparation.status
-) {
-  setPlaced(true);
-  setConfirmed(true);
-  setConfirmModalActive(false);
-  setPreparing(true);
-}
+        if (
+          orderTracker &&
+          orderTracker.preparation &&
+          orderTracker.preparation.status
+        ) {
+          setPlaced(true);
+          setConfirmed(true);
+          setConfirmModalActive(false);
+          setPreparing(true);
+        }
 
-if (
-  
-  cart.orderStatus != "acceptance" &&
-  orderTracker &&
-  orderTracker.acceptance &&
-  orderTracker.acceptance.status && 
-  orderStatus != "preparation"
-) {
-  setPlaced(true);
-  setConfirmed(true);
-  setConfirmModalActive(true);
-  dispatch(updateCartStatus(orderStatus));
-}
+        if (
+          !isConfirmPressed &&
+          cart.orderStatus != "acceptance" &&
+          orderTracker &&
+          orderTracker.acceptance &&
+          orderTracker.acceptance.status &&
+          orderStatus != "preparation"
+        ) {
+          setPlaced(true);
+          setConfirmed(true);
+          setConfirmModalActive(true);
+          setIsConfirmPressed(true);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -132,13 +124,13 @@ if (
 
     // Clean up the interval when the component unmounts or when the dependencies change
     return () => clearInterval(intervalId);
-  }, [cartId, loggedInUser._id]);
+  }, [cartId, loggedInUser._id, isConfirmPressed]);
 
   return (
     <div className={classes.processingForm}>
       <div className={classes.processingForm__wrapper}>
         <div className={classes.processingForm__header}>
-          {(driverName && orderTrackerData.orderTracker.pickup) ? (
+          {driverName && orderTrackerData.orderTracker.pickup ? (
             <h2>
               {driverName}{" "}
               <span>
