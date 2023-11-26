@@ -7,6 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import RestaurantTwoToneIcon from "@mui/icons-material/RestaurantTwoTone";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import { useSelector } from "react-redux";
+import HeaderWhite from "../HeaderWhite/HeaderWhite";
 
 
 
@@ -44,6 +45,8 @@ const PlaceOrder = () => {
   };
 
   return (
+    <>
+    <HeaderWhite  />
     <div style={{ height: "100vh", width: "100%" }} onWheel={handleZoom}>
       <ReactMapGL
         {...viewport}
@@ -79,6 +82,7 @@ const PlaceOrder = () => {
         </div>
       </ReactMapGL>
     </div>
+    </>
   );
 };
 
