@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Header from "../Header/Header";
+import HeaderWhite from "../HeaderWhite/HeaderWhite";
 import ReactMapGL, {
   GeolocateControl,
   Source,
@@ -415,7 +415,7 @@ const DeliveryPage = () => {
 
   return (
     <div onWheel={handleZoom}>
-      <Header />
+      <HeaderWhite />
       {/* <div>DeliveryPage</div> */}
 
       <ReactMapGL
