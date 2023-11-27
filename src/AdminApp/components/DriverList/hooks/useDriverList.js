@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { getAllDrivers, updateDriverDetails } from "../../../../services/driverService";
 
 export const useDriverList = () => {
