@@ -8,8 +8,13 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import Rating from "@mui/material/Rating";
 import Title from "../Title";
+import { Button, TextField } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,9 +35,24 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+const myStyles = {
+  width: "100%",
+  marginBottom: "16px",
+};
 
 export default function UserList() {
-  const { userList, isLoading, isError } = useUserList({});
+  const { 
+    userList, 
+    isLoading, 
+    isError, 
+    showEditForm,
+    userData,
+    handleEditUser, 
+    setShowEditForm,
+    handleSaveEdit,
+    handleCancel,
+    handleChange,
+  } = useUserList({});
   return (
     <React.Fragment>
       <Title>Users List</Title>
@@ -43,6 +63,7 @@ export default function UserList() {
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell>Email</StyledTableCell>
               <StyledTableCell>Phone Number</StyledTableCell>
+              <StyledTableCell>Actions</StyledTableCell>
             </StyledTableRow>
           </TableHead>
           <TableBody>
@@ -53,10 +74,61 @@ export default function UserList() {
                 </StyledTableCell>
                 <StyledTableCell>{row.email}</StyledTableCell>
                 <StyledTableCell>{row.phoneNumber}</StyledTableCell>
+                <StyledTableCell>
+                  <Button onClick={() => handleEditUser(row._id)}>
+                    <EditIcon />
+                  </Button>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
         </Table>
+        <Dialog
+          open={showEditForm}
+          onClose={() => setShowEditForm(false)}
+          maxWidth="md"
+        >
+          <DialogTitle>Edit Driver</DialogTitle>
+          <DialogContent>
+            <div style={myStyles}>
+              <TextField
+                label="First Name"
+                name="firstName"
+                value={userData.firstName}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </div>
+            <div style={myStyles}>
+              <TextField
+                label="Last Name"
+                name="lastName"
+                value={userData.lastName}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </div>
+            <div style={myStyles}>
+              <TextField
+                label="Phone Number"
+                name="phoneNumber"
+                type="text"
+                value={userData.phoneNumber}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <>
+              <Button onClick={handleSaveEdit}>Save Changes</Button>
+              <Button onClick={handleCancel}>Cancel</Button>
+            </>
+          </DialogActions>
+        </Dialog>
       </TableContainer>
     </React.Fragment>
   );
