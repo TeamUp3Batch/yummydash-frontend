@@ -71,3 +71,14 @@ export const getAllDrivers = async () => {
     throw error;
   }
 };
+
+export const updateDriverDetails = async (data) =>{
+  const url = `${apiUrl}/api/driver/updateDriverDetails`;
+  try {
+    const result = await axios.post(url, data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+  
+}

@@ -473,7 +473,7 @@ const RestaurantView = ({
             onClose={() => setShowForm(false)}
             maxWidth="md"
           >
-            <DialogTitle>Add New Menu</DialogTitle>
+            <DialogTitle>Edit Menu</DialogTitle>
             <DialogContent>
               <div style={myStyles}>
                 <TextField

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { useDriverList } from "./hooks/useDriverList";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -9,6 +9,13 @@ import TableHead from "@mui/material/TableHead";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Rating from "@mui/material/Rating";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import { Container, Grid, Typography, TextField, Button } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import Title from "../Title";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -32,7 +39,23 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function DriversList() {
-  const { driverList, isLoading, isError } = useDriverList({});
+  const {
+    driverList,
+    driverData,
+    handleCancel,
+    showEditForm,
+    setShowEditForm,
+    handleChange,
+    handleEditDriver,
+    handleSaveEdit,
+    isLoading,
+    isError,
+  } = useDriverList({});
+  
+  const myStyles = {
+    width: "100%",
+    marginBottom: "16px",
+  };
   return (
     <React.Fragment>
       <Title>Drivers List</Title>
@@ -45,6 +68,7 @@ export default function DriversList() {
               <StyledTableCell>Phone Number</StyledTableCell>
               <StyledTableCell>Orders Delivered</StyledTableCell>
               <StyledTableCell>Rating</StyledTableCell>
+              <StyledTableCell>Actions</StyledTableCell>
             </StyledTableRow>
           </TableHead>
           <TableBody>
@@ -57,13 +81,63 @@ export default function DriversList() {
                 <StyledTableCell>{row.phoneNumber}</StyledTableCell>
                 <StyledTableCell>{row.ordersDelivered}</StyledTableCell>
                 <StyledTableCell>
-                  {" "}
                   <Rating name="read-only" value={row.userRating} readOnly />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Button onClick={() => handleEditDriver(row._id)}>
+                    <EditIcon />
+                  </Button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
         </Table>
+        <Dialog
+          open={showEditForm}
+          onClose={() => setShowEditForm(false)}
+          maxWidth="md"
+        >
+          <DialogTitle>Edit Driver</DialogTitle>
+          <DialogContent>
+            <div style={myStyles}>
+              <TextField
+                label="First Name"
+                name="firstName"
+                value={driverData.firstName}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </div>
+            <div style={myStyles}>
+              <TextField
+                label="Last Name"
+                name="lastName"
+                value={driverData.lastName}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </div>
+            <div style={myStyles}>
+              <TextField
+                label="Phone Number"
+                name="phoneNumber"
+                type="text"
+                value={driverData.phoneNumber}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <>
+              <Button onClick={handleSaveEdit}>Save Changes</Button>
+              <Button onClick={handleCancel}>Cancel</Button>
+            </>
+          </DialogActions>
+        </Dialog>
       </TableContainer>
     </React.Fragment>
   );
