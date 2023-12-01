@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import Statistics from "../components/Statistics/TotalCounts";
+import TotalCounts from "../components/TotalCounts/TotalCounts";
 import WeeklyChart from "../components/Chart/weeklyAreaChart";
 import MonthlyChart from "../components/Chart/monthlyAreaChart";
 import TopPerformance from "../components/TopPerformance/TopPerformance";
@@ -16,7 +16,7 @@ export default function Dashboard() {
     <>
       <StyledGrid container spacing={2}>
         <StyledGrid item xs={12}>
-          <Statistics />
+          <TotalCounts />
         </StyledGrid>
         <StyledGrid item xs={12} sm={6}>
           <WeeklyChart />

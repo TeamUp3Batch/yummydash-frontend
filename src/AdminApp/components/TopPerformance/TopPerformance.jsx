@@ -14,7 +14,7 @@ const VibrantCard = styled(Card)(({ theme }) => ({
   color: theme.palette.getContrastText(theme.palette.secondary.main),
   textAlign: "center",
   width: 300,
-  height: 150,
+  height: 200,
   margin: "0.5rem",
   position: "relative",
   borderRadius: "1rem",
@@ -60,10 +60,10 @@ export default function Statistics() {
               </TitleContainer>
               <CardContent>
                 <h4>
-                  Name: {driver.firstName} {driver.lastName}
+                  {driver.firstName} {driver.lastName}
                 </h4>
-                <h4>Email: {driver.email}</h4>
-                <h4>Phone: {driver.phoneNumber}</h4>
+                <h4>{driver.email}</h4>
+                <h4>{driver.phoneNumber}</h4>
                 <h4>Orders Delivered: {driver.ordersDelivered}</h4>
                 <h4>User Rating: {driver.userRating}</h4>
               </CardContent>
@@ -86,8 +86,9 @@ export default function Statistics() {
                 <h4>Top Performance Restaurant </h4>
               </TitleContainer>
               <CardContent>
-                <h4>Restaurant Name: {restaurant.restaurantName}</h4>
-                <h4>Total Orders : {restaurant.totalOrders}</h4>
+                <h4>{restaurant.restaurantName}</h4>
+                <h4>Orders Delivered</h4>
+                <h4>{restaurant.totalOrders}</h4>
               </CardContent>
             </VibrantCard>
           ))}
