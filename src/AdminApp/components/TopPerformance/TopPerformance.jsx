@@ -62,8 +62,6 @@ export default function Statistics() {
                 <h4>
                   {driver.firstName} {driver.lastName}
                 </h4>
-                <h4>{driver.email}</h4>
-                <h4>{driver.phoneNumber}</h4>
                 <h4>Orders Delivered: {driver.ordersDelivered}</h4>
                 <h4>User Rating: {driver.userRating}</h4>
               </CardContent>
@@ -87,7 +85,7 @@ export default function Statistics() {
               </TitleContainer>
               <CardContent>
                 <h4>{restaurant.restaurantName}</h4>
-                <h4>Orders Delivered</h4>
+                <h4>Orders Delivered:</h4>
                 <h4>{restaurant.totalOrders}</h4>
               </CardContent>
             </VibrantCard>

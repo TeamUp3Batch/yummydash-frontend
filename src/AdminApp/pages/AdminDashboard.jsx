@@ -214,7 +214,7 @@ export default function AdminDashboard() {
               underline="none"
               onClick={() => handleSectionClick("dashboard")}
             >
-              <ListItem Button>
+              <ListItem >
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
@@ -227,7 +227,7 @@ export default function AdminDashboard() {
               underline="none"
               onClick={() => handleSectionClick("Restaurant List")}
             >
-              <ListItem Button>
+              <ListItem >
                 <ListItemIcon>
                   <BentoIcon />
                 </ListItemIcon>
@@ -241,7 +241,7 @@ export default function AdminDashboard() {
               underline="none"
               onClick={() => handleSectionClick("Driver List")}
             >
-              <ListItem Button>
+              <ListItem >
                 <ListItemIcon>
                   <AirportShuttleIcon />
                 </ListItemIcon>
@@ -254,7 +254,7 @@ export default function AdminDashboard() {
               underline="none"
               onClick={() => handleSectionClick("User List")}
             >
-              <ListItem Button>
+              <ListItem >
                 <ListItemIcon>
                   <GroupIcon />
                 </ListItemIcon>
