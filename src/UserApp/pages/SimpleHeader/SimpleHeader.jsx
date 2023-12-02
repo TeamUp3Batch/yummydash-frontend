@@ -21,12 +21,12 @@ const SimpleHeader = () => {
       <div className={styles.wrapper}>
         <img className={styles.logo} src={logo} alt="Logo" />
         <div className={styles.account}>
-          {/* <Link to="/admin">
+          <Link to="/adminLogin">
             <Button className={styles.signup}>
             <AdminPanelSettingsIcon  sx={{fontSize: 30}}/>
             Admin
             </Button>
-          </Link> */}
+          </Link>
           <Link to="/restaurantSignUp">
             <Button className={styles.signup}>
             <RestaurantIcon  sx={{fontSize: 30}}/>

@@ -13,6 +13,7 @@ import DriverSignUp from "./DriverApp/pages/DriverSignUp/DriverSignUp";
 import AdminDashboard from "./AdminApp/pages/AdminDashboard";
 import RestaurantView from "./AdminApp/components/RestaurantList/RestaurantView/RestaurantView";
 import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
+import AdminLogin from "./AdminApp/pages/AdminLogin/AdminLogin";
 
 
 
@@ -30,6 +31,7 @@ function App() {
       <Route path="/delivery" element={<DeliveryPage />} />
       <Route path="/driverDashBoard" element={<DriverDashboard/>}/>
       <Route path="/driverSignup" element={<DriverSignUp/>}/>
+      <Route path="/adminLogin" element={<AdminLogin/>}/>
       <Route path="/admin" element={<AdminDashboard/>}/>
       <Route path="/viewHistory" element={<OrderHistory />} />
     </Routes>
