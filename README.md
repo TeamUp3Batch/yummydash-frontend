@@ -8,7 +8,7 @@ Online Food Ordering Website/App inspired from the popular - Skip The Dishes
 - [Features](#features)
 - [Getting Started](#getting-started)
     - [Installation] (#installation)
- -[Main Contributors](#contributing)
+- [Main Contributors](#contributing)
 
 ## Project Description
 
