@@ -32,14 +32,15 @@ and efficient food delivery experience.
 - Search for restaurants/food 
 <img width="1425" alt="Screenshot 2023-12-04 at 12 44 55 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/bba27a14-1e56-4a0b-8695-247d3baefb26">
 - Place an order at a Restaurant
-  ![Screenshot 2023-11-23 at 12 28 47 PM](https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/f850a9d7-c1f8-4c55-a250-5ae995040ad5)
+<img width="1439" alt="Screenshot 2023-12-04 at 1 21 46 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/05374998-bd7e-4a72-a6dd-3b5a9c3cd53d">
+
 - Place an order at a Restaurant (including cart and payment gateway).
-  ![Screenshot 2023-11-23 at 12 29 28 PM](https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/a464bbc6-e344-4e72-8494-22768c7265e5)
-  ![Screenshot 2023-11-23 at 12 29 51 PM](https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/eaf4ff58-324d-4986-929b-d52a29734bba)
-  ![Screenshot 2023-11-23 at 12 34 18 PM](https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/fb1be624-896a-45cf-bde7-5276cd707f43)
-  ![Screenshot 2023-11-23 at 12 34 44 PM](https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/2e1679f1-a82a-4698-8195-1d822f7016bf)
+<img width="1439" alt="Screenshot 2023-12-04 at 1 21 58 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/b56aecfd-3ca5-4e1a-b319-3b2dae585dd5">
+
+
 - Rate delivery driver and Restaurant
-![Screenshot 2023-11-23 at 12 36 47 PM](https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/89fb6834-5658-4e97-a17e-4130f09e4ac6)
+- <img width="1440" alt="Screenshot 2023-12-04 at 1 23 10 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/68956cd9-8d32-4f5a-822f-1626c56c2080">
+
 - Restaurant
   - Registration  
 <img width="1266" alt="Screenshot 2023-12-04 at 12 57 27 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/abd63d24-d98a-41f4-a3a6-07bf616c63a1">
