@@ -22,7 +22,6 @@ and efficient food delivery experience.
 ## Features
 
 - Client user registration
-- 
 - Registration
  <img width="1425" alt="Screenshot 2023-12-04 at 12 25 48 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/ef85892c-ba03-4fbd-a7f9-bd0f1e76371a">
 - Login
@@ -39,7 +38,7 @@ and efficient food delivery experience.
 
 
 - Rate delivery driver and Restaurant
-- <img width="1440" alt="Screenshot 2023-12-04 at 1 23 10 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/68956cd9-8d32-4f5a-822f-1626c56c2080">
+  <img width="1440" alt="Screenshot 2023-12-04 at 1 23 10 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/68956cd9-8d32-4f5a-822f-1626c56c2080">
 
 - Restaurant
   - Registration  
