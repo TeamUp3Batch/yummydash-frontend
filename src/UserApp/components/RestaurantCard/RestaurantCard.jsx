@@ -23,7 +23,7 @@ const RestaurantCard = ({ cardDetails }) => {
                 <img src={clockIcon} alt="Clock" />
                 <p>
                   {cardDetails.estimatedDeliveryTime.minEstimatedTime} -{' '}
-                  {cardDetails.estimatedDeliveryTime.maxEstimatedTime} mins • $0.99 Delivery Fee{' '}
+                  {cardDetails.estimatedDeliveryTime.maxEstimatedTime} mins • $0 Delivery Fee{' '}
                 </p>
               </div>
               <div className={classes.__second}>

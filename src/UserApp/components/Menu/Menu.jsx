@@ -90,9 +90,9 @@ const Menu = ({ restaurantDetails }) => {
                   </p>
                   <span> | </span>
                   <button onClick={() => setModalActive(true)}>
-                    Service fee apply
+                    No Service Fee
                   </button>
-                  <p>$0.99 Delivery Fee</p>
+                  <p>Free Delivery</p>
                 </div>
                 <div className={classes.restauranMenu__add_search}>
                   <button onClick={() => setModalActive(true)}>

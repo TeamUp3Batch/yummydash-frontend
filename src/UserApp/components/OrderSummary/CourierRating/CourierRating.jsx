@@ -5,6 +5,10 @@ import { resetMenuState } from "../../../../slices/menuSlice";
 import { resetRestaurantState } from "../../../../slices/restaurantSlice";
 
 import { updateDriverRatingByUser } from "../../../../services/cartService";
+import {
+  updateDeliveredOrdersByDriver,
+  updateDriverRating,
+} from "../../../../services/driverService";
 import { getDriverProfile } from "../../../../services/driverService";
 
 import likeIcon from "../../../../icons/like-svgrepo-com.svg";
@@ -19,9 +23,8 @@ const CourierRating = ({
   cartId,
   userId,
   driverId,
-  driverName
+  driverName,
 }) => {
-
   const dispatch = useDispatch();
   const [courierRating, setCourierRating] = useState(null);
 
@@ -43,7 +46,9 @@ const CourierRating = ({
           driverRating: courierRating,
         };
         const response = await updateDriverRatingByUser(data);
-        if (response) {          
+        await updateDeliveredOrdersByDriver({driverId:driverId});
+        await updateDriverRating({driverId:driverId});
+        if (response) {
         } else {
         }
       } catch (error) {
@@ -51,14 +56,18 @@ const CourierRating = ({
       }
       dispatch(resetMenuState());
       dispatch(resetRestaurantState());
-      setActiveDriver(false)
+      setActiveDriver(false);
     } else {
       console.log("Error submitting rating:");
     }
   };
 
   return (
-    <div className={activeDriver ? classes.courierRating__active: classes.confirmModal }>
+    <div
+      className={
+        activeDriver ? classes.courierRating__active : classes.confirmModal
+      }
+    >
       {/* <div
     className={active ? classes.restaurantRating__active : classes.confirmModal}
     /> */}

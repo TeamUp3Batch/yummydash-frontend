@@ -82,3 +82,25 @@ export const updateDriverDetails = async (data) =>{
   }
   
 }
+
+export const updateDeliveredOrdersByDriver = async (data) =>{
+  const url = `${apiUrl}/api/driver/updateDeliveredOrdersByDriver`;
+  try {
+    const result = await axios.post(url, data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+  
+}
+
+export const updateDriverRating = async (data) =>{
+  const url = `${apiUrl}/api/driver/updateDriverRating`;
+  try {
+    const result = await axios.post(url, data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+  
+}
