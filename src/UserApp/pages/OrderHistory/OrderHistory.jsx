@@ -4,12 +4,14 @@ import Header from "../Header/Header";
 import { getAllOrdersByUserId } from "../../../services/cartService";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Rating from "@mui/material/Rating";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const OrderHistory = () => {
   const { loggedInUser } = useSelector((state) => state.auth);
@@ -17,10 +19,16 @@ const OrderHistory = () => {
   const trimDate = (date) => {
     return date.split("T")[0];
   };
-  const buttonStyle = {
-    color: "#FFFFFF",
-    backgroundColor: "#F36805",
-    marginTop: "30px",
+
+  const divStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  };
+
+  const titleStyle = {
+    margin: "0",
+    textAlign: "center",
   };
 
   useEffect(() => {
@@ -55,14 +63,18 @@ const OrderHistory = () => {
               OrderId: #{userOrderHistory._id}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              Date: {trimDate(userOrderHistory.cartCreationTime)}
+              DELIVERED: {trimDate(userOrderHistory.cartCreationTime)}
             </Typography>
             <Divider />
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              Total: {userOrderHistory.total}
+              <b>Total: ${userOrderHistory.total}</b>
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              Rating: {userOrderHistory.restaurantRating}
+              <Rating
+                name="read-only"
+                value={userOrderHistory.restaurantRating}
+                readOnly
+              />
             </Typography>
           </CardContent>
         </Card>
@@ -76,16 +88,22 @@ const OrderHistory = () => {
 
       <Container maxWidth="md">
         <br />
+        <div style={divStyle}>
+          <Link to="../main">
+            <ArrowBackIcon />
+          </Link>
+
+          <h1 style={titleStyle}>Order History</h1>
+          <Link>
+            <ArrowForwardIcon />
+          </Link>
+        </div>
+
         <Grid container spacing={2}>
           {userOrderHistories.map((userOrderHistory, index) => (
             <UserOrderCard key={index} userOrderHistory={userOrderHistory} />
           ))}
         </Grid>
-        <Link to="../main">
-          <Button variant="outlined" style={buttonStyle}>
-            Back to Restaurant
-          </Button>
-        </Link>
       </Container>
     </>
   );
