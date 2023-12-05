@@ -182,7 +182,7 @@ const Header = ({ setSorting, setSearchQuery }) => {
               <ListItemText primary="Need Help" />
               <Divider dark />
             </ListItemButton>
-            <ListItemButton style={{ marginTop: "500px" }}>
+            <ListItemButton>
               <LogoutIcon />
               <ListItemText
                 primary="Logout"

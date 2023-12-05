@@ -9,6 +9,7 @@ import {
   useTotalOrdersDelivered,
   useTopPerformingRestaurant,
 } from "./hooks/useTopPerformance";
+import Rating from "@mui/material/Rating";
 
 const VibrantCard = styled(Card)(({ theme }) => ({
   color: theme.palette.getContrastText(theme.palette.secondary.main),
@@ -63,7 +64,7 @@ export default function Statistics() {
                   {driver.firstName} {driver.lastName}
                 </h4>
                 <h4>Orders Delivered: {driver.ordersDelivered}</h4>
-                <h4>User Rating: {driver.userRating}</h4>
+                <Rating name="read-only" value={driver.userRating} readOnly />
               </CardContent>
             </VibrantCard>
           ))}
