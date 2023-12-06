@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import clockIcon from '../../../icons/clock-two-svgrepo-com.svg';
-import starIcon from '../../../icons/star-svgrepo-com.svg';
 import classes from './restauranrCard.module.scss';
+import Rating from "@mui/material/Rating";
 
 const RestaurantCard = ({ cardDetails }) => {
   return (
@@ -27,8 +27,7 @@ const RestaurantCard = ({ cardDetails }) => {
                 </p>
               </div>
               <div className={classes.__second}>
-                <img src={starIcon} alt="star" width="15px" />
-                <p>{cardDetails.ratings}</p>
+              <Rating name="read-only" value={cardDetails.ratings} readOnly />
               </div>
             </div>
           </div>
