@@ -10,6 +10,7 @@ import DriverDashboard from "./DriverApp/pages/DriverDashboard";
 import { Routes, Route } from "react-router-dom";
 import RestaurantSignUp from "./RestaurantApp/pages/RestaurantSignUp/RestaurantSignUp";
 import DriverSignUp from "./DriverApp/pages/DriverSignUp/DriverSignUp";
+import AdminDashboard from "./AdminApp/pages/AdminDashboard";
 import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
 import AdminLogin from "./AdminApp/pages/AdminLogin/AdminLogin";
 
@@ -30,6 +31,7 @@ function App() {
       <Route path="/driverDashBoard" element={<DriverDashboard/>}/>
       <Route path="/driverSignup" element={<DriverSignUp/>}/>
       <Route path="/adminLogin" element={<AdminLogin/>}/>
+      <Route path="/admin" element={<AdminDashboard/>}/>
       <Route path="/viewHistory" element={<OrderHistory />} />
     </Routes>
   );
