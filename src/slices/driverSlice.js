@@ -25,6 +25,9 @@ const driverSlice = createSlice({
       state.isLoading = false;
       state.error = false;
     },
+    updateDriver: (state, action) => {
+      state.loggedInDriver = action.payload;
+    },
     signUpDriverFailure: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
@@ -64,6 +67,7 @@ export const {
   signUpDriverSuccess,
   signUpDriverFailure,
   logoutDriver,
+  updateDriver,
   updateDriverAddress,
   deleteDriverAddress,
   updateDriverPhoneNumber,
