@@ -11,7 +11,6 @@ import { Routes, Route } from "react-router-dom";
 import RestaurantSignUp from "./RestaurantApp/pages/RestaurantSignUp/RestaurantSignUp";
 import DriverSignUp from "./DriverApp/pages/DriverSignUp/DriverSignUp";
 import AdminDashboard from "./AdminApp/pages/AdminDashboard";
-import RestaurantView from "./AdminApp/components/RestaurantList/RestaurantView/RestaurantView";
 import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
 import AdminLogin from "./AdminApp/pages/AdminLogin/AdminLogin";
 
