@@ -1,10 +1,28 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Paper, Typography, Avatar, Box, Rating } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
+import { getDriverProfile } from "../../services/driverService";
+import { updateDriver } from "../../slices/driverSlice";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const { loggedInDriver } = useSelector((state) => state.driver);
+  
+  useEffect(() => {
+    const fetchDriverData = async () => {
+      try {
+        const driver = await getDriverProfile(loggedInDriver._id);
+        dispatch(updateDriver(driver.data.driverProfile));
+      } catch (error) {
+        console.error('Error fetching total users:', error);
+      }
+    };
+    fetchDriverData();
+  }, []);
+
 
   return (
     <Box
@@ -34,7 +52,7 @@ const Profile = () => {
 
       <Box sx={{ mt: 2 }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Rating value={loggedInDriver.rating} precision={0.1} readOnly />
+          <Rating value={loggedInDriver.userRating} precision={0.1} readOnly />
           <Typography
             variant="body2"
             color="textSecondary"

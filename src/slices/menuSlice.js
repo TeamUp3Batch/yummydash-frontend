@@ -7,6 +7,7 @@ const menuSlice = createSlice({
     cart: null,
     cartId: null,
     checkout: null,
+    driver:null
   },
   reducers: {
     addToCart: (state, action) => {
@@ -18,7 +19,8 @@ const menuSlice = createSlice({
     resetMenuState: (state) => {
       state.cart = null;
       state.cartId = null;
-      state.checkout = null
+      state.checkout = null;
+      state.driver = null;
     },
     updateCartItemQuantity: (state, action) => {
       const { menuId, quantity } = action.payload;
@@ -42,11 +44,14 @@ const menuSlice = createSlice({
     },
     updateOrderTracker:(state,action) =>{
       state.cart.orderTracker = action.payload
+    },
+    updateDriver:(state,action) =>{
+      state.driver = action.payload
     }
   },
 });
 
-export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout, removeCart, updateCartStatus, updateOrderTracker  } =
+export const { addToCart, setCartId, resetMenuState, updateCartItemQuantity, checkout, removeCart, updateCartStatus, updateOrderTracker, updateDriver  } =
   menuSlice.actions;
 
 

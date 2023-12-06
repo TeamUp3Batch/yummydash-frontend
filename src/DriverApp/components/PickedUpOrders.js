@@ -88,7 +88,7 @@ const PickedUpOrders = () => {
         updatedOrderDetails[selectedOrderIndex].orderStatus = newOrderStatus;
         return updatedOrderDetails;
       });
-      await updateDeliveredOrdersByDriver({driverId:loggedInDriver._id});
+      let deliveredorder = await updateDeliveredOrdersByDriver({driverId:loggedInDriver._id});
       handleCloseModal();
     } catch (error) {
       console.error("Error updating order status:", error);

@@ -12,7 +12,7 @@ import RestaurantTwoToneIcon from "@mui/icons-material/RestaurantTwoTone";
 import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
 import { useSelector } from "react-redux";
 
-import { updateCartStatus } from "../../../slices/menuSlice";
+import { updateCartStatus, updateDriver } from "../../../slices/menuSlice";
 
 import { getOrderDetailsByOrderId } from "../../../services/cartService";
 import { getDriverProfile } from "../../../services/driverService";
@@ -31,7 +31,7 @@ import RestaurantRating from "../../components/OrderSummary/RestaurantRating/Res
 import ConfirmModal from "../../components/OrderSummary/ConfirmModal/ConfirmModal";
 const ProcessingForm = ({ clientSecret }) => {
   const dispatch = useDispatch();
-  const { cartId, checkout, cart } = useSelector((state) => state.menu);
+  const { cartId, checkout, cart, driver } = useSelector((state) => state.menu);
   const { loggedInUser } = useSelector((state) => state.auth);
   const [tracker, setTracker] = useState(true);
   const [placed, setPlaced] = useState(true);
@@ -77,9 +77,16 @@ const ProcessingForm = ({ clientSecret }) => {
           setConfirmModalActive(false);
           setDriving(true);
           setCollecting(true);
-          if(orderTrackerData.driverId){
-          const driverDetails = await getDriverProfile(orderTrackerData.driverId)
-          if(driverDetails){setDriverName(driverDetails.data.driverProfile.firstName)}
+        }
+
+        
+        if (orderTrackerData.driverId) {
+          const driverDetails = await getDriverProfile(
+            orderTrackerData.driverId
+          );
+          if (driverDetails) {
+            setDriverName(driverDetails.data.driverProfile.firstName);
+            dispatch(updateDriver(driverDetails.data.driverProfile.firstName));
           }
         }
 
@@ -126,26 +133,21 @@ const ProcessingForm = ({ clientSecret }) => {
 
     // Clean up the interval when the component unmounts or when the dependencies change
     return () => clearInterval(intervalId);
-  }, [cartId, loggedInUser._id, isConfirmPressed]);
+  }, [cartId, loggedInUser._id, isConfirmPressed, orderTrackerData.driverId]);
 
   return (
     <div className={classes.processingForm}>
       <div className={classes.processingForm__wrapper}>
         <div className={classes.processingForm__header}>
-          {driverName && orderTrackerData.orderTracker.pickup ? (
+          { preparing && cart.orderStatus === "preparation" ? (
             <h2>
-              {driverName}{" "}
-              <span>
-                is picking up your order from {checkout.restaurantName}{" "}
-              </span>
-            </h2>
-          ) : preparing ?(
+            {checkout.restaurantName}
+            <span> is preparing your order</span>
+          </h2>
+          ) : (
             <h2>
               {checkout.restaurantName}
-              {preparing ? <span> is preparing your order</span> : <div></div>}
             </h2>
-          ) :(
-            <h2></h2>
           )}
         </div>
         {tracker ? (
@@ -240,7 +242,7 @@ const ProcessingForm = ({ clientSecret }) => {
                       width="20px"
                     />
                     <p className={classes.processingForm__work}>
-                      <b>Collecting your order</b>
+                      <b>Driver {driver} is Collecting your order</b>
                     </p>
                     <p className={classes.processingForm__time}>
                       {formattedTime(
@@ -263,7 +265,7 @@ const ProcessingForm = ({ clientSecret }) => {
                       width="20px"
                     />
                     <p className={classes.processingForm__work}>
-                      <b>Delivering your order</b>
+                      <b> {delivering ? <span>{driver} has arrived with your food</span> : <div></div>}</b>
                     </p>
                     <p className={classes.processingForm__time}>
                       {formattedTime(
@@ -335,7 +337,7 @@ const ProcessingForm = ({ clientSecret }) => {
         restaurantId={checkout.restaurantId}
         restaurantName={checkout.restaurantName}
         driverId={orderTrackerData.driverId}
-        driverName={driverName}
+        driverName={driver}
       />
       <ConfirmModal
         active={confirmModalActive}
