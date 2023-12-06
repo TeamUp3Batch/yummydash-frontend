@@ -42,9 +42,11 @@ and efficient food delivery experience.
 
 - Restaurant
   - Registration  
-<img width="1266" alt="Screenshot 2023-12-04 at 12 57 27 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/abd63d24-d98a-41f4-a3a6-07bf616c63a1">
+<img width="1080" alt="Screenshot 2023-12-05 at 6 26 40 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/41219364/db5fe818-5f3b-46e9-ab20-3ca401bd9e48">
+
   - Login
-  <img width="1266" alt="Screenshot 2023-12-04 at 12 57 33 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/ee503748-80a1-40f7-bdea-c55a9edbb899">
+ <img width="1080" alt="Screenshot 2023-12-05 at 6 26 51 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/41219364/d19ef2c2-66b2-473b-a962-6747bfafadf7">
+
   - Profile
   <img width="1266" alt="Screenshot 2023-12-04 at 12 56 39 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/518180e5-f40e-4d15-a179-b6d332601ff0">
   Add menu items
@@ -53,9 +55,10 @@ and efficient food delivery experience.
   <img width="1425" alt="Screenshot 2023-12-04 at 12 55 54 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/2b4d6495-2e32-44b5-9f78-f853dc35f827">
 - Delivery
   - Registration
-  <img width="1266" alt="Screenshot 2023-12-04 at 12 57 27 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/ee76ae24-1e16-43ba-a0e0-bb3bf1d7b99e">
+    <img width="1080" alt="Screenshot 2023-12-05 at 6 27 01 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/41219364/d3f2ae52-c3f4-4810-b47a-2921332e6c7d">
+
   - Login
-  <img width="1266" alt="Screenshot 2023-12-04 at 12 57 33 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/81bd4b6b-f91e-45cb-b233-9a44f77a10f2">
+<img width="1080" alt="Screenshot 2023-12-05 at 6 27 09 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/41219364/6658df7b-aa8f-48ab-bc3d-120f22803de9">
   - Profile
   <img width="1266" alt="Screenshot 2023-12-04 at 1 03 01 PM" src="https://github.com/TeamUp3Batch/yummydash-frontend/assets/144860459/c061761c-8b17-440e-b450-1c18fc81d2fd">
   - Pick orders to be delivered
