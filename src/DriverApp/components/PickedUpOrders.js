@@ -13,7 +13,7 @@ import {
   updateOrderStatusByRestaurant,
 } from "../../services/cartService";
 import OrderDriverStatusModal from "../components/OrderDriverStatusModal/OrderDriverStatusModal";
-import { getOrdersPickedByDriver } from "../../services/driverService";
+import { getOrdersPickedByDriver, updateDeliveredOrdersByDriver } from "../../services/driverService";
 
 import { useSelector } from "react-redux";
 
@@ -88,7 +88,7 @@ const PickedUpOrders = () => {
         updatedOrderDetails[selectedOrderIndex].orderStatus = newOrderStatus;
         return updatedOrderDetails;
       });
-
+      await updateDeliveredOrdersByDriver({driverId:loggedInDriver._id});
       handleCloseModal();
     } catch (error) {
       console.error("Error updating order status:", error);

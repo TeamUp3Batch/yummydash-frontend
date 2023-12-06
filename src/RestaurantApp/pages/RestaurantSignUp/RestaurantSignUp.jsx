@@ -51,7 +51,7 @@ const RestaurantSignUp = () => {
           <RestaurantIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Patner Sign up
+          Partner Sign up
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
           <TextField
@@ -141,7 +141,7 @@ const RestaurantSignUp = () => {
             }}
           >
             <Typography variant="h6" component="div" gutterBottom>
-              Patner Login
+              Partner Login
             </Typography>
             <form onSubmit={handleLoginSubmit}>
               <TextField

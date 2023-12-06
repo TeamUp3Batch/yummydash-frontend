@@ -77,8 +77,10 @@ const ProcessingForm = ({ clientSecret }) => {
           setConfirmModalActive(false);
           setDriving(true);
           setCollecting(true);
-          //const driverDetails = await getDriverProfile(orderTrackerData.driverId)
-          //if(driverDetails){setDriverName(driverDetails.firstName)}
+          if(orderTrackerData.driverId){
+          const driverDetails = await getDriverProfile(orderTrackerData.driverId)
+          if(driverDetails){setDriverName(driverDetails.data.driverProfile.firstName)}
+          }
         }
 
         if (orderTracker && orderTracker.ready && orderTracker.ready.status) {
@@ -137,11 +139,13 @@ const ProcessingForm = ({ clientSecret }) => {
                 is picking up your order from {checkout.restaurantName}{" "}
               </span>
             </h2>
-          ) : (
+          ) : preparing ?(
             <h2>
               {checkout.restaurantName}
-              {preparing ? <span> is preparing your order:</span> : <div></div>}
+              {preparing ? <span> is preparing your order</span> : <div></div>}
             </h2>
+          ) :(
+            <h2></h2>
           )}
         </div>
         {tracker ? (
