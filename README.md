@@ -12,7 +12,7 @@ Online Food Ordering Website/App inspired from the popular - Skip The Dishes
 
 ## Project Description
 
-The Yummy Dash web App is an online food delivery web application.
+The Yummy Dash is an online food delivery web application.
 This web application will enable users to browse, order, and enjoy a wide variety of dishes from
 from their favourite local restaurants, all from their comfort of their homes.
 This app will connect customers, restaurants, and deliver seamlessly, offering a convenient
