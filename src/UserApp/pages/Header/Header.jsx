@@ -47,6 +47,15 @@ const Header = ({ setSorting, setSearchQuery }) => {
     }
   };
 
+  const openHelpPage = () => {
+    try{
+      navigate('/needHelp')
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+
   const openProfile = () => {
     try {
       navigate("/Profile");
@@ -179,7 +188,10 @@ const Header = ({ setSorting, setSearchQuery }) => {
             </ListItemButton>
             <ListItemButton>
               <HelpIcon />
-              <ListItemText primary="Need Help" />
+              <ListItemText 
+              primary="Need Help"
+              style={{ cursor: "pointer" }}
+              onClick={() => openHelpPage()} />
               <Divider dark />
             </ListItemButton>
             <ListItemButton>
