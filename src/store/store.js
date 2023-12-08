@@ -7,6 +7,7 @@ import restaurantReducer from '../slices/restaurantSlice';
 import menuReducer from '../slices/menuSlice';
 import driverReducer from '../slices/driverSlice';
 import partnerReducer from '../slices/partnerSlice';
+import adminReducer from '../slices/adminSlice';
 
 
 const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   restaurant: restaurantReducer,
   menu: menuReducer,
   driver: driverReducer,
-  partner: partnerReducer
+  partner: partnerReducer,
+  admin: adminReducer
 });
 
 const persistConfig = {

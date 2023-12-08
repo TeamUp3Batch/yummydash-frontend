@@ -25,7 +25,6 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import logo from "../../img/yummyDashLogo.png";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutPartner } from "../../slices/partnerSlice";
 import { useNavigate } from "react-router-dom";
 import BentoIcon from "@mui/icons-material/Bento";
 import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
@@ -35,6 +34,9 @@ import RestaurantList from "../components/RestaurantList/RestaurantList";
 import DriverList from "../components/DriverList/DriverList";
 import UserList from "../components/UserList/UserList";
 import RestaurantView from "../components/RestaurantList/RestaurantView/RestaurantView";
+import {
+  logout
+} from "../../slices/adminSlice";
 
 const drawerWidth = 240;
 
@@ -108,7 +110,7 @@ export default function AdminDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
-    dispatch(logoutPartner());
+    dispatch(logout());
     navigate("/");
   };
   const [open, setOpen] = React.useState(true);

@@ -13,10 +13,13 @@ import DriverSignUp from "./DriverApp/pages/DriverSignUp/DriverSignUp";
 import AdminDashboard from "./AdminApp/pages/AdminDashboard";
 import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
 import AdminLogin from "./AdminApp/pages/AdminLogin/AdminLogin";
+import { useSelector } from "react-redux";
+
 
 
 
 function App() {
+  const { isLoggedIn } = useSelector((state) => state.admin);
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
@@ -31,10 +34,15 @@ function App() {
       <Route path="/driverDashBoard" element={<DriverDashboard/>}/>
       <Route path="/driverSignup" element={<DriverSignUp/>}/>
       <Route path="/adminLogin" element={<AdminLogin/>}/>
-      <Route path="/admin" element={<AdminDashboard/>}/>
+      {isLoggedIn ? (
+        <Route path="/admin" element={<AdminDashboard />} />
+      ) : (
+       <Route path="/adminLogin" element={<AdminLogin/>}/>
+      )}
       <Route path="/viewHistory" element={<OrderHistory />} />
     </Routes>
   );
 }
+
 
 export default App;
