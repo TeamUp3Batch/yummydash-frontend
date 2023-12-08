@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Paper, Typography, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { updateUserProfile } from "../../../services/userService";
-import Header from "../Header/Header";
+import HeaderWhite from "../HeaderWhite/HeaderWhite";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 import { updatePhoneNumber,updateFirstName,updateLastName } from "../../../slices/authSlice";
@@ -77,7 +77,7 @@ const Profile = () => {
 
   return (
     <React.Fragment>
-      <Header />
+      <HeaderWhite />
       <Dialog open={showForm} onClose={() => setShowForm(false)} maxWidth="md">
         <DialogTitle>Update profile</DialogTitle>
         <DialogContent>

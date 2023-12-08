@@ -27,16 +27,15 @@ const RestaurantList = ({ selectedCuisine, selectedSort, searchQuery }) => {
   if (searchResults.restaurants) {
     return (
       <div>
+        <h1>Search Results</h1>
         {searchResults.restaurants && searchResults.restaurants.length === 0 ? (
           <div>
-            <h1>Search Results</h1>
             <p>No Restaurants or Menus found</p>
           </div>
         ) : (
           searchResults.restaurants &&
           searchResults.restaurants.map((restaurant) => (
             <div>
-              <h1>Search Results</h1>
               <div key={restaurant._id}>
                 <RestaurantCard cardDetails={restaurant} />
               </div>

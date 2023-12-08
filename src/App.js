@@ -13,6 +13,7 @@ import DriverSignUp from "./DriverApp/pages/DriverSignUp/DriverSignUp";
 import AdminDashboard from "./AdminApp/pages/AdminDashboard";
 import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
 import AdminLogin from "./AdminApp/pages/AdminLogin/AdminLogin";
+import NeedHelpPage from "./UserApp/pages/NeedHelpPage/NeedHelpPage";
 import { useSelector } from "react-redux";
 
 
@@ -28,6 +29,7 @@ function App() {
       <Route path="/restaurantSignup" element={< RestaurantSignUp/>} />
       <Route path="/main" element={<Main />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/needHelp" element={<NeedHelpPage/>}/>
       <Route path="/menu/:restaurantId" element={<MenuPage />} />
       <Route path="/order" element={<PlaceOrder />} />
       <Route path="/delivery" element={<DeliveryPage />} />
