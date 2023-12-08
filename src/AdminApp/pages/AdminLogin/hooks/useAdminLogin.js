@@ -74,7 +74,7 @@ export const useAdminLogin = () => {
     } catch (error) {
       setIsError(true);
       setMsg(error.response.data.message);
-      dispatch(loginFailure(response));
+      dispatch(loginFailure(error));
       console.error(error);
     }
   };
