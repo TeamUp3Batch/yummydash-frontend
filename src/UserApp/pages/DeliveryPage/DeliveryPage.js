@@ -139,7 +139,7 @@ const ProcessingForm = ({ clientSecret }) => {
     <div className={classes.processingForm}>
       <div className={classes.processingForm__wrapper}>
         <div className={classes.processingForm__header}>
-          { preparing && cart.orderStatus === "preparation" ? (
+          { preparing && cart.orderStatus == "preparation" && cart.orderStatus !== "pickup" ? (
             <h2>
             {checkout.restaurantName}
             <span> is preparing your order</span>
