@@ -12,10 +12,9 @@ Online Food Ordering Website/App inspired from the popular - Skip The Dishes
 
 ## Project Description
 
-The Yummy Dash web App is an ambitious project designed to
-replicate the core functionality of the popular food delivery service, SkipThe Dishes.
+The Yummy Dash web App is an online food delivery web application.
 This web application will enable users to browse, order, and enjoy a wide variety of dishes from
-from thier favourite local restaurants, all from their comfort of their homes.
+from their favourite local restaurants, all from their comfort of their homes.
 This app will connect customers, restaurants, and deliver seamlessly, offering a convenient
 and efficient food delivery experience.
 
@@ -98,3 +97,4 @@ create .env file in your root dir and check check .envSample file for backend ur
 [Mohammad Abu Naser](https://github.com/royalhouse)
 [Kate Polyakov](https://github.com/KatePolyakov)
 [Kavitha Shanmugan](https://github.com/kavithashanmugan)
+[Urvi Patel](https://github.com/binal1991it)
