@@ -35,9 +35,11 @@ const RestaurantList = ({ selectedCuisine, selectedSort, searchQuery }) => {
         ) : (
           searchResults.restaurants &&
           searchResults.restaurants.map((restaurant) => (
-            <div key={restaurant._id}>
+            <div>
               <h1>Search Results</h1>
-              <RestaurantCard cardDetails={restaurant} />
+              <div key={restaurant._id}>
+                <RestaurantCard cardDetails={restaurant} />
+              </div>
             </div>
           ))
         )}
