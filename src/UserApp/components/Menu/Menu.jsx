@@ -194,7 +194,7 @@ const Menu = ({ restaurantDetails }) => {
                   <div className={classes.checkout__total}>
                     <div className={classes.checkout__total__header}>
                       <h4>Food & Beverage Subtotal</h4>
-                      <h4>${cart.total}</h4>
+                      <h4>${parseFloat(cart.total.toFixed(2))}</h4>
                     </div>
                     <button onClick={() => proceedCheckout()}>
                       <h3>Checkout</h3>
