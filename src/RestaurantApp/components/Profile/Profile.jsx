@@ -91,6 +91,7 @@ const Profile = () => {
           <Button onClick={handleSaveClick} variant="contained" color="primary">
             Save
           </Button>
+          <Box sx={{ m: 1 }} />
           <Button onClick={handleCancelClick} variant="outlined" color="secondary">
             Cancel
           </Button>
