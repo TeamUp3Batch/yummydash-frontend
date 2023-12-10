@@ -84,3 +84,15 @@ export const updateRestaurantDetails = async (data) => {
 
 }
 
+export const updatePartnerProfileByEmail = async (data) => {
+
+  const url = `${apiUrl}/api/partner/updatePartnerProfileByEmail`;
+  try {
+    const response = await axios.post(url, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+
+}
+
