@@ -46,7 +46,7 @@ const FulFilledOrders = () => {
 
   return (
     <React.Fragment>
-      <Title>FulFilled Orders</Title>
+      <Title>Fulfilled Orders</Title>
       <Table size="small">
         <TableHead>
           <TableRow>

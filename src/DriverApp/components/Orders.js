@@ -102,9 +102,9 @@ const Orders = () => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Order ID</TableCell>
             <TableCell>Order Details</TableCell>
             <TableCell>Customer Name</TableCell>
+            <TableCell>Restaurant Name</TableCell>
             <TableCell>Pickup Address</TableCell>
             <TableCell>Delivery Address</TableCell>
             <TableCell>Order Status</TableCell>
@@ -115,14 +115,19 @@ const Orders = () => {
         <TableBody>
           {restaurantOrderDetails.map((restaurantOrderDetail) => (
             <TableRow key={restaurantOrderDetail._id}>
-              <TableCell>{restaurantOrderDetail._id}</TableCell>
-              <TableCell>
-                ${restaurantOrderDetail.total} -{" "}
-                {restaurantOrderDetail.menuItems.length} items
+              <TableCell colSpan={1}>
+                <div>
+                  <div>{restaurantOrderDetail._id}</div>{" "}
+                  <div>
+                    ${restaurantOrderDetail.total} -{" "}
+                    {restaurantOrderDetail.menuItems.length} items
+                  </div>
+                </div>
               </TableCell>
               <TableCell>
                 {restaurantOrderDetail.userName.toUpperCase()}
               </TableCell>
+              <TableCell>{restaurantOrderDetail.restaurantName}</TableCell>
               <TableCell>{restaurantOrderDetail.restaurantAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.userAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.orderStatus}</TableCell>

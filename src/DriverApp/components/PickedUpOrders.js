@@ -13,7 +13,10 @@ import {
   updateOrderStatusByRestaurant,
 } from "../../services/cartService";
 import OrderDriverStatusModal from "../components/OrderDriverStatusModal/OrderDriverStatusModal";
-import { getOrdersPickedByDriver, updateDeliveredOrdersByDriver } from "../../services/driverService";
+import {
+  getOrdersPickedByDriver,
+  updateDeliveredOrdersByDriver,
+} from "../../services/driverService";
 
 import { useSelector } from "react-redux";
 
@@ -88,7 +91,9 @@ const PickedUpOrders = () => {
         updatedOrderDetails[selectedOrderIndex].orderStatus = newOrderStatus;
         return updatedOrderDetails;
       });
-      let deliveredorder = await updateDeliveredOrdersByDriver({driverId:loggedInDriver._id});
+      let deliveredorder = await updateDeliveredOrdersByDriver({
+        driverId: loggedInDriver._id,
+      });
       handleCloseModal();
     } catch (error) {
       console.error("Error updating order status:", error);
@@ -102,7 +107,6 @@ const PickedUpOrders = () => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Order ID</TableCell>
             <TableCell>Order Details</TableCell>
             <TableCell>Customer Name</TableCell>
             <TableCell>Pickup Address</TableCell>
@@ -115,10 +119,14 @@ const PickedUpOrders = () => {
         <TableBody>
           {restaurantOrderDetails.map((restaurantOrderDetail) => (
             <TableRow key={restaurantOrderDetail._id}>
-              <TableCell>{restaurantOrderDetail._id}</TableCell>
-              <TableCell>
-                ${restaurantOrderDetail.total} -{" "}
-                {restaurantOrderDetail.menuItems.length} items
+              <TableCell colSpan={1}>
+                <div>
+                  <div>{restaurantOrderDetail._id}</div>{" "}
+                  <div>
+                    ${restaurantOrderDetail.total} -{" "}
+                    {restaurantOrderDetail.menuItems.length} items
+                  </div>
+                </div>
               </TableCell>
               <TableCell>
                 {restaurantOrderDetail.userName.toUpperCase()}
