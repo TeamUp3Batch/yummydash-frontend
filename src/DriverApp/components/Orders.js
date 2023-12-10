@@ -102,14 +102,14 @@ const Orders = () => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Order Details</TableCell>
-            <TableCell>Customer Name</TableCell>
-            <TableCell>Restaurant Name</TableCell>
-            <TableCell>Pickup Address</TableCell>
-            <TableCell>Delivery Address</TableCell>
-            <TableCell>Order Status</TableCell>
-            <TableCell>Date & Time</TableCell>
-            <TableCell>Order Actions</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Order Details</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Customer Name</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Restaurant Name</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Pickup Address</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Delivery Address</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Order Status</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Date & Time</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Order Actions</TableCell>  
           </TableRow>
         </TableHead>
         <TableBody>
