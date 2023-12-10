@@ -94,7 +94,9 @@ create .env file in your root dir and check check .envSample file for backend ur
 ## Main Contributors
 
 [Anitha Amarnath](https://github.com/anithaamarnath)
+[Farhana Islam]()
 [Mohammad Abu Naser](https://github.com/royalhouse)
 [Kate Polyakov](https://github.com/KatePolyakov)
 [Kavitha Shanmugan](https://github.com/kavithashanmugan)
 [Urvi Patel](https://github.com/binal1991it)
+
