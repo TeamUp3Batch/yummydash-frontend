@@ -13,7 +13,10 @@ import {
   updateOrderStatusByRestaurant,
 } from "../../services/cartService";
 import OrderDriverStatusModal from "../components/OrderDriverStatusModal/OrderDriverStatusModal";
-import { getOrdersPickedByDriver, updateDeliveredOrdersByDriver } from "../../services/driverService";
+import {
+  getOrdersPickedByDriver,
+  updateDeliveredOrdersByDriver,
+} from "../../services/driverService";
 
 import { useSelector } from "react-redux";
 
@@ -88,7 +91,9 @@ const PickedUpOrders = () => {
         updatedOrderDetails[selectedOrderIndex].orderStatus = newOrderStatus;
         return updatedOrderDetails;
       });
-      let deliveredorder = await updateDeliveredOrdersByDriver({driverId:loggedInDriver._id});
+      let deliveredorder = await updateDeliveredOrdersByDriver({
+        driverId: loggedInDriver._id,
+      });
       handleCloseModal();
     } catch (error) {
       console.error("Error updating order status:", error);
@@ -102,14 +107,14 @@ const PickedUpOrders = () => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Order ID</TableCell>
-            <TableCell>Order Details</TableCell>
-            <TableCell>Customer Name</TableCell>
-            <TableCell>Pickup Address</TableCell>
-            <TableCell>Delivery Address</TableCell>
-            <TableCell>Order Status</TableCell>
-            <TableCell>Date & Time</TableCell>
-            <TableCell>Order Actions</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Order ID</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Order Details</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Customer Name</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Pickup Address</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Delivery Address</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Order Status</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Date & Time</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Order Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

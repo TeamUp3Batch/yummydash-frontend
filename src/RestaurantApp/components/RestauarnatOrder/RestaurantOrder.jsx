@@ -116,13 +116,13 @@ const RestaurantOrder = () => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Order ID</TableCell>
-            <TableCell>Customer Name</TableCell>
-            <TableCell>Menu Item</TableCell>
-            <TableCell>Total</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Updated Time</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell><b>Order ID</b></TableCell>
+            <TableCell><b>Customer Name</b></TableCell>
+            <TableCell><b>Menu Item</b></TableCell>
+            <TableCell><b>Total</b></TableCell>
+            <TableCell><b>Status</b></TableCell>
+            <TableCell><b>Updated Time</b></TableCell>
+            <TableCell><b>Actions</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
