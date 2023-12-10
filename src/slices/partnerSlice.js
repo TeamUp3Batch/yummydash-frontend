@@ -39,6 +39,13 @@ const partnerSlice = createSlice({
       state.isLoading = false;
       state.error = false;
     },
+    updatePhoneNumber: (state, action) => {
+      state.loggedInPartner.phoneNumber = action.payload;
+    },
+    updateName: (state, action) => {
+      state.loggedInPartner.name = action.payload;
+    },
+    
   }
 });
 
@@ -54,7 +61,10 @@ export const {
   deletePartnerAddress,
   updatePartnerPhoneNumber,
   updatePartnerFirstName,
-  updatePartnerLastName
+  updatePartnerLastName,
+  updatePhoneNumber,
+  updateName
+
 } = partnerSlice.actions;
 
 export default partnerSlice.reducer;

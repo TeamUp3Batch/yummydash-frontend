@@ -104,3 +104,16 @@ export const updateDriverRating = async (data) =>{
   }
   
 }
+
+export const updateDriverProfileByEmail = async (data) => {
+
+  const url = `${apiUrl}/api/driver/updateDriverProfileByEmail`;
+  try {
+    const response = await axios.post(url, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+
+}
+
