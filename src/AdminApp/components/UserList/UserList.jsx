@@ -88,7 +88,7 @@ export default function UserList() {
           onClose={() => setShowEditForm(false)}
           maxWidth="md"
         >
-          <DialogTitle>Edit Driver</DialogTitle>
+          <DialogTitle>Edit User</DialogTitle>
           <DialogContent>
             <div style={myStyles}>
               <TextField

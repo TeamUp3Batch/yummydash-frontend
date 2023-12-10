@@ -137,7 +137,7 @@ const RestaurantOrder = () => {
                   </div>
                 ))}
               </TableCell>
-              <TableCell>{parseFloat(order.total.toFixed(2))}</TableCell>
+              <TableCell>${parseFloat(order.total.toFixed(2))}</TableCell>
               <TableCell>{order.orderStatus}</TableCell>
               <TableCell>
                 {order.orderTracker[order.orderStatus]
