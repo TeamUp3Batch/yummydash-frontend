@@ -52,6 +52,7 @@ const FulFilledOrders = () => {
           <TableRow>
             <TableCell><b>Order ID</b></TableCell>
             <TableCell><b>Customer Name</b></TableCell>
+            <TableCell><b>Restaurant Name</b></TableCell>
             <TableCell><b>Pickup Address</b></TableCell>
             <TableCell><b>Delivery Address</b></TableCell>
             <TableCell><b>Order Status</b></TableCell>
@@ -65,6 +66,7 @@ const FulFilledOrders = () => {
               <TableCell>
                 {restaurantOrderDetail.userName.toUpperCase()}
               </TableCell>
+              <TableCell>{restaurantOrderDetail.restaurantName}</TableCell>
               <TableCell>{restaurantOrderDetail.restaurantAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.userAddress}</TableCell>
               <TableCell>{restaurantOrderDetail.orderStatus}</TableCell>
