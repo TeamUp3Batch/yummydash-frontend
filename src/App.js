@@ -14,6 +14,7 @@ import AdminDashboard from "./AdminApp/pages/AdminDashboard";
 import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
 import AdminLogin from "./AdminApp/pages/AdminLogin/AdminLogin";
 import NeedHelpPage from "./UserApp/pages/NeedHelpPage/NeedHelpPage";
+import UserData from "./UserApp/pages/UserData/UserData";
 import { useSelector } from "react-redux";
 
 
@@ -36,6 +37,7 @@ function App() {
       <Route path="/driverDashBoard" element={<DriverDashboard/>}/>
       <Route path="/driverSignup" element={<DriverSignUp/>}/>
       <Route path="/adminLogin" element={<AdminLogin/>}/>
+      <Route path="/userSFData" element={<UserData />} />
       {isLoggedIn ? (
         <Route path="/admin" element={<AdminDashboard />} />
       ) : (
