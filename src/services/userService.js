@@ -81,3 +81,13 @@ export const updateUserProfile = async (data) => {
     throw error;
   }
 };
+
+export const getUserData = async () => {
+  const url = `${apiUrl}/api/users/getAllUsersForSalesforce`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
