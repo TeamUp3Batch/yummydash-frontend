@@ -1,20 +1,20 @@
-import SignUp from "./UserApp/pages/SignUp/SignUp";
+import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import AdminDashboard from "./AdminApp/pages/AdminDashboard";
+import AdminLogin from "./AdminApp/pages/AdminLogin/AdminLogin";
+import DriverDashboard from "./DriverApp/pages/DriverDashboard";
+import DriverSignUp from "./DriverApp/pages/DriverSignUp/DriverSignUp";
+import RestaurantDashboard from "./RestaurantApp/pages/RestaurantDashboard";
+import RestaurantSignUp from "./RestaurantApp/pages/RestaurantSignUp/RestaurantSignUp";
+import DeliveryPage from "./UserApp/pages/DeliveryPage/DeliveryPage";
 import Landing from "./UserApp/pages/LandingPage/LandingPage";
 import Main from "./UserApp/pages/Main/Main";
-import Profile from "./UserApp/pages/Profile/Profile";
 import MenuPage from "./UserApp/pages/MenuPage/MenuPage";
-import PlaceOrder from "./UserApp/pages/PlaceOrder/PlaceOrder";
-import DeliveryPage from "./UserApp/pages/DeliveryPage/DeliveryPage";
-import RestaurantDashboard from "./RestaurantApp/pages/RestaurantDashboard";
-import DriverDashboard from "./DriverApp/pages/DriverDashboard";
-import { Routes, Route } from "react-router-dom";
-import RestaurantSignUp from "./RestaurantApp/pages/RestaurantSignUp/RestaurantSignUp";
-import DriverSignUp from "./DriverApp/pages/DriverSignUp/DriverSignUp";
-import AdminDashboard from "./AdminApp/pages/AdminDashboard";
-import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
-import AdminLogin from "./AdminApp/pages/AdminLogin/AdminLogin";
 import NeedHelpPage from "./UserApp/pages/NeedHelpPage/NeedHelpPage";
-import { useSelector } from "react-redux";
+import OrderHistory from "./UserApp/pages/OrderHistory/OrderHistory";
+import PlaceOrder from "./UserApp/pages/PlaceOrder/PlaceOrder";
+import Profile from "./UserApp/pages/Profile/Profile";
+import SignUp from "./UserApp/pages/SignUp/SignUp";
 
 
 

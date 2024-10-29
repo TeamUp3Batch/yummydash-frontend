@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import CheckIconBlack from '../../../../icons/check-circle-black.svg';
 import CheckIconOrange from '../../../../icons/check-circle-orange.svg';
-import HomeVideo from '../../../../img/WhatsApp Video 2023-11-04 at 17.50.57_19e1579d.mp4';
+import HomeVideo from '../../../../img/house.mp4';
 import classes from './confirmModal.module.scss';
 
 const ConfirmModal = ({ active, setActive }) => {
