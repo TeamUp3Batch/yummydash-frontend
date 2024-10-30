@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { resetMenuState } from "../../../../slices/menuSlice";
-import { resetRestaurantState } from "../../../../slices/restaurantSlice";
-import likeIcon from "../../../../icons/like-svgrepo-com.svg";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import dislikeIcon from "../../../../icons/dislike-svgrepo-com.svg";
+import likeIcon from "../../../../icons/like-svgrepo-com.svg";
 import restphoto from "../../../../img/restaurantPhoto.jpeg";
 import { updateRestaurantRatingByUser } from "../../../../services/cartService";
 import CourierRating from '../CourierRating/CourierRating';
@@ -20,8 +17,7 @@ const RestaurantRating = ({
   driverName,
   driverId
 }) => {
-  const dispatch = useDispatch();
-  const {  checkout, cart } = useSelector((state) => state.menu);
+  const { checkout } = useSelector((state) => state.menu);
   const [userRating, setUserRating] = useState(null);
   const [driverRatingActive, setdriverRatingActive] = useState(false);
 

@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import HeaderWhite from "../HeaderWhite/HeaderWhite";
+import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
+import RestaurantTwoToneIcon from "@mui/icons-material/RestaurantTwoTone";
+import "mapbox-gl/dist/mapbox-gl.css";
+import React, { useEffect, useState } from "react";
 import ReactMapGL, {
   GeolocateControl,
-  Source,
   Layer,
   Marker,
+  Source,
 } from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
-import RestaurantTwoToneIcon from "@mui/icons-material/RestaurantTwoTone";
-import PersonPinCircleRoundedIcon from "@mui/icons-material/PersonPinCircleRounded";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import HeaderWhite from "../HeaderWhite/HeaderWhite";
 
 import { updateCartStatus, updateDriver } from "../../../slices/menuSlice";
 
 import { getOrderDetailsByOrderId } from "../../../services/cartService";
 import { getDriverProfile } from "../../../services/driverService";
 
-import receptIcon from "../../../icons/receipt-svgrepo-com.svg";
-import trackerIcon from "../../../icons/list-ul-alt-svgrepo-com.svg";
-import circleDotIcon from "../../../icons/circle-dot-svgrepo-com.svg";
-import pointerOrange from "../../../icons/pointer-map-pointer-orange.svg";
-import pointerGrey from "../../../icons/pointer-map-pointer-grey.svg";
 import checkCircleOrange from "../../../icons/check-circle-orange.svg";
+import circleDotIcon from "../../../icons/circle-dot-svgrepo-com.svg";
+import trackerIcon from "../../../icons/list-ul-alt-svgrepo-com.svg";
+import pointerGrey from "../../../icons/pointer-map-pointer-grey.svg";
+import pointerOrange from "../../../icons/pointer-map-pointer-orange.svg";
+import receptIcon from "../../../icons/receipt-svgrepo-com.svg";
 
-import classes from "./deliveryPage.module.scss";
 import { formattedTime } from "../../../utils/formattedTimeStamp";
+import classes from "./deliveryPage.module.scss";
 
-import RestaurantRating from "../../components/OrderSummary/RestaurantRating/RestaurantRating";
 import ConfirmModal from "../../components/OrderSummary/ConfirmModal/ConfirmModal";
+import RestaurantRating from "../../components/OrderSummary/RestaurantRating/RestaurantRating";
 const ProcessingForm = ({ clientSecret }) => {
   const dispatch = useDispatch();
   const { cartId, checkout, cart, driver } = useSelector((state) => state.menu);
@@ -112,11 +111,11 @@ const ProcessingForm = ({ clientSecret }) => {
 
         if (
           !isConfirmPressed &&
-          cart.orderStatus != "acceptance" &&
+          cart.orderStatus !== "acceptance" &&
           orderTracker &&
           orderTracker.acceptance &&
           orderTracker.acceptance.status &&
-          orderStatus != "preparation"
+          orderStatus !== "preparation"
         ) {
           setPlaced(true);
           setConfirmed(true);
@@ -349,7 +348,6 @@ const ProcessingForm = ({ clientSecret }) => {
 
 const DeliveryPage = () => {
   const { checkout } = useSelector((state) => state.menu);
-  const [confirmRatingActive, setConfirmRatingActive] = useState(false);
   const [viewState, setViewState] = useState({
     longitude: checkout?.userAddress?.longitude || -106.659733,
     latitude: checkout?.userAddress?.latitude || 52.134574,

@@ -1,22 +1,16 @@
-import * as React from "react";
-import { useState, createContext, useContext } from "react";
-import { usePartnerList } from "./hooks/usePartnerList";
-import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
 import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import Link from "@mui/material/Link";
-import Rating from "@mui/material/Rating";
-import { Button } from "@mui/material";
-import CustomSeparator from "./RestaurantView/RestaurantView";
-import Title from "../Title";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
+import { usePartnerList } from "./hooks/usePartnerList";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

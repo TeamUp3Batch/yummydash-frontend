@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { loginSchema } from "../../../../schema";
 import * as authServices from "../../../../services/authService"; // Import your login service
 import {
   loginFailure,
   loginStart,
   loginSuccess,
 } from "../../../../slices/authSlice";
-import { loginSchema } from "../../../../schema";
 
 
 
@@ -45,13 +45,7 @@ export const useLoginModal = ({ isOpen, onClose }) => {
       if (error.errors) {
         setError(error.errors[0].message);
       }
-      // if (
-      //   error.response &&
-      //   error.response.status >= 400 &&
-      //   error.response.status <= 500
-      // ) {
-      //   setError(error.errors[0].message);;
-      // }
+    
     }
     onClose();
   };

@@ -1,21 +1,21 @@
-import React  from "react";
-import { useDriverList } from "./hooks/useDriverList";
-import { styled } from "@mui/material/styles";
+import EditIcon from "@mui/icons-material/Edit";
+import { Button, TextField } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import Paper from "@mui/material/Paper";
+import Rating from "@mui/material/Rating";
+import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
 import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Rating from "@mui/material/Rating";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import { TextField, Button } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+import React from "react";
 import Title from "../Title";
+import { useDriverList } from "./hooks/useDriverList";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,8 +47,6 @@ export default function DriversList() {
     handleChange,
     handleEditDriver,
     handleSaveEdit,
-    isLoading,
-    isError,
   } = useDriverList({});
   
   const myStyles = {
