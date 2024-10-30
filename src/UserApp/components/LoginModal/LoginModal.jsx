@@ -1,8 +1,9 @@
-import React from "react";
-import { Modal, Box, Typography, Button, TextField } from "@mui/material";
-import AlertTitle from "@mui/material/AlertTitle";
+import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import React from "react";
 import { useLoginModal } from "./hooks/useLoginModal";
+
 
 const LoginModal = ({ isOpen, onClose }) => {
   const { data, error, handleChange, handleSubmit } = useLoginModal({
@@ -54,11 +55,12 @@ const LoginModal = ({ isOpen, onClose }) => {
             required
             sx={{ mt: 2 }}
           />
-          {error && (
-            <Alert severity="error">
-              <AlertTitle>{error}</AlertTitle>
-            </Alert>
-          )}
+        {error && (
+  <Alert severity="error">
+    <AlertTitle>{error}</AlertTitle>
+  </Alert>
+)}
+
           <Button
             type="submit"
             variant="contained"
